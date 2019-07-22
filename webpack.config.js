@@ -7,7 +7,25 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist'
+        contentBase: './dist',
+        port: 9000,
+        proxy:{
+            "/api":{
+                target: 'http://api-test.sscoding.com',
+                secure: false,
+                bypass: function (req, res, proxyOptions) {
+                    if (req.headers.accept.indexOf('html') !== -1) {
+                        return '/index.html';
+                    }
+                    if (req.headers.accept.indexOf('css') !== -1) {
+                        return '/src/Util/base.css';
+                    }
+                    if (req.headers.accept.indexOf('images') !== -1) {
+                        return req.url;
+                    }
+                }
+            }
+        }
     },
     module: {
         rules: [

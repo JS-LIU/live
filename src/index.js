@@ -3,59 +3,54 @@
  */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Link } from 'react-router'
-const App = React.createClass({/*...*/});
-const About = React.createClass({/*...*/});
-// 等等。
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const Users = React.createClass({
-    render() {
-        return (
-            <div>
-                <h1>Users</h1>
-                <div className="master">
-                    <ul>
-                        {/* 在应用中用 Link 去链接路由 */}
-                        {this.state.users.map(user => (
-                            <li key={user.id}><Link to={`/user/${user.id}`}>{user.name}</Link></li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="detail">
-                    {this.props.children}
-                </div>
-            </div>
-        )
-    }
-});
+import {HeaderView} from "./component/HeaderView";
 
-const User = React.createClass({
-    componentDidMount() {
-        this.setState({
-            // 路由应该通过有用的信息来呈现，例如 URL 的参数
-            user: findUserById(this.props.params.userId)
-        })
-    },
+//  登录界面
+import {LoginView} from "./container/Login/LoginView";
+import {CodingView} from "./container/CodingView";
 
-    render() {
-        return (
-            <div>
-                <h2>{this.state.user.name}</h2>
-                {/* 等等。 */}
-            </div>
-        )
-    }
-});
+function Index() {
+
+
+    return (
+        <div>
+            <HeaderView />
+            <h2>Home</h2>
+            <Link to="/about/">About</Link>
+        </div>
+
+
+    )
+}
+
+function About() {
+    return (
+        <div>
+
+            <Link to="/users/">Users</Link>
+        </div>
+    )
+}
+
+function Users() {
+    return (
+        <div>
+            <h2>Users</h2>
+            <Link to="/">Home</Link>
+        </div>
+    )
+}
 
 ReactDOM.render(
-    (<Router >
-        <Route path="/" component={App}>
-            <Route path="about" component={About}/>
-            <Route path="users" component={Users}>
-                <Route path="/user/:userId" component={User}/>
-            </Route>
-            <Route path="*" component={NoMatch}/>
-        </Route>
+    (<Router>
+        <div>
+            <Route path="/" exact component={LoginView} />
+            <Route path="/about/" component={About} />
+            <Route path="/users/" component={Users} />
+            <Route path="/codingCenter" component={CodingView} />
+        </div>
     </Router>),
     document.getElementById('app')
 );
