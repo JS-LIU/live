@@ -17,17 +17,27 @@ export class LoginView extends Component{
 
     //  登录
     login(){
-        // login.testLogin("13601180392","123456");
+        userService.signIn().then((data)=>{
+            console.log(data.data.token);
+            userService.updateUserInfo({token:data.data.token});
+            console.log(userService.getUser());
+        });
     }
     inputPhoneNum(e){
         console.log(e.target.value);
-        userService.setPhoneNum(e.target.value);
+        userService.getUser().setPhoneNum(e.target.value);
+    }
+    inputPassword(e) {
+        console.log(e.target.value);
+        userService.getUser().setPassword(e.target.value);
     }
     render(){
         return(
             <div>
                 <input placeholder="手机号" onChange={(e)=>this.inputPhoneNum(e)}/>
-                <input type="password" />
+                <input type="password" onChange={(e)=>{
+                    this.inputPassword(e)
+                }}/>
                 <span onClick={this.login.bind(this)}>登录</span>
             </div>
         )

@@ -20,17 +20,23 @@ import {User} from "../entity/User";
 class UserService {
     constructor(){
         this.user = new User();
+        this.login = new Login();
     }
     createUser(phoneNum,password){
         this.user = new User(phoneNum,password);
+        this.user.saveUser();
     }
     //  登录
-    login(){
-        // this.login
+    signIn(){
+        return this.login.signIn(this.user.getPhoneNum(),this.user.getPassword());
+    }
+    //  更新用户信息
+    updateUserInfo(userInfo){
+        Object.assign(this.user,userInfo);
     }
 
-    setPhoneNum(phoneNum) {
-        this.user.setPhoneNum(phoneNum);
+    getUser(){
+        return this.user;
     }
 }
 export const userService = new UserService();

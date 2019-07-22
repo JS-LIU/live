@@ -10,10 +10,23 @@ export class User {
         this.token = "";
     }
 
-    setToken(){
-
-    }
     setPhoneNum(phoneNum){
         this.phoneNum = phoneNum;
+    }
+    getPhoneNum(){
+        return this.phoneNum;
+    }
+    setPassword(password){
+        this.password = password;
+    }
+    getPassword(){
+        return this.password;
+    }
+    setToken(token){
+        this.token = token;
+    }
+    //  创建user
+    saveUser() {
+
     }
 }

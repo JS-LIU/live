@@ -14,6 +14,13 @@ export class Login {
         };
 
     }
+    //  登录
+    signIn(phoneNum,password){
+        return this._login({
+            phone:phoneNum,
+            pass:hex_md5(password)
+        })
+    }
     //  临时方法
     testLogin(phoneNum,password){
         this._login({
