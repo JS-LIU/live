@@ -8,7 +8,6 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 // import {login} from "../../entity/Login";
 import {userService} from "../../service/UserService";
 
-
 export class LoginView extends Component{
 
     componentDidMount() {
@@ -18,17 +17,15 @@ export class LoginView extends Component{
     //  登录
     login(){
         userService.signIn().then((data)=>{
-            console.log(data.data.token);
             userService.updateUserInfo({token:data.data.token});
-            console.log(userService.getUser());
+            //  跳转到首页
+            this.props.history.push('/home');
         });
     }
     inputPhoneNum(e){
-        console.log(e.target.value);
         userService.getUser().setPhoneNum(e.target.value);
     }
     inputPassword(e) {
-        console.log(e.target.value);
         userService.getUser().setPassword(e.target.value);
     }
     render(){

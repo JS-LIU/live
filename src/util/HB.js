@@ -62,9 +62,10 @@ HB.obj = (function(){
 HB.ajax = function(){
     //  创建请求的模板类
     class AbstractSendAjax{
-        constructor(url,config){
+        constructor(url,config,headerInfo){
             this.urlFactory = new UrlFactory(url);
             this.config = config.ajaxConfig;
+            this.headerInfo = headerInfo;
         }
         getUrl(replaceUrlObj){
             this.url = this.config.baseUrl + this.urlFactory.getUrl(replaceUrlObj)
@@ -140,7 +141,7 @@ HB.ajax = function(){
             this.getHeaderValue();
             this.openXHR();
             if(this.isSetRequestHeader()){
-                this.setRequestHeader();
+                this.setRequestHeader(this.headerInfo);
             }
             this.setResponseType();
             if(this.isSend() && data){
@@ -150,14 +151,18 @@ HB.ajax = function(){
         }
     }
     class Post extends AbstractSendAjax{
-        constructor(url,config){
-            super(url,config);
+        constructor(url,config,headerInfo){
+            super(url,config,headerInfo);
         }
         openXHR(){
             this.xhr.open("post",this.url,this.async);
         }
         setRequestHeader(){
             this.xhr.setRequestHeader(this.header,this.value);
+            if(this.headerInfo){
+                this.xhr.setRequestHeader(this.headerInfo.name,this.headerInfo.value)
+            }
+
         }
 
     }
@@ -198,9 +203,9 @@ HB.ajax = function(){
             let query = new Query(this.url,this.config);
             return query.initAjax(replaceUrlObj,data);
         }
-        save(replaceUrlObj, data) {
-            let post = new Post(this.url,this.config);
-            return post.initAjax(replaceUrlObj, data);
+        save(replaceUrlObj, data,headerInfo) {
+            let post = new Post(this.url,this.config,headerInfo);
+            return post.initAjax(replaceUrlObj, data,headerInfo);
         }
     }
 
@@ -215,7 +220,7 @@ HB.ajax = function(){
         constructor(ajaxConfig){
             this.ajaxConfig = Object.assign({baseUrl:"",async:true,requestHeader:{
                     header:"Content-type",
-                    value:"application/json; charset=utf-8"
+                    value:"application/json; charset=utf-8",
                 },responseType:"json"},ajaxConfig);
         }
     }

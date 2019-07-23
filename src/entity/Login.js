@@ -6,13 +6,10 @@ import {commonAjax} from "../config/config";
 import {hex_md5} from "../util/md5";
 
 export class Login {
-    constructor(){
-
-        let merchantListAjax = commonAjax.resource('/user/:platform/:version/:action');
+    constructor(ajax){
         this._login = function(postInfo){
-            return merchantListAjax.save({platform:'c',version:'v1.0',action:'login'},postInfo);
+            return ajax.save({action:'login'},postInfo);
         };
-
     }
     //  登录
     signIn(phoneNum,password){
@@ -24,8 +21,8 @@ export class Login {
     //  临时方法
     testLogin(phoneNum,password){
         this._login({
-            phone:phoneNum,
-            pass:hex_md5(password)
+            phone:13601180392,
+            pass:hex_md5(123456)
         });
     }
 

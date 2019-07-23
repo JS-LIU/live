@@ -3,6 +3,7 @@
  */
 import {Login} from "../entity/Login";
 import {User} from "../entity/User";
+import {commonAjax} from "../config/config";
 
 
 /**
@@ -19,11 +20,11 @@ import {User} from "../entity/User";
  */
 class UserService {
     constructor(){
-        this.user = new User();
-        this.login = new Login();
+        let ajax = commonAjax.resource('/user/c/v1.0/:action');
+        this.login = new Login(ajax);
+        this.user = new User(ajax);
     }
-    createUser(phoneNum,password){
-        this.user = new User(phoneNum,password);
+    createUser(ajax){
         this.user.saveUser();
     }
     //  登录
@@ -34,9 +35,11 @@ class UserService {
     updateUserInfo(userInfo){
         Object.assign(this.user,userInfo);
     }
-
     getUser(){
         return this.user;
+    }
+    getUserInfo(){
+        return this.user.getUserInfo();
     }
 }
 export const userService = new UserService();
