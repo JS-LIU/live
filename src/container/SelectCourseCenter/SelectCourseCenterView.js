@@ -1,23 +1,50 @@
 /**
- * Created by Liudq on 2019-07-23
+ * Created by Liudq on 2019-07-25
  */
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link ,Redirect} from "react-router-dom";
-import {SelectCourseCenterHeaderView} from "../../component/SelectCourseCenterHeaderView";
-import {WeekCourseView} from "../WeekCourse/WeekCourseView";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {SelectCourseCenterHeaderView} from "./SelectCourseCenterHeaderView";
+import {courseService} from "../../service/CourseService";
+import {CourseProductList} from "./CourseProductList";
+
 
 export class SelectCourseCenterView extends Component{
-    render() {
-        return(
-            <Router>
-                <div>
-                    <SelectCourseCenterHeaderView />
-                    <Redirect to="/selectCourseCenter/week" />
-                    <Route path="/selectCourseCenter/week" component={WeekCourseView} />
+    constructor(props) {
+        super(props);
+        this.state = {
+            courseTypeList:[],
+            courseList:[],
+        };
+        /**
+         * 分页信息
+         */
+        this.pagination = courseService.getPagination();
+    }
+    componentDidMount() {
+        courseService.getCourseType().then((list)=>{
+            this.setState({
+                courseTypeList:list
+            });
 
-                </div>
-            </Router>
-        )
+            return courseService.getProductCourse()
+        });
     }
 
+    onSelectSpecifyType(specifyCourseType){
+        courseService.toggleSelectSpecifyType(specifyCourseType);
+        this.setState({
+            courseTypeList:courseService.courseType
+        })
+    }
+
+    render() {
+        return(
+            <div>
+                <div>选课中心</div>
+                <SelectCourseCenterHeaderView courseTypeList={this.state.courseTypeList} onSelectSpecifyType={this.onSelectSpecifyType.bind(this)}/>
+                <CourseProductList courseList={this.state.courseList}/>
+            </div>
+
+        )
+    }
 }

@@ -31,6 +31,7 @@ class UserService {
     signIn(){
         return this.login.signIn(this.user.getPhoneNum(),this.user.getPassword());
     }
+
     //  更新用户信息
     updateUserInfo(userInfo){
         Object.assign(this.user,userInfo);

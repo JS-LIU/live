@@ -18,12 +18,5 @@ export class Login {
             pass:hex_md5(password)
         })
     }
-    //  临时方法
-    testLogin(phoneNum,password){
-        this._login({
-            phone:13601180392,
-            pass:hex_md5(123456)
-        });
-    }
 
 }

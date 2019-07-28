@@ -4,11 +4,11 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link ,Redirect} from "react-router-dom";
 
-export class SelectCourseCenterHeaderView extends Component{
+export class StudyCourseCenterHeaderView extends Component{
     render() {
         return(
             <div>
-                <Link to="/selectCourseCenter/week">本周课程</Link>
+                <Link to="/studyCourseCenter/week">本周课程</Link>
             </div>
         )
 
