@@ -8,7 +8,7 @@ import {OwnedCourse} from "../entity/OwnedCourse";
 import {GeneralCourseType} from "../entity/GeneralCourseType";
 import {SpecifyCourseType} from "../entity/SpecifyCourseType";
 import {ProductCourse} from "../entity/ProductCourse";
-import {Page} from "../entity/Page";
+import {Pagination} from "../entity/Pagination";
 
 
 class CourseService {
@@ -27,7 +27,7 @@ class CourseService {
         this.ownedCourseList = [];
         this.courseType = [];
         this.courseList = [];
-        this.pagination = new Page(1,5);
+        this.pagination = new Pagination(1,5);
     }
 
     /**
@@ -55,14 +55,11 @@ class CourseService {
      */
     getCourseType(){
         return this._getCourseType({}).then((data)=>{
-            //  todo 返回的数据好像又错了 暂时先用对的mock一下
-            let mockData = JSON.parse('{"code":0,"message":null,"data":{"summaryTips":[{"name":"年级","selectTips":[{"id":0,"type":1,"name":"学龄前"},{"id":1,"type":1,"name":"一年级"},{"id":2,"type":1,"name":"二年级"},{"id":3,"type":1,"name":"三年级"},{"id":4,"type":1,"name":"四年级"},{"id":5,"type":1,"name":"五年级"},{"id":6,"type":1,"name":"六年级"},{"id":7,"type":1,"name":"初一"},{"id":8,"type":1,"name":"初二"},{"id":9,"type":1,"name":"初三"}],"index":1},{"name":"学科","selectTips":[{"id":1,"type":2,"name":"PYTHON"},{"id":2,"type":2,"name":"C++"},{"id":3,"type":2,"name":"SCRATCH"}],"index":2},{"name":"课程难度","selectTips":[{"id":1001,"type":3,"name":"初级"},{"id":1002,"type":3,"name":"中级"},{"id":1003,"type":3,"name":"高级"}],"index":3}]}}');
             //  todo 容错处理 判断如果有data.data.summaryTips不为空的话
             return new Promise((resolve, reject)=>{
-                resolve(this.createGeneralCourseType(mockData.data.summaryTips));
+                resolve(this.createGeneralCourseType(data.data.summaryTips));
             })
         })
-
     }
 
     /**
@@ -128,6 +125,11 @@ class CourseService {
             })
         })
     }
+
+    /**
+     * 选择的所有标签（作为参数给后台来筛选课程）
+     * @returns {[]}
+     */
     getSelectedSpecifyCourseTypeByJson(){
         let json = [];
         for(let i = 0;i < this.courseType.length;i++){
@@ -159,10 +161,15 @@ class CourseService {
         }
         return this.courseList;
     }
-
+    //  获取分页实体
     getPagination(){
         return this.pagination;
     }
+    //  课程详情
+
+
+
+
 }
 
 export const courseService = new CourseService();

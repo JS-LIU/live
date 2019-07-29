@@ -25,11 +25,30 @@ export class SelectCourseCenterView extends Component{
             this.setState({
                 courseTypeList:list
             });
-
-            return courseService.getProductCourse()
+            this.pagination.to(1);
+            this.updateCourseList();
+        })
+    }
+    updateCourseList(){
+        courseService.getProductCourse().then((courseList)=>{
+            this.setState({
+                courseList:courseList
+            });
         });
     }
 
+    /**
+     * 获取更多
+     */
+    onGetMore(){
+        this.pagination.nextPage();
+        this.updateCourseList();
+    }
+
+    /**
+     * 选择详细分类
+     * @param specifyCourseType
+     */
     onSelectSpecifyType(specifyCourseType){
         courseService.toggleSelectSpecifyType(specifyCourseType);
         this.setState({
@@ -37,12 +56,23 @@ export class SelectCourseCenterView extends Component{
         })
     }
 
+    /**
+     * 按条件查询课程列表
+     */
+    onQueryCourseList(){
+        this.pagination.to(1);
+        this.updateCourseList();
+    }
     render() {
         return(
             <div>
                 <div>选课中心</div>
-                <SelectCourseCenterHeaderView courseTypeList={this.state.courseTypeList} onSelectSpecifyType={this.onSelectSpecifyType.bind(this)}/>
-                <CourseProductList courseList={this.state.courseList}/>
+                <SelectCourseCenterHeaderView
+                    courseTypeList={this.state.courseTypeList}
+                    onSelectSpecifyType={this.onSelectSpecifyType.bind(this)}
+                    onQueryCourse={this.onQueryCourseList.bind(this)}
+                />
+                <CourseProductList courseList={this.state.courseList} onGetMore={this.onGetMore.bind(this)}/>
             </div>
 
         )
