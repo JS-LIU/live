@@ -15,29 +15,15 @@ import {HomeView} from "./container/HomePage/HomeView";
 import {StudyCourseCenterView} from "./container/StudyCourseCenter/StudyCourseCenterView";
 //  选课中心
 import {SelectCourseCenterView} from "./container/SelectCourseCenter/SelectCourseCenterView";
-
+//  课程详情
+import {ProductCourseDetailView} from "./container/ProductCourseDetail/ProductCourseDetailView";
 
 import {CodingView} from "./container/CodingView";
 
 
-// function Index() {
-//
-//
-//     return (
-//         <div>
-//             <HeaderView />
-//             <h2>Home</h2>
-//             <Link to="/about/">About</Link>
-//         </div>
-//
-//
-//     )
-// }
-
 function About() {
     return (
         <div>
-
             <Link to="/users/">Users</Link>
         </div>
     )
@@ -59,6 +45,9 @@ ReactDOM.render(
             <Route path="/home" component={HomeView}/>
             <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
             <Route path="/studyCourseCenter" component={StudyCourseCenterView} />
+            <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />
+            {/*<Route path="/userInfo" component={}/>*/}
+
 
             <Route path="/users/" component={Users} />
             <Route path="/codingCenter" component={CodingView} />

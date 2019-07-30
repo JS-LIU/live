@@ -23,7 +23,10 @@ export class HomeHeadView extends Component{
             <div>
 
                 {linkNodes}
-                <img src={this.props.userInfo.headImgUrl} alt=""/>
+                <Link to="/userInfo">
+
+                    <img src={this.props.userInfo.headImgUrl} alt=""/>
+                </Link>
             </div>
         )
     }

@@ -5,9 +5,9 @@ import {commonAjax} from "../config/config";
 import {TimeManager} from "../entity/TimeManager";
 import {userService} from "./UserService";
 import {OwnedCourse} from "../entity/OwnedCourse";
+import {ProductCourse} from "../entity/ProductCourse";
 import {GeneralCourseType} from "../entity/GeneralCourseType";
 import {SpecifyCourseType} from "../entity/SpecifyCourseType";
-import {ProductCourse} from "../entity/ProductCourse";
 import {Pagination} from "../entity/Pagination";
 
 
@@ -23,6 +23,9 @@ class CourseService {
         };
         this._getProductCourseList = function(postInfo){
             return courseAjax.save({action:'pageGoodInfo'},postInfo,{name:"token",value:userService.getUser().token});
+        };
+        this._getProductDetail = function(postInfo){
+            return courseAjax.save({action:'goodDetail'},postInfo,{name:"token",value:userService.getUser().token});
         };
         this.ownedCourseList = [];
         this.courseType = [];
@@ -118,14 +121,18 @@ class CourseService {
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size
         }).then((data)=>{
-            productCourseList.push(new ProductCourse(data.data.list));
+            for(let i = 0;i < data.data.list.length;i++){
+                productCourseList.push(this.createProductCourse(data.data.list[i]));
+            }
             return new Promise((resolve, reject)=>{
                 this.courseList = this.updateCourseList(productCourseList);
                 resolve(this.courseList);
             })
         })
     }
-
+    createProductCourse(courseInfo){
+        return new ProductCourse(courseInfo);
+    }
     /**
      * 选择的所有标签（作为参数给后台来筛选课程）
      * @returns {[]}
@@ -166,10 +173,29 @@ class CourseService {
         return this.pagination;
     }
     //  课程详情
+    getProductCourseDetail(productCourseNo){
+        let productCourse = this.findProductCourseByCourseNo(productCourseNo);
+        return this._getProductDetail({
+            goodNo:productCourseNo
+        }).then((data)=>{
+            productCourse = this.updateCourse(productCourse,data.data);
+            console.log(productCourse);
+            return new Promise((resolve, reject)=>{
+                resolve(productCourse);
+            });
+        })
+    }
 
+    findProductCourseByCourseNo(productCourseNo) {
+        return this.courseList.find((course)=>{
+            return course.goodNo === productCourseNo;
+        });
+    }
 
-
-
+    updateCourse(productCourse, detail) {
+        productCourse.repairDetail(detail);
+        return productCourse;
+    }
 }
 
 export const courseService = new CourseService();

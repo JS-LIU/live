@@ -41,8 +41,10 @@ export class SelectCourseCenterView extends Component{
      * 获取更多
      */
     onGetMore(){
-        this.pagination.nextPage();
-        this.updateCourseList();
+        console.log("我滚了");
+
+        // this.pagination.nextPage();
+        // this.updateCourseList();
     }
 
     /**
@@ -74,7 +76,6 @@ export class SelectCourseCenterView extends Component{
                 />
                 <CourseProductList courseList={this.state.courseList} onGetMore={this.onGetMore.bind(this)}/>
             </div>
-
         )
     }
 }

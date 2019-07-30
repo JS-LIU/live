@@ -14,4 +14,20 @@ export class ProductCourse {
         this.salePrice = productInfo.salePrice;
         this.teacherInfoList = productInfo.teacherInfoList;
     }
+
+    /**
+     * 补全详情
+     */
+    repairDetail(detail){
+        this.detail = detail;
+    }
+    getDetail(){
+        return this.detail;
+    }
+    getStartTimeByShow(){
+
+    }
+    getEndTimeByShow(){
+
+    }
 }
