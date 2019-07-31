@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import {HeaderView} from "./component/HeaderView";
+import {HeaderView} from "./component/HeaderView/HeaderView";
 
 //  登录界面
 import {LoginView} from "./container/Login/LoginView";
@@ -17,9 +17,12 @@ import {StudyCourseCenterView} from "./container/StudyCourseCenter/StudyCourseCe
 import {SelectCourseCenterView} from "./container/SelectCourseCenter/SelectCourseCenterView";
 //  课程详情
 import {ProductCourseDetailView} from "./container/ProductCourseDetail/ProductCourseDetailView";
+//  结算中心
+import {SettleCenterView} from "./container/SettleCenter/SettleCenterView";
 
 import {CodingView} from "./container/CodingView";
-
+import {PayView} from "./container/Pay/PayView";
+import {HB} from "./util/HB";
 
 function About() {
     return (
@@ -37,6 +40,9 @@ function Users() {
         </div>
     )
 }
+//  resetFontSize
+HB.ui.setBaseFontSize(1920,100);
+
 
 ReactDOM.render(
     (<Router>
@@ -46,6 +52,8 @@ ReactDOM.render(
             <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
             <Route path="/studyCourseCenter" component={StudyCourseCenterView} />
             <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />
+            <Route path="/confirmOrder/:productCourseNo" component={SettleCenterView} />
+            <Route path="/pay" component={PayView} />
             {/*<Route path="/userInfo" component={}/>*/}
 
 

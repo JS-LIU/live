@@ -30,7 +30,7 @@ class CourseService {
         this.ownedCourseList = [];
         this.courseType = [];
         this.courseList = [];
-        this.pagination = new Pagination(1,5);
+        this.pagination = new Pagination(1,6);
     }
 
     /**

@@ -13,6 +13,7 @@ export class ProductCourse {
         this.totalLessonNum = productInfo.totalLessonNum;
         this.salePrice = productInfo.salePrice;
         this.teacherInfoList = productInfo.teacherInfoList;
+        this.bgStyle = this.setBg();
     }
 
     /**
@@ -29,5 +30,30 @@ export class ProductCourse {
     }
     getEndTimeByShow(){
 
+    }
+    setBg(){
+        let style = ProductCourse.bgStrategy()[this.type];
+        return {
+            background:style.bg + ' url('+style.url+') no-repeat cover',
+        }
+    }
+    static bgStrategy() {
+        return {
+            "1":{
+                bgKey:"python",
+                bg:"#00b7ba",
+                url:"../img/product_course_python_header_bg.png"
+            },
+            "2":{
+                bgKey:"c++",
+                bg:"#4161A6",
+                url:"../img/product_course_c++_header_bg.png"
+            },
+            "3":{
+                bgKey:"noi",
+                bg:"#b178c8",
+                url:"../img/product_course_noi_header_bg.png"
+            }
+        }
     }
 }

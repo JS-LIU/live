@@ -2,12 +2,11 @@ const path = require('path');
 module.exports = {
     entry: './src/index.js',
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'  // 打包输出的文件
     },
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
         port: 9000,
         proxy:{
             "/api":{
@@ -18,7 +17,8 @@ module.exports = {
                         return '/index.html';
                     }
                     if (req.headers.accept.indexOf('css') !== -1) {
-                        return '/src/Util/base.css';
+                        console.log("bypass css");
+                        return '/src/util/base.css';
                     }
                     if (req.headers.accept.indexOf('images') !== -1) {
                         return req.url;

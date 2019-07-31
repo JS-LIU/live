@@ -1,4 +1,100 @@
-.course_list{
-    height:300px;
+.course_product_list{
+    width:12.03rem;
     overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /*justify-content: space-between;*/
+}
+
+.course_product_item{
+    width:3.79rem;
+    height:3.49rem;
+    display:flex;
+    flex-direction: column;
+    border-radius: 0.08rem;
+    border:0.01rem solid #E8E8E8;
+    overflow: hidden;
+    margin:0 0.2rem 0.2rem 0;
+}
+.course_product_item_header{
+    height:1.24rem;
+    color:#FFFFFF;
+    display:flex;
+}
+.course_product_item_header_box{
+    padding:0.29rem 0.29rem 0.18rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.course_product_item_title{
+    font-size:0.2rem;
+}
+.course_product_item_time{
+    font-size:0.14rem;
+}
+.course_product_item_body{
+    height:1.30rem;
+    border-bottom:0.01rem solid #e8e8e8;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    background:#FFFFFF;
+}
+.course_product_item_body_teacher_item{
+    margin-left:0.18rem;
+    height:0.5rem;
+    display:flex;
+    flex-direction: row;
+}
+.course_product_item_body_teacher_item_pic_box{
+    width:0.5rem;
+    height:0.5rem;
+    border:0.01rem solid #e8e8e8;
+    border-radius: 0.24rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.course_product_item_body_teacher_item_header_img{
+    width:100%;
+}
+.course_product_item_body_teacher_info{
+    margin-left:0.11rem;
+    height:0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size:0.14rem;
+}
+.course_product_item_body_teacher_info_job{
+    color:#000;
+}
+.course_product_item_body_teacher_info_name{
+    color:#8b8b8b;
+}
+.course_product_item_footer{
+    height:0.94rem;
+    display:flex;
+    align-items: center;
+    align-content: stretch;
+    background:#FFF;
+}
+.course_product_item_footer_box{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width:100%;
+    padding:0 0.29rem 0;
+}
+.course_product_item_footer_total_course{
+    font-size:0.14rem;
+    color:#808080;
+}
+.course_product_item_footer_course_price{
+    color:#FFC200;
+    font-size:0.36rem;
 }

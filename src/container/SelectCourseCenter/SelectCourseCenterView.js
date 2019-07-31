@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {SelectCourseCenterHeaderView} from "./SelectCourseCenterHeaderView";
 import {courseService} from "../../service/CourseService";
 import {CourseProductList} from "./CourseProductList";
-
+import {HeaderView} from "../../component/HeaderView/HeaderView";
+import selectCourseStyle from "./selectCourseStyle.css";
 
 export class SelectCourseCenterView extends Component{
     constructor(props) {
@@ -68,13 +69,17 @@ export class SelectCourseCenterView extends Component{
     render() {
         return(
             <div>
-                <div>选课中心</div>
-                <SelectCourseCenterHeaderView
-                    courseTypeList={this.state.courseTypeList}
-                    onSelectSpecifyType={this.onSelectSpecifyType.bind(this)}
-                    onQueryCourse={this.onQueryCourseList.bind(this)}
-                />
-                <CourseProductList courseList={this.state.courseList} onGetMore={this.onGetMore.bind(this)}/>
+                <div className="wrap"></div>
+
+                <HeaderView />
+                <div className="select_course_center_body">
+                    <SelectCourseCenterHeaderView
+                        courseTypeList={this.state.courseTypeList}
+                        onSelectSpecifyType={this.onSelectSpecifyType.bind(this)}
+                        onQueryCourse={this.onQueryCourseList.bind(this)}
+                    />
+                    <CourseProductList courseList={this.state.courseList} onGetMore={this.onGetMore.bind(this)}/>
+                </div>
             </div>
         )
     }

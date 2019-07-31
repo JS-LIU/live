@@ -1,0 +1,31 @@
+.select_course_center_type{
+    position:relative;
+    width:100%;
+    background:#FFF;
+    border-radius: 0.08rem;
+    border:0.01rem solid #E8E8E8;
+    overflow: hidden;
+    margin-bottom:0.3rem;
+}
+.select_course_center_type_list_box{
+    padding:0.34rem 0.19rem 0.05rem 0.19rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size:0.16rem;
+    color:#b2b3b3;
+}
+.select_course_center_type_line{
+    display:flex;
+    margin-bottom:0.41rem;
+}
+.select_course_center_general_type{
+    width:0.64rem;
+}
+.select_course_center_specify_line{
+    margin-left:0.31rem;
+    display:flex;
+}
+.select_course_center_specify_type{
+    margin-right:0.46rem;
+}
