@@ -18,11 +18,20 @@
     margin:0 0.2rem 0.2rem 0;
 }
 .course_product_item_header{
+    position:relative;
     height:1.24rem;
     color:#FFFFFF;
     display:flex;
 }
+.course_product_item_header_bg{
+    position:absolute;
+    top: 0.12rem;
+    left: 0.7rem;
+    height: 1rem;
+    width: 2.8rem;
+}
 .course_product_item_header_box{
+    position:relative;
     padding:0.29rem 0.29rem 0.18rem;
     display: flex;
     flex-direction: column;

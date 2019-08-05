@@ -1,0 +1,113 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.settle_main{
+    margin:0 auto;
+    width:11.8rem;
+    position:relative;
+}
+.settle_course_title{
+    height:0.63rem;
+    line-height: 0.63rem;
+    font-size:0.14rem;
+    color:#000000;
+}
+.product_course_pay_info{
+    background:#FFFFFF;
+    height:2.24rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size:0.14rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    margin-bottom:0.49rem;
+}
+.product_course_pay_info_box{
+    display:flex;
+    flex-direction: column;
+    margin:0 0.32rem;
+}
+.settle_product_course_info{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:0.7rem;
+}
+.settle_product_course_info_price{
+    width:100%;
+    border-top:0.01rem solid #e8e8e8;
+    padding-top:0.29rem;
+    margin-top:0.29rem;
+}
+.settle_pay_title{
+    font-size:0.16rem;
+    color:#000;
+    padding-bottom: 0.2rem;
+    border-bottom:0.01rem solid #e8e8e8;
+    margin-bottom: 0.2rem;
+}
+.settle_info_box{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom:0.23rem;
+}
+.settle_info_list{
+    display:flex;
+    flex-direction: column;
+}
+.settle_info_item{
+    display:flex;
+    flex-direction: row;
+    margin-bottom:0.15rem;
+    font-size:0.14rem;
+}
+.settle_real_price_box{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width:11.78rem;
+    height:0.72rem;
+    border:0.01rem solid #e8e8e8;
+    border-radius: 0.08rem;
+    background:#FFFFFF;
+    margin-bottom:0.3rem;
+}
+.settle_real_price_info{
+    display:flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding-right:0.21rem;
+}
+.settle_real_price_title{
+    font-size:0.14rem;
+}
+.settle_real_price{
+    font-size:0.24rem;
+    color:#FFC200;
+}
+.create_order_btn_box{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+.create_order_btn{
+    width:1.8rem;
+    height:0.41rem;
+    background:#FFC200;
+    border-radius: 0.04rem;
+    color:#FFFFFF;
+    font-size:0.16rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}

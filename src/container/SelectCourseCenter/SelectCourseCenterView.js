@@ -5,8 +5,10 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {SelectCourseCenterHeaderView} from "./SelectCourseCenterHeaderView";
 import {courseService} from "../../service/CourseService";
+import {userService} from "../../service/UserService";
 import {CourseProductList} from "./CourseProductList";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
+import {HB} from "../../util/HB";
 import selectCourseStyle from "./selectCourseStyle.css";
 
 export class SelectCourseCenterView extends Component{
@@ -28,8 +30,13 @@ export class SelectCourseCenterView extends Component{
             });
             this.pagination.to(1);
             this.updateCourseList();
-        })
+        });
+        this.onGetMore();
     }
+    componentWillUnmount() {
+        window.onscroll = null;
+    }
+
     updateCourseList(){
         courseService.getProductCourse().then((courseList)=>{
             this.setState({
@@ -42,10 +49,10 @@ export class SelectCourseCenterView extends Component{
      * 获取更多
      */
     onGetMore(){
-        console.log("我滚了");
-
-        // this.pagination.nextPage();
-        // this.updateCourseList();
+        HB.ui.scrollToTheBottom(()=>{
+            this.pagination.nextPage();
+            this.updateCourseList();
+        });
     }
 
     /**
@@ -56,7 +63,8 @@ export class SelectCourseCenterView extends Component{
         courseService.toggleSelectSpecifyType(specifyCourseType);
         this.setState({
             courseTypeList:courseService.courseType
-        })
+        });
+        this.onQueryCourseList();
     }
 
     /**
@@ -66,19 +74,28 @@ export class SelectCourseCenterView extends Component{
         this.pagination.to(1);
         this.updateCourseList();
     }
+    onSelectAll(generalCourseType){
+        courseService.toggleSelectAllSpecifyCourseType(generalCourseType);
+        this.setState({
+            courseTypeList:courseService.courseType
+        });
+        this.onQueryCourseList();
+    }
     render() {
         return(
             <div>
                 <div className="wrap"></div>
-
-                <HeaderView />
-                <div className="select_course_center_body">
+                <HeaderView userInfo={userService.getUser().userInfo}/>
+                <div className="select_course_center_main">
+                    <div className="crumbs">
+                        首页 > 选课中心
+                    </div>
                     <SelectCourseCenterHeaderView
                         courseTypeList={this.state.courseTypeList}
                         onSelectSpecifyType={this.onSelectSpecifyType.bind(this)}
-                        onQueryCourse={this.onQueryCourseList.bind(this)}
+                        onSelectAll={this.onSelectAll.bind(this)}
                     />
-                    <CourseProductList courseList={this.state.courseList} onGetMore={this.onGetMore.bind(this)}/>
+                    <CourseProductList courseList={this.state.courseList}/>
                 </div>
             </div>
         )

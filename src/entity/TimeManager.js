@@ -13,13 +13,25 @@ export class TimeManager {
     static currentTimeStampBySec(){
         return Date.parse(new Date()) / 1000;
     }
+    //  分钟转换秒
     static convertMinToSec(min){
         return min * 60;
     }
-    static convertMinToMs(min){
-        return min * 60 * 1000;
+
+    //  秒转换分钟
+    static convertSecToMin(sec){
+        return parseInt(sec / 60);
     }
-    static convertSecToMs(sec){
-        return sec * 1000;
+    //  剩余秒
+    static convertRemainSec(sec){
+        return sec % 60;
+    }
+    //  倒计时
+    static getCountDownTime(sec) {
+        return TimeManager.convertSecToMin(sec) + ":" + TimeManager.paddingZero(TimeManager.convertRemainSec(sec));
+    }
+    //  补领
+    static paddingZero(paddingTarget){
+        return (paddingTarget < 10 ? '0' + paddingTarget : paddingTarget);
     }
 }

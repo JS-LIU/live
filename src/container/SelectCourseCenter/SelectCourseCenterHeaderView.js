@@ -13,7 +13,11 @@ export class SelectCourseCenterHeaderView extends Component{
         return ()=>{
             this.props.onSelectSpecifyType(specifyCourse);
         }
-
+    }
+    onSelectAll(generalCourseType){
+        return ()=>{
+            this.props.onSelectAll(generalCourseType);
+        }
     }
     render() {
         let generalNodes = this.props.courseTypeList.map((generalCourseType,index)=>{
@@ -26,6 +30,7 @@ export class SelectCourseCenterHeaderView extends Component{
                 <div key={index} className="select_course_center_type_line">
                     <div className="select_course_center_general_type">{generalCourseType.name}</div>
                     <div className="select_course_center_specify_line">
+                        <span className="select_course_center_specify_type" onClick={this.onSelectAll(generalCourseType)} style={generalCourseType.selected?selectedStyle:{}}>所有</span>
                         {specifyNodes}
                     </div>
                 </div>
@@ -42,5 +47,5 @@ export class SelectCourseCenterHeaderView extends Component{
     }
 }
 const selectedStyle = {
-    color:"#399cfe"
+    color:"#FFC200",
 };

@@ -7,6 +7,7 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     devServer: {
+        host: "0.0.0.0",
         port: 9000,
         proxy:{
             "/api":{
@@ -17,7 +18,6 @@ module.exports = {
                         return '/index.html';
                     }
                     if (req.headers.accept.indexOf('css') !== -1) {
-                        console.log("bypass css");
                         return '/src/util/base.css';
                     }
                     if (req.headers.accept.indexOf('images') !== -1) {

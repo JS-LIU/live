@@ -1,0 +1,202 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.crumbs{
+    height:0.63rem;
+    line-height: 0.63rem;
+    font-size:0.14rem;
+    color:#808080;
+}
+.product_course_detail_main{
+    width:11.8rem;
+    margin:0 auto;
+    position:relative;
+}
+.product_course_detail{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.product_course_detail_info{
+    width:7.83rem;
+    background:#FFF;
+}
+.product_course_detail_top{
+    width:100%;
+}
+.product_course_detail_header{
+    position:relative;
+    height:3.08rem;
+    background:#6AC35F url("../../img/product_course_detail_header_bg.png") no-repeat center;
+    border-top-left-radius: 0.08rem;
+    border-top-right-radius: 0.08rem;
+}
+.product_course_detail_header_teacher_info{
+    position:absolute;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:1.40rem;
+    height:0.4rem;
+    font-size:0.16rem;
+    color:#FFFFFF;
+    right:2.34rem;
+    bottom:0.22rem;
+}
+.product_course_detail_top_course_info_box{
+    height:2.47rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.product_course_detail_top_course_info{
+    display:flex;
+    flex-direction: column;
+    padding:0.33rem 0 0.47rem 0.31rem;
+}
+.product_course_detail_top_course_name{
+    font-size:0.2rem;
+    color:#000;
+}
+.product_course_detail_top_course_time{
+    margin-top:0.18rem;
+    font-size:0.14rem;
+    color:#000;
+}
+.product_course_detail_top_course_profits{
+    padding-top:0.41rem;
+    height:74rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.product_course_detail_top_course_profit_item{
+    font-size:0.14rem;
+    background:url("../../img/profit_check.png") no-repeat left;
+    background-size: contain;
+    padding-left: 0.3rem;
+}
+.course_product_detail_teacher_info{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height:1.03rem;
+
+}
+.course_product_detail_teacher_item_header_img{
+    width:0.6rem;
+    height:0.60rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 50%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: hidden;
+}
+.course_product_detail_teacher_name_box{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:0.14rem;
+}
+.course_product_detail_teacher_item_header_img_pic{
+    width:100%;
+}
+.product_course_detail_top_course_info_teacher_list{
+    width:1.98rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding:0.49rem 0.85rem 0 1.7rem;
+}
+.product_course_detail_right{
+    width:3.8rem;
+    background:#FFF;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+}
+.product_course_detail_pay_info{
+    width:2.9rem;
+    display:flex;
+    flex-direction: column;
+    padding:0.4rem 0;
+}
+.product_course_detail_right_course_title{
+    font-size:0.2rem;
+}
+.product_course_detail_right_course_info{
+    display:flex;
+    flex-direction: column;
+    width:2.9rem;
+    height:0.91rem;
+    background:#FFF9E7;
+    border-radius: 0.04rem;
+    margin-top:0.09rem;
+}
+.product_course_detail_right_course_info_box{
+    height:0.52rem;
+    padding:0 0.12rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.product_course_detail_right_course_price_box{
+    display:flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+.product_course_detail_right_course_sale_price{
+    font-size:0.36rem;
+    color:#FFC200;
+}
+.product_course_detail_right_course_original_price{
+    padding-left:0.16rem;
+    font-size:0.12rem;
+    text-decoration:line-through;
+}
+.product_course_detail_right_course_end_time{
+    font-size:0.12rem;
+}
+.product_course_detail_settle_box{
+    margin-top:0.2rem;
+    padding-top:0.2rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-top:0.01rem dashed #E8E8E8;
+    font-size:0.16rem;
+}
+.product_course_buy_btn{
+    width:1.8rem;
+    height:0.41rem;
+    background:#FFC200;
+    border-radius: 0.04rem;
+    color:#FFF;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+.product_course_consult_btn{
+    width:0.88rem;
+    height:0.39rem;
+    border:0.01rem solid #FFC200;
+    background:#FFFFFF;
+    color:#FFC200;
+    border-radius: 0.04rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+

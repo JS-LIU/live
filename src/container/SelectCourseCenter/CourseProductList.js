@@ -3,8 +3,7 @@
  */
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import courseProductList from './courseProductList.css';
-import product_course_python_header_bg from "../../img/product_course_python_header_bg.png";
+import courseProductList from './courseProductListStyle.css';
 export class CourseProductList extends Component{
     constructor(props) {
         super(props);
@@ -25,13 +24,11 @@ export class CourseProductList extends Component{
                     </div>
                 )
             });
-            console.log(course.bgStyle);
             return(
                 <div key={index} className="course_product_item">
                     <Link to={"/productCourseDetail/"+`${course.goodNo}`}>
-                        <div className="course_product_item_header" style={{
-                            background:"#00b7ba url(../../img/product_course_python_header_bg.png) no-repeat cover"
-                        }}>
+                        <div className="course_product_item_header" style={{background:course.bgStyle.bg}}>
+                            <img src={course.bgStyle.url} alt="" className="course_product_item_header_bg" />
                             <div className="course_product_item_header_box">
                                 <div className="course_product_item_title">{course.name}</div>
                                 <div className="course_product_item_time">{course.startTime}-{course.endTime}</div>
@@ -51,7 +48,7 @@ export class CourseProductList extends Component{
             )
         });
         return(
-            <div className="course_product_list" onScrollCapture={this.props.onGetMore}>
+            <div className="course_product_list">
                 {courseNodes}
             </div>
         )

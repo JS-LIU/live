@@ -19,6 +19,10 @@ import {SelectCourseCenterView} from "./container/SelectCourseCenter/SelectCours
 import {ProductCourseDetailView} from "./container/ProductCourseDetail/ProductCourseDetailView";
 //  结算中心
 import {SettleCenterView} from "./container/SettleCenter/SettleCenterView";
+//  支付成功
+import {PaySuccessView} from "./container/PaySuccess/PaySuccessView";
+//  支付失败
+import {PayFailView} from "./container/PayFail/PayFailView";
 
 import {CodingView} from "./container/CodingView";
 import {PayView} from "./container/Pay/PayView";
@@ -54,11 +58,10 @@ ReactDOM.render(
             <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />
             <Route path="/confirmOrder/:productCourseNo" component={SettleCenterView} />
             <Route path="/pay" component={PayView} />
-            {/*<Route path="/userInfo" component={}/>*/}
+            <Route path="/paySuccess/:status" compnent={PaySuccessView}/>
+            <Route path="/payFail/:status" component={PayFailView}/>
+            {/*<Route path="/codingCenter" component={CodingView} />*/}
 
-
-            <Route path="/users/" component={Users} />
-            <Route path="/codingCenter" component={CodingView} />
         </div>
     </Router>),
     document.getElementById('app')

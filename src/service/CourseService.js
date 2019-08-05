@@ -70,9 +70,18 @@ class CourseService {
      * @param specifyCourseType
      */
     toggleSelectSpecifyType(specifyCourseType){
-        specifyCourseType.select();
+        let generalCourseType = this.findGeneralCourseTypeByTypeId(specifyCourseType.type);
+        console.log(generalCourseType);
+        generalCourseType.selectSpecifyCourseType(specifyCourseType);
     }
-
+    findGeneralCourseTypeByTypeId(typeId){
+        return this.courseType.find((generalType,index)=>{
+            return generalType.type === typeId;
+        });
+    }
+    toggleSelectAllSpecifyCourseType(generalCourseType){
+        generalCourseType.toggleSelectAllSpecifyCourseType();
+    }
     /**
      * 创建通用分类
      * @param summaryTips
@@ -84,6 +93,7 @@ class CourseService {
             let generalCourseTypeInfo = {
                 name:summaryTips[i].name,
                 index:summaryTips[i].index,
+                type:summaryTips[i].selectTips[0].type,
                 specifyCourseTypeList:this.createSpecifyCourseList(summaryTips[i].selectTips),
             };
             this.courseType.push(new GeneralCourseType(generalCourseTypeInfo))
@@ -164,7 +174,7 @@ class CourseService {
         if(this.pagination.pageNum === 1){
             this.courseList = productCourseList
         }else{
-            this.courseList.concat(productCourseList);
+            this.courseList = this.courseList.concat(productCourseList);
         }
         return this.courseList;
     }
@@ -179,7 +189,6 @@ class CourseService {
             goodNo:productCourseNo
         }).then((data)=>{
             productCourse = this.updateCourse(productCourse,data.data);
-            console.log(productCourse);
             return new Promise((resolve, reject)=>{
                 resolve(productCourse);
             });
@@ -196,6 +205,7 @@ class CourseService {
         productCourse.repairDetail(detail);
         return productCourse;
     }
+
 }
 
 export const courseService = new CourseService();

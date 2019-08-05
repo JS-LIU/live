@@ -1,0 +1,85 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.pay_success_main{
+    position:relative;
+    width:11.8rem;
+    margin:0 auto;
+}
+.pay_success_body_box{
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pay_success_body_box_inner{
+    display:flex;
+    flex-direction: row;
+    margin-left:0.43rem;
+    height:1.8rem;
+}
+.pay_success_body_box_inner_left{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:7.5rem;
+}
+.pay_success_body_box_inner_left_pay_info{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background:url("../../img/order_ok.png") no-repeat left center;
+    background-size: 0.42rem 0.32rem;
+    padding-left:0.61rem;
+    height:0.51rem;
+    font-size:0.14rem;
+}
+.pay_success_body_box_inner_left_pay_info_title{
+    color:#61BF55;
+    font-size:0.24rem;
+}
+.pay_success_body_box_inner_left_links{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:5.57rem;
+}
+.pay_success_body_box_inner_left_link_list{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:2.98rem;
+    font-size:0.16rem;
+}
+.pay_success_body_download_btn{
+    width:1.8rem;
+    height:0.4rem;
+    color:#FFF;
+    font-size: 0.16rem;
+    background:#FFC200;
+    border-radius: 0.04rem;
+    overflow: hidden;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.pay_success_body_box_inner_right{
+    width:4.28rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    background:url("../../img/qr_gzh.png") no-repeat center top;
+    background-size: 1.3rem;
+    font-size:0.14rem;
+}
+
+

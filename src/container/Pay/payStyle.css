@@ -1,0 +1,103 @@
+.pay_body{
+    width: 11.8rem;
+    margin: 0 auto;
+}
+.pay_body_top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.29rem 0;
+}
+.orderInfoLeft img{
+    width: 0.42rem;
+    vertical-align: middle;
+    margin-right: 0.28rem;
+}
+.pay_body_top_title_box{
+    display: inline-block;
+    vertical-align: middle;
+    background:url("../../img/order_ok.png") no-repeat left center;
+    background-size:0.38rem 0.32rem;
+    padding-left:0.7rem;
+}
+.pay_body_top_title_box p{
+    font-size:0.14rem;
+    font-weight:400;
+    color:#808080;
+    line-height:0.28rem;
+}
+.pay_body_top_title_box .order_count_down_text{
+    color: #FF6458;
+}
+.order_price{
+    font-size:0.14rem;
+    font-weight:600;
+    color:#000;
+    line-height:0.28rem;
+}
+.pay_body_info_box{
+    display:flex;
+    flex-direction: column;
+    width:11.78rem;
+    height:6.46rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    background:#FFF;
+}
+.pay_body_pay_way{
+    height:0.53rem;
+    margin: 0 0.31rem;
+    border-bottom:0.01rem solid #E8E8E8;
+    font-size:0.16rem;
+    color:#000000;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+.pay_qrCode_box{
+    position:relative;
+    width:2.92rem;
+    background:url("../../img/pay_ip_bg.png") no-repeat right center;
+    background-size: 2.45rem 3.14rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 5.03rem;
+    margin:0.36rem 0 0 1.23rem;
+}
+.pay_qrCode_tips_text{
+    font-size:0.16rem;
+    color: #FFFFFF;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:0.81rem;
+    width:2.92rem;
+    background:#6AC35F;
+}
+.already_pay_btn{
+    position:relative;
+    margin-top: 0.84rem;
+    width:1.78rem;
+    height:0.38rem;
+    border-radius: 0.04rem;
+    border:0.01rem solid #FFC200;
+    color:#FFC200;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.already_pay_btn_bg{
+    position: absolute;
+    bottom: -0.2rem;
+    left: -0.92rem;
+    width: 11.18rem;
+    height: 0.81rem;
+    background: #E8E8E8;
+    border-radius: 0.08rem;
+    z-index: 0;
+}
+

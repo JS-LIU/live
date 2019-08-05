@@ -1,0 +1,61 @@
+.common_footer{
+    height:2.6rem;
+    width:100%;
+    background:#000;
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.common_footer_main{
+    width:11.8rem;
+    height:1.31rem;
+    margin:0 auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.common_footer_left{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:1.31rem;
+}
+.common_footer_left_top{
+    display:flex;
+    flex-direction: row;
+
+
+}
+.common_footer_left_top_link_item{
+    margin-right:0.91rem;
+    font-size:0.16rem;
+    color:#FFFFFF;
+}
+.common_footer_left_bottom{
+    font-size:0.12rem;
+}
+.common_footer_right{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.common_footer_right_top{
+    background:url("../../img/sscoding_logo.png") no-repeat center bottom;
+    background-size: 0.94rem 0.46rem;
+    padding-bottom:0.7rem;
+    color:#FFFFFF;
+}
+.common_footer_right_top_customer_service{
+    display:flex;
+    flex-direction: column;
+    align-items: end;
+}
+.common_footer_right_top_customer_service_phone{
+    font-size:0.2rem;
+
+}
+.common_footer_right_top_customer_service_time{
+    font-size:0.12rem;
+}

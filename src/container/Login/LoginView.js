@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // import {login} from "../../entity/Login";
 import {userService} from "../../service/UserService";
+import {FooterView} from "../../component/FooterView/FooterView";
 
 export class LoginView extends Component{
 
@@ -36,6 +37,7 @@ export class LoginView extends Component{
                     this.inputPassword(e)
                 }}/>
                 <span onClick={this.login.bind(this)}>登录</span>
+                <FooterView />
             </div>
         )
     }

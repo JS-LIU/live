@@ -1,0 +1,53 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.pay_fail_main{
+    width: 11.78rem;
+    height: 5.17rem;
+    margin: 0.63rem auto;
+    border: 0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+}
+.pay_fail_tips{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 3.06rem;
+    height: 1.1rem;
+}
+.pay_fail_tips_top{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height:0.43rem;
+}
+.pay_fail_tips_title{
+    font-size:0.2rem;
+    color:#FF6458;
+}
+.pay_fail_tips_reason{
+    font-size:0.14rem;
+}
+.pay_fail_reselect_course_btn{
+    width: 1.2rem;
+    height: 0.4rem;
+    background: #FFC200;
+    border-radius: 0.04rem;
+    font-size: 0.16rem;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

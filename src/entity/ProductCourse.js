@@ -12,10 +12,13 @@ export class ProductCourse {
         this.endTime = productInfo.endTime;
         this.totalLessonNum = productInfo.totalLessonNum;
         this.salePrice = productInfo.salePrice;
+        //    主讲人列表
         this.teacherInfoList = productInfo.teacherInfoList;
         this.bgStyle = this.setBg();
     }
-
+    getMajorSpeaker(){
+        return this.teacherInfoList[0];
+    }
     /**
      * 补全详情
      */
@@ -32,27 +35,24 @@ export class ProductCourse {
 
     }
     setBg(){
-        let style = ProductCourse.bgStrategy()[this.type];
-        return {
-            background:style.bg + ' url('+style.url+') no-repeat cover',
-        }
+        return ProductCourse.bgStrategy()[this.type];
     }
     static bgStrategy() {
         return {
             "1":{
                 bgKey:"python",
                 bg:"#00b7ba",
-                url:"../img/product_course_python_header_bg.png"
+                url:"src/img/product_course_python_header_bg.png"
             },
             "2":{
                 bgKey:"c++",
                 bg:"#4161A6",
-                url:"../img/product_course_c++_header_bg.png"
+                url:"src/img/product_course_c++_header_bg.png"
             },
             "3":{
                 bgKey:"noi",
                 bg:"#b178c8",
-                url:"../img/product_course_noi_header_bg.png"
+                url:"src/img/product_course_noi_header_bg.png"
             }
         }
     }

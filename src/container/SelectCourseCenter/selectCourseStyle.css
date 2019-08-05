@@ -4,7 +4,14 @@
     height:100%;
     background:#fafafa;
 }
-.select_course_center_body{
+.crumbs{
+    height:0.63rem;
+    line-height: 0.63rem;
+    font-size:0.14rem;
+    color:#808080;
+
+}
+.select_course_center_main{
     position:relative;
     width:11.80rem;
     margin:0 auto;
