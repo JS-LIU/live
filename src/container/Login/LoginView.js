@@ -20,7 +20,7 @@ export class LoginView extends Component{
         userService.signIn().then((data)=>{
             userService.updateUserInfo({token:data.data.token});
             //  跳转到首页
-            this.props.history.push('/home');
+            this.props.history.replace('/home');
         });
     }
     inputPhoneNum(e){
@@ -37,7 +37,7 @@ export class LoginView extends Component{
                     this.inputPassword(e)
                 }}/>
                 <span onClick={this.login.bind(this)}>登录</span>
-                <FooterView />
+                <FooterView style={{position:"fixed",bottom:"0"}}/>
             </div>
         )
     }

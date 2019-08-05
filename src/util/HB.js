@@ -378,7 +378,10 @@ HB.ui = (function(){
             }
         };
     };
-
+    //  是否有滚动条
+    let hasScrollbar = function() {
+        return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
+    };
 
 
     const setBaseFontSize = function(designWidth,rem2px){
@@ -410,7 +413,8 @@ HB.ui = (function(){
     return {
         scrollToTheBottom:scrollToTheBottom,
         setBaseFontSize:setBaseFontSize,
-        parsePx:parsePx
+        parsePx:parsePx,
+        hasScrollbar:hasScrollbar
     }
 })();
 

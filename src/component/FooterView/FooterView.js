@@ -8,12 +8,19 @@ import footerStyle from './footerStyle.css';
 export class FooterView extends Component{
     constructor(props) {
         super(props);
-
+        this.state = {
+            style:{}
+        }
+    }
+    componentDidMount() {
+        this.setState({
+            style:this.props.style
+        })
     }
 
     render() {
         return (
-            <div className="common_footer">
+            <div className="common_footer" style={this.state.style}>
                 <div className="common_footer_main">
                     <div className="common_footer_left">
                         <div className="common_footer_left_top">

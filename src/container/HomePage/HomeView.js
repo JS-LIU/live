@@ -7,26 +7,29 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {homeData} from "./HomeData";
 import {HomeHeadView} from "../../component/HomeHeadView";
 import {userService} from "../../service/UserService";
+import {HeaderView} from "../../component/HeaderView/HeaderView";
 
 export class HomeView extends Component{
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             userInfo:{}
         }
     }
+
     componentDidMount() {
-        userService.getUserInfo().then((userInfo)=>{
-            this.setState({
-                userInfo:userInfo
+        userService.getUserInfo().then(()=>{
+            this.setState((state,props)=>{
+                return {
+                    userInfo:userService.getUser().userInfo
+                }
             })
         });
     }
     render() {
         return(
             <div>
-                <HomeHeadView routeList={homeData.header.links} userInfo={this.state.userInfo} />
-
+                <HeaderView userInfo={this.state.userInfo} />
             </div>
         )
     }
