@@ -9,14 +9,18 @@ import {ProductCourse} from "../entity/ProductCourse";
 import {GeneralCourseType} from "../entity/GeneralCourseType";
 import {SpecifyCourseType} from "../entity/SpecifyCourseType";
 import {Pagination} from "../entity/Pagination";
-
+import {OwnedCourseLearnStatus} from "../entity/OwnedCourseLearnStatus";
+import {OwnedCourseLearnStatusList} from "../entity/OwnedCourseLearnStatusList";
 
 class CourseService {
     constructor(){
         let ownedCourseAjax = commonAjax.resource('/course/w/v1.0/:action');
         let courseAjax = commonAjax.resource('/good/w/v1.0/:action');
-        this._getOwnedCourseList = function(postInfo){
+        this._getOwnedCourseListByWeek = function(postInfo){
             return ownedCourseAjax.save({action:'pageCoursePlan'},postInfo,{name:"token",value:userService.getUser().token});
+        };
+        this._getAllOwnedCourseList = function(postInfo){
+            return ownedCourseAjax.save({action:"pageMyCourse"},postInfo,{name:"token",value:userService.getUser().token})
         };
         this._getCourseType = function(postInfo){
             return courseAjax.save({action:'goodBaseSelectTips'},postInfo,{name:"token",value:userService.getUser().token});
@@ -31,28 +35,107 @@ class CourseService {
         this.courseType = [];
         this.courseList = [];
         this.pagination = new Pagination(1,6);
+        //  对象：学习状态
+        this.ownedCourseLearnStatusList = this.createOwnedCourseLearnStatusList([
+            {
+                id:0,
+                name:"未开课",
+                active:false,
+                order:1
+            },
+            {
+                id:1,
+                name:"正在学",
+                active:false,
+                order:2
+            },
+            {
+                id:2,
+                name:"已结束",
+                active:false,
+                order:3
+            },
+            {
+                id:99,
+                name:"全部",
+                active:true,
+                order:0
+            }
+        ]);
+    }
+    getOwnedCourseLearnStatusList(){
+        return this.ownedCourseLearnStatusList;
+    }
+    /**
+     * 创建学习状态
+     * @param statusJson
+     * @returns {OwnedCourseLearnStatusList}
+     */
+    createOwnedCourseLearnStatusList(statusJson){
+        let ownedCourseLearnStatusList = [];
+        for(let i = 0;i < statusJson.length;i++){
+            ownedCourseLearnStatusList.push(new OwnedCourseLearnStatus(statusJson[i]));
+        }
+        return new OwnedCourseLearnStatusList(ownedCourseLearnStatusList);
     }
 
     /**
+     * 选择学习状态
+     * @param learnStatus
+     * @returns {[]}
+     */
+    selectOwnedCourseLearnStatus(learnStatus){
+        this.ownedCourseLearnStatusList.selectOwnedCourseLearnStatus(learnStatus);
+        return this.ownedCourseLearnStatusList.getList();
+    }
+    /**
      * 获取已购的本周课程(某一周的课程，已购课程)
-     * @param pageNum
      * @param startTime
      * @param endTime
      */
-    getOwnedCourseList(pageNum,startTime,endTime){
-        this._getOwnedCourseList({
-            pageNum:pageNum,
-            pageSize:5,
-            startTime:TimeManager.convertToTimeStampBySec(startTime),
-            endTime:TimeManager.convertToTimeStampBySec(endTime)
+    getOwnedCourseListByWeek(startTime, endTime){
+        return this._getOwnedCourseListByWeek({
+            pageNum:this.pagination.pageNum,
+            pageSize:this.pagination.size,
+            startTime:startTime,
+            endTime:endTime
         }).then((data)=>{
-            for(let i = 0;i < data.data.list.length;i++){
-                this.ownedCourseList.push(new OwnedCourse(data.data.list[i]));
+            //  todo 暂时前端处理
+            if(data.data.total < this.pagination.pageNum*this.pagination.size){
+                data.data.list = [];
             }
-            return this.ownedCourseList;
+            return this.createOwnedCourseListByJson(data.data.list);
+        })
+    }
+    getAllOwnedCourseList(learnStatus){
+        return this._getAllOwnedCourseList({
+            pageNum:this.pagination.pageNum,
+            pageSize:this.pagination.size,
+            learnStatus:learnStatus
+        }).then((data)=>{
+            return this.createOwnedCourseListByJson(data.data.list);
         })
     }
 
+    /**
+     * 创建拥有的课程
+     * @param ownedCourseListJson
+     * @returns {Promise<OwnedCourse>}
+     */
+    createOwnedCourseListByJson(ownedCourseListJson){
+        let ownedCourseList = [];
+        return new Promise((resolve, reject)=>{
+            if(ownedCourseListJson.length === 0){
+                reject("no course");
+            }else{
+                for(let i = 0;i < ownedCourseListJson.length;i++){
+                    ownedCourseList.push(new OwnedCourse(ownedCourseListJson[i]));
+                }
+                this.ownedCourseList = this.refreshOrMoreList(this.ownedCourseList,ownedCourseList);
+                resolve(this.ownedCourseList);
+            }
+        });
+    }
     /**
      * 获取所有课程的分类（商品类型列表）
      */
@@ -135,7 +218,7 @@ class CourseService {
                 productCourseList.push(this.createProductCourse(data.data.list[i]));
             }
             return new Promise((resolve, reject)=>{
-                this.courseList = this.updateCourseList(productCourseList);
+                this.courseList = this.refreshOrMoreList(this.courseList,productCourseList);
                 resolve(this.courseList);
             })
         })
@@ -165,18 +248,19 @@ class CourseService {
     }
 
     /**
-     * 更新courseList
+     * 加载更多或者刷新列表
      * private
-     * @param productCourseList
+     * @param baseList
+     * @param addedList
      * @returns {[]|*}
      */
-    updateCourseList(productCourseList) {
+    refreshOrMoreList(baseList, addedList) {
         if(this.pagination.pageNum === 1){
-            this.courseList = productCourseList
+            baseList = addedList
         }else{
-            this.courseList = this.courseList.concat(productCourseList);
+            baseList = baseList.concat(addedList);
         }
-        return this.courseList;
+        return baseList;
     }
     //  获取分页实体
     getPagination(){

@@ -2,6 +2,8 @@
  * Created by Liudq on 2019-07-30
  */
 import {TimeManager} from "./TimeManager";
+import {OrderProduct} from "./OrderProduct";
+
 
 export class Order {
     constructor(orderInfo){
@@ -10,9 +12,16 @@ export class Order {
         this.payLastTime = orderInfo.payLastTime;
         this.frequentlyStep = 2;
         this.lazyStep = 10;
-        this.status = orderInfo.status;
+        this.status = orderInfo.status||orderInfo.orderStatus;
+        this.orderCreateTime = orderInfo.orderCreateTime;
+        //  todo 现在order对商品是1对1 1对多的时候改成list
+        this.orderCourse = new OrderProduct({
+            weeks:orderInfo.weeks,
+            name:orderInfo.goodName,
+            series:orderInfo.series,
+            sellPrice:orderInfo.sellPrice
+        });
     }
-
     /**
      * 是否过期
      * @returns {boolean}

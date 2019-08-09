@@ -30,8 +30,24 @@ export class TimeManager {
     static getCountDownTime(sec) {
         return TimeManager.convertSecToMin(sec) + ":" + TimeManager.paddingZero(TimeManager.convertRemainSec(sec));
     }
-    //  补领
+    //  补零
     static paddingZero(paddingTarget){
         return (paddingTarget < 10 ? '0' + paddingTarget : paddingTarget);
+    }
+    //  时间戳转换时间
+    static timeStampToDate(timestamp) {
+        let date = new Date(timestamp * 1000);
+        return {
+            Y : date.getFullYear() + '-',
+            M : (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
+            D : date.getDate() + ' ',
+            h : date.getHours() + ':',
+            m : date.getMinutes() + ':',
+            s : date.getSeconds(),
+        };
+    }
+    static convertStampToYMD(timestamp){
+        let d = TimeManager.timeStampToDate(timestamp);
+        return d.Y+d.M+d.D;
     }
 }

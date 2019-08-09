@@ -1,0 +1,100 @@
+.login_wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#FFFCF6;
+}
+.login_main{
+    position:relative;
+    width:10rem;
+    margin:0.91rem auto;
+    background:#FFF url("../../img/login_bg.jpg") no-repeat left center;
+    background-size:5rem 6rem;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    box-shadow:0 0.09rem 0.38rem 0 rgba(0, 0, 0, 0.07);;
+}
+.login_right{
+    position:relative;
+    padding-left:5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:6rem;
+}
+.login_right_top{
+    position:absolute;
+    display: flex;
+    top:0.26rem;
+    right:0.29rem;
+    font-size:0.12rem;
+}
+.login_right_top_register_btn{
+    color:#00A0E5;
+}
+.login_right_log{
+    display:flex;
+    flex-direction: column;
+    width:3.51rem;
+    align-items: center;
+}
+.login_right_log_way{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size:0.2rem;
+    color:#000000;
+}
+.login_right_log_log{
+    margin-top:0.6rem;
+}
+.login_right_log_log_phone_num,.login_right_log_log_password{
+    width:3.48rem;
+    height:0.4rem;
+    border:0.01rem solid #FFC200;
+    border-radius: 0.2rem;
+    margin-bottom:0.21rem;
+    overflow: hidden;
+}
+.login_phone_num_input{
+    background: #F5F5F5 url("../../img/login_header_icon.png") no-repeat 0.18rem center;
+    height: 100%;
+    width: 3.09rem;
+    padding-left: 0.5rem;
+
+}
+.login_psd_num_input{
+    background: #F5F5F5 url("../../img/login_psd_icon.png") no-repeat 0.18rem center;
+    height: 100%;
+    width: 3.09rem;
+    padding-left: 0.5rem;
+}
+.login_right_log_log_reset_psd{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:100%;
+}
+.login_right_log_log_reset_psd_btn{
+    font-size:0.12rem;
+    color:#00A0E5;
+}
+.login_btn{
+    width:3.5rem;
+    height:0.42rem;
+    border-radius: 0.2rem;
+    margin-top:0.61rem;
+    background: #FFC200;
+    font-size:0.14rem;
+    color:#000000;
+    display:flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+
+

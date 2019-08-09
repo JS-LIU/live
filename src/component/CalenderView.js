@@ -64,7 +64,7 @@ export class CalenderView extends Component {
     }
 
     onChange(value) {
-
+        this.props.onChangeTime(this.props.weekCourseData.startTime,this.props.weekCourseData.endTime);
         this.setState({
             value,
         });
@@ -98,7 +98,7 @@ export class CalenderView extends Component {
                 // defaultValue={now}
                 showDateInput={false}
             />);
-        return (<div style={{width: 400, margin: 20}}>
+        return (<div style={{width: 400, margin: 20,display:"flex",justifyContent:"center"}}>
             <div style={{
                 boxSizing: 'border-box',
                 position: 'relative',
@@ -119,18 +119,17 @@ export class CalenderView extends Component {
                         ({value}) => {
                             this.props.weekCourseData.startTime = value.week(value.week()).startOf('week').format(format);
                             this.props.weekCourseData.endTime = value.week(value.week()).endOf('week').format(format);
-                            this.props.handleChangeTime(this.props.weekCourseData.startTime,this.props.weekCourseData.endTime);
+
                             return (
-                                <span tabIndex="0">
-                                <input
-                                    placeholder="please select week"
-                                    style={{width: 250}}
-                                    disabled={state.disabled}
-                                    readOnly
-                                    tabIndex="-1"
-                                    className="ant-calendar-picker-input ant-input"
-                                    value={this.props.weekCourseData.startTime+"-" + this.props.weekCourseData.endTime || ''}
-                                /> </span>
+                                <div tabIndex="0" style={calendar_show}>
+                                    <div >
+                                        {this.props.weekCourseData.startTime}
+                                    </div>
+                                    <div>-</div>
+                                    <div >
+                                        {this.props.weekCourseData.endTime}
+                                    </div>
+                                </div>
                             );
                         }
                     }
@@ -139,4 +138,15 @@ export class CalenderView extends Component {
         </div>)
     }
 }
-
+const calendar_show = {
+    display:"flex",
+    flexDirection:"row",
+    justifyContent:"space-around",
+    alignItems:"center",
+    width:"1.91rem",
+    fontSize:"0.16rem",
+    color:"#000000",
+    background:"url('../src/img/calendar_icon.png') no-repeat right center",
+    backgroundSize:"0.21rem",
+    paddingRight:"0.3rem"
+};

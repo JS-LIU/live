@@ -27,6 +27,7 @@ export class PayView extends Component {
             orderInfo: orderService.getOrder(),
             payInfo: payService.getPay(),
         });
+
         orderService.queryOrderStatus(TimeManager.currentTimeStampBySec(),
             (status) => {
                 console.log(status);

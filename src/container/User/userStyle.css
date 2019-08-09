@@ -1,0 +1,16 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.user_body_main{
+    position:relative;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:11.8rem;
+    margin:0.41rem auto;
+}

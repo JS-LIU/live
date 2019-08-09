@@ -1,0 +1,136 @@
+.my_course_main{
+    position:relative;
+    width:11.78rem;
+    margin:0 auto;
+
+}
+.crumbs{
+    height:0.63rem;
+    line-height: 0.63rem;
+    font-size:0.14rem;
+    color:#808080;
+}
+.my_course_box{
+    background:#FFF;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+}
+.my_course_main_header{
+    height:0.63rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 0.46rem 0 0.41rem;
+    border-bottom:0.01rem solid #E8E8E8;
+}
+.my_course_header_title{
+    font-size: 0.2rem;
+    color:#000000;
+}
+.my_course_learnStatus_list{
+    display:flex;
+    flex-direction: row;
+    padding-right:0.41rem;
+    align-items: center;
+    width:1.98rem;
+    border-radius: 0.06rem;
+    overflow: hidden;
+}
+.my_course_learn_status{
+    width:0.48rem;
+    height:0.24rem;
+    margin-right:0.02rem;
+}
+.my_course_main_course_list{
+    width:11rem;
+    margin:0.3rem 0 0 0.41rem;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.my_course_item{
+    width:3.18rem;
+    height:3.05rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border:0.01rem solid #E8E8E8;
+    margin:0 0.4rem 0.4rem 0;
+    border-radius: 0.08rem;
+    overflow: hidden;
+}
+.my_owned_course_product_item_header{
+    position:relative;
+    height: 1.04rem;
+}
+.my_owned_course_product_item_header_bg{
+    position: absolute;
+    top: 0.12rem;
+    right: 0.12rem;
+    height: 0.8rem;
+    width: 2.4rem;
+}
+.my_owned_course_product_item_header_box{
+    position:relative;
+    height: 1.04rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:0 0.25rem 0 0.18rem;
+}
+.my_owned_course_product_item_title{
+    font-size:0.2rem;
+    color:#FFFFFF;
+}
+.my_owned_course_product_item_time{
+    margin-top: 0.15rem;
+    font-size:0.12rem;
+    color:#FFFFFF;
+}
+.my_owned_course_product_item_body{
+    height:1.44rem;
+    display:flex;
+    align-items: center;
+    border-bottom:0.01rem solid #E8E8E8;
+    padding:0 0.25rem 0 0.18rem;
+}
+
+.my_owned_course_week_course_item_info_teacher{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-right:0.41rem;
+    height:0.93rem;
+    width:0.5rem;
+}
+.my_owned_course_week_course_item_info_teacher_header{
+    width:0.5rem;
+    height:0.5rem;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.my_owned_course_week_course_item_info_teacher_header_img{
+    width:0.5rem;
+}
+.my_owned_course_week_course_item_info_teacher_name{
+    width:0.5rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.my_owned_course_product_item_footer{
+    height:0.6rem;
+    display:flex;
+    align-items: center;
+    padding:0 0.25rem 0 0.18rem;
+}
+.my_owned_course_product_item_footer_total_course{
+    font-size:0.12rem;
+}

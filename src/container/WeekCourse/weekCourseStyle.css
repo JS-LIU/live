@@ -1,0 +1,134 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.crumbs{
+    height:0.63rem;
+    line-height: 0.63rem;
+    font-size:0.14rem;
+    color:#808080;
+}
+.course_week_main{
+    position:relative;
+    width:11.8rem;
+    margin:0 auto;
+}
+.course_week_box{
+    width:11.78rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    margin:0 auto;
+    background:#FFF;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+.calender_box{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height:0.85rem;
+}
+.course_week_course_list{
+    display:flex;
+    flex-direction: column;
+    width:10.04rem;
+    margin:0 auto;
+}
+.course_week_course_item{
+    display:flex;
+    flex-direction: column;
+    margin-bottom: 0.3rem;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    border:0.01rem solid #E8E8E8;
+    box-shadow: 0 0.08rem 0.12rem 0 rgba(0, 0, 0, 0.03);
+}
+.course_week_course_item_title{
+    height:0.42rem;
+    background:#F2F4F7;
+    display:flex;
+    align-items: center;
+}
+.course_week_course_item_title_time{
+    padding-left:0.17rem;
+}
+.course_week_course_item_info{
+    height:1.82rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.course_week_course_item_info_name_box{
+    padding-left: 0.39rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height:1rem;
+}
+.course_week_course_item_info_name{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+.course_week_course_item_info_type{
+    width:0.18rem;
+    height:0.18rem;
+    border:0.02rem;
+    color:#FFF;
+    font-size:0.09rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.02rem;
+}
+.course_week_course_item_info_session_name{
+    font-size:0.2rem;
+    color:#000000;
+    margin-left:0.14rem;
+}
+.course_week_course_item_info_teacher_info{
+    display:flex;
+    align-items: center;
+    height:0.5rem;
+}
+.course_week_course_item_info_teacher{
+    display:flex;
+    flex-direction: row;
+    margin-right:0.35rem;
+}
+.course_week_course_item_info_teacher_header{
+    width:0.5rem;
+    height:0.5rem;
+    border-radius: 0.25rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.course_week_course_item_info_teacher_header_img{
+    width:0.5rem;
+}
+.course_week_course_item_info_teacher_name{
+    padding-left:0.11rem;
+    height:0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.course_week_course_down_load{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height:100%;
+    padding-right:0.5rem;
+    font-size:0.16rem;
+}

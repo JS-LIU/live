@@ -1,0 +1,108 @@
+.order_list_box{
+    width:10.15rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    background:#FFFFFF;
+}
+.order_list_box_title{
+    height:0.63rem;
+    line-height: 0.63rem;
+    padding-left:0.41rem;
+    font-size:0.2rem;
+    color:#000000;
+    border-bottom:0.01rem solid #E8E8E8;
+}
+.order_list{
+    width:9.17rem;
+    margin:0.3rem auto 0.57rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.order_list_order_item{
+    display:flex;
+    flex-direction: column;
+    width:9.15rem;
+    border-radius: 0.04rem;
+    border:0.01rem solid #E8E8E8;
+    margin-bottom:0.3rem;
+}
+.order_list_order_item_header{
+    display:flex;
+    align-items: center;
+    padding-left:0.29rem;
+    height:0.36rem;
+    background:#F2F4F7;
+    font-size:0.14rem;
+}
+.order_list_order_item_order_no{
+    padding-left:0.25rem;
+}
+.order_list_order_item_center{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding:0.35rem 0 0.39rem 0.29rem;
+}
+.order_list_order_item_center_left{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex:1;
+    border-right:0.01rem solid #E8E8E8;
+    align-items: center;
+}
+.order_list_order_item_center_left_info{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.order_list_order_item_center_left_info_name{
+    font-size:0.2rem;
+    color:#000000;
+}
+.order_list_order_item_center_left_info_time{
+    font-size:0.14rem;
+}
+.order_list_order_item_center_left_price{
+    padding-right:0.74rem;
+}
+.order_list_order_item_center_right{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:2.12rem;
+
+}
+
+.pagination_box {
+    display:flex;
+    flex-direction:row;
+    width:3.3rem;
+    margin:0 auto;
+    align-items:center;
+}
+.page_btn{
+    width:0.88rem;
+    height:0.28rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius:0.04rem;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    font-size:0.14rem;
+}
+.page_item{
+    font-size:0.14rem;
+    font-weight:600;
+    padding:0 0.08rem;
+}
+.page_item_active{
+    color:#FFC200;
+    font-size:0.14rem;
+    font-weight:600;
+}

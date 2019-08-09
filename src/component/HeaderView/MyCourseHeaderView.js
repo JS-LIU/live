@@ -1,19 +1,15 @@
 /**
- * Created by Liudq on 2019-07-18
+ * Created by Liudq on 2019-08-08
  */
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import headerStyle from "./headerStyle.css";
-
-
-export class HeaderView extends Component{
+export class MyCourseHeaderView extends Component{
     constructor(props) {
         super(props);
-    }
-
-    showDialog(){
 
     }
+
     render() {
         return (
             <div className="common_header">
@@ -21,10 +17,9 @@ export class HeaderView extends Component{
                     <div className="common_header_logo"/>
                     <div className="common_header_right">
                         <Link to="/home" className="common_header_center_link_item">首页</Link>
-                        <Link to="/selectCourseCenter" className="common_header_center_link_item">选课中心</Link>
-                        <Link to="/studyCourseCenter/week" className="common_header_center_link_item">学习中心</Link>
-                        <Link to="/codingCenter" className="common_header_center_link_item">创作中心</Link>
-                        <Link to="/downLoad" className="common_header_center_link_item">软件下载</Link>
+                        <Link to="/studyCourseCenter/week" className="common_header_center_link_item">本周课程</Link>
+                        <Link to="/studyCourseCenter/myCourseList" className="common_header_center_link_item">我的课程</Link>
+                        <Link to="/studyCourseCenter/coding" className="common_header_center_link_item">自由编程</Link>
                         <Link to="/user/userInfo" className="common_header_login_info" onMouseEnter={this.showDialog}>
                             <div className="common_header_login_header_box">
                                 <img src={this.props.userInfo.headImgUrl||"src/img/def_header_img.png"} alt="" className="common_header_login_header_pic"/>
@@ -38,4 +33,6 @@ export class HeaderView extends Component{
             </div>
         )
     }
+
+
 }

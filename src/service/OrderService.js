@@ -7,6 +7,8 @@ import {TimeManager} from "../entity/TimeManager";
 import {userService} from "./UserService";
 import {Order} from "../entity/Order";
 import {OrderProduct} from "../entity/OrderProduct";
+import {Pagination} from "../entity/Pagination";
+import {SearchOrderStatus} from "../entity/SearchOrderStatus";
 
 class OrderService {
     constructor(){
@@ -19,8 +21,14 @@ class OrderService {
         this._queryOrderStatus = function(postInfo){
             return orderAjax.save({action:"queryOrderStatus"},postInfo,{name:"token",value:userService.getUser().token});
         };
+        this._getOrderList = function(postInfo){
+            return orderAjax.save({action:"pageOrder"},postInfo,{name:"token",value:userService.getUser().token});
+        };
+
+        this.searchOrderStatus = new SearchOrderStatus();
         this.order = null;
         this.orderProduct = null;
+        this.pagination = new Pagination(1,3);
     }
     createOrder(productCourse){
         return this._createOrder({
@@ -43,7 +51,7 @@ class OrderService {
         return this.orderProduct;
     }
     getOrderProduct(){
-        return this.this.orderProduct;
+        return this.orderProduct;
     }
     getOrder(){
         return this.order;
@@ -116,5 +124,39 @@ class OrderService {
         return this.order.getRemainTime();
     }
 
+    /**
+     * 按条件查询订单列表
+     * @returns {*}
+     */
+    getOrderList(){
+        return this._getOrderList({
+            orderStatus:this.searchOrderStatus.getCurrentSearchOrderStatus().status,
+            pageNum:this.pagination.pageNum,
+            pageSize:this.pagination.size
+        }).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.data && data.data.list){
+                    this.orderList = this.createOrderList(data.data.list);
+                    this.pagination.setTotalSize(data.data.total);
+                    resolve(this.orderList);
+                }else{
+                    reject("没有订单");
+                }
+            });
+        })
+    }
+
+    /**
+     * 创建订单列表
+     * @param orderList
+     * @returns {undefined}
+     */
+    createOrderList(orderList) {
+        this.orderList = [];
+        for(let i = 0;i < orderList.length;i++){
+            this.orderList.push(new Order(orderList[i]));
+        }
+        return this.orderList;
+    }
 }
 export let orderService = new OrderService();

@@ -8,6 +8,7 @@ import {homeData} from "./HomeData";
 import {HomeHeadView} from "../../component/HomeHeadView";
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
+import {FooterView} from "../../component/FooterView/FooterView";
 
 export class HomeView extends Component{
     constructor(props) {
@@ -30,6 +31,8 @@ export class HomeView extends Component{
         return(
             <div>
                 <HeaderView userInfo={this.state.userInfo} />
+                <div style={{margin:"0 auto",width:"200px",fontSize:"20px"}}>首页sssssssscoding首页</div>
+                <FooterView style={{position:"fixed",bottom:"0"}}/>
             </div>
         )
     }

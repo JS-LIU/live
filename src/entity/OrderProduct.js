@@ -15,5 +15,8 @@ export class OrderProduct {
         this.salePrice = productCourse.salePrice;
         //    主讲人列表
         this.teacherInfoList = productCourse.teacherInfoList;
+        this.weeks = productCourse.weeks;
+        this.sellPrice = productCourse.sellPrice;
+        this.series = productCourse.series;
     }
 }

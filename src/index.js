@@ -27,6 +27,7 @@ import {PayFailView} from "./container/PayFail/PayFailView";
 import {CodingView} from "./container/CodingView";
 import {PayView} from "./container/Pay/PayView";
 import {HB} from "./util/HB";
+import {UserView} from "./container/User/UserView";
 
 function About() {
     return (
@@ -54,12 +55,13 @@ ReactDOM.render(
             <Route path="/" exact component={LoginView} />
             <Route path="/home" component={HomeView}/>
             <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
-            <Route path="/studyCourseCenter" component={StudyCourseCenterView} />
+            <Route path="/studyCourseCenter/:myCourse" component={StudyCourseCenterView} />
             <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />
             <Route path="/confirmOrder/:productCourseNo" component={SettleCenterView} />
             <Route path="/pay" component={PayView} />
-            <Route path="/paySuccess/:status" compnent={PaySuccessView}/>
+            <Route path="/paySuccess/:status" component={PaySuccessView}/>
             <Route path="/payFail/:status" component={PayFailView}/>
+            <Route path="/user/:userInfo" component={UserView}/>
             {/*<Route path="/codingCenter" component={CodingView} />*/}
 
         </div>
