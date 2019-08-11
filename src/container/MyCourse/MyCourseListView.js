@@ -17,8 +17,7 @@ export class MyCourseListView extends Component{
     }
     componentDidMount() {
         courseService.pagination.to(1);
-        let activeLearnStatus = courseService.getOwnedCourseLearnStatusList().getActive();
-        this.updateOwnedCourseList(activeLearnStatus.id);
+        this.updateOwnedCourseList();
         this.onGetMore();
     }
     componentWillUnmount() {
@@ -26,13 +25,12 @@ export class MyCourseListView extends Component{
     }
     onGetMore(){
         HB.ui.scrollToTheBottom(()=>{
-            this.pagination.nextPage();
+            courseService.pagination.nextPage();
             this.updateOwnedCourseList();
         });
     }
-    updateOwnedCourseList(learnStatus){
-        courseService.getAllOwnedCourseList(learnStatus).then((courseList)=>{
-            console.log(courseList);
+    updateOwnedCourseList(){
+        courseService.getAllOwnedCourseList().then((courseList)=>{
             this.setState({
                 ownedCourseList:courseList
             });
@@ -42,7 +40,7 @@ export class MyCourseListView extends Component{
         return ()=>{
             this.updateOwnedCourseList(learnStatus);
             this.setState({
-                learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus)
+                learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus.id)
             })
         }
     }
@@ -57,7 +55,7 @@ export class MyCourseListView extends Component{
         });
         let ownedCourseListNodes = this.state.ownedCourseList.map((courseItem,index)=>{
             return (
-                <div key={index} className="my_course_item">
+                <Link to={"/ownedCourseDetail/"+`${courseItem.id}`} key={index} className="my_course_item">
                     <div className="my_owned_course_product_item_header" style={{background:courseItem.getTypeInfo(courseItem.type).background}}>
                         <img src={courseItem.getTypeInfo(courseItem.type).url} alt="" className="my_owned_course_product_item_header_bg" />
                         <div className="my_owned_course_product_item_header_box">
@@ -93,7 +91,7 @@ export class MyCourseListView extends Component{
                         </div>
                     </div>
 
-                </div>
+                </Link>
             )
         });
         return (

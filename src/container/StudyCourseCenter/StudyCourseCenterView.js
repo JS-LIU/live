@@ -7,18 +7,20 @@ import {StudyCourseCenterHeaderView} from "../../component/StudyCourseCenterHead
 import {WeekCourseView} from "../WeekCourse/WeekCourseView";
 import {MyCourseHeaderView} from "../../component/HeaderView/MyCourseHeaderView";
 import {userService} from "../../service/UserService";
-import studyCourseCenterStyle from './studyCourseCenterStyle.css';
 import {MyCourseListView} from '../MyCourse/MyCourseListView';
+import {FooterView} from "../../component/FooterView/FooterView";
+import studyCourseCenterStyle from './studyCourseCenterStyle.css';
 export class StudyCourseCenterView extends Component{
     render() {
         return(
                 <div>
-                    <div className="wrap"></div>
+                    <div className="wrap" />
                     <MyCourseHeaderView userInfo={userService.getUser().userInfo}/>
                     <div>
                         <Route path="/studyCourseCenter/week" component={WeekCourseView} />
                         <Route path="/studyCourseCenter/myCourseList" component={MyCourseListView} />
                     </div>
+                    <FooterView />
                 </div>
         )
     }

@@ -1,0 +1,21 @@
+.ring_progress_main{
+    position:relative;
+}
+.circle_progress_wrapper{
+    position:relative;
+    border-radius: 50%;
+    box-sizing:border-box;
+}
+.wrapper{
+    position: absolute;
+    top:0;
+    overflow: hidden;
+}
+.circle_progress{
+    border-radius: 50%;
+    position: absolute;
+    top:0;
+    -webkit-transform: rotate(45deg);
+}
+
+    /*-webkit-animation: circleProgressLoad_left 5s linear infinite;*/

@@ -73,4 +73,12 @@ export class OwnedCourse {
     getTypeInfo(type){
         return OwnedCourse.typeStrategy()[type];
     }
+    setDetail(detail){
+        this.detail = detail;
+
+    }
+    getCoursePlanList(){
+        return this.detail.coursePlans;
+    }
+
 }

@@ -31,6 +31,9 @@ class CourseService {
         this._getProductDetail = function(postInfo){
             return courseAjax.save({action:'goodDetail'},postInfo,{name:"token",value:userService.getUser().token});
         };
+        this._getOwnedCourseDetail = function(postInfo){
+            return ownedCourseAjax.save({action:"courseDetail"},postInfo,{name:"token",value:userService.getUser().token});
+        };
         this.ownedCourseList = [];
         this.courseType = [];
         this.courseList = [];
@@ -65,6 +68,22 @@ class CourseService {
     }
     getOwnedCourseLearnStatusList(){
         return this.ownedCourseLearnStatusList;
+    }
+    getOwnedCourseDetail(id){
+        let ownedCourse = this.findOwnedCourseById(id);
+        return this._getOwnedCourseDetail({
+            courseId:id
+        }).then((data)=>{
+            ownedCourse.setDetail(data.data);
+            return new Promise((resolve, reject)=>{
+                resolve(ownedCourse);
+            })
+        })
+    }
+    findOwnedCourseById(id){
+        return this.ownedCourseList.find((ownedCourse,index)=>{
+            return parseInt(ownedCourse.id) === parseInt(id);
+        })
     }
     /**
      * 创建学习状态
@@ -107,11 +126,11 @@ class CourseService {
             return this.createOwnedCourseListByJson(data.data.list);
         })
     }
-    getAllOwnedCourseList(learnStatus){
+    getAllOwnedCourseList(){
         return this._getAllOwnedCourseList({
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size,
-            learnStatus:learnStatus
+            learnStatus:this.getOwnedCourseLearnStatusList().getActive().id
         }).then((data)=>{
             return this.createOwnedCourseListByJson(data.data.list);
         })

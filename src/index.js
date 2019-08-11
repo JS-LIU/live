@@ -23,11 +23,17 @@ import {SettleCenterView} from "./container/SettleCenter/SettleCenterView";
 import {PaySuccessView} from "./container/PaySuccess/PaySuccessView";
 //  支付失败
 import {PayFailView} from "./container/PayFail/PayFailView";
-
-import {CodingView} from "./container/CodingView";
-import {PayView} from "./container/Pay/PayView";
-import {HB} from "./util/HB";
+//  用户中心
 import {UserView} from "./container/User/UserView";
+//  支付
+import {PayView} from "./container/Pay/PayView";
+//  课程详情
+import {OwnedCourseDetailView} from './container/OwnedCourseDetail/OwnedCourseDetailView';
+
+
+import {TestView} from "./container/Test/TestView";
+import {CodingView} from "./container/CodingView";
+import {HB} from "./util/HB";
 
 function About() {
     return (
@@ -52,6 +58,7 @@ HB.ui.setBaseFontSize(1920,100);
 ReactDOM.render(
     (<Router>
         <div>
+            <Route path="/test"  component={TestView} />
             <Route path="/" exact component={LoginView} />
             <Route path="/home" component={HomeView}/>
             <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
@@ -62,6 +69,7 @@ ReactDOM.render(
             <Route path="/paySuccess/:status" component={PaySuccessView}/>
             <Route path="/payFail/:status" component={PayFailView}/>
             <Route path="/user/:userInfo" component={UserView}/>
+            <Route path="/ownedCourseDetail/:id" component={OwnedCourseDetailView}/>
             {/*<Route path="/codingCenter" component={CodingView} />*/}
 
         </div>
