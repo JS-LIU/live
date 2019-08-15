@@ -3,9 +3,11 @@
  */
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-import {HeaderView} from "./component/HeaderView/HeaderView";
+import { BrowserRouter,
+    Switch,
+    Route,
+    Redirect,
+    Link } from "react-router-dom";
 
 //  登录界面
 import {LoginView} from "./container/Login/LoginView";
@@ -30,35 +32,17 @@ import {PayView} from "./container/Pay/PayView";
 //  课程详情
 import {OwnedCourseDetailView} from './container/OwnedCourseDetail/OwnedCourseDetailView';
 
-
 import {TestView} from "./container/Test/TestView";
-import {CodingView} from "./container/CodingView";
 import {HB} from "./util/HB";
+import {OrderDetailView} from "./container/OrderDetail/OrderDetailView";
 
-function About() {
-    return (
-        <div>
-            <Link to="/users/">Users</Link>
-        </div>
-    )
-}
-
-function Users() {
-    return (
-        <div>
-            <h2>Users</h2>
-            <Link to="/">Home</Link>
-        </div>
-    )
-}
 //  resetFontSize
 HB.ui.setBaseFontSize(1920,100);
 
-
 ReactDOM.render(
-    (<Router>
+    (<BrowserRouter>
+        <Redirect to="/"/>
         <div>
-            <Route path="/test"  component={TestView} />
             <Route path="/" exact component={LoginView} />
             <Route path="/home" component={HomeView}/>
             <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
@@ -70,9 +54,10 @@ ReactDOM.render(
             <Route path="/payFail/:status" component={PayFailView}/>
             <Route path="/user/:userInfo" component={UserView}/>
             <Route path="/ownedCourseDetail/:id" component={OwnedCourseDetailView}/>
+            <Route path="/orderDetail/:orderNo" component={OrderDetailView}/>
             {/*<Route path="/codingCenter" component={CodingView} />*/}
 
         </div>
-    </Router>),
+    </BrowserRouter>),
     document.getElementById('app')
 );

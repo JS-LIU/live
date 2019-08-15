@@ -5,21 +5,18 @@
   "main": "index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch",
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --open --config webpack.dev.js"
   },
   "author": "liudq",
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "codemirror": "^5.48.2",
     "lodash": "^4.17.14",
     "qrcode.react": "^0.9.3",
     "rc-calendar": "^9.15.4",
     "react": "^16.8.6",
-    "react-calendar": "^2.19.0",
-    "react-codemirror2": "^6.0.0",
     "react-dom": "^16.8.6",
     "react-paginate": "^6.3.0",
     "react-router": "^5.0.1",
@@ -31,11 +28,16 @@
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.0.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.6",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
   }
 }

@@ -45,7 +45,7 @@ export class LoginView extends Component{
                         <div className="login_right_log">
                             <div className="login_right_log_way">
                                 <Link to="/login/psdLogin">密码登录</Link>
-                                <div>|</div>
+                                <div className="login_seg">|</div>
                                 <Link to="/login/verificationCodeLog">验证码登录</Link>
                             </div>
                             <div className="login_right_log_log">
@@ -66,7 +66,6 @@ export class LoginView extends Component{
 
                     </div>
                 </div>
-                {/*<FooterView style={{position:"fixed",bottom:"0"}}/>*/}
             </div>
         )
     }

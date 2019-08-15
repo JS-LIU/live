@@ -47,7 +47,11 @@
     flex-direction: row;
     justify-content: space-around;
     font-size:0.2rem;
-    color:#000000;
+    align-items: center;
+}
+.login_seg{
+    color:#E8E8E8;
+    font-size: 0.16rem;
 }
 .login_right_log_log{
     margin-top:0.6rem;
@@ -61,16 +65,15 @@
     overflow: hidden;
 }
 .login_phone_num_input{
-    background: #F5F5F5 url("../../img/login_header_icon.png") no-repeat 0.18rem center;
+    background: #F5F5F5 url("../../img/login_header_icon.png") no-repeat 0.1rem center;
     height: 100%;
-    width: 3.09rem;
+    width: 3rem;
     padding-left: 0.5rem;
-
 }
 .login_psd_num_input{
-    background: #F5F5F5 url("../../img/login_psd_icon.png") no-repeat 0.18rem center;
+    background: #F5F5F5 url("../../img/login_psd_icon.png") no-repeat 0.1rem center;
     height: 100%;
-    width: 3.09rem;
+    width: 3rem;
     padding-left: 0.5rem;
 }
 .login_right_log_log_reset_psd{

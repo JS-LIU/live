@@ -42,6 +42,9 @@ class UserService {
     getUserInfo(){
         return this.user.getUserInfo();
     }
+    logIn(){
+
+    }
 }
 export const userService = new UserService();
 

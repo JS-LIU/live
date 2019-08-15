@@ -28,27 +28,27 @@ export class OrderListView extends Component {
             })
         })
     }
-    getOrderStatus(orderStatus){
-        if(orderStatus === 3004){
+    getOrderStatus(orderItem){
+        if(orderItem.status === 3004){
             return (
                 <div>
                     已过期
                 </div>
             )
-        }else if(orderStatus === 3003){
+        }else if(orderItem.status === 3003){
             return (
                 <div>
                     已取消
                 </div>
             )
-        }else if(orderStatus === 3002){
+        }else if(orderItem.status === 3002){
             return (
-                <Link to="/orderDetail">
+                <Link to={"/orderDetail/" + `${orderItem.orderNo}`}>
                     查看订单
                 </Link>
             )
         }
-        else if(orderStatus === 3001){
+        else if(orderItem.status === 3001){
             return (
                 <div>
                     <Link to="/pay">
@@ -73,7 +73,7 @@ export class OrderListView extends Component {
                 return (
                     <div className="order_list_order_item" key={index}>
                         <div className="order_list_order_item_header">
-                            <span>{TimeManager.convertStampToYMD(orderItem.orderCreateTime)}</span>
+                            <span>{TimeManager.convertStampToYMD(orderItem.orderCreateTime,"unix")}</span>
                             <span className="order_list_order_item_order_no">订单号：{orderItem.orderNo}</span>
                         </div>
                         <div className="order_list_order_item_center">
@@ -87,7 +87,7 @@ export class OrderListView extends Component {
                                 </div>
                             </div>
                             <div className="order_list_order_item_center_right">
-                                {this.getOrderStatus(orderItem.status)}
+                                {this.getOrderStatus(orderItem)}
                             </div>
                         </div>
                     </div>

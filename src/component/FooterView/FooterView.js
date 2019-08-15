@@ -3,24 +3,18 @@
  */
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {HB} from '../../util/HB';
 import footerStyle from './footerStyle.css';
 
 export class FooterView extends Component{
     constructor(props) {
         super(props);
-        this.state = {
-            style:{}
-        }
-    }
-    componentDidMount() {
-        this.setState({
-            style:this.props.style
-        })
     }
 
     render() {
+        console.log(this.props.style);
         return (
-            <div className="common_footer" style={this.state.style}>
+            <div className="common_footer" style={this.props.style}>
                 <div className="common_footer_main">
                     <div className="common_footer_left">
                         <div className="common_footer_left_top">
@@ -45,16 +39,9 @@ export class FooterView extends Component{
                                 <div className="common_footer_right_top_customer_service_time">周一至周日 9:00-24:00（春节除外）</div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
-
-
             </div>
         );
     }
-
-
 }

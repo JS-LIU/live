@@ -11,6 +11,7 @@ import {SpecifyCourseType} from "../entity/SpecifyCourseType";
 import {Pagination} from "../entity/Pagination";
 import {OwnedCourseLearnStatus} from "../entity/OwnedCourseLearnStatus";
 import {OwnedCourseLearnStatusList} from "../entity/OwnedCourseLearnStatusList";
+import {OwnedCoursePlanItem} from "../entity/OwnedCoursePlanItem";
 
 class CourseService {
     constructor(){
@@ -34,7 +35,10 @@ class CourseService {
         this._getOwnedCourseDetail = function(postInfo){
             return ownedCourseAjax.save({action:"courseDetail"},postInfo,{name:"token",value:userService.getUser().token});
         };
+        //  课程列表
         this.ownedCourseList = [];
+        //  每节课列表
+        this.ownedCoursePlanList = [];
         this.courseType = [];
         this.courseList = [];
         this.pagination = new Pagination(1,6);
@@ -112,48 +116,50 @@ class CourseService {
      * @param startTime
      * @param endTime
      */
-    getOwnedCourseListByWeek(startTime, endTime){
+    getOwnedCoursePlanItemListByWeek(startTime, endTime){
         return this._getOwnedCourseListByWeek({
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size,
             startTime:startTime,
             endTime:endTime
         }).then((data)=>{
-            //  todo 暂时前端处理
-            if(data.data.total < this.pagination.pageNum*this.pagination.size){
-                data.data.list = [];
-            }
-            return this.createOwnedCourseListByJson(data.data.list);
+            this.ownedCoursePlanList = this.createListByJson(data.data.list,this.ownedCoursePlanList,OwnedCoursePlanItem);
+            return new Promise((resolve, reject)=>{
+                resolve(this.ownedCoursePlanList);
+            });
         })
     }
+
+    /**
+     * 获取全部购买课程(班期)
+     * @returns [OwnedCourse]
+     */
     getAllOwnedCourseList(){
         return this._getAllOwnedCourseList({
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size,
             learnStatus:this.getOwnedCourseLearnStatusList().getActive().id
         }).then((data)=>{
-            return this.createOwnedCourseListByJson(data.data.list);
+            this.ownedCourseList = this.createListByJson(data.data.list,this.ownedCourseList,OwnedCourse);
+            return new Promise((resolve, reject)=>{
+                resolve(this.ownedCourseList);
+            });
         })
     }
 
     /**
-     * 创建拥有的课程
-     * @param ownedCourseListJson
-     * @returns {Promise<OwnedCourse>}
+     * 通过json创建实体列表
+     * @param listJson
+     * @param list
+     * @param Course
+     * @returns {Promise<list>}
      */
-    createOwnedCourseListByJson(ownedCourseListJson){
-        let ownedCourseList = [];
-        return new Promise((resolve, reject)=>{
-            if(ownedCourseListJson.length === 0){
-                reject("no course");
-            }else{
-                for(let i = 0;i < ownedCourseListJson.length;i++){
-                    ownedCourseList.push(new OwnedCourse(ownedCourseListJson[i]));
-                }
-                this.ownedCourseList = this.refreshOrMoreList(this.ownedCourseList,ownedCourseList);
-                resolve(this.ownedCourseList);
-            }
-        });
+    createListByJson(listJson,list,Course){
+        let newList = [];
+        for(let i = 0;i < listJson.length;i++){
+            newList.push(new Course(listJson[i]));
+        }
+        return this.refreshOrMoreList(list,newList);
     }
     /**
      * 获取所有课程的分类（商品类型列表）
@@ -173,7 +179,6 @@ class CourseService {
      */
     toggleSelectSpecifyType(specifyCourseType){
         let generalCourseType = this.findGeneralCourseTypeByTypeId(specifyCourseType.type);
-        console.log(generalCourseType);
         generalCourseType.selectSpecifyCourseType(specifyCourseType);
     }
     findGeneralCourseTypeByTypeId(typeId){

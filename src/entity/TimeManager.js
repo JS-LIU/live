@@ -34,20 +34,41 @@ export class TimeManager {
     static paddingZero(paddingTarget){
         return (paddingTarget < 10 ? '0' + paddingTarget : paddingTarget);
     }
-    //  时间戳转换时间
-    static timeStampToDate(timestamp) {
-        let date = new Date(timestamp * 1000);
+    static convertToCommon(type,timeStamp){
+        return TimeManager.getType(timeStamp)[type]
+    }
+    static getType(timeStamp){
         return {
-            Y : date.getFullYear() + '-',
-            M : (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-',
-            D : date.getDate() + ' ',
-            h : date.getHours() + ':',
-            m : date.getMinutes() + ':',
+            "unix":timeStamp * 1000,
+            "common":timeStamp
+        }
+    }
+    //  时间戳转换时间
+    static timeStampToDate(timestamp,type) {
+        let date = new Date(TimeManager.convertToCommon(type,timestamp));
+        return {
+            Y : date.getFullYear(),
+            M : date.getMonth()+1,
+            D : TimeManager.paddingZero(date.getDate()),
+            h : date.getHours(),
+            m : TimeManager.paddingZero(date.getMinutes()),
             s : date.getSeconds(),
+            w : date.getDay()
         };
     }
-    static convertStampToYMD(timestamp){
-        let d = TimeManager.timeStampToDate(timestamp);
-        return d.Y+d.M+d.D;
+    //  转换时间戳到 年 月 日
+    static convertStampToYMD(timestamp,type){
+        let d = TimeManager.timeStampToDate(timestamp,type);
+        return d.Y+"-"+d.M+"-"+d.D;
+    }
+    //  转换时间到月日
+    static convertStampToMD(timestamp,type){
+        let d = TimeManager.timeStampToDate(timestamp,type);
+        return d.M+"月"+d.D+"日";
+    }
+    //  转换时间戳到 月 日 时 分
+    static convertStampToMDHM(timestamp,type){
+        let d = TimeManager.timeStampToDate(timestamp,type);
+        return d.M + d.D + d.h + d.m;
     }
 }

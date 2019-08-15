@@ -24,12 +24,15 @@ class OrderService {
         this._getOrderList = function(postInfo){
             return orderAjax.save({action:"pageOrder"},postInfo,{name:"token",value:userService.getUser().token});
         };
-
+        this._queryOrderDetail = function(postInfo){
+            return orderAjax.save({action:"queryOrderDetail"},postInfo,{name:"token",value:userService.getUser().token});
+        };
         this.searchOrderStatus = new SearchOrderStatus();
         this.order = null;
         this.orderProduct = null;
         this.pagination = new Pagination(1,3);
     }
+
     createOrder(productCourse){
         return this._createOrder({
             goodNo:productCourse.goodNo,
@@ -42,7 +45,6 @@ class OrderService {
             });
         })
     }
-
     /**
      * 创建订单商品
      */
@@ -157,6 +159,16 @@ class OrderService {
             this.orderList.push(new Order(orderList[i]));
         }
         return this.orderList;
+    }
+
+    queryOrderDetail(orderNo){
+        return this._queryOrderDetail({
+            orderNo:orderNo
+        }).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                resolve(data.data);
+            })
+        });
     }
 }
 export let orderService = new OrderService();

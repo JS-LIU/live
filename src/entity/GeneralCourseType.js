@@ -39,7 +39,9 @@ export class GeneralCourseType {
         return true;
     }
     selectSpecifyCourseType(specifyCourseType){
+        this.selectAllSpecifyCourseType(false);
         specifyCourseType.select();
-        this.selected = this.isAllSelectedSpecifyCourseType();
+        this.selected = false;
+        // this.selected = this.isAllSelectedSpecifyCourseType();
     }
 }

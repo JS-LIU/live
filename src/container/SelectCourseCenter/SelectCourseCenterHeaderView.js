@@ -30,7 +30,7 @@ export class SelectCourseCenterHeaderView extends Component{
                 <div key={index} className="select_course_center_type_line">
                     <div className="select_course_center_general_type">{generalCourseType.name}</div>
                     <div className="select_course_center_specify_line">
-                        <span className="select_course_center_specify_type" onClick={this.onSelectAll(generalCourseType)} style={generalCourseType.selected?selectedStyle:{}}>所有</span>
+                        <span className="select_course_center_specify_type" onClick={this.onSelectAll(generalCourseType)} style={generalCourseType.selected?selectedStyle:{}}>全部</span>
                         {specifyNodes}
                     </div>
                 </div>

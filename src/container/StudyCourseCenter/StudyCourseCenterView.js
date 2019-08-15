@@ -17,10 +17,10 @@ export class StudyCourseCenterView extends Component{
                     <div className="wrap" />
                     <MyCourseHeaderView userInfo={userService.getUser().userInfo}/>
                     <div>
-                        <Route path="/studyCourseCenter/week" component={WeekCourseView} />
-                        <Route path="/studyCourseCenter/myCourseList" component={MyCourseListView} />
+                        <Route path="/studyCourseCenter/week" component={WeekCourseView}/>
+                        <Route path="/studyCourseCenter/myCourseList" component={MyCourseListView}/>
                     </div>
-                    <FooterView />
+
                 </div>
         )
     }

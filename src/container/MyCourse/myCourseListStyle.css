@@ -14,6 +14,7 @@
     background:#FFF;
     border:0.01rem solid #E8E8E8;
     border-radius: 0.08rem;
+    margin-bottom:0.81rem;
 }
 .my_course_main_header{
     height:0.63rem;
@@ -104,7 +105,6 @@
     align-items: center;
     margin-right:0.41rem;
     height:0.93rem;
-    width:0.5rem;
 }
 .my_owned_course_week_course_item_info_teacher_header{
     width:0.5rem;
@@ -120,7 +120,6 @@
     width:0.5rem;
 }
 .my_owned_course_week_course_item_info_teacher_name{
-    width:0.5rem;
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -133,4 +132,12 @@
 }
 .my_owned_course_product_item_footer_total_course{
     font-size:0.12rem;
+}
+.my_owned_course_product_item_footer_total_course_proceed{
+    display:flex;
+    align-items: center;
+    height:0.6rem;
+}
+.my_owned_course_product_item_footer_total_course_proceed_text{
+    padding-left:0.08rem;
 }

@@ -21,7 +21,7 @@
     width:11.78rem;
     border:0.01rem solid #E8E8E8;
     border-radius: 0.08rem;
-    margin:0 auto;
+    margin:0 auto 0.81rem;
     background:#FFF;
     display:flex;
     flex-direction: column;
@@ -56,7 +56,21 @@
     align-items: center;
 }
 .course_week_course_item_title_time{
-    padding-left:0.17rem;
+
+    background:url("../../img/black_clock.png") no-repeat 0.17rem center;
+    background-size: 0.19rem;
+    color:#000000;
+    padding-left:0.42rem;
+}
+.course_week_course_item_title_status{
+    width:0.72rem;
+    height:0.24rem;
+    margin-left:0.14rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.04rem;
 }
 .course_week_course_item_info{
     height:1.82rem;
@@ -70,12 +84,12 @@
     display:flex;
     flex-direction: column;
     justify-content: space-around;
-    height:1rem;
 }
 .course_week_course_item_info_name{
     display:flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom:0.28rem;
 }
 .course_week_course_item_info_type{
     width:0.18rem;
@@ -90,9 +104,9 @@
     border-radius: 0.02rem;
 }
 .course_week_course_item_info_session_name{
-    font-size:0.2rem;
-    color:#000000;
-    margin-left:0.14rem;
+    font-size: 0.2rem;
+    color: #000000;
+    padding-left: 0.4rem;
 }
 .course_week_course_item_info_teacher_info{
     display:flex;
@@ -131,4 +145,9 @@
     height:100%;
     padding-right:0.5rem;
     font-size:0.16rem;
+}
+.week_no_course{
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }

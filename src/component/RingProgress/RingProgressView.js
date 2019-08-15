@@ -54,7 +54,6 @@ export class RingProgressView extends Component{
         });
     //   r -135 start 45
     //     l 225 start
-
     }
 
     render() {
@@ -68,8 +67,8 @@ export class RingProgressView extends Component{
                         <div className="circleProgress"  style={this.leftCircleStyle}/>
                     </div>
                 </div>
+                {this.props.innerRender}
             </div>
         );
     }
-
 }

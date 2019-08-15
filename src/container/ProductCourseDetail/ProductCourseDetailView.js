@@ -7,6 +7,7 @@ import {courseService} from "../../service/CourseService";
 import productCourseDetailStyle from './productCourseDetailStyle.css';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
+import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 
 export class ProductCourseDetailView extends Component{
     constructor(props) {
@@ -33,7 +34,7 @@ export class ProductCourseDetailView extends Component{
             return (
                 <div key={index} className="course_product_detail_teacher_info">
                     <div className="course_product_detail_teacher_item_header_img">
-                        <img src={teacher.headImgUrl} alt="" className="course_product_detail_teacher_item_header_img_pic"/>
+                        <img src={teacher.headImgUrl||"../src/img/def_header_img.png"} alt="" className="course_product_detail_teacher_item_header_img_pic"/>
                     </div>
                     <div className="course_product_detail_teacher_name_box">
                         <div>主讲教师</div>
@@ -62,9 +63,20 @@ export class ProductCourseDetailView extends Component{
                                 <div className="product_course_detail_top_course_info_box">
                                     <div className="product_course_detail_top_course_info">
                                         <div className="product_course_detail_top_course_name">{this.state.course.getDetail().name}</div>
-                                        <div className="product_course_detail_top_course_time">
-                                            {this.state.course.getDetail().startTime}~{this.state.course.getDetail().endTime}
-                                        </div>
+                                        <CourseTimeShowView
+                                            style={{
+                                                display:"flex",
+                                                flexDirection: "row",
+                                                fontSize: "0.14rem",
+                                                marginTop:"0.18rem"
+                                            }}
+                                            showTimeStepEnd={true}
+                                            timeType={"common"}
+                                            timeStep={this.state.course.getDetail().timeList}
+                                            startTime={this.state.course.getDetail().startTime}
+                                            endTime={this.state.course.getDetail().endTime}
+                                        />
+
                                         <ul className="product_course_detail_top_course_profits">
                                             <li className="product_course_detail_top_course_profit_item">1.在线直播授课</li>
                                             <li className="product_course_detail_top_course_profit_item">2.1v1专职教师辅导</li>

@@ -9,6 +9,7 @@ import {payService} from "../../service/PayService";
 import settleCenterStyle from './settleCenterStyle.css';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
+import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 
 export class SettleCenterView extends Component{
     constructor(props) {
@@ -50,7 +51,20 @@ export class SettleCenterView extends Component{
                             <ul className="settle_product_course_info">
                                 <li>课程名称：{this.state.productCourse.name}</li>
                                 <li>授课老师：{teacherNodes}</li>
-                                <li>上课时间：{this.state.productCourse.startTime}~{this.state.productCourse.endTime}</li>
+                                <CourseTimeShowView
+                                    style={{
+                                        display:"flex",
+                                        flexDirection: "row",
+                                        fontSize: "0.14rem",
+                                        color:"#000000",
+                                    }}
+                                    showTimeStepEnd={true}
+                                    timeType={"common"}
+                                    timeStep={this.state.productCourse.timeList}
+                                    startTime={this.state.productCourse.startTime}
+                                    endTime={this.state.productCourse.endTime}
+                                />
+                                {/*<li>上课时间：{this.state.productCourse.startTime}~{this.state.productCourse.endTime}</li>*/}
                             </ul>
                             <div className="settle_product_course_info_price">课程价格：{this.state.productCourse.salePrice / 100}</div>
                         </div>

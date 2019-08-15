@@ -5,7 +5,7 @@
 /**
  * 基础代码来源 http://react-component.github.io/calendar/examples/week.html
  * moment.js使用教程
-  */
+ */
 import 'rc-calendar/assets/index.css';
 import React, {Component} from 'react';
 import Calendar from 'rc-calendar';
@@ -17,7 +17,7 @@ import 'moment/locale/en-gb';
 
 const format = 'YYYY-MM-DD';
 const cn = location.search.indexOf('cn') !== -1;
-
+const mdFormat = "MM.DD";
 const now = moment();
 
 
@@ -64,10 +64,12 @@ export class CalenderView extends Component {
     }
 
     onChange(value) {
-        this.props.onChangeTime(this.props.weekCourseData.startTime,this.props.weekCourseData.endTime);
         this.setState({
-            value,
+            value: value,
         });
+        this.props.weekData.startTime = value.week(value.week()).startOf('week').format(format);
+        this.props.weekData.endTime = value.week(value.week()).endOf('week').format(format);
+        this.props.onChangeTime();
     }
 
     dateRender(current) {
@@ -95,58 +97,47 @@ export class CalenderView extends Component {
                 dateRender={this.dateRender.bind(this)}
                 locale={zhCN}
                 style={{zIndex: 1000}}
-                // defaultValue={now}
                 showDateInput={false}
             />);
-        return (<div style={{width: 400, margin: 20,display:"flex",justifyContent:"center"}}>
-            <div style={{
-                boxSizing: 'border-box',
-                position: 'relative',
-                display: 'block',
-                lineHeight: 1.5,
-                marginBottom: 22,
-            }}
+        return (
+            <DatePicker
+                onOpenChange={this.onOpenChange.bind(this)}
+                open={this.state.open}
+                animation="slide-up"
+                calendar={calendar}
+                value={state.value}
+                onChange={this.onChange.bind(this)}
             >
-                <DatePicker
-                    onOpenChange={this.onOpenChange.bind(this)}
-                    open={this.state.open}
-                    animation="slide-up"
-                    calendar={calendar}
-                    value={state.value}
-                    onChange={this.onChange.bind(this)}
-                >
-                    {
-                        ({value}) => {
-                            this.props.weekCourseData.startTime = value.week(value.week()).startOf('week').format(format);
-                            this.props.weekCourseData.endTime = value.week(value.week()).endOf('week').format(format);
-
-                            return (
-                                <div tabIndex="0" style={calendar_show}>
-                                    <div >
-                                        {this.props.weekCourseData.startTime}
-                                    </div>
-                                    <div>-</div>
-                                    <div >
-                                        {this.props.weekCourseData.endTime}
-                                    </div>
+                {
+                    ({value}) => {
+                        this.props.weekData.startTime = value.week(value.week()).startOf('week').format(format);
+                        this.props.weekData.endTime = value.week(value.week()).endOf('week').format(format);
+                        return (
+                            <div tabIndex="0" style={calendar_show}>
+                                <div>
+                                    {value.week(value.week()).startOf('week').format(mdFormat)}
                                 </div>
-                            );
-                        }
+                                <div>-</div>
+                                <div>
+                                    {value.week(value.week()).endOf('week').format(mdFormat)}
+                                </div>
+                            </div>
+                        );
                     }
-                </DatePicker>
-            </div>
-        </div>)
+                }
+            </DatePicker>)
     }
 }
+
 const calendar_show = {
-    display:"flex",
-    flexDirection:"row",
-    justifyContent:"space-around",
-    alignItems:"center",
-    width:"1.91rem",
-    fontSize:"0.16rem",
-    color:"#000000",
-    background:"url('../src/img/calendar_icon.png') no-repeat right center",
-    backgroundSize:"0.21rem",
-    paddingRight:"0.3rem"
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "1.91rem",
+    fontSize: "0.16rem",
+    color: "#000000",
+    background: "url('../src/img/calendar_icon.png') no-repeat 1.6rem 0.01rem",
+    backgroundSize: "0.2rem",
+    paddingRight: "0.3rem"
 };
