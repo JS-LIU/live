@@ -37,7 +37,7 @@ export class SettleCenterView extends Component{
         }
         let teacherNodes = this.state.productCourse.teacherInfoList.map((teacher,index)=>{
             return (
-                <span className="settle_product_course_teacher_name" key={index}>{teacher.name}</span>
+                <span className="settle_product_course_teacher_name" key={index}>{teacher.teacherName}</span>
             )
         });
         return(

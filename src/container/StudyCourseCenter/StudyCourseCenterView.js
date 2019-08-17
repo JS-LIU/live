@@ -24,5 +24,4 @@ export class StudyCourseCenterView extends Component{
                 </div>
         )
     }
-
 }

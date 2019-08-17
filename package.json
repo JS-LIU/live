@@ -2,7 +2,7 @@
   "name": "live",
   "version": "1.0.0",
   "description": "live ",
-  "main": "index",
+  "main": "pcMyCourseIndex.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.prod.js",

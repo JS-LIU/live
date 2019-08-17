@@ -1,0 +1,52 @@
+.PC_course_route{
+    display:flex;
+    flex-direction: column;
+    background:#F0F2F6;
+    align-items: center;
+    width:1.49rem;
+    height:100%;
+    position:fixed;
+    top:0;
+    left:0;
+    color:#000000;
+}
+.PC_course_route_header_item{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size:0.14rem;
+    height:0.95rem;
+    margin-bottom:1rem;
+}
+.PC_course_route_header{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:0.48rem;
+    height:0.48rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.PC_course_route_header_pic{
+    width:0.48rem;
+}
+.PC_course_route_header_name{
+    font-size:0.14rem;
+    color:#000000;
+}
+.PC_course_route_account{
+    font-size:0.14rem;
+    color:#AF7861;
+}
+.PC_course_route_item{
+    width:1.25rem;
+    height:0.4rem;
+    border-radius: 0.04rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size:0.14rem;
+}

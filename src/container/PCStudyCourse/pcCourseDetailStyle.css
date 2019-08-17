@@ -1,0 +1,171 @@
+.pc_owned_course_plan_main{
+    position:relative;
+    width:11.31rem;
+}
+.pc_owned_course_plan_list{
+    width: 10.46rem;
+    margin:0 auto;
+    display:flex;
+    flex-direction: column;
+    border:0.01rem solid #E5E5E5;
+    box-shadow:0 0.08rem 0.12rem 0 rgba(0, 0, 0, 0.03);
+    border-radius: 0.08rem;
+    overflow: hidden;
+    background:#ffffff;
+}
+.owned_course_plan_header{
+    position:relative;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.1rem;
+}
+.owned_course_plan_header_bg{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+}
+.owned_course_plan_header_course_plan_item_info{
+    padding-left:0.4rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:1.31rem;
+    color:#FFFFFF;
+    position:relative;
+}
+.owned_course_plan_header_course_plan_item_info_top{
+    display:flex;
+    flex-direction: column;
+}
+.owned_course_plan_header_course_plan_item_info_top_name{
+    font-size:0.2rem;
+}
+.owned_course_plan_header_course_plan_item_info_top_time{
+    font-size:0.12rem;
+}
+
+.owned_course_plan_header_course_plan_item_info_bottom{
+    display:flex;
+    flex-direction: row;
+}
+.owned_course_plan_header_course_plan_item_info_bottom_teacher_info{
+    display:flex;
+    flex-direction: row;
+    height:0.5rem;
+    margin-right:0.35rem;
+}
+.owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:0.5rem;
+    height:0.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic{
+    width:0.5rem;
+}
+.owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name{
+    padding-left:0.11rem;
+    font-size:0.12rem;
+    color:#FFF;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title{
+    padding-bottom: 0.06rem;
+}
+.owned_course_plan_header_course_plan_item_right{
+    position:relative;
+    margin-right:1.58rem;
+}
+.course_progress{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #FFF;
+    width: 0.6rem;
+    height: 0.4rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -0.3rem;
+    margin-top: -0.2rem;
+    align-items: center;
+}
+.course_progress_num{
+    font-size:0.16rem;
+}
+.course_progress_title{
+    font-size:0.12rem;
+}
+.course_plan_item{
+    height:1.59rem;
+    border-bottom:0.01rem solid #F1F1F1;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.course_plan_item_info{
+    height:0.7rem;
+    display:flex;
+    flex-direction: column;
+    margin-left:0.41rem;
+}
+.course_plan_item_info_course_name{
+    color:#000000;
+    font-size:0.2rem;
+    padding-left:0.4rem;
+    width:3.55rem;
+    display:flex;
+    flex-wrap: wrap;
+}
+.course_plan_item_info_course_start_time{
+    margin-top:0.14rem;
+    font-size:0.12rem;
+}
+.pc_course_plan_item_right_pl_1{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex:1;
+    height:100%;
+    padding:0 0.5rem 0 1rem;
+}
+.pc_course_week_course_material{
+    display:flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width:1.92rem;
+    height: 100%;
+    font-size:0.12rem;
+}
+.pc_course_week_course_material_item{
+    padding-top:0.25rem;
+}
+.pc_course_week_course_enter_box{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:100%;
+}
+.pc_course_week_course_enter_course{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width:1.18rem;
+    height:0.38rem;
+    border-radius:0.2rem;
+    border:0.01rem solid #61BF55;
+    font-size: 0.14rem;
+}

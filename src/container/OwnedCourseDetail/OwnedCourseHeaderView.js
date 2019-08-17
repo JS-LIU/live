@@ -43,20 +43,20 @@ export class OwnedCourseHeaderView extends Component{
                     <div className="owned_course_plan_header_course_plan_item_info_bottom">
                         <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info">
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header">
-                                <img src={this.props.ownedCourse.teacherInfo.headImgUrl||"../src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
+                                <img src={this.props.ownedCourse.teacherInfo.headImgUrl||"/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
                             </div>
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name">
                                 <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title">教师</div>
-                                <div>{this.props.ownedCourse.teacherInfo.name}</div>
+                                <div>{this.props.ownedCourse.teacherInfo.teacherName}</div>
                             </div>
                         </div>
                         <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info">
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header">
-                                <img src={this.props.ownedCourse.assistantInfo.headImgUrl||"../src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
+                                <img src={this.props.ownedCourse.assistantInfo.headImgUrl||"/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
                             </div>
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name">
                                 <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title">助教</div>
-                                <div>{this.props.ownedCourse.assistantInfo.name||"暂未分配"}</div>
+                                <div>{this.props.ownedCourse.assistantInfo.teacherName||"暂未分配"}</div>
                             </div>
                         </div>
                     </div>

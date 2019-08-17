@@ -18,5 +18,4 @@ export class Login {
             pass:hex_md5(password)
         })
     }
-
 }

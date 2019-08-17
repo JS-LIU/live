@@ -1,38 +1,26 @@
 /**
- * Created by Liudq on 2019-08-08
+ * Created by Liudq on 2019-08-16
  */
-
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {HB} from "../../util/HB";
 import {TimeManager} from "../../entity/TimeManager";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 import {courseService} from "../../service/CourseService";
-import {OwnedCourseBottom} from './OwnedCourseBottom';
-import myCourseListStyle from "./myCourseListStyle.css";
-import {FooterView} from "../../component/FooterView/FooterView";
-export class MyCourseListView extends Component{
+import {PCOwnedCourseBottom} from './PCOwnedCourseBottom';
+import pcMyCourseListStyle from "./pcMyCourseListStyle.css";
+export class PCMyCourseListView extends Component{
     constructor(props) {
         super(props);
         this.state = {
             ownedCourseList:[],
             learnStatusList:courseService.getOwnedCourseLearnStatusList().getList(),
-            footerStyle:null
         }
     }
     componentDidMount() {
         courseService.pagination.to(1);
         this.updateOwnedCourseList();
         this.onGetMore();
-
-    }
-    setFooterStyle(){
-        console.log(HB.ui.hasScrollbar());
-        if(!HB.ui.hasScrollbar()){
-            this.setState({
-                footerStyle:{position:"fixed",bottom:"0"}
-            })
-        }
     }
     componentWillUnmount() {
         window.onscroll = null;
@@ -48,7 +36,6 @@ export class MyCourseListView extends Component{
             this.setState({
                 ownedCourseList:courseList,
             });
-            this.setFooterStyle()
 
         }).catch(()=>{
             console.log("我是有底线的");
@@ -73,7 +60,7 @@ export class MyCourseListView extends Component{
         });
         let ownedCourseListNodes = this.state.ownedCourseList.map((courseItem,index)=>{
             return (
-                <Link to={"/ownedCourseDetail/"+`${courseItem.id}`} key={index} className="my_course_item">
+                <Link to={"/studyCourseCenter/ownedCourseDetail/"+`${courseItem.id}`} key={index} className="pc_my_course_item">
                     <div className="my_owned_course_product_item_header" style={{background:courseItem.type.getTypeInfo().background}}>
                         <img src={courseItem.type.getTypeInfo().url} alt="" className="my_owned_course_product_item_header_bg" />
                         <div className="my_owned_course_product_item_header_box">
@@ -97,7 +84,7 @@ export class MyCourseListView extends Component{
                     <div className="my_owned_course_product_item_body">
                         <div className="my_owned_course_week_course_item_info_teacher">
                             <div className="my_owned_course_week_course_item_info_teacher_header">
-                                <img src={courseItem.teacherInfo.headImgUrl || "../src/img/def_header_img.png"} alt=""
+                                <img src={courseItem.teacherInfo.headImgUrl || "/src/img/def_header_img.png"} alt=""
                                      className="my_owned_course_week_course_item_info_teacher_header_img"/>
                             </div>
                             <div className="my_owned_course_week_course_item_info_teacher_name">
@@ -107,7 +94,7 @@ export class MyCourseListView extends Component{
                         </div>
                         <div className="my_owned_course_week_course_item_info_teacher">
                             <div className="my_owned_course_week_course_item_info_teacher_header">
-                                <img src={courseItem.assistantInfo.headImgUrl || "../src/img/def_header_img.png"} alt=""
+                                <img src={courseItem.assistantInfo.headImgUrl || "/src/img/def_header_img.png"} alt=""
                                      className="my_owned_course_week_course_item_info_teacher_header_img"/>
                             </div>
                             <div className="my_owned_course_week_course_item_info_teacher_name">
@@ -116,28 +103,23 @@ export class MyCourseListView extends Component{
                             </div>
                         </div>
                     </div>
-                    <OwnedCourseBottom courseItem={courseItem}/>
+                    <PCOwnedCourseBottom courseItem={courseItem}/>
                 </Link>
             )
         });
         return (
-            <div>
-                <div className="my_course_main">
-                    <div className="crumbs">首页 > 我的课程</div>
-                    <div className="my_course_box">
-
-                        <div className="my_course_main_header">
-                            <div className="my_course_header_title">我的课程</div>
-                            <div className="my_course_learnStatus_list">
-                                {ownedCourseLearnStatusNodes}
-                            </div>
-                        </div>
-                        <div className="my_course_main_course_list">
-                            {ownedCourseListNodes}
+            <div className="pc_my_course_main">
+                <div className="my_course_box">
+                    <div className="pc_my_course_main_header">
+                        <div className="my_course_header_title">我的课程</div>
+                        <div className="my_course_learnStatus_list">
+                            {ownedCourseLearnStatusNodes}
                         </div>
                     </div>
+                    <div className="pc_my_course_main_course_list">
+                        {ownedCourseListNodes}
+                    </div>
                 </div>
-                <FooterView style={this.state.footerStyle}/>
             </div>
         );
     }

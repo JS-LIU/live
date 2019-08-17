@@ -9,6 +9,10 @@ module.exports = {
             './src/index.js',
             "babel-polyfill"
         ],
+        pcMyCourse:[
+            "./src/pcMyCourseIndex.js",
+            "babel-polyfill"
+        ],
         vendor:[
             "qrcode.react",
             "rc-calendar",

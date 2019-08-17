@@ -5,6 +5,8 @@ import {CourseType} from "./CourseType";
 import {TimeManager} from "./TimeManager";
 import {HB} from "../util/HB";
 import {LearnStatus} from "./LearnStatus";
+import {PreVideo} from "./PreVideo";
+import {Courseware} from "./Courseware";
 
 export class OwnedCoursePlanItem {
     constructor(ownedCoursePlanItemInfo){
@@ -19,10 +21,18 @@ export class OwnedCoursePlanItem {
         this.learnStatus = new LearnStatus(ownedCoursePlanItemInfo.learnStatus);
         this.videoViewStatus = ownedCoursePlanItemInfo.videoViewStatus;
         this.videoId = ownedCoursePlanItemInfo.videoId;
+        this.preVideo = new PreVideo(ownedCoursePlanItemInfo.preVideoStatus,ownedCoursePlanItemInfo.preVideoId);
         this.preVideoStatus = ownedCoursePlanItemInfo.preVideoStatus;
         this.preVideoId = ownedCoursePlanItemInfo.preVideoId;
+        this.courseware = new Courseware(ownedCoursePlanItemInfo.coursewareStatus,ownedCoursePlanItemInfo.coursewareUrl);
         this.coursewareStatus = ownedCoursePlanItemInfo.coursewareStatus;
         this.coursewareUrl = ownedCoursePlanItemInfo.coursewareUrl;
+
+        this.homeworkDownloadStatus = ownedCoursePlanItemInfo.homeworkDownloadStatus;
+        this.homeworkName = ownedCoursePlanItemInfo.homeworkName;
+        this.homeworkUrl = ownedCoursePlanItemInfo.homeworkUrl;
+        this.lectureNotesStatus = ownedCoursePlanItemInfo.lectureNotesStatus;
+        this.materialList = ownedCoursePlanItemInfo.lectureNotesStatus;
     }
     getShowTime(){
         let date = TimeManager.timeStampToDate(this.classTime,"common");

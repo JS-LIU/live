@@ -45,10 +45,16 @@ export class OwnedCourse {
                 learnStatus:coursePlanItem.learnStatus,
                 videoViewStatus:coursePlanItem.videoViewStatus,
                 videoId:coursePlanItem.videoId,
-                preVideoStatus:coursePlanItem.videoViewStatus,
+                preVideoStatus:coursePlanItem.preVideoStatus,
                 preVideoId:coursePlanItem.preVideoId,
                 coursewareStatus:coursePlanItem.coursewareStatus,
                 coursewareUrl:coursePlanItem.coursewareUrl,
+
+                homeworkDownloadStatus: coursePlanItem.homeworkDownloadStatus,
+                homeworkName: coursePlanItem.homeworkName,
+                homeworkUrl: coursePlanItem.homeworkUrl,
+                lectureNotesStatus: coursePlanItem.lectureNotesStatus,
+                materialList: coursePlanItem.lectureNotesStatus,
             };
             list.push(new OwnedCoursePlanItem(coursePlanItemObj));
         }
