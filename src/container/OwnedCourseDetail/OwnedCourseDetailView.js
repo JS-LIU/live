@@ -6,8 +6,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {courseService} from "../../service/CourseService";
 import {OwnedCourseHeaderView} from "./OwnedCourseHeaderView";
 import {MyCourseHeaderView} from "../../component/HeaderView/MyCourseHeaderView";
-import myOwnedCourseDetailStyle from './ownedCourseDetailStyle.css';
 import {userService} from "../../service/UserService";
+import myOwnedCourseDetailStyle from './ownedCourseDetailStyle.css';
 
 export class OwnedCourseDetailView extends Component{
     constructor(props) {
@@ -29,7 +29,7 @@ export class OwnedCourseDetailView extends Component{
         if(!this.state.ownedCourse){
             return null;
         }
-        let OwnedCoursePlanNodes = this.state.ownedCourse.getCoursePlanList().map((coursePlanItem,index)=>{
+        let OwnedCoursePlanNodes = courseService.getOwnedCoursePlanItemListByDetail(this.state.ownedCourse.id).map((coursePlanItem,index)=>{
             return (
                 <div key={index} className="course_plan_item">
                     <div className="course_plan_item_info" >
@@ -56,9 +56,7 @@ export class OwnedCourseDetailView extends Component{
                         {OwnedCoursePlanNodes}
                     </div>
                 </div>
-
             </div>
         );
     }
-
 }

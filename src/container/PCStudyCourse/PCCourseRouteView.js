@@ -13,7 +13,7 @@ export class PCCourseRouteView extends Component{
     render() {
         return (
             <div className="PC_course_route">
-                <Link to="/user/userInfo" className="PC_course_route_header_item">
+                <Link to="/studyCourseCenter/userInfo" className="PC_course_route_header_item">
                     <div className="PC_course_route_header">
                         <img src={this.props.userInfo.headImgUrl || "src/img/def_header_img.png"} alt="" className="PC_course_route_header_pic"/>
                     </div>

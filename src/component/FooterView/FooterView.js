@@ -18,10 +18,10 @@ export class FooterView extends Component{
                 <div className="common_footer_main">
                     <div className="common_footer_left">
                         <div className="common_footer_left_top">
-                            <Link className="common_footer_left_top_link_item">关于我们</Link>
-                            <Link className="common_footer_left_top_link_item">关于我们</Link>
-                            <Link className="common_footer_left_top_link_item">关于我们</Link>
-                            <Link className="common_footer_left_top_link_item">关于我们</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
                         </div>
                         <div className="common_footer_left_bottom">
                             <div>

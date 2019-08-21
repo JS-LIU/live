@@ -48,7 +48,11 @@ export class PCWeekCourseView extends Component{
         this.getOwnedCoursePlanItemList();
         this.onGetMore();
     }
-
+    downLoadHomework(coursePlanItem){
+        return ()=>{
+            courseService.downLoadHomework(coursePlanItem);
+        }
+    }
     componentWillUnmount() {
         window.onscroll = null;
     }
@@ -101,7 +105,9 @@ export class PCWeekCourseView extends Component{
                                 <ul className="pc_course_week_course_material">
                                     <li className="pc_course_week_course_material_item" style={{background:"url('"+coursePlanItem.preVideo.getPreVideoStatus().url+"') no-repeat top center",backgroundSize:"0.2rem",color:coursePlanItem.preVideo.getPreVideoStatus().color}}>预习视频</li>
                                     <li className="pc_course_week_course_material_item" style={{background:"url('"+coursePlanItem.courseware.getCourseWareStatus().url+"') no-repeat top center",backgroundSize:"0.2rem",color:coursePlanItem.courseware.getCourseWareStatus().color}}>讲义</li>
-                                    <li className="pc_course_week_course_material_item" style={{background:"url('/src/img/home_work_cant.png') no-repeat top center",backgroundSize:"0.2rem",color:"#c7c7c7"}}>作业</li>
+                                    <li className="pc_course_week_course_material_item"
+                                        onClick={this.downLoadHomework(coursePlanItem)}
+                                        style={{background:"url('"+ coursePlanItem.homework.getStatusInfo().url +"') no-repeat top center",backgroundSize:"0.2rem",color:coursePlanItem.homework.getStatusInfo().color}}>作业</li>
                                 </ul>
                                 <div className="pc_course_week_course_enter_box">
                                     <div className="pc_course_week_course_enter_course" style={{background:coursePlanItem.learnStatus.getStatusInfo().background,color:coursePlanItem.learnStatus.getStatusInfo().pcColor}}>{coursePlanItem.learnStatus.getStatusInfo().pcName}</div>

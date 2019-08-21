@@ -24,11 +24,18 @@
 }
 .product_course_detail_info{
     width:7.83rem;
-    background:#FFF;
 }
 .product_course_detail_top{
     width:100%;
+    background:#FFF;
 }
+.product_course_detail_bottom {
+    width: 100%;
+    margin:0.18rem 0 0.6rem;
+    background:#FFF;
+
+}
+
 .product_course_detail_header{
     position:relative;
     height:3.08rem;
@@ -133,6 +140,7 @@
 }
 .product_course_detail_right_course_title{
     font-size:0.2rem;
+    color:#000000;
 }
 .product_course_detail_right_course_info{
     display:flex;
@@ -167,6 +175,33 @@
 .product_course_detail_right_course_end_time{
     font-size:0.12rem;
 }
+.product_course_detail_right_course_buy_only{
+    display:flex;
+    flex-direction: column;
+    width:2.9rem;
+    margin-top:0.2rem;
+}
+.product_course_detail_right_course_buy_only_title{
+    font-size:0.14rem;
+    color:#000000;
+}
+.product_course_detail_right_course_buy_only_course,.suggest_goods_item{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding:0 0.1rem;
+    height:0.32rem;
+    border: 0.01rem solid #E8E8E8;
+    border-radius: 0.04rem;
+}
+.product_course_detail_right_course_buy_combo_list{
+    display:flex;
+    flex-direction: column;
+    width:2.9rem;
+    margin-top:0.2rem;
+}
+
 .product_course_detail_settle_box{
     margin-top:0.2rem;
     padding-top:0.2rem;
@@ -197,7 +232,39 @@
     align-items: center;
     justify-content: center;
 }
-
-
-
+.product_course_detail_bottom_title{
+    height:0.66rem;
+    font-size:0.16rem;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    padding:0 0.2rem;
+    border-bottom:0.01rem solid #E8E8E8;
+}
+.product_course_detail_bottom_title_item{
+    padding-right:0.74rem;
+}
+.product_detail_img_list{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.product_detail_img{
+    width:100%;
+}
+.product_detail_problem_list{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+}
+.common_question_item{
+    padding:0.2rem;
+}
+.common_question_item_title{
+    font-size:0.16rem;
+    color:#000000;
+}
+.common_question_item_answer{
+    font-size:0.14rem;
+}
 

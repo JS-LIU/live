@@ -18,7 +18,11 @@ export class HeaderView extends Component{
         return (
             <div className="common_header">
                 <div className="common_header_center">
-                    <div className="common_header_logo"/>
+                    <div className="common_header_logo_title">
+                        <div className="common_header_logo" />
+                        <div className="common_header_title">{this.props.title}</div>
+                    </div>
+
                     <div className="common_header_right">
                         <Link to="/home" className="common_header_center_link_item">首页</Link>
                         <Link to="/selectCourseCenter" className="common_header_center_link_item">选课中心</Link>
@@ -27,7 +31,7 @@ export class HeaderView extends Component{
                         <Link to="/downLoad" className="common_header_center_link_item">软件下载</Link>
                         <Link to="/user/userInfo" className="common_header_login_info" onMouseEnter={this.showDialog}>
                             <div className="common_header_login_header_box">
-                                <img src={this.props.userInfo.headImgUrl||"src/img/def_header_img.png"} alt="" className="common_header_login_header_pic"/>
+                                <img src={this.props.userInfo.headImgUrl||"/src/img/def_header_img.png"} alt="" className="common_header_login_header_pic"/>
                             </div>
                             <div className="common_header_login_user_name">{this.props.userInfo.nickName||"登录"}</div>
                             <div className="down_arrow"/>

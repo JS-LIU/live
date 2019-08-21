@@ -8,7 +8,6 @@ import {WeekCourseView} from "../WeekCourse/WeekCourseView";
 import {MyCourseHeaderView} from "../../component/HeaderView/MyCourseHeaderView";
 import {userService} from "../../service/UserService";
 import {MyCourseListView} from '../MyCourse/MyCourseListView';
-import {FooterView} from "../../component/FooterView/FooterView";
 import studyCourseCenterStyle from './studyCourseCenterStyle.css';
 export class StudyCourseCenterView extends Component{
     render() {

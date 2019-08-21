@@ -12,11 +12,13 @@ import {Pagination} from "../entity/Pagination";
 import {OwnedCourseLearnStatus} from "../entity/OwnedCourseLearnStatus";
 import {OwnedCourseLearnStatusList} from "../entity/OwnedCourseLearnStatusList";
 import {OwnedCoursePlanItem} from "../entity/OwnedCoursePlanItem";
+import {CourseType} from "../entity/CourseType";
 
 class CourseService {
     constructor(){
         let ownedCourseAjax = commonAjax.resource('/course/w/v1.0/:action');
         let courseAjax = commonAjax.resource('/good/w/v1.0/:action');
+        let preVideoAjax = commonAjax.resource('/user/w/v1.0/:action');
         this._getOwnedCourseListByWeek = function(postInfo){
             return ownedCourseAjax.save({action:'pageCoursePlan'},postInfo,{name:"token",value:userService.getUser().token});
         };
@@ -37,7 +39,7 @@ class CourseService {
         };
 
         this._getPreSessionVideo = function(postInfo){
-            return ownedCourseAjax.save({action:"preSessionVideo"},postInfo,{name:"token",value:userService.getUser().token});
+            return preVideoAjax.save({action:"preSessionVideo"},postInfo,{name:"token",value:userService.getUser().token});
         };
         //  课程列表
         this.ownedCourseList = [];
@@ -79,9 +81,9 @@ class CourseService {
     }
     //  预习视频
     getPreSessionVideo(ownedCourseItem){
-        return this._getOwnedCourseDetail({
+        return this._getPreSessionVideo({
             videoId:ownedCourseItem.preVideo.preVideoId,
-            userCoursePlanId:null
+            userCoursePlanId:ownedCourseItem.id
         })
     }
     getOwnedCourseDetail(id){
@@ -99,6 +101,17 @@ class CourseService {
         return this.ownedCourseList.find((ownedCourse,index)=>{
             return parseInt(ownedCourse.id) === parseInt(id);
         })
+    }
+
+    /**
+     * 从详情 获取coursePlanItem列表
+     * @param ownedCourseId
+     * @returns {[]|*}
+     */
+    getOwnedCoursePlanItemListByDetail(ownedCourseId){
+        let ownedCourse = this.findOwnedCourseById(ownedCourseId);
+        this.ownedCoursePlanList = ownedCourse.getCoursePlanList();
+        return this.ownedCoursePlanList;
     }
     /**
      * 创建学习状态
@@ -301,13 +314,35 @@ class CourseService {
     getPagination(){
         return this.pagination;
     }
-    //  课程详情
-    getProductCourseDetail(productCourseNo){
-        let productCourse = this.findProductCourseByCourseNo(productCourseNo);
+
+    /**
+     * 课程详情中的套餐也有商品
+     * @param productCourseNo
+     * @returns {*}
+     */
+    getOrCreateProductCourseDetail(productCourseNo){
         return this._getProductDetail({
             goodNo:productCourseNo
         }).then((data)=>{
+            let productCourse = this.findProductCourseByCourseNo(productCourseNo);
+            //  不推入this.courseList
+            if(!productCourse){
+                productCourse = this.createProductCourse({
+                    id :data.data.id,
+                    goodNo :data.data.goodNo,
+                    level :data.data.level,
+                    name :data.data.name,
+                    startTime :data.data.startTime,
+                    endTime :data.data.endTime,
+                    teacherInfoList :data.data.teacherInfoList,
+                    totalLessonNum :data.data.totalLessonNum,
+                    salePrice :data.data.salePrice,
+                    timeList :data.data.timeList,
+                    type :data.data.type,
+                });
+            }
             productCourse = this.updateCourse(productCourse,data.data);
+
             return new Promise((resolve, reject)=>{
                 resolve(productCourse);
             });
@@ -323,6 +358,16 @@ class CourseService {
     updateCourse(productCourse, detail) {
         productCourse.repairDetail(detail);
         return productCourse;
+    }
+    findOwnedCoursePlanItemById(coursePlanItemId){
+        return this.ownedCoursePlanList.find((item,index)=>{
+            return item.id === coursePlanItemId;
+        })
+    }
+
+    downLoadHomework(ownedCoursePlanItem){
+        let coursePlanItem = this.findOwnedCoursePlanItemById(ownedCoursePlanItem.id);
+        coursePlanItem.homework.getStatusInfo().downLoad();
     }
 
 }

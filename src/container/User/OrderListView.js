@@ -7,6 +7,7 @@ import {orderService} from "../../service/OrderService";
 import ReactPaginate from 'react-paginate';
 import orderListStyle from "./orderListStyle.css";
 import {TimeManager} from "../../entity/TimeManager";
+import {payService} from "../../service/PayService";
 export class OrderListView extends Component {
     constructor(props) {
         super(props);
@@ -28,35 +29,56 @@ export class OrderListView extends Component {
             })
         })
     }
+    toPay(orderItem){
+        return ()=>{
+            orderService.reCreateOrder(orderItem).then((info)=>{
+                payService.createPay(info.payModels);
+                this.props.history.replace("/pay");
+            });
+
+        }
+    }
+    cancelOrder(orderItem){
+        return ()=>{
+            orderService.cancelOrder(orderItem).then(()=>{
+                this.onChangePage(orderService.pagination.pageNum)
+            }).catch((msg)=>{
+                alert(msg);
+            })
+        }
+    }
     getOrderStatus(orderItem){
         if(orderItem.status === 3004){
             return (
                 <div>
-                    已过期
+                    <div>已过期</div>
+                    <Link to={"/orderDetail/"+`${orderItem.orderNo}`}>订单详情</Link>
                 </div>
             )
         }else if(orderItem.status === 3003){
             return (
                 <div>
-                    已取消
+                    <div>已取消</div>
+                    <Link to={"/orderDetail/" + `${orderItem.orderNo}`}>
+                        查看订单
+                    </Link>
                 </div>
             )
         }else if(orderItem.status === 3002){
             return (
-                <Link to={"/orderDetail/" + `${orderItem.orderNo}`}>
-                    查看订单
-                </Link>
+                <div>
+                    <div>已支付</div>
+                    <Link to={"/orderDetail/" + `${orderItem.orderNo}`}>
+                        查看订单
+                    </Link>
+                </div>
             )
         }
         else if(orderItem.status === 3001){
             return (
                 <div>
-                    <Link to="/pay">
-                        去支付
-                    </Link>
-                    <div>
-                        取消订单
-                    </div>
+                    <div onClick={this.toPay(orderItem)}>去支付</div>
+                    <div onClick={this.cancelOrder(orderItem)}>取消订单</div>
                 </div>
             )
         }

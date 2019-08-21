@@ -24,7 +24,7 @@ export class OrderDetailView extends Component{
     render() {
         return (
             <div>
-                <div className="wrap"></div>
+                <div className="wrap" />
                 <div className="order_detail_main">
                     <div className="order_detail_title">我的订单</div>
                     <div className="order_detail_product">
@@ -45,7 +45,6 @@ export class OrderDetailView extends Component{
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         );

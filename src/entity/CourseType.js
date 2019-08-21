@@ -4,14 +4,20 @@
 export class CourseType {
     constructor(type){
         this.type = type;
+        //  状态机
+        // this.currentStatus = type;
     }
-    static typeStrategy(){
+    static StatusManager(){
         return {
             "1":{
                 name:"p",
                 background:"#00b7ba",
                 url:"/src/img/product_course_python_header_bg.png",
-                iconBackground:"/src/img/icon_py.png"
+                iconBackground:"/src/img/icon_py.png",
+                //  切换状态
+                // cutNextStatus:()=>{
+                //     this.currentStatus = CourseType.StatusManager()["2"];
+                // }
             },
             "2":{
                 name:"c",
@@ -28,6 +34,6 @@ export class CourseType {
         }
     }
     getTypeInfo(){
-        return CourseType.typeStrategy()[this.type];
+        return CourseType.StatusManager()[this.type];
     }
 }

@@ -12,7 +12,6 @@ export class ProductCourse {
         this.name = productInfo.name;
         this.startTime = productInfo.startTime;
         this.endTime = productInfo.endTime;
-        this.teacherInfoList = productInfo.teacherInfoList;
         this.totalLessonNum = productInfo.totalLessonNum;
         this.salePrice = productInfo.salePrice;
         this.timeList = productInfo.timeList;
@@ -30,6 +29,7 @@ export class ProductCourse {
         this.detail = detail;
     }
     getDetail(){
+        this.detail.suggestGoods = this.detail.suggestGoods || [];
         return this.detail;
     }
 }

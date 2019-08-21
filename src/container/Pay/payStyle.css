@@ -57,7 +57,7 @@
 .pay_qrCode_box{
     position:relative;
     width:2.92rem;
-    background:url("../../img/pay_ip_bg.png") no-repeat right center;
+    background:url("../../img/pay_ip_bg.png") no-repeat right 0.25rem;
     background-size: 2.45rem 3.14rem;
     display:flex;
     flex-direction: column;

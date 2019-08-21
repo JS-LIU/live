@@ -29,7 +29,9 @@ export class SettleCenterView extends Component{
         orderService.createOrder(this.productCourse).then((info)=>{
             payService.createPay(info.payModels);
             this.props.history.push('/pay')
-        });
+        }).catch((msg)=>{
+            alert(msg)
+        })
     }
     render() {
         if(!this.state.productCourse){
@@ -42,8 +44,8 @@ export class SettleCenterView extends Component{
         });
         return(
             <div>
-                <div className="wrap"></div>
-                <HeaderView userInfo={userService.getUser().userInfo}/>
+                <div className="wrap" />
+                <HeaderView userInfo={userService.getUser().userInfo} title={"结算中心"}/>
                 <div className="settle_main">
                     <div className="settle_course_title">课程信息</div>
                     <div className="product_course_pay_info">
@@ -82,7 +84,7 @@ export class SettleCenterView extends Component{
                                 <div>￥0.00</div>
                             </li>
                             <li className="settle_info_item">
-                                <div>合计金额：</div>
+                                <div>合计：</div>
                                 <div>￥{this.state.productCourse.salePrice / 100}</div>
                             </li>
                         </ul>
@@ -94,7 +96,7 @@ export class SettleCenterView extends Component{
                         </div>
                     </div>
                     <div className="create_order_btn_box">
-                        <div onClick={this.createOrder.bind(this)} className="create_order_btn">立即购买</div>
+                        <div onClick={this.createOrder.bind(this)} className="create_order_btn">提交订单</div>
                     </div>
                 </div>
             </div>

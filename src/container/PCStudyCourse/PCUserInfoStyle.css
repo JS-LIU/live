@@ -1,9 +1,7 @@
-.user_info_box{
-    width:10.15rem;
-    border:0.01rem solid #E8E8E8;
-    border-radius: 0.08rem;
-    overflow: hidden;
-    background:#FFFFFF;
+.pc_user_info_main{
+    position:relative;
+    width:11.31rem;
+    background:#ffffff;
 }
 .user_info_box_title{
     height:0.63rem;

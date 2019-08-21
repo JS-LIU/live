@@ -6,7 +6,7 @@ export class Courseware {
         this.courseWareStatus = courseWareStatus;
         this.courseWareUrl = courseWareUrl;
     }
-    static statusStrategy(){
+    static StatusManager(){
         return {
             "0":{
                 name:"不可查看",
@@ -21,6 +21,6 @@ export class Courseware {
         }
     }
     getCourseWareStatus(){
-        return Courseware.statusStrategy()[this.courseWareStatus];
+        return Courseware.StatusManager()[this.courseWareStatus];
     }
 }

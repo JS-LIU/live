@@ -18,6 +18,12 @@ class OrderService {
         this._createOrder = function(postInfo){
             return orderAjax.save({action:'createOrder'},postInfo,{name:"token",value:userService.getUser().token});
         };
+        this._reCreateOrder = function(postInfo){
+            return orderAjax.save({action:"paymentOrder"},postInfo,{name:"token",value:userService.getUser().token});
+        };
+        this._cancelOrder = function(postInfo){
+            return orderAjax.save({action:"cancelOrder"},postInfo,{name:"token",value:userService.getUser().token});
+        };
         this._queryOrderStatus = function(postInfo){
             return orderAjax.save({action:"queryOrderStatus"},postInfo,{name:"token",value:userService.getUser().token});
         };
@@ -30,7 +36,7 @@ class OrderService {
         this.searchOrderStatus = new SearchOrderStatus();
         this.order = null;
         this.orderProduct = null;
-        this.pagination = new Pagination(1,3);
+        this.pagination = new Pagination(1,10);
     }
 
     createOrder(productCourse){
@@ -38,11 +44,31 @@ class OrderService {
             goodNo:productCourse.goodNo,
             salePrice:productCourse.salePrice
         }).then((data)=>{
-            this.createOrderProduct(productCourse);
-            this.order = new Order(data.data);
             return new Promise((resolve, reject)=>{
-                resolve({order:this.order,payModels:data.data.payModels})
+                if(parseInt(data.code) === 0){
+                    this.createOrderProduct(productCourse);
+                    this.order = new Order(data.data);
+                    resolve({order:this.order,payModels:data.data.payModels})
+                }else{
+                    reject(data.message);
+                }
             });
+        })
+    }
+    reCreateOrder(orderInfo){
+        return this._reCreateOrder({
+            orderNo:orderInfo.orderNo
+        }).then((data)=>{
+            return new Promise((resolve,reject)=>{
+                if(parseInt(data.code) === 0){
+                    this.createOrderProduct(orderInfo.orderProduct);
+                    this.order = new Order(Object.assign(data.data,orderInfo.orderProduct));
+                    resolve({order:this.order,payModels:data.data.payModels})
+                }else{
+                    reject(data.message);
+                }
+            });
+
         })
     }
     /**
@@ -90,10 +116,7 @@ class OrderService {
                 orderNo:this.order.orderNo
             }).then((data)=>{
                 currentTimeStampBySec = TimeManager.currentTimeStampBySec();
-                console.log(data.data.orderStatus);
-                console.log(this.order.getOrderStatus(data.data.orderStatus));
                 if(this.order.getOrderStatus(data.data.orderStatus) === "已支付"){
-                    console.log("已支付");
                     success(data.data.orderStatus);
                 }
                 if(this.order.getOrderStatus(data.data.orderStatus) === "已取消"||this.order.getOrderStatus(data.data.orderStatus) === "已过期"){
@@ -113,11 +136,11 @@ class OrderService {
     getQueryStep(currentTimeStampBySec,boundOfFrequently,queryStep){
         if(currentTimeStampBySec > boundOfFrequently && queryStep !== this.order.lazyStep){
             queryStep = this.order.lazyStep;
-            clearInterval(this.timing);
+            this.stopQueryOrderStatus();
             this.queryTiming(queryStep,TimeManager.currentTimeStampBySec(),boundOfFrequently);
         }
         if(this.order.isOverDue(TimeManager.currentTimeStampBySec())){
-            clearInterval(this.timing);
+            this.stopQueryOrderStatus();
         }
         return queryStep;
     }
@@ -170,5 +193,20 @@ class OrderService {
             })
         });
     }
+    cancelOrder(orderItem){
+        return this._cancelOrder({
+            orderNo:orderItem.orderNo
+        }).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.data === 0){
+                    resolve(data.data);
+                }else{
+                    reject(data.data.message);
+                }
+            })
+
+        })
+    }
+
 }
 export let orderService = new OrderService();

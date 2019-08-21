@@ -43,8 +43,8 @@ ReactDOM.render(
     (<BrowserRouter>
         <Redirect to="/"/>
         <div>
-            <Route path="/" exact component={LoginView} />
             <Route path="/home" component={HomeView}/>
+            <Route path="/" exact component={LoginView} />
             <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
             <Route path="/studyCourseCenter/:myCourse" component={StudyCourseCenterView} />
             <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />

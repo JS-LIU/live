@@ -4,6 +4,7 @@
 import {Login} from "../entity/Login";
 import {User} from "../entity/User";
 import {commonAjax} from "../config/config";
+import {TimeManager} from "../entity/TimeManager";
 
 
 /**
@@ -20,12 +21,30 @@ import {commonAjax} from "../config/config";
  */
 class UserService {
     constructor(){
-        let ajax = commonAjax.resource('/user/c/v1.0/:action');
+        let ajax = commonAjax.resource('/user/w/v1.0/:action');
         this.login = new Login(ajax);
         this.user = new User(ajax);
+        this._resetUserInfo = function(postInfo){
+            return ajax.save({action:"updateUserInfo"},postInfo,{name:"token",value:this.user.token})
+
+        };
     }
     createUser(ajax){
         this.user.saveUser();
+    }
+    resetUserInfo(userInfo){
+        userInfo.birthday = TimeManager.convertYMDToStampByUnix(userInfo.birthY+"/"+userInfo.birthM+"/"+userInfo.birthD);
+        return this._resetUserInfo(userInfo).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.code === 0){
+                    this.updateUserInfo({userInfo:userInfo});
+                    resolve(data);
+                }else{
+                    reject(data)
+                }
+
+            })
+        })
     }
     //  登录
     signIn(){

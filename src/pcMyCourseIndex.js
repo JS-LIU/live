@@ -15,7 +15,7 @@ import {HB} from "./util/HB";
 import {userService} from "../src/service/UserService";
 HB.ui.setBaseFontSize(1280,100);
 
-let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTY1OTQ0MzA5Mzg2Iiwia2V5X3VzZXJfaWQiOjIsImlhdCI6MTU2NTk0NDMwOSwiZXhwIjoxNTY2NTQ5MTA5fQ.vXnQBUPAQrFrWBZ31zR4NIlP38ssjv8Gv2Lw5P5h-Ag";
+let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTY2MTgzNTMxNTQwIiwia2V5X3VzZXJfaWQiOjIsImlhdCI6MTU2NjE4MzUzMSwiZXhwIjoxNTY2Nzg4MzMxfQ.rEB4rva5vWvUYloEHwKtmaoPP9o19eToxVoYCz1C02o";
 userService.updateUserInfo({token:token});
 userService.getUserInfo().then(()=>{
     ReactDOM.render(

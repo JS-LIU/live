@@ -20,7 +20,8 @@
     "react-dom": "^16.8.6",
     "react-paginate": "^6.3.0",
     "react-router": "^5.0.1",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "reactjs-swiper": "^0.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",

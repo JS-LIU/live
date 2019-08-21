@@ -71,4 +71,16 @@ export class TimeManager {
         let d = TimeManager.timeStampToDate(timestamp,type);
         return d.M + d.D + d.h + d.m;
     }
+
+    //  年月日转时间戳
+    static convertYMDToStampByUnix(YMD){
+        return new Date(YMD).getTime() / 1000;
+    }
+    static createDate(start,end){
+        let list = [];
+        for(let i = start;i <= end;i++){
+            list.push(i);
+        }
+        return list;
+    }
 }

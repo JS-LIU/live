@@ -1,13 +1,13 @@
 /**
- * Created by Liudq on 2019-08-06
+ * Created by Liudq on 2019-08-21
  */
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import {userService} from "../../service/UserService";
-import userInfoStyle from "./userInfoStyle.css";
+import pcUserInfoStyle from "./PCUserInfoStyle.css";
 import {TimeManager} from "../../entity/TimeManager";
 
-export class UserInfoView extends Component{
+export class PCUserInfoView extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -107,9 +107,10 @@ export class UserInfoView extends Component{
         });
         let grade = ["学前班","小学一年级","小学二年级","小学三年级","小学四年级","小学五年级","小学六年级","初中一年级","初中二年级","初中三年级","高中一年级","高中二年级","高中三年级"];
         let gradeNodes = grade.map((gradeItem,index)=>{
-            return (
-                <option key={index} value={gradeItem} selected={gradeItem === this.state.userInfo.grade?"selected":null}>{gradeItem}</option>
-            )
+            console.log(this.state.userInfo.grade);
+           return (
+               <option key={index} value={gradeItem} selected={gradeItem === this.state.userInfo.grade?"selected":null}>{gradeItem}</option>
+           )
 
         });
         return (
@@ -173,7 +174,7 @@ export class UserInfoView extends Component{
                             <div className="user_info_set_info_box_left_item_grade">
                                 <select className="user_info_set_info_box_left_item_grade_box"
                                         onChange={this.onChangeGrade.bind(this)}>
-                                    {gradeNodes}
+                                   {gradeNodes}
                                 </select>
                             </div>
                         </li>

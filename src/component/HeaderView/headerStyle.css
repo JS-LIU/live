@@ -8,6 +8,7 @@
     align-items: center;
     background:#FFF;
     box-shadow:0 0.03rem 0.1rem 0 rgba(0, 0, 0, 0.1);
+    z-index: 3;
 }
 .common_header_center{
     display:flex;
@@ -19,11 +20,22 @@
     margin:0 auto;
     font-size:0.14rem;
 }
+.common_header_logo_title{
+    height:100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
 .common_header_logo{
     width:1.43rem;
     height:100%;
     background:#F5F5F5 url("../../img/sscoding_logo.png") no-repeat center;
     background-size: 0.94rem 0.47rem;
+}
+.common_header_title{
+    font-size:0.2rem;
+    font-weight: 600;
+    padding-left:0.26rem;
 }
 .common_header_right{
     display:flex;

@@ -13,6 +13,7 @@ export class Order {
         this.frequentlyStep = 2;
         this.lazyStep = 10;
         this.status = orderInfo.status||orderInfo.orderStatus;
+
         this.orderCreateTime = orderInfo.orderCreateTime;
         //  todo 现在order对商品是1对1 1对多的时候改成list
         this.orderCourse = new OrderProduct({
@@ -27,6 +28,8 @@ export class Order {
      * @returns {boolean}
      */
     isOverDue(currentTimeStampBySec){
+        console.log("======",currentTimeStampBySec);
+        console.log("======",this.payLastTime);
         return (currentTimeStampBySec > this.payLastTime);
     }
 

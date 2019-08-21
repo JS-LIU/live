@@ -8,6 +8,7 @@ import {PCWeekCourseView} from './PCWeekCourseView';
 import {PCMyCourseListView} from './PCMyCourseListView';
 import {PCCourseRouteView} from "./PCCourseRouteView";
 import {PCCourseDetailView} from "./PCCourseDetailView";
+import {PCUserInfoView} from "./PCUserInfoView";
 import pcStudyCourseStyle from "./pcStudyCourseStyle.css";
 export class PCStudyCourseView extends Component{
     render() {
@@ -18,6 +19,7 @@ export class PCStudyCourseView extends Component{
                     <Route path="/studyCourseCenter/week" component={PCWeekCourseView} />
                     <Route path="/studyCourseCenter/myCourseList" component={PCMyCourseListView} />
                     <Route path="/studyCourseCenter/ownedCourseDetail/:id" component={PCCourseDetailView} />
+                    <Route path="/studyCourseCenter/userInfo" component={PCUserInfoView} />
                 </div>
             </div>
         )

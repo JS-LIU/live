@@ -27,13 +27,12 @@ export class PayView extends Component {
             orderInfo: orderService.getOrder(),
             payInfo: payService.getPay(),
         });
-
+        let self = this;
         orderService.queryOrderStatus(TimeManager.currentTimeStampBySec(),
-            (status) => {
-                console.log(status);
-                this.props.history.replace('/paySuccess/' + `${status}`);
-            }, (status) => {
-                this.props.history.replace('/payFail/' + `${status}`);
+            function(status){
+                self.props.history.replace('/paySuccess/' + `${status}`);
+            }, function(status){
+                self.props.history.replace('/payFail/' + `${status}`);
             });
         this.startCountDown();
     }

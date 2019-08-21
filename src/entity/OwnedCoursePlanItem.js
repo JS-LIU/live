@@ -7,7 +7,7 @@ import {HB} from "../util/HB";
 import {LearnStatus} from "./LearnStatus";
 import {PreVideo} from "./PreVideo";
 import {Courseware} from "./Courseware";
-
+import {Homework} from "./Homework";
 export class OwnedCoursePlanItem {
     constructor(ownedCoursePlanItemInfo){
         this.id = ownedCoursePlanItemInfo.id;
@@ -28,6 +28,11 @@ export class OwnedCoursePlanItem {
         this.coursewareStatus = ownedCoursePlanItemInfo.coursewareStatus;
         this.coursewareUrl = ownedCoursePlanItemInfo.coursewareUrl;
 
+        this.homework = new Homework({
+            homeworkDownloadStatus:ownedCoursePlanItemInfo.homeworkDownloadStatus||ownedCoursePlanItemInfo.userHomeworkStatus,
+            homeworkName:ownedCoursePlanItemInfo.homeworkName,
+            homeworkUrl:ownedCoursePlanItemInfo.homeworkUrl
+        });
         this.homeworkDownloadStatus = ownedCoursePlanItemInfo.homeworkDownloadStatus;
         this.homeworkName = ownedCoursePlanItemInfo.homeworkName;
         this.homeworkUrl = ownedCoursePlanItemInfo.homeworkUrl;
