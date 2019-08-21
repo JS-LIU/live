@@ -113,7 +113,7 @@ export class UserInfoView extends Component{
 
         });
         return (
-            <div className="pc_user_info_main">
+            <div className="user_info_main">
                 <div className="user_info_box_title">个人信息</div>
                 <div className="user_info_box_set_info_box">
                     <ul className="user_info_box_set_info_box_left">
