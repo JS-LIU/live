@@ -14,7 +14,7 @@ module.exports = merge(common, {
                 secure: false,
                 bypass: function (req, res, proxyOptions) {
                     if (req.headers.accept.indexOf('html') !== -1) {
-                        return '/pcMyCourseIndex.html';
+                        return '/index.html';
                     }
                     if (req.headers.accept.indexOf('css') !== -1) {
                         return '/src/util/base.css';

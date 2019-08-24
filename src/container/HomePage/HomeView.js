@@ -9,32 +9,77 @@ import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {FooterView} from "../../component/FooterView/FooterView";
 import HomeStyle from './HomeStyle.css';
+import {baseUrl} from "../../config/config";
+
 export class HomeView extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            userInfo:{},
             activeImgList:[{
-                image: '/src/img/activeImg_1.png',
+                image: baseUrl.getBaseUrl()+'/src/img/activeImg_1.png',
                 title: 'vipCode',
                 link: 'http://www.baidu.com'
             }],
+            cooperationList:[
+                {cn:"sec_5_content_item_1",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}>
+                        <div>中国计算机学会</div>
+                        <div>CCF会员单位</div>
+                </div>),id:0},
+                {cn:"sec_5_content_item_2",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:1},
+                {cn:"sec_5_content_item_3",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:2},
+                {cn:"sec_5_content_item_4",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:3},
+            ]
         }
     }
 
     componentDidMount() {
-        userService.getUserInfo().then(()=>{
-            this.setState((state,props)=>{
-                return {
-                    userInfo:userService.getUser().userInfo
-                }
+        // userService.getUserInfo().then(()=>{
+        //     this.setState((state,props)=>{
+        //         return {
+        //             userInfo:userService.getUser().userInfo
+        //         }
+        //     })
+        // });
+    }
+    makeCooperationUnActive(){
+        for(let i = 0 ;i < this.state.cooperationList.length;i++){
+            this.state.cooperationList[i].active = false;
+        }
+        return this.state.cooperationList;
+    }
+    setCooperationActive(item) {
+        return () => {
+            this.makeCooperationUnActive();
+            item.active = true;
+            this.setState({
+                cooperationList:this.state.cooperationList
             })
-        });
+        }
+    }
+    setCooperationActiveUnActive(){
+        this.makeCooperationUnActive();
+        this.setState({
+            cooperationList:this.state.cooperationList
+        })
     }
     render() {
+        let cooperation = this.state.cooperationList.map((item,i)=>{
+            return (
+                <li key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",height:"2rem"}}>
+                    <div
+                        className={item.cn}
+                        style={item.active?{backgroundColor:"#E8E8E8"}:{backgroundColor:"#FFFFFF"}}
+                        onMouseEnter={this.setCooperationActive(item)}
+                        onMouseLeave={this.setCooperationActiveUnActive.bind(this)}>
+                    </div>
+                    {item.active?item.companyName:""}
+                </li>
+
+            )
+        });
         return(
             <div>
-                <HeaderView userInfo={this.state.userInfo} />
+                <HeaderView />
                 <ReactSwiper
                     swiperOptions={{
                     preloadImages: true,
@@ -49,7 +94,8 @@ export class HomeView extends Component{
                         有效计划、帮孩子掌控未来
                     </div>
                     <div className="sec_2_video_box">
-                        <img src="/src/img/sec_2_video_play_btn.png" className="sec_2_video_play_btn" alt=""/>
+                        <div className="sec_2_video_play_btn_bg"/>
+                        <img src={baseUrl.getBaseUrl() + "/src/img/sec_2_video_play_btn.png"} className="sec_2_video_play_btn" alt=""/>
                     </div>
                     <ul className="sec_2_intro_list">
                         <li className="sec_2_intro_list_item_py">
@@ -79,8 +125,8 @@ export class HomeView extends Component{
                     <div className="sec_4_content">
                         <div className="sec_4_content_item">
                             <div className="sec_4_content_img_list_left">
-                                <img src="/src/img/sec_4_left_live.png" alt="" className="sec_4_left_live"/>
-                                <img src="/src/img/sec_4_left_1v1.png" alt="" className="sec_4_left_live"/>
+                                <img src={baseUrl.getBaseUrl()+"/src/img/sec_4_left_live.png"} alt="" className="sec_4_left_live"/>
+                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_left_1v1.png"} alt="" className="sec_4_left_live"/>
                             </div>
                             <div className="sec_4_left_bottom">
                                 <div>名师直播+1V1专职辅导</div>
@@ -89,9 +135,9 @@ export class HomeView extends Component{
                         </div>
                         <div className="sec_4_content_item">
                             <div className="sec_4_content_img_list_right">
-                                <img src="/src/img/sec_4_right_1.png" alt="" className="sec_4_right_live_1"/>
-                                <img src="/src/img/sec_4_right_2.png" alt="" className="sec_4_right_live_2"/>
-                                <img src="/src/img/sec_4_right_3.png" alt="" className="sec_4_right_live_3"/>
+                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_right_1.png"} alt="" className="sec_4_right_live_1"/>
+                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_right_2.png"} alt="" className="sec_4_right_live_2"/>
+                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_right_3.png"} alt="" className="sec_4_right_live_3"/>
                             </div>
                             <div className="sec_4_left_bottom">
                                 <div>课前预习视频+课后复习讲义、项目作业</div>
@@ -105,10 +151,11 @@ export class HomeView extends Component{
                         松鼠编程 技术合作
                     </div>
                     <ul className="sec_5_content">
-                       <li className="sec_5_content_item_1"></li>
-                       <li className="sec_5_content_item_2"></li>
-                       <li className="sec_5_content_item_3"></li>
-                       <li className="sec_5_content_item_4"></li>
+                       {/*<li className="sec_5_content_item_1"></li>*/}
+                       {/*<li className="sec_5_content_item_2"></li>*/}
+                       {/*<li className="sec_5_content_item_3"></li>*/}
+                       {/*<li className="sec_5_content_item_4"></li>*/}
+                        {cooperation}
                     </ul>
                 </div>
                 <div className="sec_6">

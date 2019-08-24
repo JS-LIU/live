@@ -8,6 +8,7 @@ import {courseService} from "../../service/CourseService";
 import {TimeManager} from "../../entity/TimeManager";
 import PCWeekCourseStyle from './pcWeekCourseStyle.css';
 import {HB} from "../../util/HB";
+import {baseUrl} from "../../config/config";
 
 export class PCWeekCourseView extends Component{
 
@@ -56,7 +57,13 @@ export class PCWeekCourseView extends Component{
     componentWillUnmount() {
         window.onscroll = null;
     }
-
+    enterCourse(coursePlanItem){
+        return ()=>{
+            if(coursePlanItem.learnStatus === "正在学"){
+                windwo.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.typeText}));
+            }
+        }
+    }
     getCourseNodes(){
         if(this.state.coursePlanList.length > 0){
             return this.state.coursePlanList.map((coursePlanItem, index) => {
@@ -64,7 +71,7 @@ export class PCWeekCourseView extends Component{
                     <div className="pc_course_week_course_item" key={index}>
                         <div className="pc_course_week_course_item_title">
                             <span
-                                className="pc_course_week_course_item_title_time">{coursePlanItem.getShowTime()}</span>
+                                className="pc_course_week_course_item_title_time">{coursePlanItem.getShowTime("common")}</span>
                             <span className="course_week_course_item_title_status"
                                   style={{background:coursePlanItem.learnStatus.getStatusInfo().background,color:coursePlanItem.learnStatus.getStatusInfo().color}}>
                                 {coursePlanItem.learnStatus.getStatusInfo().name}
@@ -81,7 +88,7 @@ export class PCWeekCourseView extends Component{
                                 <div className="course_week_course_item_info_teacher_info">
                                     <div className="course_week_course_item_info_teacher">
                                         <div className="course_week_course_item_info_teacher_header">
-                                            <img src={coursePlanItem.teacherInfo.headImgUrl || "/src/img/def_header_img.png"} alt=""
+                                            <img src={coursePlanItem.teacherInfo.headImgUrl || baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                                  className="course_week_course_item_info_teacher_header_img"/>
                                         </div>
                                         <div className="course_week_course_item_info_teacher_name">
@@ -91,7 +98,7 @@ export class PCWeekCourseView extends Component{
                                     </div>
                                     <div className="course_week_course_item_info_teacher">
                                         <div className="course_week_course_item_info_teacher_header">
-                                            <img src={coursePlanItem.assistantInfo.headImgUrl||"/src/img/def_header_img.png"} alt=""
+                                            <img src={coursePlanItem.assistantInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                                  className="course_week_course_item_info_teacher_header_img"/>
                                         </div>
                                         <div className="course_week_course_item_info_teacher_name">
@@ -110,7 +117,7 @@ export class PCWeekCourseView extends Component{
                                         style={{background:"url('"+ coursePlanItem.homework.getStatusInfo().url +"') no-repeat top center",backgroundSize:"0.2rem",color:coursePlanItem.homework.getStatusInfo().color}}>作业</li>
                                 </ul>
                                 <div className="pc_course_week_course_enter_box">
-                                    <div className="pc_course_week_course_enter_course" style={{background:coursePlanItem.learnStatus.getStatusInfo().background,color:coursePlanItem.learnStatus.getStatusInfo().pcColor}}>{coursePlanItem.learnStatus.getStatusInfo().pcName}</div>
+                                    <div className="pc_course_week_course_enter_course" onClick={this.enterCourse(coursePlanItem)} style={{background:coursePlanItem.learnStatus.getStatusInfo().background,color:coursePlanItem.learnStatus.getStatusInfo().pcColor}}>{coursePlanItem.learnStatus.getStatusInfo().pcName}</div>
                                 </div>
                             </div>
                         </div>

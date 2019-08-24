@@ -11,6 +11,8 @@ import {courseService} from "../../service/CourseService";
 import {OwnedCourseBottom} from './OwnedCourseBottom';
 import myCourseListStyle from "./myCourseListStyle.css";
 import {FooterView} from "../../component/FooterView/FooterView";
+import {baseUrl} from "../../config/config";
+
 export class MyCourseListView extends Component{
     constructor(props) {
         super(props);
@@ -27,10 +29,13 @@ export class MyCourseListView extends Component{
 
     }
     setFooterStyle(){
-        console.log(HB.ui.hasScrollbar());
         if(!HB.ui.hasScrollbar()){
             this.setState({
                 footerStyle:{position:"fixed",bottom:"0"}
+            })
+        }else{
+            this.setState({
+                footerStyle:{position:"relative"}
             })
         }
     }
@@ -56,18 +61,19 @@ export class MyCourseListView extends Component{
     }
     onChangeLearnStatus(learnStatus){
         return ()=>{
-            this.updateOwnedCourseList(learnStatus);
+
             this.setState({
-                learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus.id)
-            })
+                learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus)
+            });
+            this.updateOwnedCourseList();
         }
     }
     render() {
         let ownedCourseLearnStatusNodes = this.state.learnStatusList.map((learnStatus,index)=>{
             return (
-                <div key={index} onClick={this.onChangeLearnStatus(learnStatus)} className="my_course_learn_status">
+                <a key={index} onClick={this.onChangeLearnStatus(learnStatus)} className="my_course_learn_status">
                     {learnStatus.name}
-                </div>
+                </a>
             )
 
         });
@@ -97,7 +103,7 @@ export class MyCourseListView extends Component{
                     <div className="my_owned_course_product_item_body">
                         <div className="my_owned_course_week_course_item_info_teacher">
                             <div className="my_owned_course_week_course_item_info_teacher_header">
-                                <img src={courseItem.teacherInfo.headImgUrl || "../src/img/def_header_img.png"} alt=""
+                                <img src={courseItem.teacherInfo.headImgUrl || baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                      className="my_owned_course_week_course_item_info_teacher_header_img"/>
                             </div>
                             <div className="my_owned_course_week_course_item_info_teacher_name">
@@ -107,7 +113,7 @@ export class MyCourseListView extends Component{
                         </div>
                         <div className="my_owned_course_week_course_item_info_teacher">
                             <div className="my_owned_course_week_course_item_info_teacher_header">
-                                <img src={courseItem.assistantInfo.headImgUrl || "../src/img/def_header_img.png"} alt=""
+                                <img src={courseItem.assistantInfo.headImgUrl || baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                      className="my_owned_course_week_course_item_info_teacher_header_img"/>
                             </div>
                             <div className="my_owned_course_week_course_item_info_teacher_name">

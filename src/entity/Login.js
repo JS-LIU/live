@@ -10,6 +10,16 @@ export class Login {
         this._login = function(postInfo){
             return ajax.save({action:'login'},postInfo);
         };
+        this._register = function(postInfo){
+            return ajax.save({action:'registerUserInfo'},postInfo);
+        };
+        let userAjax = commonAjax.resource('/user/w/v1.0/:action');
+        this._getVCode = function(postInfo){
+            return userAjax.save({action:'resetPwdVerifyCode'},postInfo);
+        }
+    }
+    isLogin(user){
+        return user.token !== "";
     }
     //  登录
     signIn(phoneNum,password){
@@ -17,5 +27,16 @@ export class Login {
             phone:phoneNum,
             pass:hex_md5(password)
         })
+    }
+    //  注册
+    register(phoneNum,password){
+        return this._register({
+            phone:phoneNum,
+            pass:hex_md5(password)
+        })
+    }
+    //  获取验证码
+    getVCode(){
+        return this._getVCode();
     }
 }

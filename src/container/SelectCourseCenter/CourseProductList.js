@@ -5,6 +5,8 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import courseProductList from './courseProductListStyle.css';
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
+import {baseUrl} from "../../config/config";
+
 export class CourseProductList extends Component{
     constructor(props) {
         super(props);
@@ -16,7 +18,7 @@ export class CourseProductList extends Component{
                 return (
                     <div key={index} className="course_product_item_body_teacher_item">
                         <div className="course_product_item_body_teacher_item_pic_box">
-                            <img src={teacher.headImgUrl||"../src/img/def_header_img.png"} alt="" className="course_product_item_body_teacher_item_header_img"/>
+                            <img src={teacher.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt="" className="course_product_item_body_teacher_item_header_img"/>
                         </div>
                         <div className="course_product_item_body_teacher_info">
                             <div className="course_product_item_body_teacher_info_job">主讲</div>
@@ -41,7 +43,7 @@ export class CourseProductList extends Component{
                                         marginTop: "0.15rem"
                                     }}
                                     showTimeStepEnd={false}
-                                    timeType={"common"}
+                                    timeType={"unix"}
                                     timeStep={course.timeList}
                                     startTime={course.startTime}
                                     endTime={course.endTime}

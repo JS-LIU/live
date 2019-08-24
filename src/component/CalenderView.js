@@ -14,6 +14,7 @@ import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
+import {baseUrl} from "../config/config";
 
 const format = 'YYYY-MM-DD';
 const cn = location.search.indexOf('cn') !== -1;
@@ -137,7 +138,7 @@ const calendar_show = {
     width: "1.91rem",
     fontSize: "0.16rem",
     color: "#000000",
-    background: "url('../src/img/calendar_icon.png') no-repeat 1.6rem 0.01rem",
+    background: "url('"+baseUrl.getBaseUrl() +"/src/img/calendar_icon.png') no-repeat 1.6rem 0.01rem",
     backgroundSize: "0.2rem",
     paddingRight: "0.3rem"
 };

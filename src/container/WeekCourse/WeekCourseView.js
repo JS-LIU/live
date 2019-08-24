@@ -10,6 +10,7 @@ import weekCourseStyle from './weekCourseStyle.css';
 import {userService} from "../../service/UserService";
 import {HB} from "../../util/HB";
 import {FooterView} from "../../component/FooterView/FooterView";
+import {baseUrl} from "../../config/config";
 
 export class WeekCourseView extends Component{
 
@@ -29,6 +30,10 @@ export class WeekCourseView extends Component{
         if(!HB.ui.hasScrollbar()){
             this.setState({
                 footerStyle:{position:"fixed",bottom:"0"}
+            })
+        }else{
+            this.setState({
+                footerStyle:{position:"relative"}
             })
         }
     }
@@ -72,7 +77,7 @@ export class WeekCourseView extends Component{
                     <div className="course_week_course_item" key={index}>
                         <div className="course_week_course_item_title">
                             <span
-                                className="course_week_course_item_title_time">{coursePlanItem.getShowTime()}</span>
+                                className="course_week_course_item_title_time">{coursePlanItem.getShowTime("common")}</span>
                             <span className="course_week_course_item_title_status"
                                   style={{background:coursePlanItem.learnStatus.getStatusInfo().background,color:coursePlanItem.learnStatus.getStatusInfo().color}}>
                                 {coursePlanItem.learnStatus.getStatusInfo().name}
@@ -89,7 +94,7 @@ export class WeekCourseView extends Component{
                                 <div className="course_week_course_item_info_teacher_info">
                                     <div className="course_week_course_item_info_teacher">
                                         <div className="course_week_course_item_info_teacher_header">
-                                            <img src={coursePlanItem.teacherInfo.headImgUrl||"../src/img/def_header_img.png"} alt=""
+                                            <img src={coursePlanItem.teacherInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                                  className="course_week_course_item_info_teacher_header_img"/>
                                         </div>
                                         <div className="course_week_course_item_info_teacher_name">
@@ -99,7 +104,7 @@ export class WeekCourseView extends Component{
                                     </div>
                                     <div className="course_week_course_item_info_teacher">
                                         <div className="course_week_course_item_info_teacher_header">
-                                            <img src={coursePlanItem.assistantInfo.headImgUrl||"../src/img/def_header_img.png"} alt=""
+                                            <img src={coursePlanItem.assistantInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                                  className="course_week_course_item_info_teacher_header_img"/>
                                         </div>
                                         <div className="course_week_course_item_info_teacher_name">

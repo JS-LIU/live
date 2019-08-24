@@ -129,6 +129,8 @@
     display:flex;
     align-items: center;
     padding:0 0.25rem 0 0.18rem;
+    background:url("../../img/enter_course.png") no-repeat 2.8rem center;
+    background-size: 0.29rem;
 }
 .my_owned_course_product_item_footer_total_course{
     font-size:0.12rem;

@@ -56,7 +56,7 @@ export class PayView extends Component {
         }
         return (
             <div>
-                <HeaderView userInfo={userService.getUser().userInfo}/>
+                <HeaderView />
                 <div className="pay_body">
                     <div className="pay_body_header">
                         <div className="pay_body_top">

@@ -188,10 +188,18 @@ class OrderService {
         return this._queryOrderDetail({
             orderNo:orderNo
         }).then((data)=>{
+            let order = this.findOrderByOrderNo(orderNo);
+            order.setDetail(data.data);
             return new Promise((resolve, reject)=>{
-                resolve(data.data);
+                console.log("====",order);
+                resolve(order);
             })
         });
+    }
+    findOrderByOrderNo(orderNo){
+        return this.orderList.find((orderItem,index)=>{
+            return orderItem.orderNo === orderNo
+        })
     }
     cancelOrder(orderItem){
         return this._cancelOrder({

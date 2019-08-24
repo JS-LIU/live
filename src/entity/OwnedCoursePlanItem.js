@@ -39,8 +39,8 @@ export class OwnedCoursePlanItem {
         this.lectureNotesStatus = ownedCoursePlanItemInfo.lectureNotesStatus;
         this.materialList = ownedCoursePlanItemInfo.lectureNotesStatus;
     }
-    getShowTime(){
-        let date = TimeManager.timeStampToDate(this.classTime,"common");
+    getShowTime(type){
+        let date = TimeManager.timeStampToDate(this.classTime,type);
         let M = date.M + ".";
         let D = date.D;
         let w = "周" + HB.valid.parseChinese(date.w)[0]+" ";

@@ -2,7 +2,7 @@
  * Created by Liudq on 2019-07-22
  */
 import {Login} from "./Login";
-import {commonAjax} from "../config/config";
+import {baseUrl, commonAjax} from "../config/config";
 import {userService} from "../service/UserService";
 import {TimeManager} from "./TimeManager";
 export class User {
@@ -10,10 +10,16 @@ export class User {
         this.phoneNum = "";
         this.password = "";
         this.token = "";
-        this.userInfo = {};
+        this.userInfo = {
+            headImgUrl:baseUrl.getBaseUrl() + "/src/img/def_header_img.png",
+            userName:"登录"
+        };
         this._getUserInfo = function(postInfo){
             return ajax.save({action:'userInfo'},postInfo,{name:"token",value:this.token});
         };
+        this._resetPsd = function(postInfo){
+            return ajax.save({action:'resetPwd'},postInfo,{name:"token",value:this.token});
+        }
     }
 
     setPhoneNum(phoneNum){
@@ -43,7 +49,17 @@ export class User {
             })
         });
     }
-
+    resetPsd(resetInfo){
+        return this._resetPsd({
+            code:resetInfo.vCode,
+            password:resetInfo.password
+        }).then((data)=>{
+            this.password = data.data.resetInfo.password;
+            return new Promise((resolve, reject)=>{
+                resolve(data);
+            })
+        })
+    }
     //  创建user
     saveUser() {
 

@@ -66,6 +66,7 @@
     height:0.5rem;
     border-radius: 50%;
     overflow: hidden;
+    background:#ffffff;
 }
 .owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic{
     width:0.5rem;

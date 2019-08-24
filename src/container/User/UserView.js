@@ -10,6 +10,7 @@ import {UserInfoView} from "./UserInfoView";
 import {AccountManageView} from "./AccountManageView";
 import {OrderListView} from "./OrderListView";
 import userStyle from './userStyle.css';
+import {OrderDetailView} from "./OrderDetailView";
 export class UserView extends Component{
     constructor(props) {
         super(props);
@@ -19,13 +20,14 @@ export class UserView extends Component{
     render() {
         return (
             <div>
-                <div className="wrap"></div>
-                <HeaderView userInfo={userService.getUser().userInfo}/>
+                <div className="wrap" />
+                <HeaderView />
                 <div className="user_body_main">
                     <UserTabBox userInfo={userService.getUser().userInfo} history={this.props.history}/>
                     <Route path="/user/userInfo" component={UserInfoView} />
                     <Route path="/user/accountManage" component={AccountManageView} />
                     <Route path="/user/orderList" component={OrderListView}/>
+                    <Route path="/user/orderDetail/:orderNo" component={OrderDetailView}/>
                 </div>
             </div>
         );

@@ -4,6 +4,8 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import userTabBoxStyle from './userTabBoxStyle.css';
+import {baseUrl} from "../../config/config";
+
 export class UserTabBox extends Component{
     constructor(props) {
         super(props);
@@ -11,29 +13,29 @@ export class UserTabBox extends Component{
             {
                 link:"/userInfo",
                 name:"个人信息",
-                uncheck_icon:"../src/img/user_tab_box_user_info_uncheck.png",
-                check_icon:"../src/img/user_tab_box_user_info_check.png",
+                uncheck_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_user_info_uncheck.png",
+                check_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_user_info_check.png",
                 activity:true
             },
             {
                 link:"/accountManage",
                 name:"账户管理",
-                uncheck_icon:"../src/img/user_tab_box_account_uncheck.png",
-                check_icon:"../src/img/user_tab_box_account_check.png",
+                uncheck_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_account_uncheck.png",
+                check_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_account_check.png",
                 activity:false,
             },
             {
                 link:"/orderList",
                 name:"我的订单",
-                uncheck_icon:"../src/img/user_tab_box_order_uncheck.png",
-                check_icon:"../src/img/user_tab_box_order_check.png",
+                uncheck_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_order_uncheck.png",
+                check_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_order_check.png",
                 activity:false,
             },
             {
                 link:"/voucherList",
                 name:"优惠券",
-                uncheck_icon:"../src/img/user_tab_box_voucher_uncheck.png",
-                check_icon:"../src/img/user_tab_box_voucher_check.png",
+                uncheck_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_voucher_uncheck.png",
+                check_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_voucher_check.png",
                 activity:false,
             }
         ];
@@ -69,7 +71,7 @@ export class UserTabBox extends Component{
                     <div className="user_tab_box_user_header">
                         <img src={this.props.userInfo.headImgUrl} alt="" className="user_tab_box_user_header_pic"/>
                     </div>
-                    <div className="user_tab_box_user_name">{this.props.userInfo.nickName}</div>
+                    <div className="user_tab_box_user_name">{this.props.userInfo.userName}</div>
                 </div>
                 <div className="user_tab_box_tab_list">
                     {tabListNodes}

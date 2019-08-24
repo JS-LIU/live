@@ -8,6 +8,7 @@ import ReactPaginate from 'react-paginate';
 import orderListStyle from "./orderListStyle.css";
 import {TimeManager} from "../../entity/TimeManager";
 import {payService} from "../../service/PayService";
+import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 export class OrderListView extends Component {
     constructor(props) {
         super(props);
@@ -52,14 +53,14 @@ export class OrderListView extends Component {
             return (
                 <div>
                     <div>已过期</div>
-                    <Link to={"/orderDetail/"+`${orderItem.orderNo}`}>订单详情</Link>
+                    <Link to={"/user/orderDetail/"+`${orderItem.orderNo}`}>订单详情</Link>
                 </div>
             )
         }else if(orderItem.status === 3003){
             return (
                 <div>
                     <div>已取消</div>
-                    <Link to={"/orderDetail/" + `${orderItem.orderNo}`}>
+                    <Link to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
                         查看订单
                     </Link>
                 </div>
@@ -68,7 +69,7 @@ export class OrderListView extends Component {
             return (
                 <div>
                     <div>已支付</div>
-                    <Link to={"/orderDetail/" + `${orderItem.orderNo}`}>
+                    <Link to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
                         查看订单
                     </Link>
                 </div>
@@ -92,6 +93,7 @@ export class OrderListView extends Component {
             )
         }else{
             return this.state.orderList.map((orderItem,index)=>{
+                console.log(orderItem);
                 return (
                     <div className="order_list_order_item" key={index}>
                         <div className="order_list_order_item_header">
@@ -101,8 +103,22 @@ export class OrderListView extends Component {
                         <div className="order_list_order_item_center">
                             <div className="order_list_order_item_center_left">
                                 <div className="order_list_order_item_center_left_info">
-                                    <span className="order_list_order_item_center_left_info_name">{orderItem.orderCourse.name}</span>
-                                    {/*<span className="order_list_order_item_center_left_info_time">{orderItem.orderCourse.weeks[0].week}</span>*/}
+                                    <span className="order_list_order_item_center_left_info_name"
+                                          style={{background:"url('"+orderItem.orderCourse.type.getTypeInfo().iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>{orderItem.orderCourse.name}</span>
+                                    <CourseTimeShowView
+                                        style={{
+                                            display:"flex",
+                                            flexDirection: "row",
+                                            fontSize: "0.12rem",
+                                            marginTop: "0.15rem",
+                                            paddingLeft:"0.35rem"
+                                        }}
+                                        showTimeStepEnd={false}
+                                        timeType={"unix"}
+                                        timeStep={orderItem.orderCourse.timeList}
+                                        startTime={orderItem.orderCourse.startTime}
+                                        endTime={orderItem.orderCourse.endTime}
+                                    />
                                 </div>
                                 <div className="order_list_order_item_center_left_price">
                                     ￥{orderItem.orderCourse.sellPrice / 100}
@@ -118,7 +134,6 @@ export class OrderListView extends Component {
         }
     }
     onChangePage(currentPage){
-        console.log(currentPage);
         orderService.pagination.to(currentPage.selected+1);
         orderService.getOrderList().then((list)=>{
             this.setState({

@@ -1,22 +1,4 @@
-.login_wrap{
-    position:fixed;
-    top:0;
-    left:0;
-    height:100%;
-    width:100%;
-    background:#FFFCF6;
-}
-.login_main{
-    position:relative;
-    width:10rem;
-    margin:0.91rem auto;
-    background:#FFF url("../../img/login_bg.jpg") no-repeat left center;
-    background-size:5rem 6rem;
-    border-radius: 0.08rem;
-    overflow: hidden;
-    box-shadow:0 0.09rem 0.38rem 0 rgba(0, 0, 0, 0.07);;
-}
-.login_right{
+.register_right{
     position:relative;
     padding-left:5rem;
     display:flex;
@@ -25,67 +7,64 @@
     align-items: center;
     height:6rem;
 }
-.login_right_top{
+.register_right_top{
     position:absolute;
     display: flex;
     top:0.26rem;
     right:0.29rem;
     font-size:0.12rem;
 }
-.login_right_top_register_btn{
+.register_right_top_register_btn{
     color:#00A0E5;
 }
-.login_right_log{
+.register_right_log{
     display:flex;
     flex-direction: column;
     width:3.51rem;
     align-items: center;
 }
-.login_right_log_way{
+.register_right_log_way{
     width:100%;
     display:flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
     font-size:0.2rem;
     align-items: center;
 }
-.login_seg{
-    color:#E8E8E8;
-    font-size: 0.16rem;
-}
-.login_right_log_log{
+.register_right_log_log{
     margin-top:0.6rem;
 }
-.login_right_log_log_phone_num,.login_right_log_log_password{
+.register_right_log_log_phone_num,.register_right_log_log_password{
     width:3.48rem;
     height:0.4rem;
+    border:0.01rem solid #FFC200;
     border-radius: 0.2rem;
     margin-bottom:0.21rem;
     overflow: hidden;
 }
-.login_phone_num_input{
+.register_phone_num_input{
     background: #F5F5F5 url("../../img/login_header_icon.png") no-repeat 0.1rem center;
     height: 100%;
     width: 3rem;
     padding-left: 0.5rem;
 }
-.login_psd_num_input{
+.register_psd_num_input{
     background: #F5F5F5 url("../../img/login_psd_icon.png") no-repeat 0.1rem center;
     height: 100%;
     width: 3rem;
     padding-left: 0.5rem;
 }
-.login_right_log_log_reset_psd{
+.register_right_log_log_reset_psd{
     display:flex;
     flex-direction: row;
     justify-content: flex-end;
     width:100%;
 }
-.login_right_log_log_reset_psd_btn{
+.register_right_log_log_reset_psd_btn{
     font-size:0.12rem;
     color:#00A0E5;
 }
-.login_btn{
+.register_btn{
     width:3.5rem;
     height:0.42rem;
     border-radius: 0.2rem;
@@ -98,5 +77,3 @@
     flex-direction: row;
     align-items: center;
 }
-
-

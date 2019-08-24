@@ -50,6 +50,9 @@ class UserService {
     signIn(){
         return this.login.signIn(this.user.getPhoneNum(),this.user.getPassword());
     }
+    register(){
+        return this.login.register(this.user.getPhoneNum(),this.user.getPassword());
+    }
     //  更新用户信息
     updateUserInfo(userInfo){
         Object.assign(this.user,userInfo);
@@ -59,6 +62,15 @@ class UserService {
     }
     getUserInfo(){
         return this.user.getUserInfo();
+    }
+    getVCode(){
+        return this.login.getVCode()
+    }
+    resetPwd(restInfo){
+        return this.user.resetPwd({
+            code:restInfo.vCode,
+            password:restInfo.newPsd
+        })
     }
 }
 export const userService = new UserService();

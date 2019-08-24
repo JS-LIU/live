@@ -1,3 +1,5 @@
+import {CourseType} from "./CourseType";
+
 /**
  * Created by Liudq on 2019-08-04
  */
@@ -6,8 +8,9 @@ export class OrderProduct {
 
         this.id = productCourse.id;
         this.goodNo = productCourse.goodNo;
-        this.type = productCourse.type;
+        this.type = new CourseType(productCourse.type);
         this.level = productCourse.level;
+        this.series = productCourse.level;
         this.name = productCourse.name;
         this.startTime = productCourse.startTime;
         this.endTime = productCourse.endTime;
@@ -15,8 +18,16 @@ export class OrderProduct {
         this.salePrice = productCourse.salePrice;
         //    主讲人列表
         this.teacherInfoList = productCourse.teacherInfoList||[];
+        this.assistant = productCourse.assistant||{};
+        this.timeList = productCourse.timeList;
         this.weeks = productCourse.weeks;
         this.sellPrice = productCourse.sellPrice;
-        this.series = productCourse.series;
+        this.majorTeacher = {};
+    }
+    setAssistant(assistant){
+        this.assistant = assistant;
+    }
+    setMajorTeacher(teacherInfoList){
+        this.majorTeacher = teacherInfoList[0];
     }
 }

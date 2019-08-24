@@ -24,6 +24,7 @@ export class CourseTimeShowView extends Component{
                 </div>
             )
         });
+        TimeManager.convertStampToMD(this.props.startTime,this.props.timeType);
         return (
             <div style={this.props.style}>
                 <div>

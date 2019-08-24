@@ -46,6 +46,7 @@ export class TimeManager {
     //  时间戳转换时间
     static timeStampToDate(timestamp,type) {
         let date = new Date(TimeManager.convertToCommon(type,timestamp));
+        console.log(date);
         return {
             Y : date.getFullYear(),
             M : date.getMonth()+1,

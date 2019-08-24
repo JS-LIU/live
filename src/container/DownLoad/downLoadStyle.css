@@ -1,0 +1,113 @@
+.down_load_header{
+    position:relative;
+    display:flex;
+    height:5.44rem;
+    background:#1A1A1A url("../../img/down_load_header_bg.png") no-repeat center;
+    background-size: 19.2rem 5.44rem;
+    width:19.2rem;
+}
+.down_load_btn_list{
+    position:absolute;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    top:2.8rem;
+    left:9.93rem;
+    width:4.64rem;
+    height:0.6rem;
+    color:#000000;
+    font-size:0.2rem;
+}
+.windows_down_load_btn{
+    width: 2rem;
+    height: 0.6rem;
+    border-radius: 0.08rem;
+    background: #ffffff url("../../img/mac_icon.png") no-repeat 0.23rem center;
+    background-size: 0.26rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0.14rem;
+}
+.mac_down_load_btn{
+    width:2.14rem;
+    height:0.6rem;
+    border-radius: 0.08rem;
+    background:#ffffff url("../../img/win_icon.png") no-repeat 0.23rem center;
+    background-size: 0.26rem 0.31rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.down_load_sec_1{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:#ffffff;
+    height:7.67rem;
+}
+.down_load_sec_1_title{
+    font-size:0.42rem;
+    color:#404040;
+}
+.down_load_sec_1_recommend_list{
+    width:9.82rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top:1.38rem;
+}
+.recommend_item{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:2.56rem;
+}
+.subscription_item_title{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:0.2rem;
+    color:#FFAA00;
+    padding-top:1.9rem;
+    background:url("../../img/subscription_code.png") no-repeat top center;
+    background-size: 1.6rem;
+    width:2.56rem;
+}
+.server_code_item_title{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:0.2rem;
+    color:#FFAA00;
+    padding-top:1.9rem;
+    background:url("../../img/server_code.png") no-repeat top center;
+    background-size: 1.6rem;
+    width:2.56rem;
+}
+.miniprogram_item_title{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:0.2rem;
+    color:#FFAA00;
+    padding-top:1.9rem;
+    background:url("../../img/miniprogram_code.png") no-repeat top center;
+    background-size: 1.6rem;
+    width:2.56rem;
+}
+.recommend_item_info{
+    padding-top:0.2rem;
+    font-size:0.16rem;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width:2.56rem;
+    color:#808080;
+    line-height:0.28rem;
+}

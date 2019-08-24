@@ -35,11 +35,11 @@ export class OwnedCourseDetailView extends Component{
                     <div className="course_plan_item_info" >
                         <div className="course_plan_item_info_course_name" style={{background:"url('"+coursePlanItem.type.getTypeInfo().iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>
                             {this.state.ownedCourse.courseName} | {coursePlanItem.sessionName}</div>
-                        <div className="course_plan_item_info_course_start_time">{coursePlanItem.getShowTime()}</div>
+                        <div className="course_plan_item_info_course_start_time">{coursePlanItem.getShowTime("unix")}</div>
                     </div>
-                    <div className="course_down_load_title">
+                    <Link to="/downLoad" className="course_down_load_title">
                         下载客户端上课 >
-                    </div>
+                    </Link>
                 </div>
             )
         });

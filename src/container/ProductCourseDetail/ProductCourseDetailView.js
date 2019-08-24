@@ -23,20 +23,26 @@ export class ProductCourseDetailView extends Component{
         };
         this.productCourseNo = this.props.match.params.productCourseNo;
     }
-    componentDidMount() {
 
+    componentDidMount() {
         courseService.getOrCreateProductCourseDetail(this.productCourseNo).then((course)=>{
             this.setState({
                 course:course
             });
             this.setFooterStyle();
         });
-
     }
     switchCourseDetail(courseItem){
         return ()=>{
-            console.log(courseItem.goodNo);
+            console.log(courseItem);
             this.props.history.replace("/productCourseDetail/" + courseItem.goodNo);
+            this.productCourseNo = courseItem.goodNo;
+            courseService.getOrCreateProductCourseDetail(this.productCourseNo).then((course)=>{
+                this.setState({
+                    course:course
+                });
+                this.setFooterStyle();
+            });
         }
     }
     switchToDetail(){
@@ -56,6 +62,14 @@ export class ProductCourseDetailView extends Component{
             this.setState({
                 footerStyle:{position:"fixed",bottom:"0"}
             })
+        }
+    }
+    //  todo 这里应该调后台接口但是后台没接口
+    onBuyCourse(){
+        if(userService.login.isLogin(userService.getUser())){
+            this.props.history.push("/confirmOrder/" + `${this.productCourseNo}`);
+        }else{
+            this.props.history.push("/login/login");
         }
     }
     render() {
@@ -105,7 +119,7 @@ export class ProductCourseDetailView extends Component{
         return(
             <div>
                 <div className="wrap" />
-                <HeaderView userInfo={userService.getUser().userInfo}/>
+                <HeaderView />
                 <div className="product_course_detail_main">
                     <div className="crumbs">
                         首页 > 选课中心 > {this.state.course.name}
@@ -130,7 +144,7 @@ export class ProductCourseDetailView extends Component{
                                                 marginTop:"0.18rem"
                                             }}
                                             showTimeStepEnd={true}
-                                            timeType={"common"}
+                                            timeType={"unix"}
                                             timeStep={this.state.course.getDetail().timeList}
                                             startTime={this.state.course.getDetail().startTime}
                                             endTime={this.state.course.getDetail().endTime}
@@ -189,7 +203,7 @@ export class ProductCourseDetailView extends Component{
                                         {courseComboNodes}
                                     </div>):null}
                                 <div className="product_course_detail_settle_box">
-                                    <Link to={"/confirmOrder/" + `${this.productCourseNo}`} className="product_course_buy_btn">购买学习</Link>
+                                    <a className="product_course_buy_btn" onClick={this.onBuyCourse.bind(this)}>购买学习</a>
                                     <div className="product_course_consult_btn">咨询</div>
                                 </div>
                             </div>
@@ -199,6 +213,5 @@ export class ProductCourseDetailView extends Component{
                 <FooterView style={this.state.footerStyle}/>
             </div>
         )
-
     }
 }

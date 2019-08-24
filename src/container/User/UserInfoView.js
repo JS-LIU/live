@@ -18,65 +18,61 @@ export class UserInfoView extends Component{
     }
     onChangeName(e){
         let name = e.target.value;
-        let userInfo = Object.assign({},this.userInfo,{
+        this.userInfo = Object.assign({},this.userInfo,{
             userName:name
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     onChangeSex(e){
-        console.log(userService.getUser().userInfo);
-        console.log(e.target.value);
         let sex = (e.target.value==="男"?1:0);
-        let userInfo = Object.assign(this.userInfo,{
+        this.userInfo = Object.assign(this.userInfo,{
             sex:sex
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     onChangeYear(e){
-        console.log(e.target.value);
-        let userInfo = Object.assign(this.userInfo,{
+        this.userInfo = Object.assign(this.userInfo,{
             birthY:e.target.value
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     onChangeMonth(e){
-        console.log(e.target.value);
-        let userInfo = Object.assign(this.userInfo,{
+        this.userInfo = Object.assign(this.userInfo,{
             birthM:e.target.value
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     onChangeDay(e){
         console.log(e.target.value);
-        let userInfo = Object.assign(this.userInfo,{
+        this.userInfo = Object.assign(this.userInfo,{
             birthD:e.target.value
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     onChangeGrade(e){
-        let userInfo = Object.assign(this.userInfo,{
+        this.userInfo = Object.assign(this.userInfo,{
             grade:e.target.value
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     onChangeAddress(e){
-        let userInfo = Object.assign(this.userInfo,{
+        this.userInfo = Object.assign(this.userInfo,{
             address:e.target.value
         });
         this.setState({
-            userInfo:userInfo
+            userInfo:this.userInfo
         })
     }
     confirmFixed(){

@@ -12,19 +12,45 @@
     color:#000000;
 }
 .sec_2_video_box{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: center;*/
     width:6.74rem;
     height:3.53rem;
     position:relative;
-    background:url("/src/img/sec_2_video_box_bg.png") no-repeat center;
+    background:url("../../img/sec_2_video_box_bg.png") no-repeat center;
     background-size: 6.74rem 3.53rem;
 }
+.sec_2_video_play_btn_bg{
+    position: absolute;
+    width: 1.4rem;
+    height: 1.4rem;
+    left: 2.6rem;
+    border-radius: 50%;
+    background: #FFC200;
+    top: 0.7rem;
+    opacity: 0.3;
+    animation: scaleBtnBg 1.5s ease-in infinite;
+}
+
 .sec_2_video_play_btn{
+    position:absolute;
     width:1rem;
     height:1rem;
-    margin-top:0.9rem;
+    top:0.9rem;
+    left:2.8rem;
+    animation:scaleBtn 1.5s linear infinite;
+}
+@keyframes scaleBtnBg {
+    from {transform:scale(1);opacity: 0.3;}
+    to {transform:scale(1.8);opacity: 0;}
+}
+@keyframes scaleBtn
+{
+    0% {transform:scale(1);}
+    4% {transform:scale(1.05);}
+    8% {transform:scale(1);}
+    100% {transform:scale(1);}
 }
 .sec_2_intro_list{
     width:9.78rem;
@@ -35,7 +61,7 @@
 .sec_2_intro_list_item_py{
     display:flex;
     flex-direction: column;
-    background:url("/src/img/sec_2_python_icon.png") no-repeat left top;
+    background:url("../../img/sec_2_python_icon.png") no-repeat left top;
     background-size:0.35rem 0.43rem;
     width:2.6rem;
     padding-top:0.43rem;
@@ -43,7 +69,7 @@
 .sec_2_intro_list_item_c{
     display:flex;
     flex-direction: column;
-    background:url("/src/img/sec_2_c_icon.png") no-repeat left top;
+    background:url("../../img/sec_2_c_icon.png") no-repeat left top;
     background-size:0.35rem 0.43rem;
     width:2.6rem;
     padding-top:0.41rem;
@@ -51,8 +77,8 @@
 .sec_2_intro_list_item_noip{
     display:flex;
     flex-direction: column;
-    background:url("/src/img/sec_2_noip_icon.png") no-repeat left top;
-    background-size:0.35rem 0.43rem;
+    background:url("../../img/sec_2_noip_icon.png") no-repeat left top;
+    background-size:0.66rem 0.43rem;
     width:2.6rem;
     padding-top:0.43rem;
 }
@@ -126,40 +152,40 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    width:4.44rem;
+    width:5.42rem;
 }
 .sec_4_content_img_list_right{
     position:relative;
     width:5rem;
-    height:2.31rem;
+    height:2.8rem;
 }
 .sec_4_right_live_1{
     top:0.24rem;
     left:0;
     z-index: 1;
-    width:2.12rem;
-    height:2.08rem;
+    width:2.68rem;
+    height:2.63rem;
     position:absolute;
 }
 .sec_4_right_live_2{
     top:0;
     left:1.63rem;
     z-index: 0;
-    width:2.12rem;
-    height:2.08rem;
+    width:2.64rem;
+    height:2.59rem;
     position:absolute;
 }
 .sec_4_right_live_3{
     top:0.24rem;
     right:0;
     z-index: 1;
-    width:2.12rem;
-    height:2.08rem;
+    width:2.68rem;
+    height:2.63rem;
     position:absolute;
 }
 .sec_4_left_live{
-    width:2.06rem;
-    height:2rem;
+    width:2.64rem;
+    height:2.59rem;
     border:0.08rem;
 }
 .sec_4_left_bottom{
@@ -192,7 +218,7 @@
     height:1.25rem;
     border:0.01rem solid #e8e8e8;
     border-radius: 0.08rem;
-    background:url("/src/img/sec_5_content_item_1.png") no-repeat center;
+    background:url("../../img/sec_5_content_item_1.png") no-repeat center;
     background-size: 0.97rem 0.69rem;
     margin-right:0.19rem;
 }
@@ -201,7 +227,7 @@
     height:1.25rem;
     border:0.01rem solid #e8e8e8;
     border-radius: 0.08rem;
-    background:url("/src/img/sec_5_content_item_2.png") no-repeat center;
+    background:url("../../img/sec_5_content_item_2.png") no-repeat center;
     background-size: 1.7rem 0.49rem;
     margin-right:0.19rem;
 }
@@ -210,7 +236,7 @@
     height:1.25rem;
     border:0.01rem solid #e8e8e8;
     border-radius: 0.08rem;
-    background:url("/src/img/sec_5_content_item_3.png") no-repeat center;
+    background:url("../../img/sec_5_content_item_3.png") no-repeat center;
     background-size: 0.58rem 0.72rem;
     margin-right:0.19rem;
 }
@@ -219,7 +245,7 @@
     height:1.25rem;
     border:0.01rem solid #e8e8e8;
     border-radius: 0.08rem;
-    background:url("/src/img/sec_5_content_item_4.png") no-repeat center;
+    background:url("../../img/sec_5_content_item_4.png") no-repeat center;
     background-size: 2.12rem 0.42rem;
     margin-right:0.19rem;
 }
@@ -238,7 +264,7 @@
 .sec_7{
     width:19.2rem;
     height:5.36rem;
-    background:url("/src/img/sec_7_bg.jpg") no-repeat center;
+    background:url("../../img/sec_7_bg.jpg") no-repeat center;
     background-size: 19.2rem 5.36rem;
     position:relative;
 }
@@ -260,4 +286,9 @@
     color:#FFFFFF;
     border-radius: 0.08rem;
 
+}
+
+
+.swiper-pagination-bullet-active{
+    background:#FFC200;
 }

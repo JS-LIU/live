@@ -9,6 +9,8 @@ import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowV
 import {courseService} from "../../service/CourseService";
 import {PCOwnedCourseBottom} from './PCOwnedCourseBottom';
 import pcMyCourseListStyle from "./pcMyCourseListStyle.css";
+import {baseUrl} from "../../config/config";
+
 export class PCMyCourseListView extends Component{
     constructor(props) {
         super(props);
@@ -45,7 +47,7 @@ export class PCMyCourseListView extends Component{
         return ()=>{
             this.updateOwnedCourseList(learnStatus);
             this.setState({
-                learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus.id)
+                learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus)
             })
         }
     }
@@ -84,7 +86,7 @@ export class PCMyCourseListView extends Component{
                     <div className="my_owned_course_product_item_body">
                         <div className="my_owned_course_week_course_item_info_teacher">
                             <div className="my_owned_course_week_course_item_info_teacher_header">
-                                <img src={courseItem.teacherInfo.headImgUrl || "/src/img/def_header_img.png"} alt=""
+                                <img src={courseItem.teacherInfo.headImgUrl || baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                      className="my_owned_course_week_course_item_info_teacher_header_img"/>
                             </div>
                             <div className="my_owned_course_week_course_item_info_teacher_name">
@@ -94,7 +96,7 @@ export class PCMyCourseListView extends Component{
                         </div>
                         <div className="my_owned_course_week_course_item_info_teacher">
                             <div className="my_owned_course_week_course_item_info_teacher_header">
-                                <img src={courseItem.assistantInfo.headImgUrl || "/src/img/def_header_img.png"} alt=""
+                                <img src={courseItem.assistantInfo.headImgUrl || baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
                                      className="my_owned_course_week_course_item_info_teacher_header_img"/>
                             </div>
                             <div className="my_owned_course_week_course_item_info_teacher_name">

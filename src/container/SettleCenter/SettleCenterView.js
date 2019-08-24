@@ -45,7 +45,7 @@ export class SettleCenterView extends Component{
         return(
             <div>
                 <div className="wrap" />
-                <HeaderView userInfo={userService.getUser().userInfo} title={"结算中心"}/>
+                <HeaderView title={"结算中心"}/>
                 <div className="settle_main">
                     <div className="settle_course_title">课程信息</div>
                     <div className="product_course_pay_info">
@@ -61,12 +61,11 @@ export class SettleCenterView extends Component{
                                         color:"#000000",
                                     }}
                                     showTimeStepEnd={true}
-                                    timeType={"common"}
+                                    timeType={"unix"}
                                     timeStep={this.state.productCourse.timeList}
                                     startTime={this.state.productCourse.startTime}
                                     endTime={this.state.productCourse.endTime}
                                 />
-                                {/*<li>上课时间：{this.state.productCourse.startTime}~{this.state.productCourse.endTime}</li>*/}
                             </ul>
                             <div className="settle_product_course_info_price">课程价格：{this.state.productCourse.salePrice / 100}</div>
                         </div>

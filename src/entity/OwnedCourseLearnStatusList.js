@@ -7,7 +7,7 @@ export class OwnedCourseLearnStatusList {
     }
     selectOwnedCourseLearnStatus(ownedCourseLearnStatus){
         for(let i = 0; i < this.ownedCourseLearnStatusList.length; i++){
-            ownedCourseLearnStatus.unSelected();
+            this.ownedCourseLearnStatusList[i].unSelected();
         }
         ownedCourseLearnStatus.selected();
     }

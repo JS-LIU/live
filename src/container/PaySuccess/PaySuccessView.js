@@ -20,7 +20,7 @@ export class PaySuccessView extends Component{
         return (
             <div>
                 <div className="wrap"></div>
-                <HeaderView userInfo={userService.getUser().userInfo} title={"支付成功"}/>
+                <HeaderView title={"支付成功"}/>
                 <div className="pay_success_main">
                     <div className="pay_success_body_box">
                         <div className="pay_success_body_box_inner">
@@ -35,7 +35,7 @@ export class PaySuccessView extends Component{
                                         <Link className="pay_success_body_box_inner_left_link_item">查看课程</Link>
                                         <Link className="pay_success_body_box_inner_left_link_item">查看课程</Link>
                                     </div>
-                                    <Link className="pay_success_body_download_btn">下载客户端去上课</Link>
+                                    <Link to="/downLoad" className="pay_success_body_download_btn">下载客户端去上课</Link>
                                 </div>
                             </div>
                             <div className="pay_success_body_box_inner_right">

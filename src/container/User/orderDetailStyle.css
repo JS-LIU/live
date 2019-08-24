@@ -1,0 +1,124 @@
+.order_detail_main{
+    position:relative;
+    width:10.15rem;
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    background:#FFFFFF;
+}
+.order_detail_title{
+    height:0.63rem;
+    line-height: 0.63rem;
+    padding-left:0.41rem;
+    font-size:0.2rem;
+    color:#000000;
+    border-bottom:0.01rem solid #E8E8E8;
+}
+.order_detail_product{
+    display:flex;
+    flex-direction: column;
+    width:9.15rem;
+    height:2.47rem;
+    margin:0.3rem auto 0;
+    border:0.01rem solid #F2F4F7;
+    border-radius: 0.08rem;
+}
+.order_detail_product_header{
+    display:flex;
+    flex-direction: row;
+    background:#F2F4F7;
+    align-items: center;
+    font-size:0.14rem;
+    height:0.36rem;
+}
+.order_detail_product_header_payTime{
+    padding-left:0.29rem;
+}
+.order_detail_product_header_orderNo{
+    padding-left:0.35rem;
+}
+.order_detail_product_info{
+    display:flex;
+    align-items: center;
+    background:#ffffff;
+    height:2.13rem;
+}
+.order_detail_product_info_left{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:1.36rem;
+    margin-left:0.3rem;
+}
+.order_detail_product_info_left_top{
+    display:flex;
+    flex-direction: column;
+}
+.order_detail_product_info_left_top_name{
+    font-size:0.2rem;
+    color:#000000;
+    padding-left:0.35rem;
+}
+.order_detail_product_info_left_top_time{
+    font-size:0.14rem;
+    padding-left:0.35rem;
+}
+.order_detail_product_info_left_bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left:0.35rem;
+    width:8rem;
+}
+.order_detail_product_info_left_bottom_teacher_list{
+    display:flex;
+}
+.order_detail_product_info_left_bottom_teacher{
+    display:flex;
+    flex-direction: row;
+}
+.order_detail_product_teacher_header{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:0.5rem;
+    height:0.5rem;
+    background:#ffffff;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.order_detail_product_teacher_pic{
+    width:0.5rem;
+}
+.order_detail_product_teacher_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-left: 0.1rem;
+    font-size: 0.12rem;
+}
+.order_detail_product_teacher_info_position{
+    color:#000000;
+}
+.course_price{
+    font-size:0.2rem;
+}
+.order_info_list{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 0.22rem 0.86rem 0 0;
+    font-size:0.14rem;
+}
+.order_info_list_item{
+    margin-top:0.1rem;
+}
+.order_real_price{
+    margin-top:0.2rem;
+    color:#FFC200;
+    padding-bottom:1rem;
+}
+
+

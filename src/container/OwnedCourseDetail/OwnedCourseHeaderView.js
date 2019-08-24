@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {RingProgressView} from "../../component/RingProgress/RingProgressView";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
+import {baseUrl} from "../../config/config";
 
 export class OwnedCourseHeaderView extends Component{
     constructor(props) {
@@ -34,7 +35,7 @@ export class OwnedCourseHeaderView extends Component{
                                 marginTop: "0.15rem"
                             }}
                             showTimeStepEnd={true}
-                            timeType={"common"}
+                            timeType={"unix"}
                             timeStep={this.props.ownedCourse.timeList}
                             startTime={this.props.ownedCourse.startTime}
                             endTime={this.props.ownedCourse.endTime}
@@ -43,7 +44,7 @@ export class OwnedCourseHeaderView extends Component{
                     <div className="owned_course_plan_header_course_plan_item_info_bottom">
                         <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info">
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header">
-                                <img src={this.props.ownedCourse.teacherInfo.headImgUrl||"/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
+                                <img src={this.props.ownedCourse.teacherInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
                             </div>
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name">
                                 <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title">教师</div>
@@ -52,7 +53,7 @@ export class OwnedCourseHeaderView extends Component{
                         </div>
                         <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info">
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header">
-                                <img src={this.props.ownedCourse.assistantInfo.headImgUrl||"/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
+                                <img src={this.props.ownedCourse.assistantInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
                             </div>
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name">
                                 <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title">助教</div>

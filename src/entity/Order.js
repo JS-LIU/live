@@ -13,15 +13,26 @@ export class Order {
         this.frequentlyStep = 2;
         this.lazyStep = 10;
         this.status = orderInfo.status||orderInfo.orderStatus;
-
+        this.salePrice = orderInfo.salePrice;
         this.orderCreateTime = orderInfo.orderCreateTime;
         //  todo 现在order对商品是1对1 1对多的时候改成list
         this.orderCourse = new OrderProduct({
-            weeks:orderInfo.weeks,
+            timeList:orderInfo.timeList,
             name:orderInfo.goodName,
-            series:orderInfo.series,
-            sellPrice:orderInfo.sellPrice
+            level:orderInfo.series,
+            sellPrice:orderInfo.sellPrice,
+            startTime:orderInfo.startTime,
+            endTime:orderInfo.endTime,
+            type:orderInfo.goodType,
+            teacherList:orderInfo.teacherList,
+            assistant:orderInfo.assistant,
         });
+        this.orderDetail = null;
+    }
+    setDetail(orderDetail){
+        this.orderCourse.setAssistant(orderDetail.assistant||{});
+        this.orderCourse.setMajorTeacher(orderDetail.teacherList);
+        this.orderDetail = orderDetail
     }
     /**
      * 是否过期
