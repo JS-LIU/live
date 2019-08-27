@@ -19,9 +19,9 @@ export class FooterView extends Component{
                     <div className="common_footer_left">
                         <div className="common_footer_left_top">
                             <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
-                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
-                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
-                            <Link to="/" className="common_footer_left_top_link_item">关于我们</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">隐私政策</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">常见问题</Link>
+                            <Link to="/" className="common_footer_left_top_link_item">上课流程</Link>
                         </div>
                         <div className="common_footer_left_bottom">
                             <div>

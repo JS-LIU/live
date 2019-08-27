@@ -40,6 +40,7 @@
     position:relative;
     height:3.08rem;
     background:#6AC35F url("../../img/product_course_detail_header_bg.png") no-repeat center;
+    background-size:7.83rem 3.08rem;
     border-top-left-radius: 0.08rem;
     border-top-right-radius: 0.08rem;
 }
@@ -54,6 +55,26 @@
     color:#FFFFFF;
     right:2.34rem;
     bottom:0.22rem;
+}
+.product_course_detail_header_course_video{
+    position:absolute;
+    top:1.03rem;
+    right:1.3rem;
+    width:1.6rem;
+    height:0.9rem;
+    background:url("../../img/course_video.png") no-repeat center;
+    background-size: 1.6rem 0.9rem;
+    box-shadow: 0 0.06rem 0.13rem 0 rgba(0, 0, 0, 0.34);
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.product_course_detail_header_course_video_btn{
+    width:0.24rem;
+    height:0.24rem;
+    background:url("../../img/course_video_btn.png") no-repeat center;
+    background-size: 0.24rem;
 }
 .product_course_detail_top_course_info_box{
     height:2.47rem;
@@ -178,6 +199,7 @@
 .product_course_detail_right_course_buy_only{
     display:flex;
     flex-direction: column;
+    align-items: flex-start;
     width:2.9rem;
     margin-top:0.2rem;
 }
@@ -191,6 +213,7 @@
     justify-content: center;
     align-items: center;
     padding:0 0.1rem;
+    margin-top:0.06rem;
     height:0.32rem;
     border: 0.01rem solid #E8E8E8;
     border-radius: 0.04rem;
@@ -267,4 +290,33 @@
 .common_question_item_answer{
     font-size:0.14rem;
 }
-
+#J_prismPlayer{
+    position:fixed;
+    top:2.3rem;
+    left:5.15rem;
+}
+.video_player_box{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.video_player_wrapper{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity: 0.6;
+    background: #000000;
+}
+.video_player_close_btn{
+    position:fixed;
+    top:2.3rem;
+    right:4.7rem;
+    background:url("../../img/close_video_btn.png") no-repeat center;
+    background-size: 0.2rem;
+    width:0.2rem;
+    height:0.2rem;
+}

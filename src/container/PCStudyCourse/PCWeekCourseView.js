@@ -28,8 +28,8 @@ export class PCWeekCourseView extends Component{
     };
     getOwnedCoursePlanItemList(){
         courseService.getOwnedCoursePlanItemListByWeek(
-            TimeManager.convertToTimeStampBySec(this.weekData.startTime),
-            TimeManager.convertToTimeStampBySec(this.weekData.endTime)
+            TimeManager.convertToTimeStampBySec(this.weekData.startTime + " 00:00:00"),
+            TimeManager.convertToTimeStampBySec(this.weekData.endTime + " 23:59:59")
         ).then((coursePlanList)=>{
             this.setState({
                 coursePlanList:coursePlanList
@@ -59,9 +59,9 @@ export class PCWeekCourseView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
-            if(coursePlanItem.learnStatus === "正在学"){
-                windwo.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.typeText}));
-            }
+            console.log(coursePlanItem);
+            console.log(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type}));
+            window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.typeText}));
         }
     }
     getCourseNodes(){

@@ -8,8 +8,8 @@ import ReactSwiper from 'reactjs-swiper';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {FooterView} from "../../component/FooterView/FooterView";
-import HomeStyle from './HomeStyle.css';
 import {baseUrl} from "../../config/config";
+import HomeStyle from './HomeStyle.css';
 
 export class HomeView extends Component{
     constructor(props) {
@@ -28,18 +28,38 @@ export class HomeView extends Component{
                 {cn:"sec_5_content_item_2",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:1},
                 {cn:"sec_5_content_item_3",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:2},
                 {cn:"sec_5_content_item_4",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:3},
-            ]
+            ],
+            problemList:[{
+                question:"问：不满意如何退费？",
+                answer: (<div>
+                            <div>一、体验课9.9元特价课，不支持退费；</div>
+                            <div>二、正课学员：</div>
+                            <div>2次及以内学员，可以申请全额退费；</div>
+                            <div>3次及以上学员，可以申请退费，退费需扣除已消耗课时费；</div>
+                            <div>退费金额=缴费金额-已耗课时*缴费金额/课时数</div>
+                        </div>)
+            },{
+                question:"问：课程可以分期付款吗？",
+                answer: "松鼠编程课程学费可以分期付款；宝妈可以在支付时选择信用卡支付、或者分期乐、酷分期等分期产品。"
+            },{
+                question:"问：一节课多长时间？",
+                answer: "松鼠编程每课时 50分钟，每次课包含2课时；其中加上助教课前、课后辅导时间；每次课大约两小时。"
+            },{
+                question:"问：能否调课/调老师？",
+                answer: "无论是对老师课程不满意抑或因为自身原因；需要调换老师的，皆可调换下一个班级或者同期其他班级。"
+            },{
+                question:"问：不知道家里的设备能否上课？",
+                answer: (
+                    <div>
+                        <div>下载客户端；客户端会自动提示进行设备检测；检测成功即可具备上课条件；</div>
+                        <div>如检测不成功可拨打400-621-6161进行免费技术支持</div>
+                    </div>
+                )
+            }]
         }
     }
 
     componentDidMount() {
-        // userService.getUserInfo().then(()=>{
-        //     this.setState((state,props)=>{
-        //         return {
-        //             userInfo:userService.getUser().userInfo
-        //         }
-        //     })
-        // });
     }
     makeCooperationUnActive(){
         for(let i = 0 ;i < this.state.cooperationList.length;i++){
@@ -63,23 +83,32 @@ export class HomeView extends Component{
         })
     }
     render() {
-        let cooperation = this.state.cooperationList.map((item,i)=>{
+        let cooperationNodes = this.state.cooperationList.map((item,i)=>{
             return (
                 <li key={i} style={{display:"flex",flexDirection:"column",alignItems:"center",height:"2rem"}}>
                     <div
                         className={item.cn}
-                        style={item.active?{backgroundColor:"#E8E8E8"}:{backgroundColor:"#FFFFFF"}}
+                        style={item.active?{backgroundColor:"#FAFAFA"}:{backgroundColor:"#FFFFFF"}}
                         onMouseEnter={this.setCooperationActive(item)}
                         onMouseLeave={this.setCooperationActiveUnActive.bind(this)}>
                     </div>
                     {item.active?item.companyName:""}
                 </li>
-
+            )
+        });
+        let problemNodes = this.state.problemList.map((item,i)=>{
+            return (
+                <li className="home_question_item" key={i}>
+                    <div className="home_question_title">{item.question}</div>
+                    <div className="home_question_answer">
+                        {item.answer}
+                    </div>
+                </li>
             )
         });
         return(
             <div>
-                <HeaderView />
+                <HeaderView history={this.props.history} userInfo={userService.getUser().userInfo}/>
                 <ReactSwiper
                     swiperOptions={{
                     preloadImages: true,
@@ -155,11 +184,16 @@ export class HomeView extends Component{
                        {/*<li className="sec_5_content_item_2"></li>*/}
                        {/*<li className="sec_5_content_item_3"></li>*/}
                        {/*<li className="sec_5_content_item_4"></li>*/}
-                        {cooperation}
+                        {cooperationNodes}
                     </ul>
                 </div>
                 <div className="sec_6">
                     <div className="sec_6_title">常见问题</div>
+                    <div className="sec_6_problem_list_box">
+                        <ul className="sec_6_problem_list" style={{width:(this.state.problemList.length*4.14-0.4)+"rem"}}>
+                            {problemNodes}
+                        </ul>
+                    </div>
                 </div>
                 <div className="sec_7">
                     <div className="sec_7_enjoy_btn">

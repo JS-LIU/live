@@ -3,7 +3,7 @@
  */
 import {Login} from "../entity/Login";
 import {User} from "../entity/User";
-import {commonAjax} from "../config/config";
+import {baseUrl, commonAjax} from "../config/config";
 import {TimeManager} from "../entity/TimeManager";
 
 
@@ -40,7 +40,7 @@ class UserService {
                     this.updateUserInfo({userInfo:userInfo});
                     resolve(data);
                 }else{
-                    reject(data)
+                    reject(data.message)
                 }
 
             })
@@ -50,8 +50,11 @@ class UserService {
     signIn(){
         return this.login.signIn(this.user.getPhoneNum(),this.user.getPassword());
     }
-    register(){
-        return this.login.register(this.user.getPhoneNum(),this.user.getPassword());
+    signInByCode(code){
+        return this.login.signInByCode(this.user.getPhoneNum(),code);
+    }
+    register(vCode){
+        return this.login.register(this.user.getPhoneNum(),this.user.getPassword(),vCode);
     }
     //  更新用户信息
     updateUserInfo(userInfo){
@@ -63,14 +66,47 @@ class UserService {
     getUserInfo(){
         return this.user.getUserInfo();
     }
-    getVCode(){
-        return this.login.getVCode()
+    getPwdVCode(){
+        return this.login.getPwdVCode(this.user)
+    }
+    getRegisterVCode(){
+        return this.login.getRegisterVerifyCode(this.user).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.code !== 0){
+                    reject(data.message);
+                }else{
+                    resolve(data);
+                }
+            })
+        })
     }
     resetPwd(restInfo){
         return this.user.resetPwd({
             code:restInfo.vCode,
             password:restInfo.newPsd
         })
+    }
+    autoUpdateUserInfo(){
+        if(this.getUser().userInfo.userName === ""){
+            Object.assign(this.user.userInfo,{userName:"小松许"})
+        }
+        if(this.getUser().userInfo.headImgUrl === ""){
+            Object.assign(this.user.userInfo,{headImgUrl:baseUrl.getBaseUrl()+"/src/img/def_header_img.png"});
+        }
+    }
+    getLoginVCode(){
+        return this.login.getLoginVCode(this.user).then((data)=>{
+            console.log(data);
+            return new Promise((resolve, reject)=>{
+                if(data.code!==0){
+
+                    reject(data.message);
+                }else{
+                    resolve(data)
+                }
+
+            })
+        });
     }
 }
 export const userService = new UserService();

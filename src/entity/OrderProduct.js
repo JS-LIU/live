@@ -23,6 +23,7 @@ export class OrderProduct {
         this.weeks = productCourse.weeks;
         this.sellPrice = productCourse.sellPrice;
         this.majorTeacher = {};
+        this.videoId = productCourse.videoId;
     }
     setAssistant(assistant){
         this.assistant = assistant;

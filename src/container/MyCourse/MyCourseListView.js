@@ -138,8 +138,9 @@ export class MyCourseListView extends Component{
                                 {ownedCourseLearnStatusNodes}
                             </div>
                         </div>
+
                         <div className="my_course_main_course_list">
-                            {ownedCourseListNodes}
+                            {this.state.learnStatusList.length>0?{ownedCourseListNodes}:(<div className="my_course_no_course">暂无课程</div>)}
                         </div>
                     </div>
                 </div>

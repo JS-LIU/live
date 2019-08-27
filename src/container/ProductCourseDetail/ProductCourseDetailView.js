@@ -4,13 +4,14 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {courseService} from "../../service/CourseService";
-import productCourseDetailStyle from './productCourseDetailStyle.css';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 import {TimeManager} from "../../entity/TimeManager";
 import {FooterView} from "../../component/FooterView/FooterView";
 import {HB} from "../../util/HB";
+import {baseUrl} from "../../config/config";
+import productCourseDetailStyle from './productCourseDetailStyle.css';
 
 export class ProductCourseDetailView extends Component{
     constructor(props) {
@@ -19,11 +20,38 @@ export class ProductCourseDetailView extends Component{
             course:null,
             isShowCourseDetail:true,
             isShowProblem:false,
-            footerStyle:null
+            footerStyle:null,
+            isShowAliPlay:false
         };
         this.productCourseNo = this.props.match.params.productCourseNo;
     }
-
+    playAudio(course){
+        return ()=>{
+            this.setState({
+                isShowAliPlay:true
+            });
+            courseService.getVideoView(course).then((data)=>{
+                console.log(data.data.aliVodId);
+                console.log(data.data.playAuth);
+                new Aliplayer({
+                    id: "J_prismPlayer",
+                    vid : data.data.aliVodId,
+                    playauth : data.data.playAuth,
+                    width:'8.96rem',
+                    height:'5rem',
+                    controlBarVisibility:'hover',
+                    diagnosisButtonVisible:false,
+                    autoplay: true
+                });
+            })
+        }
+    }
+    closeAudio(){
+        // document.getElementById("J_prismPlayer")
+        this.setState({
+            isShowAliPlay:false
+        });
+    }
     componentDidMount() {
         courseService.getOrCreateProductCourseDetail(this.productCourseNo).then((course)=>{
             this.setState({
@@ -34,7 +62,6 @@ export class ProductCourseDetailView extends Component{
     }
     switchCourseDetail(courseItem){
         return ()=>{
-            console.log(courseItem);
             this.props.history.replace("/productCourseDetail/" + courseItem.goodNo);
             this.productCourseNo = courseItem.goodNo;
             courseService.getOrCreateProductCourseDetail(this.productCourseNo).then((course)=>{
@@ -80,11 +107,11 @@ export class ProductCourseDetailView extends Component{
             return (
                 <div key={index} className="course_product_detail_teacher_info">
                     <div className="course_product_detail_teacher_item_header_img">
-                        <img src={teacher.headImgUrl||"../src/img/def_header_img.png"} alt="" className="course_product_detail_teacher_item_header_img_pic"/>
+                        <img src={teacher.headImgUrl||baseUrl.getBaseUrl()+"/src/img/def_header_img.png"} alt="" className="course_product_detail_teacher_item_header_img_pic"/>
                     </div>
                     <div className="course_product_detail_teacher_name_box">
                         <div>主讲教师</div>
-                        <div>{teacher.teacherName}</div>
+                        <div>{teacher.teacherName}老师</div>
                     </div>
                 </div>
             )
@@ -119,7 +146,7 @@ export class ProductCourseDetailView extends Component{
         return(
             <div>
                 <div className="wrap" />
-                <HeaderView />
+                <HeaderView history={this.props.history} userInfo={userService.getUser().userInfo}/>
                 <div className="product_course_detail_main">
                     <div className="crumbs">
                         首页 > 选课中心 > {this.state.course.name}
@@ -130,7 +157,10 @@ export class ProductCourseDetailView extends Component{
                                 <div className="product_course_detail_header">
                                     <div className="product_course_detail_header_teacher_info">
                                         <div>松鼠编程特级教师</div>
-                                        <div>{this.state.course.getMajorSpeaker().teacherName}</div>
+                                        <div>{this.state.course.getMajorSpeaker().teacherName}老师</div>
+                                    </div>
+                                    <div className="product_course_detail_header_course_video">
+                                        <a className="product_course_detail_header_course_video_btn" onClick={this.playAudio(this.state.course)}/>
                                     </div>
                                 </div>
                                 <div className="product_course_detail_top_course_info_box">
@@ -204,13 +234,20 @@ export class ProductCourseDetailView extends Component{
                                     </div>):null}
                                 <div className="product_course_detail_settle_box">
                                     <a className="product_course_buy_btn" onClick={this.onBuyCourse.bind(this)}>购买学习</a>
-                                    <div className="product_course_consult_btn">咨询</div>
+                                    <a className="product_course_consult_btn">咨询</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <FooterView style={this.state.footerStyle}/>
+                {this.state.isShowAliPlay?
+                    <div className="video_player_box">
+                        <div className="video_player_wrapper" />
+                        <div className="video_player_close_btn" onClick={this.closeAudio.bind(this)} />
+                        <div id="J_prismPlayer" className="audio_player" />
+                    </div>
+                    :null}
             </div>
         )
     }

@@ -25,7 +25,6 @@ export class OrderDetailView extends Component{
             })
         })
     }
-
     render() {
         if(!this.state.orderInfo){
             return null;
@@ -97,10 +96,10 @@ export class OrderDetailView extends Component{
                         </div>
                     </div>
                     <ul className="order_info_list">
-                        <li className="order_info_list_item">付款时间：{TimeManager.convertStampToMDHM(this.state.orderInfo.orderDetail.payTime,"unix")}</li>
-                        <li className="order_info_list_item">商品总价：{this.state.orderInfo.orderDetail.salePrice / 100}</li>
-                        <li className="order_info_list_item">付款方式：微信支付</li>
-                        <li className="order_real_price">实付金额：￥{this.state.orderInfo.orderDetail.sellPrice / 100}</li>
+                        <li className="order_info_list_item">付款时间：{this.state.orderInfo.orderDetail.payTime}</li>
+                        <li className="order_info_list_item">商品总价：{this.state.orderInfo.orderDetail.salePrice}</li>
+                        <li className="order_info_list_item">付款方式：{this.state.orderInfo.orderDetail.payType}</li>
+                        <li className="order_real_price">实付金额：￥{this.state.orderInfo.orderDetail.sellPrice}</li>
                     </ul>
                 </div>
             </div>

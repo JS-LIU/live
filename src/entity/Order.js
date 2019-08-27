@@ -32,7 +32,11 @@ export class Order {
     setDetail(orderDetail){
         this.orderCourse.setAssistant(orderDetail.assistant||{});
         this.orderCourse.setMajorTeacher(orderDetail.teacherList);
-        this.orderDetail = orderDetail
+        this.orderDetail = orderDetail;
+        this.setPayTime();
+        this.setPayType();
+        this.setSalePrice();
+        this.setSellPrice();
     }
     /**
      * 是否过期
@@ -67,5 +71,38 @@ export class Order {
     }
     getOrderStatus(code){
         return Order.statusStrategy()[code];
+    }
+
+    setPayTime() {
+        if(this.status !== 3002){
+            this.orderDetail.payTime = this.getOrderStatus(this.status);
+        }else{
+            this.orderDetail.payTime = TimeManager.convertStampToMDHM(this.orderDetail.payTime,"unix")
+        }
+    }
+
+
+    setPayType() {
+        if(this.status !== 3002){
+            this.orderDetail.payType = this.getOrderStatus(this.status);
+        }else{
+            this.orderDetail.payType = "微信支付";
+        }
+    }
+
+    setSalePrice() {
+        if(this.status !== 3002){
+            this.orderDetail.salePrice = this.getOrderStatus(this.status);
+        }else{
+            this.orderDetail.salePrice = this.orderDetail.salePrice / 100;
+        }
+    }
+
+    setSellPrice() {
+        if(this.status !== 3002){
+            this.orderDetail.payType = this.getOrderStatus(this.status);
+        }else{
+            this.orderDetail.sellPrice = this.orderDetail.sellPrice / 100;
+        }
     }
 }

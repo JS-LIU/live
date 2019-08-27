@@ -152,11 +152,11 @@
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    width:5.42rem;
+    width:5rem;
 }
 .sec_4_content_img_list_right{
     position:relative;
-    width:5rem;
+    width:5.4rem;
     height:2.8rem;
 }
 .sec_4_right_live_1{
@@ -194,6 +194,7 @@
     align-items: center;
     font-size:0.2rem;
     color: #39579A;
+    padding-top: 0.3rem;
 }
 .sec_5{
     display:flex;
@@ -261,6 +262,53 @@
     font-size:0.42rem;
     color:#000000;
 }
+.sec_6_problem_list_box{
+    width:19.2rem;
+    margin-top:1rem;
+    overflow-x: auto;
+}
+.sec_6_problem_list{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
+}
+/*.sec_6_problem_list_box::-webkit-scrollbar {*/
+/*    width:0 !important;   !* remove scrollbar space *!*/
+/*    background: transparent;  !* optional: just make scrollbar invisible *!*/
+/*}*/
+
+/*!* 兼容IE10+ *!*/
+/*.sec_6_problem_list_box { -ms-overflow-style: none; }*/
+
+/*!* 但是firefox代码无效 *!*/
+/*.sec_6_problem_list_box { overflow: -moz-scrollbars-none; }*/
+
+.home_question_item{
+    width:3.74rem;
+    height:4.28rem;
+    background:#FFC200;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.home_question_title{
+    padding-top:0.46rem;
+    color:#000000;
+    font-size:0.2rem;
+    height:0.84rem;
+    width:3.16rem;
+}
+.home_question_answer{
+    width:2.72rem;
+    height:2.34rem;
+    background:#FFFFFF;
+    border-radius:0.08rem;
+    font-size:0.16rem;
+    padding:0.33rem 0.22rem 0;
+}
 .sec_7{
     width:19.2rem;
     height:5.36rem;
@@ -291,4 +339,7 @@
 
 .swiper-pagination-bullet-active{
     background:#FFC200;
+}
+.swiper-img{
+    width:100%;
 }

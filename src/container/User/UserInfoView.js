@@ -51,7 +51,6 @@ export class UserInfoView extends Component{
         })
     }
     onChangeDay(e){
-        console.log(e.target.value);
         this.userInfo = Object.assign(this.userInfo,{
             birthD:e.target.value
         });
@@ -77,9 +76,10 @@ export class UserInfoView extends Component{
     }
     confirmFixed(){
         userService.resetUserInfo(this.userInfo).then((data)=>{
+            this.props.refreshUserInfo();
             alert("修改成功");
-        }).catch(()=>{
-            alert("修改失败");
+        }).catch((msg)=>{
+            alert(msg);
         });
     }
     render() {

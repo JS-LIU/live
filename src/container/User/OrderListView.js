@@ -42,7 +42,11 @@ export class OrderListView extends Component {
     cancelOrder(orderItem){
         return ()=>{
             orderService.cancelOrder(orderItem).then(()=>{
-                this.onChangePage(orderService.pagination.pageNum)
+                return orderService.getOrderList()
+            }).then((list)=>{
+                this.setState({
+                    orderList:list,
+                })
             }).catch((msg)=>{
                 alert(msg);
             })
@@ -61,7 +65,7 @@ export class OrderListView extends Component {
                 <div>
                     <div>已取消</div>
                     <Link to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
-                        查看订单
+                        订单详情
                     </Link>
                 </div>
             )
@@ -70,7 +74,7 @@ export class OrderListView extends Component {
                 <div>
                     <div>已支付</div>
                     <Link to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
-                        查看订单
+                        订单详情
                     </Link>
                 </div>
             )

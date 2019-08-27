@@ -45,7 +45,7 @@ export class SettleCenterView extends Component{
         return(
             <div>
                 <div className="wrap" />
-                <HeaderView title={"结算中心"}/>
+                <HeaderView history={this.props.history} title={"结算中心"} userInfo={userService.getUser().userInfo}/>
                 <div className="settle_main">
                     <div className="settle_course_title">课程信息</div>
                     <div className="product_course_pay_info">

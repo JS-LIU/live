@@ -85,7 +85,7 @@ export class SelectCourseCenterView extends Component{
         return(
             <div>
                 <div className="wrap"></div>
-                <HeaderView />
+                <HeaderView  history={this.props.history} userInfo={userService.getUser().userInfo}/>
                 <div className="select_course_center_main">
                     <div className="crumbs">
                         首页 > 选课中心

@@ -10,12 +10,18 @@ export class AccountManageView extends Component{
     constructor(props) {
         super(props);
         this.resetInfo = null;
+        this.state = {
+            countDown:"获取验证码"
+        }
     }
     sendVCode(){
-        userService.getVCode()
+        if(this.state.countDown === "获取验证码"){
+            this.startCountDown();
+            userService.getPwdVCode()
+        }
+
     }
     inputVCode(e){
-        console.log(e.target.value);
         this.resetInfo.vCode = e.target.value
     }
     inputNewPsd(e){
@@ -30,6 +36,22 @@ export class AccountManageView extends Component{
         }
         userService.resetPsd(this.resetInfo);
     }
+    startCountDown(){
+        let startTime = 10;
+        let t = setInterval(()=>{
+            startTime--;
+            this.setState({
+                countDown:startTime+"s后重新获取"
+            });
+            if(startTime === 0){
+                startTime = 10;
+                this.setState({
+                    countDown:"获取验证码"
+                });
+                clearInterval(t);
+            }
+        },1000)
+    }
     render() {
         return (
             <div className="account_manage">
@@ -40,7 +62,7 @@ export class AccountManageView extends Component{
                             <div className="account_change_item_title">手机</div>
                             <div className="account_change_item_info">
                                 <div className="account_change_item_info_phone_num">{userService.getUser().phoneNum}</div>
-                                <a className="account_change_item_info_send_v_code" onClick={this.sendVCode.bind(this)}>发送验证码</a>
+                                <a className="account_change_item_info_send_v_code" onClick={this.sendVCode.bind(this)}>{this.state.countDown}</a>
                             </div>
                         </li>
                         <li className="account_item">

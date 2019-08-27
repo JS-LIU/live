@@ -14,9 +14,18 @@ export class Login {
             return ajax.save({action:'registerUserInfo'},postInfo);
         };
         let userAjax = commonAjax.resource('/user/w/v1.0/:action');
-        this._getVCode = function(postInfo){
-            return userAjax.save({action:'resetPwdVerifyCode'},postInfo);
-        }
+        this._getPwdVCode = function(postInfo,user){
+            return userAjax.save({action:'resetPwdVerifyCode'},postInfo,{name:"token",value:user.token});
+        };
+        this._getRegisterVerifyCode = function(postInfo){
+            return userAjax.save({action:'registerVerifyCode'},postInfo);
+        };
+        this._getLoginVCode = function(postInfo){
+            return userAjax.save({action:"loginVerifyCode"},postInfo)
+        };
+        this._loginByCode = function(postInfo){
+            return userAjax.save({action:"loginWithVerifyCode"},postInfo)
+        };
     }
     isLogin(user){
         return user.token !== "";
@@ -28,15 +37,34 @@ export class Login {
             pass:hex_md5(password)
         })
     }
+    signInByCode(phoneNum,code){
+        return this._loginByCode({
+            phone:phoneNum,
+            code:code
+        })
+    }
     //  注册
-    register(phoneNum,password){
+    register(phoneNum,password,vCode){
         return this._register({
             phone:phoneNum,
-            pass:hex_md5(password)
+            pass:hex_md5(password),
+            code:vCode
         })
     }
     //  获取验证码
-    getVCode(){
-        return this._getVCode();
+    getPwdVCode(user){
+        return this._getPwdVCode({
+            phone:user.phoneNum
+        },user);
+    }
+    getRegisterVerifyCode(user){
+        return this._getRegisterVerifyCode({
+            phone:user.phoneNum
+        })
+    }
+    getLoginVCode(user){
+        return this._getLoginVCode({
+            phone:user.phoneNum
+        })
     }
 }

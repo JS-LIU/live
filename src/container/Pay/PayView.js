@@ -56,7 +56,7 @@ export class PayView extends Component {
         }
         return (
             <div>
-                <HeaderView />
+                <HeaderView history={this.props.history} userInfo={userService.getUser().userInfo}/>
                 <div className="pay_body">
                     <div className="pay_body_header">
                         <div className="pay_body_top">

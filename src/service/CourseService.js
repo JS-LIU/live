@@ -41,6 +41,9 @@ class CourseService {
         this._getPreSessionVideo = function(postInfo){
             return preVideoAjax.save({action:"preSessionVideo"},postInfo,{name:"token",value:userService.getUser().token});
         };
+        this._getCourseVideo = function(postInfo){
+            return preVideoAjax.save({action:"videoView"},postInfo,{name:"token",value:userService.getUser().token});
+        };
         //  课程列表
         this.ownedCourseList = [];
         //  每节课列表
@@ -86,6 +89,13 @@ class CourseService {
             userCoursePlanId:ownedCourseItem.id
         })
     }
+    //  获取课程视频
+    getVideoView(course){
+        return this._getCourseVideo({
+            videoId:course.detail.videoId
+        })
+    }
+
     getOwnedCourseDetail(id){
         let ownedCourse = this.findOwnedCourseById(id);
         return this._getOwnedCourseDetail({

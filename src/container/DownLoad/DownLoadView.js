@@ -16,7 +16,7 @@ export class DownLoadView extends Component{
     render() {
         return (
             <div>
-                <HeaderView />
+                <HeaderView userInfo={userService.getUser().userInfo}/>
                 <div className="down_load_header">
                     <ul className="down_load_btn_list">
                         <li className="windows_down_load_btn">Windows下载</li>

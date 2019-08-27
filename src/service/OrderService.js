@@ -191,7 +191,6 @@ class OrderService {
             let order = this.findOrderByOrderNo(orderNo);
             order.setDetail(data.data);
             return new Promise((resolve, reject)=>{
-                console.log("====",order);
                 resolve(order);
             })
         });
@@ -206,10 +205,10 @@ class OrderService {
             orderNo:orderItem.orderNo
         }).then((data)=>{
             return new Promise((resolve, reject)=>{
-                if(data.data === 0){
+                if(data.code === 0){
                     resolve(data.data);
                 }else{
-                    reject(data.data.message);
+                    reject(data.message);
                 }
             })
 

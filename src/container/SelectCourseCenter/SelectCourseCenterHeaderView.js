@@ -23,7 +23,10 @@ export class SelectCourseCenterHeaderView extends Component{
         let generalNodes = this.props.courseTypeList.map((generalCourseType,index)=>{
             let specifyNodes = generalCourseType.specifyCourseTypeList.map((specifyCourseType,index)=>{
                 return (
-                    <span key={index} className="select_course_center_specify_type" style={specifyCourseType.selected?selectedStyle:{}} onClick={this.onSelectSpecifyType(specifyCourseType)}>{specifyCourseType.name}</span>
+                    <span key={index}
+                          className="select_course_center_specify_type"
+                          style={(specifyCourseType.selected&&!generalCourseType.selected)?selectedStyle:{}}
+                          onClick={this.onSelectSpecifyType(specifyCourseType)}>{specifyCourseType.name}</span>
                 )
             });
             return (
@@ -47,5 +50,8 @@ export class SelectCourseCenterHeaderView extends Component{
     }
 }
 const selectedStyle = {
-    color:"#FFC200",
+    background: "#FFC200",
+    padding: "0 0.1rem",
+    borderRadius: "0.12rem",
+    color: "#FFFFFF"
 };

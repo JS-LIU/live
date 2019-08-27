@@ -39,9 +39,9 @@ export class HeaderView extends Component{
                         <Link to="/downLoad" className="common_header_center_link_item">软件下载</Link>
                         <Link to={userService.login.isLogin(userService.getUser())?"/user/userInfo":"/login/login"} className="common_header_login_info" onMouseEnter={this.showDialog}>
                             <div className="common_header_login_header_box">
-                                <img src={userService.getUser().userInfo.headImgUrl} alt="" className="common_header_login_header_pic"/>
+                                <img src={this.props.userInfo.headImgUrl} alt="" className="common_header_login_header_pic"/>
                             </div>
-                            <div className="common_header_login_user_name">{userService.getUser().userInfo.userName||"小松许"}</div>
+                            <div className="common_header_login_user_name">{this.props.userInfo.userName||"小松许"}</div>
                             <div className="down_arrow"/>
                         </Link>
                     </div>

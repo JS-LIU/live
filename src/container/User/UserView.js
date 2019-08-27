@@ -14,17 +14,27 @@ import {OrderDetailView} from "./OrderDetailView";
 export class UserView extends Component{
     constructor(props) {
         super(props);
-
+        this.state = {
+            userInfo:userService.getUser().userInfo
+        }
+    }
+    refreshUserInfo(){
+        this.setState({
+            userInfo:userService.getUser().userInfo
+        })
     }
 
     render() {
         return (
             <div>
                 <div className="wrap" />
-                <HeaderView />
+                <HeaderView history={this.props.history} userInfo={this.state.userInfo}/>
                 <div className="user_body_main">
                     <UserTabBox userInfo={userService.getUser().userInfo} history={this.props.history}/>
-                    <Route path="/user/userInfo" component={UserInfoView} />
+                    <Route path="/user/userInfo" component={props=>{
+                        let obj = Object.assign({},props,{refreshUserInfo:this.refreshUserInfo.bind(this)});
+                        return <UserInfoView {...obj}/>}
+                    } />
                     <Route path="/user/accountManage" component={AccountManageView} />
                     <Route path="/user/orderList" component={OrderListView}/>
                     <Route path="/user/orderDetail/:orderNo" component={OrderDetailView}/>

@@ -1,9 +1,8 @@
 /**
  * Created by Liudq on 2019-07-22
  */
-import {Login} from "./Login";
 import {baseUrl, commonAjax} from "../config/config";
-import {userService} from "../service/UserService";
+import {hex_md5} from "../util/md5";
 import {TimeManager} from "./TimeManager";
 export class User {
     constructor(ajax){
@@ -52,7 +51,7 @@ export class User {
     resetPsd(resetInfo){
         return this._resetPsd({
             code:resetInfo.vCode,
-            password:resetInfo.password
+            password:hex_md5(resetInfo.password)
         }).then((data)=>{
             this.password = data.data.resetInfo.password;
             return new Promise((resolve, reject)=>{

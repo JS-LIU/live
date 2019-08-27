@@ -49,9 +49,7 @@ export class PCCourseDetailView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
-            if(coursePlanItem.learnStatus === "正在学"){
-                windwo.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.typeText}));
-            }
+            window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.typeText}));
         }
     }
     render() {

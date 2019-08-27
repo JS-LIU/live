@@ -17,7 +17,7 @@ import {baseUrl} from "./config/config";
 
 HB.ui.setBaseFontSize(1280,100);
 
-let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTY2MTgzNTMxNTQwIiwia2V5X3VzZXJfaWQiOjIsImlhdCI6MTU2NjE4MzUzMSwiZXhwIjoxNTY2Nzg4MzMxfQ.rEB4rva5vWvUYloEHwKtmaoPP9o19eToxVoYCz1C02o";
+let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTY2NjQ4MjE5OTczIiwia2V5X3VzZXJfaWQiOjQ2LCJpYXQiOjE1NjY2NDgyMTksImV4cCI6MTU2NzI1MzAxOX0.1bofMt32n3mSgQgZXE7K3_WN3aeSSilwsLRJIpFaYWs";
 userService.updateUserInfo({token:token});
 // baseUrl.setBaseUrl("/pcwap");
 

@@ -51,6 +51,15 @@
     flex-wrap: wrap;
     flex-direction: row;
 }
+.my_course_no_course{
+    height:2rem;
+    background:url("../../img/no_course.png") no-repeat center;
+    background-size: 2.97rem 1.59rem;
+    padding-top:2rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
 .my_course_item{
     width:3.18rem;
     height:3.05rem;

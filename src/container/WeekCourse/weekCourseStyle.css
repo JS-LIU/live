@@ -150,6 +150,10 @@
     font-size:0.16rem;
 }
 .week_no_course{
+    height:2rem;
+    background:url("../../img/no_course.png") no-repeat center;
+    background-size: 2.97rem 1.59rem;
+    padding-top:2rem;
     display:flex;
     align-items: center;
     justify-content: center;

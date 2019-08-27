@@ -26,6 +26,9 @@ export class LoginMainView extends Component{
         return ()=>{
             userService.signIn().then((data)=>{
                 userService.updateUserInfo({token:data.data.token});
+                return userService.getUserInfo();
+            }).then(()=>{
+                userService.autoUpdateUserInfo();
                 //  跳转到首页
                 this.props.history.replace('/home');
             });
@@ -39,12 +42,39 @@ export class LoginMainView extends Component{
     }
     register(){
         return ()=>{
-            userService.register().then((data)=>{
+            userService.register(this.vcode).then((data)=>{
                 userService.updateUserInfo({token:data.data.token});
                 //  跳转到首页
                 this.props.history.replace('/login/login');
             });
         }
+    }
+    inputVCode(value){
+        this.vcode = value;
+    }
+    getRegisterVCode(){
+        userService.getRegisterVCode().then(()=>{
+
+        }).catch((msg)=>{
+            alert(msg)
+        });
+    }
+    getLoginVCode(){
+        userService.getLoginVCode().then((data)=>{
+
+        }).catch((msg)=>{
+            alert(msg)
+        });
+    }
+    vCodeLogin(){
+        userService.signInByCode(this.vcode).then((data)=>{
+            userService.updateUserInfo({token:data.data.token});
+            return userService.getUserInfo();
+        }).then(()=>{
+            userService.autoUpdateUserInfo();
+            //  跳转到首页
+            this.props.history.replace('/home');
+        });
     }
     render(){
         return(
@@ -57,15 +87,19 @@ export class LoginMainView extends Component{
                             login:this.login(),
                             inputPhoneNum:this.inputPhoneNum,
                             inputPassword:this.inputPassword,
+                            getLoginVCode:this.getLoginVCode.bind(this),
+                            inputVCode:this.inputVCode.bind(this),
+                            vCodeLogin:this.vCodeLogin.bind(this)
                         });
                         return <LoginView  {...obj} />
                     }} />
-
                     <Route path="/login/register" component={ props => {
                         let obj = Object.assign({},props,{
                             register:this.register(),
-                            inputPhoneNum:this.inputPhoneNum,
-                            inputPassword:this.inputPassword,
+                            inputPhoneNum:this.inputPhoneNum.bind(this),
+                            inputPassword:this.inputPassword.bind(this),
+                            getRegisterVCode:this.getRegisterVCode.bind(this),
+                            inputVCode:this.inputVCode.bind(this)
                         });
                         return <RegisterView {...obj}/>
                     }} />
