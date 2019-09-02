@@ -9,7 +9,7 @@ import {userService} from "../../service/UserService";
 export class AccountManageView extends Component{
     constructor(props) {
         super(props);
-        this.resetInfo = null;
+        this.resetInfo = {};
         this.state = {
             countDown:"获取验证码"
         }
@@ -22,6 +22,7 @@ export class AccountManageView extends Component{
 
     }
     inputVCode(e){
+        console.log(this.resetInfo.vCode);
         this.resetInfo.vCode = e.target.value
     }
     inputNewPsd(e){
@@ -34,17 +35,18 @@ export class AccountManageView extends Component{
         if(this.resetInfo.VPsd !== this.resetInfo.newPsd){
             alert("两次输入的密码不同");
         }
-        userService.resetPsd(this.resetInfo);
+        this.resetInfo.phoneNum = userService.getUser().phoneNum;
+        userService.resetPwd(this.resetInfo);
     }
     startCountDown(){
-        let startTime = 10;
+        let startTime = 60;
         let t = setInterval(()=>{
             startTime--;
             this.setState({
                 countDown:startTime+"s后重新获取"
             });
             if(startTime === 0){
-                startTime = 10;
+                startTime = 60;
                 this.setState({
                     countDown:"获取验证码"
                 });
@@ -67,15 +69,22 @@ export class AccountManageView extends Component{
                         </li>
                         <li className="account_item">
                             <div className="account_change_item_title"/>
-                            <input placeholder="请输入手机验证码" className="account_change_item_input input_v_code" onChange={this.inputVCode.bind(this)}/>
+                            <input placeholder="请输入手机验证码"
+                                   className="account_change_item_input input_v_code"
+                                   onChange={this.inputVCode.bind(this)}/>
                         </li>
                         <li className="account_item">
                             <div className="account_change_item_title">新密码</div>
-                            <input placeholder="请输入新密码" className="account_change_item_input input_psd" onChange={this.inputNewPsd.bind(this)}/>
+                            <input type="password" placeholder="请输入新密码"
+                                   autoComplete="new-password"
+                                   className="account_change_item_input input_psd"
+                                   onChange={this.inputNewPsd.bind(this)}/>
                         </li>
                         <li className="account_item">
                             <div className="account_change_item_title">确认密码</div>
-                            <input placeholder="请确认新密码" className="account_change_item_input input_psd" onChange={this.inputVPsd.bind(this)}/>
+                            <input placeholder="请确认新密码"
+                                   className="account_change_item_input input_psd"
+                                   onChange={this.inputVPsd.bind(this)}/>
                         </li>
                         <li className="confirm_fixed_psd">
                             <div className="account_change_item_title"/>

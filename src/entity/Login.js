@@ -13,18 +13,17 @@ export class Login {
         this._register = function(postInfo){
             return ajax.save({action:'registerUserInfo'},postInfo);
         };
-        let userAjax = commonAjax.resource('/user/w/v1.0/:action');
-        this._getPwdVCode = function(postInfo,user){
-            return userAjax.save({action:'resetPwdVerifyCode'},postInfo,{name:"token",value:user.token});
+        this._getPwdVCode = function(postInfo){
+            return ajax.save({action:'resetPwdVerifyCode'},postInfo);
         };
         this._getRegisterVerifyCode = function(postInfo){
-            return userAjax.save({action:'registerVerifyCode'},postInfo);
+            return ajax.save({action:'registerVerifyCode'},postInfo);
         };
         this._getLoginVCode = function(postInfo){
-            return userAjax.save({action:"loginVerifyCode"},postInfo)
+            return ajax.save({action:"loginVerifyCode"},postInfo)
         };
         this._loginByCode = function(postInfo){
-            return userAjax.save({action:"loginWithVerifyCode"},postInfo)
+            return ajax.save({action:"loginWithVerifyCode"},postInfo)
         };
     }
     isLogin(user){
@@ -55,7 +54,7 @@ export class Login {
     getPwdVCode(user){
         return this._getPwdVCode({
             phone:user.phoneNum
-        },user);
+        });
     }
     getRegisterVerifyCode(user){
         return this._getRegisterVerifyCode({

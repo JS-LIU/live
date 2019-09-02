@@ -8,7 +8,8 @@ export class Homework {
         this.homeworkDownloadStatus = homeWorkInfo.homeworkDownloadStatus;
         this.homeworkName = homeWorkInfo.homeworkName;
         this.homeworkUrl = homeWorkInfo.homeworkUrl;
-        this.baseUrl = "https://test-api/"
+        this.homeworkSavePath = homeWorkInfo.homeworkSavePath;
+        this.baseUrl = "https://test-api/";
     }
     statusManager(){
         return {
@@ -27,7 +28,6 @@ export class Homework {
                 url:baseUrl.getBaseUrl() + "/src/img/home_work_can.png",
                 iconBackground:baseUrl.getBaseUrl() + "/src/img/home_work_can.png",
                 downLoad:()=>{
-
                     let downloadPage = window.open(this.baseUrl+this.homeworkUrl);
                     downloadPage.close()
                 }

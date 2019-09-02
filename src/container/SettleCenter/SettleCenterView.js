@@ -17,16 +17,17 @@ export class SettleCenterView extends Component{
         this.productCourseNo = this.props.match.params.productCourseNo;
         this.productCourse = courseService.findProductCourseByCourseNo(this.productCourseNo);
         this.state = {
-            productCourse:this.productCourse
+            productCourse:null
         }
     }
     componentDidMount() {
+
         this.setState({
             productCourse:this.productCourse
         });
     }
     createOrder(){
-        orderService.createOrder(this.productCourse).then((info)=>{
+        orderService.createOrder(this.state.productCourse).then((info)=>{
             payService.createPay(info.payModels);
             this.props.history.push('/pay')
         }).catch((msg)=>{
@@ -37,11 +38,15 @@ export class SettleCenterView extends Component{
         if(!this.state.productCourse){
             return null;
         }
-        let teacherNodes = this.state.productCourse.teacherInfoList.map((teacher,index)=>{
-            return (
-                <span className="settle_product_course_teacher_name" key={index}>{teacher.teacherName}</span>
-            )
-        });
+        // let teacherNodes = this.state.productCourse.teacherInfoList.map((teacher,index)=>{
+        //     return (
+        //         <span className="settle_product_course_teacher_name" key={index}>{teacher.teacherName}</span>
+        //     )
+        // });
+        let productCourseModule = this.productCourse.getModule.before((repairParam)=>{
+            repairParam.startTime = this.productCourse.courseInfo.getStartTimeToShow("unix");
+            repairParam.endTime = this.productCourse.courseInfo.getEndTimeToShow("unix");
+        }).call(this.productCourse,{});
         return(
             <div>
                 <div className="wrap" />
@@ -51,8 +56,8 @@ export class SettleCenterView extends Component{
                     <div className="product_course_pay_info">
                         <div className="product_course_pay_info_box">
                             <ul className="settle_product_course_info">
-                                <li>课程名称：{this.state.productCourse.name}</li>
-                                <li>授课老师：{teacherNodes}</li>
+                                <li>课程名称：{productCourseModule.courseName}</li>
+                                <li>授课老师：{productCourseModule.teacherInfo.teacherName}</li>
                                 <CourseTimeShowView
                                     style={{
                                         display:"flex",
@@ -61,13 +66,12 @@ export class SettleCenterView extends Component{
                                         color:"#000000",
                                     }}
                                     showTimeStepEnd={true}
-                                    timeType={"unix"}
-                                    timeStep={this.state.productCourse.timeList}
-                                    startTime={this.state.productCourse.startTime}
-                                    endTime={this.state.productCourse.endTime}
+                                    timeStep={productCourseModule.timeList}
+                                    startTime={productCourseModule.startTime}
+                                    endTime={productCourseModule.endTime}
                                 />
                             </ul>
-                            <div className="settle_product_course_info_price">课程价格：{this.state.productCourse.salePrice / 100}</div>
+                            <div className="settle_product_course_info_price">课程价格：{productCourseModule.salePrice / 100}</div>
                         </div>
                     </div>
 
@@ -76,7 +80,7 @@ export class SettleCenterView extends Component{
                         <ul className="settle_info_list">
                             <li className="settle_info_item">
                                 <div>商品金额：</div>
-                                <div>￥{this.state.productCourse.salePrice / 100}</div>
+                                <div>￥{productCourseModule.salePrice / 100}</div>
                             </li>
                             <li className="settle_info_item">
                                 <div>优惠减免：</div>
@@ -84,14 +88,14 @@ export class SettleCenterView extends Component{
                             </li>
                             <li className="settle_info_item">
                                 <div>合计：</div>
-                                <div>￥{this.state.productCourse.salePrice / 100}</div>
+                                <div>￥{productCourseModule.salePrice / 100}</div>
                             </li>
                         </ul>
                     </div>
                     <div className="settle_real_price_box">
                         <div className="settle_real_price_info">
                             <div className="settle_real_price_title">实付款：</div>
-                            <div className="settle_real_price">￥{this.state.productCourse.salePrice / 100}</div>
+                            <div className="settle_real_price">￥{productCourseModule.salePrice / 100}</div>
                         </div>
                     </div>
                     <div className="create_order_btn_box">

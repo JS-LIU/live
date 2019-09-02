@@ -76,6 +76,9 @@ export class TimeManager {
     static convertYMDToStampByUnix(YMD){
         return new Date(YMD).getTime() / 1000;
     }
+    static convertYMDToStampByCommon(YMD){
+        return new Date(YMD).getTime();
+    }
     static createDate(start,end){
         let list = [];
         for(let i = start;i <= end;i++){

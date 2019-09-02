@@ -11,6 +11,8 @@ import {AccountManageView} from "./AccountManageView";
 import {OrderListView} from "./OrderListView";
 import userStyle from './userStyle.css';
 import {OrderDetailView} from "./OrderDetailView";
+import {HB} from '../../util/HB';
+
 export class UserView extends Component{
     constructor(props) {
         super(props);
@@ -19,9 +21,15 @@ export class UserView extends Component{
         }
     }
     refreshUserInfo(){
-        this.setState({
-            userInfo:userService.getUser().userInfo
-        })
+        userService.getUserInfo().then(()=>{
+            this.setState({
+                userInfo:userService.getUser().userInfo
+            })
+        });
+
+    }
+    componentDidMount() {
+        HB.save.setStorage({redirect:"user"})
     }
 
     render() {

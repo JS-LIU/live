@@ -9,7 +9,7 @@ export class GeneralCourseType {
         this.name = generalCourseTypeInfo.name;
         this.type = generalCourseTypeInfo.type;
         this.specifyCourseTypeList = generalCourseTypeInfo.specifyCourseTypeList;
-        this.selected = false;
+        this.selected = true;
     }
     select(){
         this.selected = !this.selected;

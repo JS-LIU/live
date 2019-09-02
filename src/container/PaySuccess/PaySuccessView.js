@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {orderService} from "../../service/OrderService";
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
+import {HB} from '../../util/HB';
 import paySuccessStyle from './paySuccessStyle.css';
 
 export class PaySuccessView extends Component{
@@ -14,6 +15,9 @@ export class PaySuccessView extends Component{
         this.state = {
             orderProduct:orderService.getOrderProduct()
         }
+    }
+    componentDidMount() {
+        HB.save.setStorage({redirect:"user"});
     }
 
     render() {
@@ -31,9 +35,11 @@ export class PaySuccessView extends Component{
                                 </div>
                                 <div className="pay_success_body_box_inner_left_links">
                                     <div className="pay_success_body_box_inner_left_link_list">
-                                        <Link className="pay_success_body_box_inner_left_link_item">查看课程</Link>
-                                        <Link className="pay_success_body_box_inner_left_link_item">查看课程</Link>
-                                        <Link className="pay_success_body_box_inner_left_link_item">查看课程</Link>
+                                        <Link
+                                            to="/studyCourseCenter/myCourseList"
+                                            className="pay_success_body_box_inner_left_link_item">查看课程 ></Link>
+                                        <Link to="/user/orderList" className="pay_success_body_box_inner_left_link_item">查看订单 ></Link>
+                                        <Link to="/selectCourseCenter" className="pay_success_body_box_inner_left_link_item">继续选课 ></Link>
                                     </div>
                                     <Link to="/downLoad" className="pay_success_body_download_btn">下载客户端去上课</Link>
                                 </div>

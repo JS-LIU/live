@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {orderService} from "../../service/OrderService";
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
+import {HB} from "../../util/HB";
 import payFailStyle from './payFailStyle.css';
 export class PayFailView extends Component{
     constructor(props) {
@@ -15,6 +16,10 @@ export class PayFailView extends Component{
     reSelectCourse(){
         this.props.history.replace("/selectCourseCenter");
     }
+    componentDidMount() {
+        HB.save.setStorage({redirect:"user"});
+    }
+
     render() {
         return (
             <div>

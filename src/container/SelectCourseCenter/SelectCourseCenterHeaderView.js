@@ -19,6 +19,9 @@ export class SelectCourseCenterHeaderView extends Component{
             this.props.onSelectAll(generalCourseType);
         }
     }
+    componentDidMount() {
+    }
+
     render() {
         let generalNodes = this.props.courseTypeList.map((generalCourseType,index)=>{
             let specifyNodes = generalCourseType.specifyCourseTypeList.map((specifyCourseType,index)=>{

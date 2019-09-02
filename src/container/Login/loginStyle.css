@@ -49,6 +49,9 @@
     font-size:0.2rem;
     align-items: center;
 }
+.login_right_log_way_title{
+    cursor: pointer;
+}
 .login_seg{
     color:#E8E8E8;
     font-size: 0.16rem;

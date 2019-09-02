@@ -11,12 +11,12 @@ export class User {
         this.token = "";
         this.userInfo = {
             headImgUrl:baseUrl.getBaseUrl() + "/src/img/def_header_img.png",
-            userName:"登录"
+            userName:"登录",
         };
         this._getUserInfo = function(postInfo){
             return ajax.save({action:'userInfo'},postInfo,{name:"token",value:this.token});
         };
-        this._resetPsd = function(postInfo){
+        this._resetPwd = function(postInfo){
             return ajax.save({action:'resetPwd'},postInfo,{name:"token",value:this.token});
         }
     }
@@ -40,6 +40,7 @@ export class User {
     getUserInfo(){
         return this._getUserInfo({}).then((data)=>{
             this.userInfo = data.data;
+            this.userInfo.headImgUrl = (this.userInfo.headImgUrl === "" ? baseUrl.getBaseUrl()+"/src/img/def_header_img.png":this.userInfo.headImgUrl);
             return new Promise((resolve, reject)=>{
                 this.userInfo.birthY = TimeManager.timeStampToDate(this.userInfo.birthday,"unix").Y;
                 this.userInfo.birthM = TimeManager.timeStampToDate(this.userInfo.birthday,"unix").M;
@@ -48,19 +49,16 @@ export class User {
             })
         });
     }
-    resetPsd(resetInfo){
-        return this._resetPsd({
+    resetPwd(resetInfo){
+        return this._resetPwd({
+            phone:resetInfo.phoneNum||this.phoneNum,
             code:resetInfo.vCode,
-            password:hex_md5(resetInfo.password)
+            password:hex_md5(resetInfo.newPsd)
         }).then((data)=>{
-            this.password = data.data.resetInfo.password;
+            this.password = resetInfo.newPsd;
             return new Promise((resolve, reject)=>{
                 resolve(data);
             })
         })
-    }
-    //  创建user
-    saveUser() {
-
     }
 }

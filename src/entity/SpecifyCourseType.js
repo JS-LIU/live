@@ -9,7 +9,7 @@ export class SpecifyCourseType {
         this.name = specifyCourseInfo.name;
         this.type = specifyCourseInfo.type;
         this.id = specifyCourseInfo.id;
-        this.selected = false;
+        this.selected = true;
     }
     select(){
         this.selected = !this.selected;

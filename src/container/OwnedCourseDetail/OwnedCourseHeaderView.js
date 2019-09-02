@@ -14,18 +14,18 @@ export class OwnedCourseHeaderView extends Component{
     courseProgressRender(){
         return (
             <div className="course_progress">
-                <div className="course_progress_num">{this.props.ownedCourse.finishLessonNum} / {this.props.ownedCourse.totalLessonNum}</div>
+                <div className="course_progress_num">{this.props.ownedCourseModule.finishLessonNum} / {this.props.ownedCourseModule.totalLessonNum}</div>
                 <div className="course_progress_title">课程进度</div>
             </div>
         )
     }
     render() {
         return (
-            <div className="owned_course_plan_header" style={{background:this.props.ownedCourse.type.getTypeInfo().background}}>
-                <img src={this.props.ownedCourse.type.getTypeInfo().url} alt="" className="owned_course_plan_header_bg" />
+            <div className="owned_course_plan_header" style={{background:this.props.ownedCourseModule.type.background}}>
+                <img src={this.props.ownedCourseModule.type.url} alt="" className="owned_course_plan_header_bg" />
                 <div className="owned_course_plan_header_course_plan_item_info">
                     <div className="owned_course_plan_header_course_plan_item_info_top">
-                        <div className="owned_course_plan_header_course_plan_item_info_top_name">{this.props.ownedCourse.courseName}</div>
+                        <div className="owned_course_plan_header_course_plan_item_info_top_name">{this.props.ownedCourseModule.courseName}</div>
                         <CourseTimeShowView
                             style={{
                                 display:"flex",
@@ -35,29 +35,28 @@ export class OwnedCourseHeaderView extends Component{
                                 marginTop: "0.15rem"
                             }}
                             showTimeStepEnd={true}
-                            timeType={"unix"}
-                            timeStep={this.props.ownedCourse.timeList}
-                            startTime={this.props.ownedCourse.startTime}
-                            endTime={this.props.ownedCourse.endTime}
+                            timeStep={this.props.ownedCourseModule.timeList}
+                            startTime={this.props.ownedCourseModule.startTime}
+                            endTime={this.props.ownedCourseModule.endTime}
                         />
                     </div>
                     <div className="owned_course_plan_header_course_plan_item_info_bottom">
                         <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info">
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header">
-                                <img src={this.props.ownedCourse.teacherInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
+                                <img src={this.props.ownedCourseModule.teacherInfo.headImgUrl} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
                             </div>
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name">
                                 <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title">教师</div>
-                                <div>{this.props.ownedCourse.teacherInfo.teacherName}</div>
+                                <div>{this.props.ownedCourseModule.teacherInfo.teacherName}</div>
                             </div>
                         </div>
                         <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info">
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header">
-                                <img src={this.props.ownedCourse.assistantInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
+                                <img src={this.props.ownedCourseModule.assistantInfo.headImgUrl} className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_header_pic" alt=""/>
                             </div>
                             <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name">
                                 <div className="owned_course_plan_header_course_plan_item_info_bottom_teacher_info_name_title">助教</div>
-                                <div>{this.props.ownedCourse.assistantInfo.teacherName||"暂未分配"}</div>
+                                <div>{this.props.ownedCourseModule.assistantInfo.teacherName}</div>
                             </div>
                         </div>
                     </div>
@@ -69,8 +68,8 @@ export class OwnedCourseHeaderView extends Component{
                         borderWidth={"0.06"}
                         borderBg={"rgba(255,255,255,1)"}
                         progressBorderBg={"rgba(220,255,234,1)"}
-                        nowProgress={this.props.ownedCourse.finishLessonNum}
-                        totalProgress={this.props.ownedCourse.totalLessonNum}
+                        nowProgress={this.props.ownedCourseModule.finishLessonNum}
+                        totalProgress={this.props.ownedCourseModule.totalLessonNum}
                         innerRender={this.courseProgressRender()}
                     />
                 </div>

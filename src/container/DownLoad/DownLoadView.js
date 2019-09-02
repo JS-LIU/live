@@ -6,11 +6,15 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {userService} from "../../service/UserService";
 import {FooterView} from "../../component/FooterView/FooterView";
+import {HB} from '../../util/HB';
 import downLoadStyle from './downLoadStyle.css';
 
 export class DownLoadView extends Component{
     constructor(props) {
         super(props);
+    }
+    componentDidMount() {
+        HB.save.setStorage({redirect:"home"})
     }
 
     render() {

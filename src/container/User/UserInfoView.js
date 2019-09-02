@@ -98,7 +98,7 @@ export class UserInfoView extends Component{
         let day = TimeManager.createDate(1,31);
         let dayNodes = day.map((dayItem,index)=>{
             return (
-                <option key={index} value={dayItem} selected={parseInt(dayItem) === this.state.userInfo.birthD?"selected":null}>{dayItem}</option>
+                <option key={index} value={dayItem} selected={parseInt(dayItem) === parseInt(this.state.userInfo.birthD)?"selected":null}>{dayItem}</option>
             )
         });
         let grade = ["学前班","小学一年级","小学二年级","小学三年级","小学四年级","小学五年级","小学六年级","初中一年级","初中二年级","初中三年级","高中一年级","高中二年级","高中三年级"];
@@ -174,7 +174,7 @@ export class UserInfoView extends Component{
                             </div>
                         </li>
                         <li className="user_info_box_set_info_box_left_item">
-                            <div className="user_info_set_info_box_left_item_title">收获地址</div>
+                            <div className="user_info_set_info_box_left_item_title">收货地址</div>
                             <input type="text"
                                    value={this.state.userInfo.address}
                                    className="user_info_set_info_box_address"

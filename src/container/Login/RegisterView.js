@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import registerStyle from './registerStyle.css';
+import {HB} from "../../util/HB";
 
 export class RegisterView extends Component{
     constructor(props) {
@@ -49,13 +50,14 @@ export class RegisterView extends Component{
         this.props.register();
     }
     inputPhoneNum(e){
+        this.phoneNum = e.target.value;
         this.props.inputPhoneNum(e.target.value);
     }
     inputPassword(e) {
         this.props.inputPassword(e.target.value)
     }
     getVCode(){
-        if(this.state.countDown === "获取验证码"){
+        if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.phoneNum)){
             this.startCountDown();
             this.props.getRegisterVCode();
         }
@@ -64,14 +66,14 @@ export class RegisterView extends Component{
         this.props.inputVCode(e.target.value);
     }
     startCountDown(){
-        let startTime = 10;
+        let startTime = 60;
         let t = setInterval(()=>{
             startTime--;
             this.setState({
                 countDown:startTime+"s后重新获取"
             });
             if(startTime === 0){
-                startTime = 10;
+                startTime = 60;
                 this.setState({
                     countDown:"获取验证码"
                 });
@@ -109,6 +111,7 @@ export class RegisterView extends Component{
                         </div>
                         <div className="register_right_log_log_password" style={this.state.passwordStyle}>
                             <input type="password"
+                                   autoComplete="new-password"
                                    placeholder="请输入密码"
                                    className="register_psd_num_input"
                                    onChange={(e)=>{this.inputPassword(e)}}
@@ -118,7 +121,7 @@ export class RegisterView extends Component{
                         </div>
                     </div>
                     <div className="register_right_log_log_reset_psd">
-                        <Link to="/login/resetPsd" className="register_right_log_log_reset_psd_btn">忘记密码</Link>
+                        <Link to="/forgetPassword" className="register_right_log_log_reset_psd_btn">忘记密码</Link>
                     </div>
                     <div className="register_btn" onClick={this.register.bind(this)}>注册</div>
                 </div>

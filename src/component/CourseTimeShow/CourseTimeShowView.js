@@ -11,6 +11,7 @@ export class CourseTimeShowView extends Component{
     }
     render() {
         let weekDayNodes = this.props.timeStep.map((weekItem,index)=>{
+            // weekItem.week = (weekItem.week === 0? 7:weekItem.week);
             let endTime = null;
             if(this.props.showTimeStepEnd){
                 endTime = (
@@ -19,16 +20,16 @@ export class CourseTimeShowView extends Component{
             }
             return (
                 <div key={index} className="time_list_item">
-                    <div>周{HB.valid.parseChinese(weekItem.week)[0]} {weekItem.periodStartTime}</div>
+                    <div>周{weekItem.week} {weekItem.periodStartTime}</div>
                     {endTime}
                 </div>
             )
         });
-        TimeManager.convertStampToMD(this.props.startTime,this.props.timeType);
+        // TimeManager.convertStampToMD(this.props.startTime,this.props.timeType);
         return (
             <div style={this.props.style}>
                 <div>
-                    {TimeManager.convertStampToMD(this.props.startTime,this.props.timeType)}-{TimeManager.convertStampToMD(this.props.endTime,this.props.timeType)}
+                    {this.props.startTime}-{this.props.endTime}
                 </div>
                 <div className="time_list">
                     {weekDayNodes}

@@ -11,6 +11,8 @@ import {userService} from "../../service/UserService";
 import {HB} from "../../util/HB";
 import {FooterView} from "../../component/FooterView/FooterView";
 import {baseUrl} from "../../config/config";
+import {TeacherView} from "../../component/Teacher/TeacherView";
+import {IconCourseNameView} from "../../component/IconCourseNameView/IconCourseNameView";
 
 export class WeekCourseView extends Component{
 
@@ -64,6 +66,7 @@ export class WeekCourseView extends Component{
         courseService.pagination.to(1);
         this.getOwnedCoursePlanItemList();
         this.onGetMore();
+        HB.save.setStorage({redirect:"studyCourseCenter/week"});
     }
 
     componentWillUnmount() {
@@ -73,46 +76,46 @@ export class WeekCourseView extends Component{
     getCourseNodes(){
         if(this.state.coursePlanList.length > 0){
             return this.state.coursePlanList.map((coursePlanItem, index) => {
+                let coursePlanItemModule = coursePlanItem.getModule.before((repairParam)=>{
+                    repairParam.startTime = coursePlanItem.coursePlanItem.getShowTime("common");
+                }).call(coursePlanItem,{});
                 return (
                     <div className="course_week_course_item" key={index}>
                         <div className="course_week_course_item_title">
                             <span
-                                className="course_week_course_item_title_time">{coursePlanItem.getShowTime("common")}</span>
+                                className="course_week_course_item_title_time">{coursePlanItemModule.startTime}</span>
                             <span className="course_week_course_item_title_status"
-                                  style={{background:coursePlanItem.learnStatus.getStatusInfo().background,color:coursePlanItem.learnStatus.getStatusInfo().color}}>
-                                {coursePlanItem.learnStatus.getStatusInfo().name}
+                                  style={{background:coursePlanItemModule.learnStatus.background,color:coursePlanItemModule.learnStatus.color}}>
+                                {coursePlanItemModule.learnStatus.name}
                             </span>
                         </div>
                         <div className="course_week_course_item_info">
                             <div className="course_week_course_item_info_name_box">
                                 <div className="course_week_course_item_info_name">
-                                    <div
-                                        className="course_week_course_item_info_session_name"
-                                        style={{background:"url('"+coursePlanItem.type.getTypeInfo().iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>
-                                        {coursePlanItem.sessionName}</div>
+                                    <IconCourseNameView
+                                        name={coursePlanItemModule.name}
+                                        style={{
+                                            background:"url('"+coursePlanItemModule.type.iconBackground +"') no-repeat left center",
+                                            backgroundSize:"0.25rem",
+                                            fontSize:"0.2rem",
+                                            color: "#000000",
+                                            paddingLeft:"0.4rem"
+                                        }}
+                                    />
                                 </div>
                                 <div className="course_week_course_item_info_teacher_info">
-                                    <div className="course_week_course_item_info_teacher">
-                                        <div className="course_week_course_item_info_teacher_header">
-                                            <img src={coursePlanItem.teacherInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
-                                                 className="course_week_course_item_info_teacher_header_img"/>
-                                        </div>
-                                        <div className="course_week_course_item_info_teacher_name">
-                                            <div>主讲</div>
-                                            <div>{coursePlanItem.teacherInfo.teacherName}</div>
-                                        </div>
-                                    </div>
-                                    <div className="course_week_course_item_info_teacher">
-                                        <div className="course_week_course_item_info_teacher_header">
-                                            <img src={coursePlanItem.assistantInfo.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} alt=""
-                                                 className="course_week_course_item_info_teacher_header_img"/>
-                                        </div>
-                                        <div className="course_week_course_item_info_teacher_name">
-                                            <div>助教</div>
-                                            <div>{coursePlanItem.assistantInfo.teacherName}</div>
-                                        </div>
-                                    </div>
-
+                                    <TeacherView
+                                        teacherStyle={{marginLeft:"0.18rem"}}
+                                        teacherTitle={"主讲"}
+                                        headImgUrl={coursePlanItemModule.teacherInfo.headImgUrl}
+                                        teacherName={coursePlanItemModule.teacherInfo.teacherName}
+                                    />
+                                    <TeacherView
+                                        teacherStyle={{marginLeft:"0.18rem"}}
+                                        teacherTitle={"助教"}
+                                        headImgUrl={coursePlanItemModule.assistantInfo.headImgUrl}
+                                        teacherName={coursePlanItemModule.assistantInfo.teacherName}
+                                    />
                                 </div>
                             </div>
                             <Link to="/downLoad" className="course_week_course_down_load">

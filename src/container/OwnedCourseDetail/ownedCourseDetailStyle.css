@@ -96,13 +96,15 @@
     flex-direction: column;
     justify-content: space-between;
     color: #FFF;
-    width: 0.5rem;
-    height: 0.4rem;
+    width: 0.7rem;
     top: 50%;
     left: 50%;
-    margin-left: -0.25rem;
+    margin-left: -0.35rem;
     margin-top: -0.2rem;
     align-items: center;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 .course_progress_num{
     font-size:0.16rem;

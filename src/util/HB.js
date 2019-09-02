@@ -51,8 +51,26 @@ HB.obj = (function(){
     let isArray = function isArray(o) {
         return Object.prototype.toString.call(o) === "[object Array]";
     };
+    //  判断是否为"",null,{} 如果是返回true,否则返回false
+    const isNothing = function(arg){
+
+        if(arg === null){
+            return true;
+        }
+        if(arg === ""){
+            return true;
+        }
+        if(arg === undefined){
+            return true
+        }
+        if(Object.prototype.toString.call(arg) === "[object Object]" && isEmpty(arg)){
+            return true;
+        }
+    };
+
 
     return {
+        isNothing:isNothing,
         toEquals:toEquals,
         isEmpty:isEmpty,
         isArray:isArray
@@ -260,7 +278,14 @@ HB.valid = (function(){
     function validPhoneNum(phoneNum){
         return phoneNum.length === 11;
     }
-
+    function isPoneAvailable(phoneNum) {
+        let myReg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myReg.test(phoneNum)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     //  用途：将字符串中所有空格删除
     function trimAllBlank(str){
@@ -317,7 +342,8 @@ HB.valid = (function(){
         parseChinese:parseChinese,
         parseDay:parseDay,
         validPhoneNum:validPhoneNum,
-        addTimeToDay:addTimeToDay
+        addTimeToDay:addTimeToDay,
+        isPoneAvailable:isPoneAvailable
     }
 
 })();
@@ -464,13 +490,70 @@ HB.save = (function(){
 
     const setStorage = function(obj){
         for(let prop in obj){
-            localStorage[prop] = JSON.stringify(obj[prop]);
+            localStorage[prop] = obj[prop];
         }
     };
-
-
+    function isQuotaExceeded(e) {
+        let quotaExceeded = false;
+        if(e) {
+            if(e.code) {
+                switch(e.code) {
+                    case 22:
+                        quotaExceeded = true;
+                        break;
+                    case 1014: // Firefox
+                        if(e.name === 'NS_ERROR_DOM_QUOTA_REACHED') {
+                            quotaExceeded = true;
+                        }
+                        break;
+                }
+            } else if(e.number === -2147024882) { // IE8
+                quotaExceeded = true;
+            }
+        }
+        return quotaExceeded;
+    }
+    function setLocalStorageByLimitTime(key, value) {
+        let curTime = new Date().getTime(); // 获取当前时间 ，转换成JSON字符串序列
+        let valueDate = JSON.stringify({
+            val: value,
+            timer: curTime
+        });
+        try {
+            localStorage.setItem(key, valueDate);
+        } catch(e) {
+            // 兼容性写法
+            if(isQuotaExceeded(e)) {
+                console.log("Error: 本地存储超过限制");
+                localStorage.clear();
+            } else {
+                console.log("Error: 保存到本地存储失败");
+            }
+        }
+    }
+    function getLocalStorageByLimitTime(key) {
+        let exp = 60 * 60 * 1000; // 1个小时
+        if(localStorage.getItem(key)) {
+            let vals = localStorage.getItem(key); // 获取本地存储的值
+            let dataObj = JSON.parse(vals); // 将字符串转换成JSON对象
+            console.log("dataObj:===",dataObj);
+            console.log(new Date().getTime());
+            // 如果(当前时间 - 存储的元素在创建时候设置的时间) > 过期时间
+            let isTimed = (new Date().getTime() - dataObj.timer) > exp;
+            if(isTimed) {
+                console.log("存储已过期");
+                localStorage.removeItem(key);
+                return null;
+            }
+            return dataObj.val;
+        } else {
+            return null;
+        }
+    }
     return {
         setStorage:setStorage,
+        setLocalStorageByLimitTime:setLocalStorageByLimitTime,
+        getLocalStorageByLimitTime:getLocalStorageByLimitTime
     }
 })();
 

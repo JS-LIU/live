@@ -11,6 +11,11 @@
     z-index: 3;
 }
 .common_header_center{
+    width:11.8rem;
+    position:relative;
+}
+.common_header_center_box{
+    position:relative;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -43,6 +48,7 @@
 }
 .common_header_center_link_item{
     margin-left:0.5rem;
+    cursor: pointer;
 }
 .common_header_login_info{
     display:flex;
@@ -74,4 +80,28 @@
     border-left: 0.07rem solid transparent;
     border-right: 0.07rem solid transparent;
     border-top: 0.1rem solid #FFC200;
+}
+.login_info_toggle_list{
+    position:absolute;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    top:0.5rem;
+    right:0;
+    width:0.96rem;
+    height:0.95rem;
+    background:url("../../img/user_info_toggle_list_box.png") no-repeat top center;
+    background-size: 0.96rem 0.95rem;
+    z-index: 1;
+}
+.login_info_toggle_list_item{
+    width:0.74rem;
+    border-bottom:0.01rem solid #E8E8E8;
+    height:0.46rem;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top:0.01rem;
+    font-size:0.14rem;
 }

@@ -22,7 +22,7 @@ export class OwnedCourseBottom extends Component {
                     totalProgress={courseItem.totalLessonNum}
                 />
                 <div className="my_owned_course_product_item_footer_total_course_proceed_text">
-                    {courseItem.learnStatus.getStatusInfo().name === "正在学"?"已完成"+courseItem.finishLessonNum+"/"+courseItem.totalLessonNum+"节课":courseItem.learnStatus.getStatusInfo().name}</div>
+                    {courseItem.learnStatus.name === "正在学"?"已完成"+courseItem.finishLessonNum+"/"+courseItem.totalLessonNum+"节课":courseItem.learnStatus.name}</div>
             </div>
         );
     }

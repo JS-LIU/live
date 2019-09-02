@@ -1,0 +1,32 @@
+.teacher{
+    height:0.5rem;
+    display:flex;
+    flex-direction: row;
+}
+.teacher_pic_box{
+    width:0.5rem;
+    height:0.5rem;
+    border:0.01rem solid #e8e8e8;
+    border-radius: 0.24rem;
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.teacher_header_img{
+    width:100%;
+}
+.teacher_info{
+    margin-left:0.11rem;
+    height:0.5rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size:0.14rem;
+}
+.teacher_info_job{
+    color:#000;
+}
+.teacher_info_name{
+    color:#8b8b8b;
+}

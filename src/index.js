@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter,
+    HashRouter,
     Switch,
     Route,
     Redirect,
@@ -35,6 +36,7 @@ import {OwnedCourseDetailView} from './container/OwnedCourseDetail/OwnedCourseDe
 import {HB} from "./util/HB";
 import {OrderDetailView} from "./container/User/OrderDetailView";
 import {DownLoadView} from "./container/DownLoad/DownLoadView";
+import {ForgetPasswordView} from './container/Login/ForgetPasswordView';
 import {baseUrl} from "./config/config";
 import {userService} from "./service/UserService";
 //  resetFontSize
@@ -44,19 +46,17 @@ HB.ui.setBaseFontSize(1920,100);
 
 //  上次访问的是哪个页面 到了这个页面我要让他访问哪个页面
 
-let redirectConfig = {
-    "resetPassword":"/login/login",
-    "register":"/login/register",
-    "selectCourseCenter":"/selectCourseCenter"
-};
-let redirectUrl = redirectConfig[HB.url.getSearchKey("redirect")] || "/home";
+
+
+
 let renderDom = function(){
     ReactDOM.render(
-        (<BrowserRouter>
+        (<HashRouter history={history}>
             <Redirect to={redirectUrl}/>
             <div>
                 <Route path="/home" component={HomeView}/>
-                <Route path="/login/:action" exact component={LoginMainView} />
+                <Route path="/login/:action" component={LoginMainView} />
+                <Route path="/forgetPassword" component={ForgetPasswordView} />
                 <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
                 <Route path="/studyCourseCenter/:myCourse" component={StudyCourseCenterView} />
                 <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />
@@ -69,17 +69,34 @@ let renderDom = function(){
                 <Route path="/orderDetail/:orderNo" component={OrderDetailView}/>
                 <Route path="/downLoad" component={DownLoadView}/>
             </div>
-        </BrowserRouter>),
+        </HashRouter>),
         document.getElementById('app')
     );
 };
-//  获取token
-let token = HB.url.getSearchKey("token")||HB.url.getSearchKey("t");
+//  获取token todo 将登陆跳转逻辑 重构到 RouterService 中
+let token = HB.url.getSearchKey("token")||HB.url.getSearchKey("t")||HB.save.getLocalStorageByLimitTime("token");
+let redirect = HB.url.getSearchKey("redirect")||localStorage.getItem("redirect");
+let redirectConfig = {
+    "resetPassword":"/forgetPassword",
+    "register":"/login/register",
+    "selectCourseCenter":"/selectCourseCenter",
+    "login/login":"/login/login",
+    "studyCourseCenter/myCourseList":"/studyCourseCenter/myCourseList",
+    "studyCourseCenter/week":"/studyCourseCenter/week",
+    "user":"/user/accountManage",
+    "ownedCourseDetail":"/studyCourseCenter/myCourseList",
+    "orderDetail":'/orderDetail'+localStorage.getItem("orderNo"),
+};
+let redirectUrl = redirectConfig[redirect] || "/home";
 if(token){
+    userService.updateUserInfo({token:token});
+    HB.save.setLocalStorageByLimitTime("token",token);
     userService.getUserInfo().then(()=>{
         renderDom();
     })
 }else{
+    localStorage.clear();
+    redirectUrl = redirectConfig[HB.url.getSearchKey("redirect")] || "/home";
     renderDom();
 }
 

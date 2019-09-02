@@ -107,7 +107,6 @@ export class PCUserInfoView extends Component{
         });
         let grade = ["学前班","小学一年级","小学二年级","小学三年级","小学四年级","小学五年级","小学六年级","初中一年级","初中二年级","初中三年级","高中一年级","高中二年级","高中三年级"];
         let gradeNodes = grade.map((gradeItem,index)=>{
-            console.log(this.state.userInfo.grade);
            return (
                <option key={index} value={gradeItem} selected={gradeItem === this.state.userInfo.grade?"selected":null}>{gradeItem}</option>
            )
@@ -179,7 +178,7 @@ export class PCUserInfoView extends Component{
                             </div>
                         </li>
                         <li className="user_info_box_set_info_box_left_item">
-                            <div className="user_info_set_info_box_left_item_title">收获地址</div>
+                            <div className="user_info_set_info_box_left_item_title">收货地址</div>
                             <input type="text"
                                    value={this.state.userInfo.address}
                                    className="user_info_set_info_box_address"

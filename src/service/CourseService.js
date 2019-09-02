@@ -109,7 +109,7 @@ class CourseService {
     }
     findOwnedCourseById(id){
         return this.ownedCourseList.find((ownedCourse,index)=>{
-            return parseInt(ownedCourse.id) === parseInt(id);
+            return parseInt(ownedCourse.courseInfo.id) === parseInt(id);
         })
     }
 
@@ -120,8 +120,7 @@ class CourseService {
      */
     getOwnedCoursePlanItemListByDetail(ownedCourseId){
         let ownedCourse = this.findOwnedCourseById(ownedCourseId);
-        this.ownedCoursePlanList = ownedCourse.getCoursePlanList();
-        return this.ownedCoursePlanList;
+        return ownedCourse.coursePlanList;
     }
     /**
      * 创建学习状态
@@ -223,6 +222,10 @@ class CourseService {
     toggleSelectAllSpecifyCourseType(generalCourseType){
         generalCourseType.toggleSelectAllSpecifyCourseType();
     }
+    selectAllSpecifyCourseType(generalCourseType){
+        generalCourseType.selectAllSpecifyCourseType(true);
+        generalCourseType.selected = true;
+    }
     /**
      * 创建通用分类
      * @param summaryTips
@@ -273,7 +276,8 @@ class CourseService {
             pageSize:this.pagination.size
         }).then((data)=>{
             for(let i = 0;i < data.data.list.length;i++){
-                productCourseList.push(this.createProductCourse(data.data.list[i]));
+                let productCourse = this.createProductCourse(data.data.list[i]);
+                productCourseList.push(productCourse);
             }
             return new Promise((resolve, reject)=>{
                 this.courseList = this.refreshOrMoreList(this.courseList,productCourseList);
@@ -337,22 +341,9 @@ class CourseService {
             let productCourse = this.findProductCourseByCourseNo(productCourseNo);
             //  不推入this.courseList
             if(!productCourse){
-                productCourse = this.createProductCourse({
-                    id :data.data.id,
-                    goodNo :data.data.goodNo,
-                    level :data.data.level,
-                    name :data.data.name,
-                    startTime :data.data.startTime,
-                    endTime :data.data.endTime,
-                    teacherInfoList :data.data.teacherInfoList,
-                    totalLessonNum :data.data.totalLessonNum,
-                    salePrice :data.data.salePrice,
-                    timeList :data.data.timeList,
-                    type :data.data.type,
-                });
+                productCourse = this.createProductCourse(data.data);
             }
             productCourse = this.updateCourse(productCourse,data.data);
-
             return new Promise((resolve, reject)=>{
                 resolve(productCourse);
             });
@@ -361,6 +352,7 @@ class CourseService {
 
     findProductCourseByCourseNo(productCourseNo) {
         return this.courseList.find((course)=>{
+            console.log(course);
             return course.goodNo === productCourseNo;
         });
     }

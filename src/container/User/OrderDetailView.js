@@ -8,6 +8,7 @@ import {TimeManager} from "../../entity/TimeManager";
 import orderDetailStyle from './orderDetailStyle.css';
 import {baseUrl} from "../../config/config";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
+import {HB} from '../../util/HB';
 
 export class OrderDetailView extends Component{
     constructor(props) {
@@ -23,7 +24,8 @@ export class OrderDetailView extends Component{
             this.setState({
                 orderInfo:orderInfo
             })
-        })
+        });
+        HB.save.setStorage({redirect:"/orderDetail",orderNo:this.orderNo});
     }
     render() {
         if(!this.state.orderInfo){

@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import loginStyle from './loginStyle.css';
+import {HB} from "../../util/HB";
 export class LoginView extends Component{
     constructor(props) {
         super(props);
@@ -19,6 +20,7 @@ export class LoginView extends Component{
         this.props.login();
     }
     inputPhoneNum(e){
+        this.phoneNum = e.target.value;
         this.props.inputPhoneNum(e.target.value);
     }
     inputPassword(e) {
@@ -55,7 +57,7 @@ export class LoginView extends Component{
         })
     }
     getLoginVCode(){
-        if(this.state.countDown === "获取验证码"){
+        if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.phoneNum)){
             this.startCountDown();
             this.props.getLoginVCode();
         }
@@ -64,14 +66,14 @@ export class LoginView extends Component{
         this.props.inputVCode(e.target.value);
     }
     startCountDown(){
-        let startTime = 10;
+        let startTime = 60;
         let t = setInterval(()=>{
             startTime--;
             this.setState({
                 countDown:startTime+"s后重新获取"
             });
             if(startTime === 0){
-                startTime = 10;
+                startTime = 60;
                 this.setState({
                     countDown:"获取验证码"
                 });
@@ -92,9 +94,13 @@ export class LoginView extends Component{
                 </div>
                 <div className="login_right_log">
                     <div className="login_right_log_way">
-                        <a onClick={this.onLoginByPsd.bind(this)} style={this.state.loginByPsd?{color:"#000000"}:{}}>密码登录</a>
+                        <div className="login_right_log_way_title"
+                             onClick={this.onLoginByPsd.bind(this)}
+                             style={this.state.loginByPsd?{color:"#000000"}:{}}>密码登录</div>
                         <div className="login_seg">|</div>
-                        <a onClick={this.onLoginByVCode.bind(this)} style={this.state.loginByPsd?{}:{color:"#000000"}}>验证码登录</a>
+                        <div className="login_right_log_way_title"
+                             onClick={this.onLoginByVCode.bind(this)}
+                             style={this.state.loginByPsd?{}:{color:"#000000"}}>验证码登录</div>
                     </div>
                     <div className="login_right_log_log">
                         <div className="login_right_log_log_phone_num" style={this.state.phoneNumStyle}>
@@ -110,7 +116,7 @@ export class LoginView extends Component{
                                    className="login_psd_num_input"
                                    onChange={(e)=>{this.inputPassword(e)}}
                                    onBlur={this.onPasswordBlur.bind(this)}
-                                   onFocus={this.onPasswordFocus.bind(this)}/>
+                                   onFocus={this.onPasswordFocus.bind(this)} autoComplete="new-password"/>
                         </div>:<div className="register_right_register_v_code" style={this.state.passwordStyle}>
                             <input type="text"
                                    className="register_v_code_input"
@@ -123,7 +129,7 @@ export class LoginView extends Component{
 
                     </div>
                     <div className="login_right_log_log_reset_psd">
-                        <Link to="/login/resetPsd" className="login_right_log_log_reset_psd_btn">忘记密码</Link>
+                        <Link to="/forgetPassword" className="login_right_log_log_reset_psd_btn">忘记密码</Link>
                     </div>
                     {this.state.loginByPsd?
                         <div className="login_btn" onClick={this.login.bind(this)}>登录</div>:

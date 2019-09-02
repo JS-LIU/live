@@ -31,6 +31,8 @@ export class LoginMainView extends Component{
                 userService.autoUpdateUserInfo();
                 //  跳转到首页
                 this.props.history.replace('/home');
+            }).catch((msg)=>{
+                alert(msg)
             });
         }
     }
@@ -42,10 +44,16 @@ export class LoginMainView extends Component{
     }
     register(){
         return ()=>{
+            if(userService.getUser().password.length === 0){
+                alert("请输入密码");
+                return null;
+            }
             userService.register(this.vcode).then((data)=>{
                 userService.updateUserInfo({token:data.data.token});
                 //  跳转到首页
                 this.props.history.replace('/login/login');
+            }).catch((msg)=>{
+                alert(msg)
             });
         }
     }
@@ -74,6 +82,8 @@ export class LoginMainView extends Component{
             userService.autoUpdateUserInfo();
             //  跳转到首页
             this.props.history.replace('/home');
+        }).catch((msg)=>{
+            alert(msg);
         });
     }
     render(){

@@ -32,6 +32,7 @@ export class SelectCourseCenterView extends Component{
             this.updateCourseList();
         });
         this.onGetMore();
+        HB.save.setStorage({redirect:"selectCourseCenter"});
     }
     componentWillUnmount() {
         window.onscroll = null;
@@ -75,7 +76,7 @@ export class SelectCourseCenterView extends Component{
         this.updateCourseList();
     }
     onSelectAll(generalCourseType){
-        courseService.toggleSelectAllSpecifyCourseType(generalCourseType);
+        courseService.selectAllSpecifyCourseType(generalCourseType);
         this.setState({
             courseTypeList:courseService.courseType
         });
@@ -84,7 +85,7 @@ export class SelectCourseCenterView extends Component{
     render() {
         return(
             <div>
-                <div className="wrap"></div>
+                <div className="wrap" />
                 <HeaderView  history={this.props.history} userInfo={userService.getUser().userInfo}/>
                 <div className="select_course_center_main">
                     <div className="crumbs">
