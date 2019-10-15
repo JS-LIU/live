@@ -12,6 +12,7 @@ import {OrderListView} from "./OrderListView";
 import userStyle from './userStyle.css';
 import {OrderDetailView} from "./OrderDetailView";
 import {HB} from '../../util/HB';
+import {CouponListView} from "../CouponListView/CouponListView";
 
 export class UserView extends Component{
     constructor(props) {
@@ -49,6 +50,7 @@ export class UserView extends Component{
                     <Route path="/user/accountManage" component={AccountManageView} />
                     <Route path="/user/orderList" component={OrderListView}/>
                     <Route path="/user/orderDetail/:orderNo" component={OrderDetailView}/>
+                    <Route path="/user/couponList" component={CouponListView}/>
                 </div>
             </div>
         );

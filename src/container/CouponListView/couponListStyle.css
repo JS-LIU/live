@@ -1,0 +1,105 @@
+.coupon_list_container{
+    width:10.15rem;
+    border:0.01rem solid #F2F4F7;
+    border-radius: 0.08rem;
+    overflow: hidden;
+    background:#ffffff;
+}
+.coupon_list_header{
+    height:0.63rem;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.01rem solid #F2F4F7;
+    font-size:0.2rem;
+    color:#000000;
+    padding-left:0.41rem;
+}
+.coupon_list_title_left{
+    font-size: 0.2rem;
+    color: #000000;
+}
+.coupon_list_title_right{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:2rem;
+    margin-right: 0.4rem;
+}
+.coupon_status_item{
+    width:0.48rem;
+    height:0.24rem;
+    background:#F3F3F3;
+    color:#808080;
+    font-weight:300;
+    font-size:0.12rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.selected_status{
+    background:#C0C0C0;
+    color:#FFF;
+}
+.selected_status_first{
+    border-radius:0.06rem 0 0 0.06rem;
+}
+.selected_status_last{
+    border-radius: 0 0.06rem 0.06rem 0;
+}
+.no_coupon_list{
+    width:100%;
+    background:url("../../img/no_course.png") no-repeat center;
+    background-size: 3rem 1.6rem;
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+}
+.coupon_list{
+    margin:0.3rem 0 1.02rem 0.38rem;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:9rem;
+}
+.coupon{
+    position:relative;
+    width:2.7rem;
+    height:1.2rem;
+    margin:0 0.3rem 0.3rem 0;
+}
+.unselected_coupon{
+    background:url("../../img/coupon_unselected.png") no-repeat center;
+    background-size: 2.7rem 1.2rem;
+    width:2.7rem;
+    height:1.2rem;
+}
+.cant_use_coupon{
+    background:url("../../img/coupon_cant_use.png") no-repeat center;
+    background-size: 2.7rem 1.2rem;
+    width:2.7rem;
+    height:1.2rem;
+}
+.coupon_price{
+    font-size:0.3rem;
+    color:#B8836C;
+    margin:0.17rem 0 0 0.23rem;
+    font-weight:600;
+}
+.coupon_name{
+    margin:0.02rem 0 0 0.23rem;
+    font-weight:600;
+    color:#808080;
+}
+.coupon_end_time{
+    margin:0 0 0 0.23rem;
+    font-weight:400;
+    font-size:0.12rem;
+}
+.coupon_sub_limit{
+    color:#CCCCCC;
+    font-size:0.12rem;
+    margin:0.12rem 0 0 0.23rem;
+}

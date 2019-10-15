@@ -32,7 +32,7 @@ export class UserTabBox extends Component{
                 activity:false,
             },
             {
-                link:"/voucherList",
+                link:"/couponList",
                 name:"优惠券",
                 uncheck_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_voucher_uncheck.png",
                 check_icon:baseUrl.getBaseUrl() + "/src/img/user_tab_box_voucher_check.png",
