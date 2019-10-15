@@ -2,24 +2,72 @@
  * Created by Liudq on 2019-07-23
  */
 import React, {Component} from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+// import "~slick-carousel/slick/slick-theme.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import ReactSwiper from 'reactjs-swiper';
 
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {FooterView} from "../../component/FooterView/FooterView";
 import {baseUrl} from "../../config/config";
 import HomeStyle from './HomeStyle.css';
+import {HB} from "../../util/HB";
+import {HomeViewDialogView} from "./HomeViewDialogView";
 
+function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className="sec_8_child_img_next_btn"
+            onClick={onClick} />
+    );
+}
+
+function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+        <div
+            className="sec_8_child_img_prev_btn"
+            onClick={onClick} />
+    );
+}
 export class HomeView extends Component{
     constructor(props) {
         super(props);
+        this.sec_1_swiper_params = {
+            // loop: true,
+            // pagination: {
+            //     el: '.swiper-pagination',
+            //     clickable: true
+            // },
+            dots: true,
+            // autoplay: true,
+            arrows:false,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+        this.sec_5_swiper_params = {
+            arrows:false,
+            autoplay: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        };
+        this.sec_8_swiper_params = {
+            arrows:true,
+            autoplay: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            nextArrow:  <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />
+        };
         this.state = {
-            activeImgList:[{
-                image: baseUrl.getBaseUrl()+'/src/img/activeImg_1.png',
-                title: 'vipCode',
-                link: 'http://www.baidu.com'
-            }],
             cooperationList:[
                 {cn:"sec_5_content_item_1",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}>
                         <div>中国计算机学会</div>
@@ -55,11 +103,117 @@ export class HomeView extends Component{
                         <div>如检测不成功可拨打400-621-6161进行免费技术支持</div>
                     </div>
                 )
-            }]
+            }],
+            advantage:[{
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_1.png",
+                text:"有趣有用有效的学习案例，让孩子沉浸编程之乐",
+                hideText:"精选编程项目案例",
+                isActive:false,
+            },{
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_2.png",
+                text:"老师与学员摄像头、屏幕、课件等屏幕实时共享",
+                hideText:"在线直播互动",
+                isActive:false,
+            },{
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_3.png",
+                text:"课程进度、课堂表现、学习成绩定时推送随时查询",
+                hideText:"学习报告",
+                isActive:false,
+            },{
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_4.png",
+                text:"引进AI智能巡班系统，课堂表现大数据分析",
+                hideText:"AI智能巡班质检",
+                isActive:false,
+            },{
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_6.png",
+                text:"独家在线学习平台，听课与编程协作同步进行",
+                hideText:"班级团队协作",
+                isActive:false,
+            },{
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_6.png",
+                text:"独家研发配套教材，全面强化学习效果",
+                hideText:"课程配套讲义教材",
+                isActive:false,
+            }],
+            prizeNodes:[
+                baseUrl.getBaseUrl() + "/src/img/tencent_prize.png",
+                baseUrl.getBaseUrl() + "/src/img/wangyi_prize.png",
+                baseUrl.getBaseUrl() + "/src/img/pencil_prize.png",
+            ],
+            planList:[
+                {
+                    key:"python",
+                    background:"#05AEB1",
+                    titleText:"Python人工智能编程基础",
+                    contentInfo:()=>{
+                        return (<div className="sec_4_dialog_content">
+                            <div className="sec_4_dialog_line">
+                                <div className="sec_4_dialog_line_num sec_4_content_python_color">1.</div>
+                                <div className="sec_4_dialog_line_text sec_4_content_python_color">系统学习Python语法，掌握函数、数据抓取及可视化处理，初步完成语音、图像等人工智能程序。</div>
+                            </div>
+                            <div className="sec_4_dialog_line">
+                                <div className="sec_4_dialog_line_num sec_4_content_python_color">2.</div>
+                                <div className="sec_4_dialog_line_info">
+                                    <div className="sec_4_dialog_line_text sec_4_content_python_color">蓝桥杯Python创意编程组初赛至国赛；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_python_color">全国各省市Python程序设计比赛（根据各地区情况）；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_python_color">全国中小学生电脑制作活动；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_python_color">全国青少年创意编程比赛（初中组）</div>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                },
+                {
+                    key:"cpp",
+                    background:"#39579A",
+                    titleText:"Python人工智能编程基础",
+                    contentInfo:()=>{
+                        return (<div className="sec_4_dialog_content">
+                            <div className="sec_4_dialog_line">
+                                <div className="sec_4_dialog_line_num sec_4_content_cpp_color">1.</div>
+                                <div className="sec_4_dialog_line_text sec_4_content_cpp_color">系统学习Python语法，掌握函数、数据抓取及可视化处理，初步完成语音、图像等人工智能程序。</div>
+                            </div>
+                            <div className="sec_4_dialog_line">
+                                <div className="sec_4_dialog_line_num sec_4_content_cpp_color">2.</div>
+                                <div className="sec_4_dialog_line_info">
+                                    <div className="sec_4_dialog_line_text sec_4_content_cpp_color">蓝桥杯Python创意编程组初赛至国赛；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_cpp_color">全国各省市Python程序设计比赛（根据各地区情况）；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_cpp_color">全国中小学生电脑制作活动；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_cpp_color">全国青少年创意编程比赛（初中组）</div>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                },
+                {
+                    key:"noip",
+                    background:"#A96DBE",
+                    titleText:"Python人工智能编程基础",
+                    contentInfo:()=>{
+                        return (<div className="sec_4_dialog_content">
+                            <div className="sec_4_dialog_line">
+                                <div className="sec_4_dialog_line_num sec_4_content_noip_color">1.</div>
+                                <div className="sec_4_dialog_line_text sec_4_content_noip_color">系统学习Python语法，掌握函数、数据抓取及可视化处理，初步完成语音、图像等人工智能程序。</div>
+                            </div>
+                            <div className="sec_4_dialog_line">
+                                <div className="sec_4_dialog_line_num sec_4_content_noip_color">2.</div>
+                                <div className="sec_4_dialog_line_info">
+                                    <div className="sec_4_dialog_line_text sec_4_content_noip_color">蓝桥杯Python创意编程组初赛至国赛；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_noip_color">全国各省市Python程序设计比赛（根据各地区情况）；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_noip_color">全国中小学生电脑制作活动；</div>
+                                    <div className="sec_4_dialog_line_text sec_4_content_noip_color">全国青少年创意编程比赛（初中组）</div>
+                                </div>
+                            </div>
+                        </div>)
+                    }
+                }
+            ],
+            isShowPlanItem:false,
         }
     }
 
     componentDidMount() {
+        HB.save.setStorage({redirect:"home"});
     }
     makeCooperationUnActive(){
         for(let i = 0 ;i < this.state.cooperationList.length;i++){
@@ -82,6 +236,41 @@ export class HomeView extends Component{
             cooperationList:this.state.cooperationList
         })
     }
+    showMorePlan(planItem){
+        return ()=>{
+            console.log(planItem);
+            this.showItem = this.state.planList.find((item,index)=>{
+                return item.key === planItem;
+            });
+
+            this.setState({
+                isShowPlanItem:true
+            })
+        }
+    }
+    closePlanItem(){
+        this.setState({
+            isShowPlanItem:false
+        })
+    }
+    showSubAdvantage(advantageItem){
+        return ()=>{
+            console.log(12);
+            advantageItem.isActive = true;
+            this.setState({
+                advantage:this.state.advantage
+            })
+        }
+    }
+    hideSubAdvantage(){
+        for(let i = 0;i < this.state.advantage.length;i++){
+            this.state.advantage[i].isActive = false;
+        }
+        this.setState({
+            advantage:this.state.advantage
+        })
+    }
+
     render() {
         let cooperationNodes = this.state.cooperationList.map((item,i)=>{
             return (
@@ -96,6 +285,13 @@ export class HomeView extends Component{
                 </li>
             )
         });
+        let prizeNodes = this.state.prizeNodes.map((item,i)=>{
+            return (
+                <div className="prize_item" >
+                    <img src={item} alt="" className="prize_item_pic"/>
+                </div>
+            )
+        });
         let problemNodes = this.state.problemList.map((item,i)=>{
             return (
                 <li className="home_question_item" key={i}>
@@ -106,102 +302,271 @@ export class HomeView extends Component{
                 </li>
             )
         });
+        let advantageNodes = this.state.advantage.map((advantageItem,index)=>{
+            return (
+                <div key={index}
+                     className="sec_6_item_box"
+                     onMouseEnter={this.showSubAdvantage(advantageItem)}
+                     onMouseLeave={this.hideSubAdvantage.bind(this)}>
+                    <img src={advantageItem.pic} alt="" className="sec_6_pic"/>
+                    <div className={`toggle_box ${advantageItem.isActive ? "toggle_box_toggle_animation":null}`}>
+                        <div className="toggle_box_top">{advantageItem.hideText}</div>
+                        <div className="toggle_box_bottom">{advantageItem.text}</div>
+                    </div>
+                </div>
+            )
+        });
         return(
             <div>
-                <HeaderView history={this.props.history} userInfo={userService.getUser().userInfo}/>
-                <ReactSwiper
-                    swiperOptions={{
-                    preloadImages: true,
-                    autoplay: 4000,
-                    autoplayDisableOnInteraction: false
-                }}
-                    showPagination
-                    items={this.state.activeImgList}
-                    className="active_swiper" />
+                {this.state.isShowPlanItem?<HomeViewDialogView planItem={this.showItem} closePlanItem={this.closePlanItem.bind(this)}/>:null}
+                <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
+                <Slider {...this.sec_1_swiper_params}>
+                    <Link className="home_head_img_box">
+                        <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_1.png"} className="home_head_img" alt=""/>
+                    </Link>
+                    <Link className="home_head_img_box">
+                        <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_2.png"} className="home_head_img" alt=""/>
+                    </Link>
+                </Slider>
                 <div className="sec_2">
                     <div className="sec_2_title">
-                        有效计划、帮孩子掌控未来
+                        <div className="sec_2_title_text">“贴身”双师，在家学习省心更放心</div>
+                        <div className="sec_title_line" ></div>
                     </div>
-                    <div className="sec_2_video_box">
-                        <div className="sec_2_video_play_btn_bg"/>
-                        <img src={baseUrl.getBaseUrl() + "/src/img/sec_2_video_play_btn.png"} className="sec_2_video_play_btn" alt=""/>
+                    <div className="sec_2_video_box_top">
+                        <div className="sec_2_video_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/sec_2_video_play_btn.png"} className="sec_2_video_play_btn" alt=""/>
+                        </div>
+                        <div className="sec_2_video_box_top_right">
+                            <div className="sec_2_video_box_top_right_title">金牌团队-一线专职编程教师直播授课</div>
+                            <div className="sec_2_video_box_top_right_detail">未科编程网校的直播授课讲师全部来自计算机或教育领域专业教师、一线竞赛教练。他们擅长编程，更擅长教会孩子编程。</div>
+                            <div className="sec_2_video_box_top_right_tag_list">
+                                <div className="sec_2_video_box_top_right_tag_list_item">边学边练</div>
+                                <div className="sec_2_video_box_top_right_tag_list_item">PBL项目式教学</div>
+                                <div className="sec_2_video_box_top_right_tag_list_item">课后无限回放</div>
+                            </div>
+                        </div>
                     </div>
-                    <ul className="sec_2_intro_list">
-                        <li className="sec_2_intro_list_item_py">
-                            <div className="sec_2_intro_list_item_title">Python人工智能课程</div>
-                            <span className="sec_2_intro_list_item_sub_title_py">人工智能必修课</span>
-                            <div className="sec_2_intro_list_item_sub_title">使用人工智能时代广泛的编程语言Python，教授孩子更多的源码编程技巧，让孩子逐步适应源码编考问题，奠定。</div>
-                        </li>
-                        <li className="sec_2_intro_list_item_c">
-                            <div className="sec_2_intro_list_item_title">C++基础系统课程</div>
-                            <span className="sec_2_intro_list_item_sub_title_c">信息学备战</span>
-                            <div className="sec_2_intro_list_item_sub_title">使用人工智能时代广泛的编程语言Python，教授孩子更多的源码编程技巧，让孩子逐步适应源码编程的方思考问题。</div>
-                        </li>
-                        <li className="sec_2_intro_list_item_noip">
-                            <div className="sec_2_intro_list_item_title">NOIP信息学冲刺课程</div>
-                            <span className="sec_2_intro_list_item_sub_title_noip">信息学备战</span>
-                            <div className="sec_2_intro_list_item_sub_title">使用人工智能时代广泛的编程语言Python，教授孩子更多的源码编程技巧，让孩子逐步适应源码编程的方思考问题。</div>
-                        </li>
-                    </ul>
-                </div>
-                <div className="sec_3">
-
+                    <div className="sec_2_video_box_bottom">
+                        <div className="sec_2_video_box_bottom_left">
+                            <div className="sec_2_video_box_top_right_title">贴心辅导-专属辅导老师实时答疑</div>
+                            <div className="sec_2_video_box_top_right_detail">课前温馨提醒引导预习，课中互动讨论在线答疑，课后及时回报家长学情，实时解决各种问题。</div>
+                            <div className="sec_2_video_box_top_right_tag_list">
+                                <div className="sec_2_video_box_top_right_tag_list_item">1对1课后辅导</div>
+                                <div className="sec_2_video_box_top_right_tag_list_item">课堂划重点</div>
+                            </div>
+                        </div>
+                        <div className="sec_2_video_box_bottom_right"></div>
+                    </div>
                 </div>
                 <div className="sec_4">
                     <div className="sec_4_title">
-                        科学方法、让学习事半功倍
+                        <div className="sec_4_title_text">有效计划、帮孩子掌控未来</div>
+                        <div className="sec_title_line" ></div>
                     </div>
                     <div className="sec_4_content">
-                        <div className="sec_4_content_item">
-                            <div className="sec_4_content_img_list_left">
-                                <img src={baseUrl.getBaseUrl()+"/src/img/sec_4_left_live.png"} alt="" className="sec_4_left_live"/>
-                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_left_1v1.png"} alt="" className="sec_4_left_live"/>
+                        <div className="python_text_box">
+                            <div className="sec_4_content_text_top">
+                                <div className="sec_4_content_text_num sec_4_content_python_color">1.</div>
+                                <div className="sec_4_content_text sec_4_content_python_color">系统学习Python语法，掌握函数、数据抓取及可视化处理，初步完成语音、图像等人工智能程序。</div>
                             </div>
-                            <div className="sec_4_left_bottom">
-                                <div>名师直播+1V1专职辅导</div>
-                                <div>双师模式</div>
+                            <div className="sec_4_content_text_bottom">
+                                <div className="sec_4_content_text_num sec_4_content_python_color">2.</div>
+                                <div className="sec_4_content_text_bottom_info">
+                                    <div className="sec_4_content_text sec_4_content_python_color">蓝桥杯Python创意编程组初赛至国赛全国各省市Python程序设计比赛</div>
+                                    <div className="sec_4_content_more sec_4_content_python_color" onClick={this.showMorePlan('python')}>查看更多</div>
+                                </div>
                             </div>
                         </div>
-                        <div className="sec_4_content_item">
-                            <div className="sec_4_content_img_list_right">
-                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_right_1.png"} alt="" className="sec_4_right_live_1"/>
-                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_right_2.png"} alt="" className="sec_4_right_live_2"/>
-                                <img src={baseUrl.getBaseUrl() + "/src/img/sec_4_right_3.png"} alt="" className="sec_4_right_live_3"/>
+                        <div className="cpp_text_box">
+                            <div className="sec_4_content_text_top">
+                                <div className="sec_4_content_text_num sec_4_content_cpp_color">1.</div>
+                                <div className="sec_4_content_text sec_4_content_cpp_color">系统学习C++语法，学会循环控制和数据处理。掌握函数、内存指针和数据结构。</div>
                             </div>
-                            <div className="sec_4_left_bottom">
-                                <div>课前预习视频+课后复习讲义、项目作业</div>
-                                <div>多维度环节设计</div>
+                            <div className="sec_4_content_text_bottom">
+                                <div className="sec_4_content_text_num sec_4_content_cpp_color">2.</div>
+                                <div className="sec_4_content_text_bottom_info">
+                                    <div className="sec_4_content_text sec_4_content_cpp_color">全国青少年信息学CSP-J/S资格认证</div>
+                                    <div className="sec_4_content_text sec_4_content_cpp_color">蓝桥杯C++创意编程组初赛至国赛</div>
+                                    <div className="sec_4_content_more sec_4_content_cpp_color" onClick={this.showMorePlan('cpp')}>查看更多</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="noip_text_box">
+                            <div className="sec_4_content_text_top">
+                                <div className="sec_4_content_text_num sec_4_content_noip_color">1.</div>
+                                <div className="sec_4_content_text sec_4_content_noip_color">熟练掌握竞赛算法和数据结构，学习深入算法、图论，强化搜索和动态规划等算法训练。</div>
+                            </div>
+                            <div className="sec_4_content_text_bottom">
+                                <div className="sec_4_content_text_num sec_4_content_noip_color">2.</div>
+                                <div className="sec_4_content_text_bottom_info">
+                                    <div className="sec_4_content_text sec_4_content_noip_color">全国青少年信息学CSP-J/S资格认证</div>
+                                    <div className="sec_4_content_more sec_4_content_noip_color" onClick={this.showMorePlan('noip')}>查看更多</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="sec_5">
                     <div className="sec_5_title">
-                        松鼠编程 技术合作
+                        <div className="sec_5_title_text">顶尖老师、让学员出类拔萃</div>
+                        <div className="sec_title_line" ></div>
                     </div>
-                    <ul className="sec_5_content">
-                       {/*<li className="sec_5_content_item_1"></li>*/}
-                       {/*<li className="sec_5_content_item_2"></li>*/}
-                       {/*<li className="sec_5_content_item_3"></li>*/}
-                       {/*<li className="sec_5_content_item_4"></li>*/}
-                        {cooperationNodes}
+                </div>
+                <Slider {...this.sec_5_swiper_params}>
+                    <div>
+                        <div className="sec_5_teacher_img_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_1.png"} className="sec_5_teacher_img" alt=""/>
+                            <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_name_info">
+                                    <div className="sec_5_teacher_name">苏航</div>
+                                    <div className="sec_5_teacher_position">c++/竞赛讲师</div>
+                                </div>
+                                <div className="sec_5_teacher_title_list">
+                                    <div className="sec_5_teacher_title">计算机博士</div>
+                                    <div className="sec_5_teacher_title">ACM指导教师</div>
+                                </div>
+                                <div className="sec_5_teacher_info">
+                                    北京工业大学计算机学院硕士生导师，主讲计算机专业课程，发表高水平论文十余篇，曾主持国家自然科学基金青年基金项目。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="sec_5_teacher_img_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
+                            <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_name_info">
+                                    <div className="sec_5_teacher_name">齐润博</div>
+                                    <div className="sec_5_teacher_position">Python讲师</div>
+                                </div>
+                                <div className="sec_5_teacher_title_list">
+                                    <div className="sec_5_teacher_title">剑桥教师</div>
+                                    <div className="sec_5_teacher_title">STEAM教育专家</div>
+                                </div>
+                                <div className="sec_5_teacher_info">
+                                    多年从事国际学校双语计算机教学及课程研发，精通K12计算机全英文教学，所教学生均考入世界前50顶尖大学攻读计算机相关专业。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="sec_5_teacher_img_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
+                            <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_name_info">
+                                    <div className="sec_5_teacher_name">李丽红</div>
+                                    <div className="sec_5_teacher_position">C++/竞赛讲师</div>
+                                </div>
+                                <div className="sec_5_teacher_title_list">
+                                    <div className="sec_5_teacher_title">北邮名师</div>
+                                    <div className="sec_5_teacher_title">NOIP金牌教练</div>
+                                </div>
+                                <div className="sec_5_teacher_info">
+                                    15年编程实战，带队比赛经验丰富，北京邮电大学本硕毕业，擅长调动学生情绪积极思考，提高学生学习兴趣，讲课过程深入浅出，课堂气氛活泼生动。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div className="sec_5_teacher_img_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
+                            <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_name_info">
+                                    <div className="sec_5_teacher_name">蒋新云</div>
+                                    <div className="sec_5_teacher_position">C++/竞赛讲师</div>
+                                </div>
+                                <div className="sec_5_teacher_title_list">
+                                    <div className="sec_5_teacher_title">北工大毕业</div>
+                                    <div className="sec_5_teacher_title">资深少儿编程教育专家</div>
+                                </div>
+                                <div className="sec_5_teacher_info">
+                                    原知名上市教育集团少儿编程总设计师。敬畏技术，喜爱孩子，专注课堂模型的探索和创新，启发孩子好奇心，培养能力。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Slider>
+                <div className="sec_6">
+                    <div className="sec_6_title">
+                        <div className="sec_6_title_text">沉浸式课堂，让孩子更爱学习</div>
+                        <div className="sec_title_line" ></div>
+                    </div>
+                    <ul className="sec_6_problem_list" >
+                        {advantageNodes}
                     </ul>
                 </div>
-                <div className="sec_6">
-                    <div className="sec_6_title">常见问题</div>
-                    <div className="sec_6_problem_list_box">
-                        <ul className="sec_6_problem_list" style={{width:(this.state.problemList.length*4.14-0.4)+"rem"}}>
-                            {problemNodes}
-                        </ul>
+                <div className="sec_8">
+                    <div className="sec_8_title">
+                        <div className="sec_8_title_text">破茧成蝶，真实未科学员</div>
+                        <div className="sec_title_line" ></div>
+                    </div>
+                </div>
+                <div className="sec_8_slider_box">
+                    <div className="sec_8_slider">
+                        <Slider {...this.sec_8_swiper_params}>
+                            <div className="sec_8_teacher_img_box">
+                                <img src={baseUrl.getBaseUrl() + "/src/img/child_pic_1.png"} className="sec_8_child_img" alt=""/>
+                                <div className="sec_8_child_info">
+                                    <div className="sec_5_teacher_name_info">
+                                        <div className="sec_5_teacher_name">周昊宇</div>
+                                        <div className="sec_5_teacher_position">C++学员</div>
+                                    </div>
+                                    <div className="sec_5_teacher_info">
+                                        <div>常州市局前街小学 四年级</div>
+                                        <div>常州市小学生“程序设计小能手”二等奖</div>
+                                        <div>江苏省“信息与未来”比赛省级二等奖</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="sec_8_teacher_img_box">
+                                <img src={baseUrl.getBaseUrl() + "/src/img/child_pic_1.png"} className="sec_8_child_img" alt=""/>
+                                <div className="sec_8_child_info">
+                                    <div className="sec_5_teacher_name_info">
+                                        <div className="sec_5_teacher_name">林一鸣</div>
+                                        <div className="sec_5_teacher_position">Python学员</div>
+                                    </div>
+                                    <div className="sec_5_teacher_info">
+                                        <div>石狮市第三实验小学 五年级</div>
+                                        <div>福建省中小学电脑制作活动三等奖</div>
+                                        <div>石狮市中小学电脑制作活动一等奖</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </Slider>
+                    </div>
+                </div>
+                <div className="sec_9">
+                    <div className="sec_8_title">
+                        <div className="sec_8_title_text">关于 未科编程</div>
+                        <div className="sec_title_line" ></div>
+                    </div>
+                    <div className="sec_9_sub_title">
+                        <div>
+                            未科编程-中小学生编程网校是北京未科教育公司旗下产品、与VIPCODE-1对1、VIPCODE-小班课同属未科公司旗下
+                        </div>
+                        <div>
+                            在线青少儿编程品牌；未科教育：是用科技推动 教育公平。我们期望通过标准化的编程课程、可视化的编程工具和先进
+                        </div>
+                        <div>
+                            的在线教学系统，让每个孩子都有机会学习更简单、更有趣的编程课，改变孩子未来。
+                        </div>
+                    </div>
+                    <div className="cooperation_list">
+                        {cooperationNodes}
+                    </div>
+                    <div className="prize_info_list">
+                        {prizeNodes}
                     </div>
                 </div>
                 <div className="sec_7">
                     <div className="sec_7_enjoy_btn">
-                        ￥9.9试学一期班（8课时）
+                        ¥9.9试学一期班(8课时)
                     </div>
                 </div>
                 <FooterView/>
             </div>
+
         )
     }
 }

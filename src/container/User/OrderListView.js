@@ -24,6 +24,7 @@ export class OrderListView extends Component {
     componentDidMount() {
         //  设计暂时只有全部订单
         orderService.getOrderList().then((list)=>{
+            console.log(list);
             this.setState({
                 orderList:list,
                 total:orderService.pagination.getTotalPage()
@@ -32,10 +33,16 @@ export class OrderListView extends Component {
     }
     toPay(orderItem){
         return ()=>{
-            orderService.reCreateOrder(orderItem).then((info)=>{
-                payService.createPay(info.payModels);
-                this.props.history.replace("/pay");
-            });
+            if(orderItem.status === 3005){
+                // let url = "/confirmOrder?productCourseNo=''&orderNo="+orderItem.orderNo+"&requestWay=orderDetail";
+                let url = `/confirmOrder?orderNo=${orderItem.orderNo}&requestWay=orderDetail`;
+                this.props.history.push(url);
+            }else if(orderItem.status === 3001){
+                orderService.rePay(orderItem.orderNo).then((info)=>{
+                    payService.createPay(info.payModels);
+                    this.props.history.replace("/pay");
+                });
+            }
 
         }
     }
@@ -79,7 +86,7 @@ export class OrderListView extends Component {
                 </div>
             )
         }
-        else if(orderItem.status === 3001){
+        else if(orderItem.status === 3001||orderItem.status === 3005){
             return (
                 <div>
                     <div onClick={this.toPay(orderItem)}>去支付</div>
@@ -97,6 +104,14 @@ export class OrderListView extends Component {
             )
         }else{
             return this.state.orderList.map((orderItem,index)=>{
+                let productModule = orderItem.orderCourse.getModule.before((repairParam) => {
+                    repairParam = repairParam || {};
+                    repairParam.showSellPrice = (orderItem.sellPrice / 100).toFixed(2);
+                    repairParam.startTime = orderItem.orderCourse.courseInfo.getStartTimeToShow("unix");
+                    repairParam.endTime = orderItem.orderCourse.courseInfo.getEndTimeToShow("unix");
+                }).call(orderItem.orderCourse, {});
+                orderItem.orderCourseModule = productModule;
+
                 console.log(orderItem);
                 return (
                     <div className="order_list_order_item" key={index}>
@@ -108,7 +123,7 @@ export class OrderListView extends Component {
                             <div className="order_list_order_item_center_left">
                                 <div className="order_list_order_item_center_left_info">
                                     <span className="order_list_order_item_center_left_info_name"
-                                          style={{background:"url('"+orderItem.orderCourse.type.getTypeInfo().iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>{orderItem.orderCourse.name}</span>
+                                          style={{background:"url('"+orderItem.orderCourseModule.type.iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>{orderItem.orderCourseModule.courseName}</span>
                                     <CourseTimeShowView
                                         style={{
                                             display:"flex",
@@ -119,13 +134,13 @@ export class OrderListView extends Component {
                                         }}
                                         showTimeStepEnd={false}
                                         timeType={"unix"}
-                                        timeStep={orderItem.orderCourse.timeList}
-                                        startTime={orderItem.orderCourse.startTime}
-                                        endTime={orderItem.orderCourse.endTime}
+                                        timeStep={orderItem.orderCourseModule.timeList}
+                                        startTime={orderItem.orderCourseModule.startTime}
+                                        endTime={orderItem.orderCourseModule.endTime}
                                     />
                                 </div>
                                 <div className="order_list_order_item_center_left_price">
-                                    ￥{orderItem.orderCourse.sellPrice / 100}
+                                    ￥{orderItem.orderCourseModule.sellPrice / 100}
                                 </div>
                             </div>
                             <div className="order_list_order_item_center_right">

@@ -6,6 +6,7 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 // import {login} from "../../entity/Login";
+import {HB} from '../../util/HB';
 import {userService} from "../../service/UserService";
 import {FooterView} from "../../component/FooterView/FooterView";
 import {LoginHeaderView} from '../../component/HeaderView/LoginHeaderView';
@@ -20,70 +21,36 @@ export class LoginMainView extends Component{
     componentDidMount() {
 
     }
-
     //  登录
-    login(){
-        return ()=>{
-            userService.signIn().then((data)=>{
-                userService.updateUserInfo({token:data.data.token});
-                return userService.getUserInfo();
-            }).then(()=>{
-                userService.autoUpdateUserInfo();
-                //  跳转到首页
+    login(signWay,signInfo){
+        userService.signIn(signWay,signInfo).then(()=>{
+            HB.save.setLocalStorageByLimitTime("token",userService.login.token);
+            return userService.updateUserInfo()
+        }).then((userInfo)=>{
+            console.log(userInfo);
+            if(userInfo.getModule().isNeedRepair){
+                this.props.history.replace('/user/userInfo');
+            }else{
                 this.props.history.replace('/home');
-            }).catch((msg)=>{
-                alert(msg)
-            });
-        }
-    }
-    inputPhoneNum(value){
-        userService.getUser().setPhoneNum(value);
-    }
-    inputPassword(value) {
-        userService.getUser().setPassword(value);
-    }
-    register(){
-        return ()=>{
-            if(userService.getUser().password.length === 0){
-                alert("请输入密码");
-                return null;
             }
-            userService.register(this.vcode).then((data)=>{
-                userService.updateUserInfo({token:data.data.token});
-                //  跳转到首页
-                this.props.history.replace('/login/login');
-            }).catch((msg)=>{
-                alert(msg)
-            });
-        }
+        })
     }
-    inputVCode(value){
-        this.vcode = value;
-    }
-    getRegisterVCode(){
-        userService.getRegisterVCode().then(()=>{
-
-        }).catch((msg)=>{
+    getVCode(purpose,phoneNum){
+        userService.getVCode(purpose,phoneNum).catch((msg)=>{
             alert(msg)
         });
     }
-    getLoginVCode(){
-        userService.getLoginVCode().then((data)=>{
-
+    register(registerInfo){
+        userService.register(registerInfo).then(()=>{
+            return userService.updateUserInfo();
+        }).then((userInfo)=>{
+            if(userInfo.getModule().isNeedRepair){
+                this.props.history.replace('/user/userInfo');
+            }else{
+                this.props.history.replace('/home');
+            }
         }).catch((msg)=>{
             alert(msg)
-        });
-    }
-    vCodeLogin(){
-        userService.signInByCode(this.vcode).then((data)=>{
-            userService.updateUserInfo({token:data.data.token});
-            return userService.getUserInfo();
-        }).then(()=>{
-            userService.autoUpdateUserInfo();
-            //  跳转到首页
-            this.props.history.replace('/home');
-        }).catch((msg)=>{
-            alert(msg);
         });
     }
     render(){
@@ -94,22 +61,15 @@ export class LoginMainView extends Component{
                 <div className="login_main">
                     <Route path="/login/login" component={ props =>{
                         let obj = Object.assign({},props,{
-                            login:this.login(),
-                            inputPhoneNum:this.inputPhoneNum,
-                            inputPassword:this.inputPassword,
-                            getLoginVCode:this.getLoginVCode.bind(this),
-                            inputVCode:this.inputVCode.bind(this),
-                            vCodeLogin:this.vCodeLogin.bind(this)
+                            login:this.login.bind(this),
+                            getVCode:this.getVCode.bind(this),
                         });
                         return <LoginView  {...obj} />
                     }} />
                     <Route path="/login/register" component={ props => {
                         let obj = Object.assign({},props,{
-                            register:this.register(),
-                            inputPhoneNum:this.inputPhoneNum.bind(this),
-                            inputPassword:this.inputPassword.bind(this),
-                            getRegisterVCode:this.getRegisterVCode.bind(this),
-                            inputVCode:this.inputVCode.bind(this)
+                            register:this.register.bind(this),
+                            getVCode:this.getVCode.bind(this),
                         });
                         return <RegisterView {...obj}/>
                     }} />

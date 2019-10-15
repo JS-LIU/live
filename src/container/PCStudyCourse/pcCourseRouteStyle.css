@@ -1,9 +1,10 @@
 .PC_course_route{
     display:flex;
     flex-direction: column;
-    background:#F0F2F6;
+    justify-content: space-between;
     align-items: center;
-    width:1.49rem;
+    background:#F0F2F6;
+    width:1.5rem;
     height:100%;
     position:fixed;
     top:0;
@@ -39,9 +40,12 @@
 .PC_course_route_account{
     font-size:0.14rem;
     color:#AF7861;
+    background:url("../../img/ss_coin_icon.png") no-repeat left center;
+    background-size: 0.16rem;
+    padding-left: 0.25rem;
 }
 .PC_course_route_item{
-    width:1.25rem;
+    width:1.1rem;
     height:0.4rem;
     border-radius: 0.04rem;
     display:flex;
@@ -49,4 +53,21 @@
     justify-content: center;
     align-items: center;
     font-size:0.14rem;
+}
+.PC_course_route_item_text{
+    padding-left:0.29rem;
+    background-size:0.25rem!important;
+}
+.logout_btn{
+    color:#B2B3B4;
+    font-size:0.14rem;
+    height:0.4rem;
+    width:100%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background:#E8E9EC url("../../img/logout.png") no-repeat 0.35rem center;
+    background-size:0.19rem;
 }

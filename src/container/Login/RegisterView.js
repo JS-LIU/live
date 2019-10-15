@@ -5,12 +5,16 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import registerStyle from './registerStyle.css';
 import {HB} from "../../util/HB";
+import {CountDownView} from "../../component/CountDown/CountDownView";
 
 export class RegisterView extends Component{
     constructor(props) {
         super(props);
+        this.vcode = "";
+        this.phoneNum = "";
+        this.password = "";
         this.state = {
-            countDown:"获取验证码",
+            // countDown:"获取验证码",
             phoneNumStyle:{border:"0.01rem solid #ffffff"},
             passwordStyle:{border:"0.01rem solid #ffffff"},
             vCodeStyle:{border:"0.01rem solid #ffffff"},
@@ -47,40 +51,45 @@ export class RegisterView extends Component{
         })
     }
     register(){
-        this.props.register();
+        this.props.register({
+            phoneNum:this.phoneNum,
+            password:this.password,
+            vcode:this.vcode
+        });
     }
     inputPhoneNum(e){
         this.phoneNum = e.target.value;
-        this.props.inputPhoneNum(e.target.value);
     }
     inputPassword(e) {
-        this.props.inputPassword(e.target.value)
-    }
-    getVCode(){
-        if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.phoneNum)){
-            this.startCountDown();
-            this.props.getRegisterVCode();
-        }
+        this.password = e.target.value;
     }
     inputVCode(e){
-        this.props.inputVCode(e.target.value);
+        this.vcode = e.target.value;
+        // this.props.inputVCode(e.target.value);
     }
-    startCountDown(){
-        let startTime = 60;
-        let t = setInterval(()=>{
-            startTime--;
-            this.setState({
-                countDown:startTime+"s后重新获取"
-            });
-            if(startTime === 0){
-                startTime = 60;
-                this.setState({
-                    countDown:"获取验证码"
-                });
-                clearInterval(t);
-            }
-        },1000)
-    }
+    // getVCode(){
+    //     if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.phoneNum)){
+    //         // this.startCountDown();
+    //         this.props.getRegisterVCode();
+    //     }
+    // }
+
+    // startCountDown(){
+    //     let startTime = 60;
+    //     let t = setInterval(()=>{
+    //         startTime--;
+    //         this.setState({
+    //             countDown:startTime+"s后重新获取"
+    //         });
+    //         if(startTime === 0){
+    //             startTime = 60;
+    //             this.setState({
+    //                 countDown:"获取验证码"
+    //             });
+    //             clearInterval(t);
+    //         }
+    //     },1000)
+    // }
     render() {
         return (
             <div className="register_right">
@@ -107,7 +116,21 @@ export class RegisterView extends Component{
                                        placeholder="验证码"
                                        onFocus={this.onVCodeFocus.bind(this)}
                                        onBlur={this.onVCodeBlur.bind(this)}/>
-                                <div className="v_code_time" onClick={this.getVCode.bind(this)}>{this.state.countDown}</div>
+                            <CountDownView
+                                clickHandle={()=>{
+                                    this.props.getVCode("register",this.phoneNum);
+                                }}
+                                startCondition={()=>{return new Promise((resolve, reject)=>{
+                                    if(HB.valid.isPoneAvailable(this.phoneNum)){
+                                        resolve();
+                                    }else{
+                                        reject()
+                                    }
+                                })}}
+                                initText={"获取验证码"}
+                                countDownText={"秒后重新获取"}
+                                totalSec={60}/>
+                                {/*<div className="v_code_time" onClick={this.getVCode.bind(this)}>{this.state.countDown}</div>*/}
                         </div>
                         <div className="register_right_log_log_password" style={this.state.passwordStyle}>
                             <input type="password"

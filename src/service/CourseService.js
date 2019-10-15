@@ -13,37 +13,47 @@ import {OwnedCourseLearnStatus} from "../entity/OwnedCourseLearnStatus";
 import {OwnedCourseLearnStatusList} from "../entity/OwnedCourseLearnStatusList";
 import {OwnedCoursePlanItem} from "../entity/OwnedCoursePlanItem";
 import {CourseType} from "../entity/CourseType";
+import {courseRepository} from '../repository/CourseRepository';
 
 class CourseService {
     constructor(){
-        let ownedCourseAjax = commonAjax.resource('/course/w/v1.0/:action');
-        let courseAjax = commonAjax.resource('/good/w/v1.0/:action');
-        let preVideoAjax = commonAjax.resource('/user/w/v1.0/:action');
-        this._getOwnedCourseListByWeek = function(postInfo){
-            return ownedCourseAjax.save({action:'pageCoursePlan'},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._getAllOwnedCourseList = function(postInfo){
-            return ownedCourseAjax.save({action:"pageMyCourse"},postInfo,{name:"token",value:userService.getUser().token})
-        };
-        this._getCourseType = function(postInfo){
-            return courseAjax.save({action:'goodBaseSelectTips'},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._getProductCourseList = function(postInfo){
-            return courseAjax.save({action:'pageGoodInfo'},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._getProductDetail = function(postInfo){
-            return courseAjax.save({action:'goodDetail'},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._getOwnedCourseDetail = function(postInfo){
-            return ownedCourseAjax.save({action:"courseDetail"},postInfo,{name:"token",value:userService.getUser().token});
-        };
-
-        this._getPreSessionVideo = function(postInfo){
-            return preVideoAjax.save({action:"preSessionVideo"},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._getCourseVideo = function(postInfo){
-            return preVideoAjax.save({action:"videoView"},postInfo,{name:"token",value:userService.getUser().token});
-        };
+        // let ownedCourseAjax = commonAjax.resource('/course/w/v1.0/:action');
+        // let c_ownedCourseAjax = commonAjax.resource('/course/c/v1.0/:action');
+        // let courseAjax = commonAjax.resource('/good/w/v1.0/:action');
+        // let preVideoAjax = commonAjax.resource('/user/w/v1.0/:action');
+        //
+        // //  区分【w和c】
+        // this._getOwnedCourseListByWeek = function(postInfo){
+        //     return c_ownedCourseAjax.save({action:'pageCoursePlan'},postInfo,{name:"token",value:userService.login.token});
+        // };
+        // //  区分【w和c】
+        // this._getAllOwnedCourseList = function(postInfo){
+        //     return ownedCourseAjax.save({action:"pageMyCourse"},postInfo,{name:"token",value:userService.login.token})
+        // };
+        // //  区分【w和c】
+        // this._getOwnedCourseDetail = function(postInfo){
+        //     return ownedCourseAjax.save({action:"courseDetail"},postInfo,{name:"token",value:userService.login.token});
+        // };
+        // this._getCourseType = function(postInfo){
+        //     return courseAjax.save({action:'goodBaseSelectTips'},postInfo,{name:"token",value:userService.login.token});
+        // };
+        // this._getProductCourseList = function(postInfo){
+        //     return courseAjax.save({action:'pageGoodInfo'},postInfo,{name:"token",value:userService.login.token});
+        // };
+        // this._getProductDetail = function(postInfo){
+        //     return courseAjax.save({action:'goodDetail'},postInfo,{name:"token",value:userService.login.token});
+        // };
+        //
+        //
+        // this._getPreSessionVideo = function(postInfo){
+        //     return preVideoAjax.save({action:"preSessionVideo"},postInfo,{name:"token",value:userService.login.token});
+        // };
+        // this._getCourseVideo = function(postInfo){
+        //     return preVideoAjax.save({action:"videoView"},postInfo,{name:"token",value:userService.login.token});
+        // };
+        // this._queryUserHomeWork = function(postInfo){
+        //     return ownedCourseAjax.save({action:"queryUserHomework"},postInfo,{name:"token",value:userService.login.token});
+        // };
         //  课程列表
         this.ownedCourseList = [];
         //  每节课列表
@@ -61,15 +71,15 @@ class CourseService {
             },
             {
                 id:1,
-                name:"正在学",
-                active:false,
-                order:2
-            },
-            {
-                id:2,
                 name:"已结束",
                 active:false,
                 order:3
+            },
+            {
+                id:2,
+                name:"正在学",
+                active:false,
+                order:2
             },
             {
                 id:99,
@@ -84,21 +94,30 @@ class CourseService {
     }
     //  预习视频
     getPreSessionVideo(ownedCourseItem){
-        return this._getPreSessionVideo({
+        return courseRepository.getPreSessionVideo({
             videoId:ownedCourseItem.preVideo.preVideoId,
             userCoursePlanId:ownedCourseItem.id
+        }).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.code !== 0){
+                    reject(data);
+                }else{
+                    resolve(data);
+                }
+            });
+
         })
     }
     //  获取课程视频
-    getVideoView(course){
-        return this._getCourseVideo({
-            videoId:course.detail.videoId
+    getVideoView(videoId){
+        return courseRepository.getCourseVideo({
+            videoId:videoId
         })
     }
 
     getOwnedCourseDetail(id){
         let ownedCourse = this.findOwnedCourseById(id);
-        return this._getOwnedCourseDetail({
+        return courseRepository.getOwnedCourseDetail({
             courseId:id
         }).then((data)=>{
             ownedCourse.setDetail(data.data);
@@ -150,7 +169,7 @@ class CourseService {
      * @param endTime
      */
     getOwnedCoursePlanItemListByWeek(startTime, endTime){
-        return this._getOwnedCourseListByWeek({
+        return courseRepository.getOwnedCourseListByWeek({
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size,
             startTime:startTime,
@@ -168,7 +187,8 @@ class CourseService {
      * @returns [OwnedCourse]
      */
     getAllOwnedCourseList(){
-        return this._getAllOwnedCourseList({
+        console.log(this.getOwnedCourseLearnStatusList().getActive().id);
+        return courseRepository.getAllOwnedCourseList({
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size,
             learnStatus:this.getOwnedCourseLearnStatusList().getActive().id
@@ -198,7 +218,7 @@ class CourseService {
      * 获取所有课程的分类（商品类型列表）
      */
     getCourseType(){
-        return this._getCourseType({}).then((data)=>{
+        return courseRepository.getCourseType({}).then((data)=>{
             //  todo 容错处理 判断如果有data.data.summaryTips不为空的话
             return new Promise((resolve, reject)=>{
                 resolve(this.createGeneralCourseType(data.data.summaryTips));
@@ -212,7 +232,13 @@ class CourseService {
      */
     toggleSelectSpecifyType(specifyCourseType){
         let generalCourseType = this.findGeneralCourseTypeByTypeId(specifyCourseType.type);
-        generalCourseType.selectSpecifyCourseType(specifyCourseType);
+        let speCourseType = this.findSpecifyCourseById(generalCourseType,specifyCourseType);
+        generalCourseType.selectSpecifyCourseType(speCourseType);
+    }
+    findSpecifyCourseById(generalCourseType,specifyCourseType){
+        return generalCourseType.specifyCourseTypeList.find((specifyItem,index)=>{
+            return specifyItem.id === specifyCourseType.id;
+        })
     }
     findGeneralCourseTypeByTypeId(typeId){
         return this.courseType.find((generalType,index)=>{
@@ -223,8 +249,14 @@ class CourseService {
         generalCourseType.toggleSelectAllSpecifyCourseType();
     }
     selectAllSpecifyCourseType(generalCourseType){
-        generalCourseType.selectAllSpecifyCourseType(true);
-        generalCourseType.selected = true;
+        let genCourseType = this.findGeneralCourseTypeByType(generalCourseType);
+        genCourseType.selectAllSpecifyCourseType(true);
+        genCourseType.selected = true;
+    }
+    findGeneralCourseTypeByType(generalCourseType){
+        return this.courseType.find((generalCourseTypeItem,index)=>{
+            return generalCourseTypeItem.type === generalCourseType.type;
+        })
     }
     /**
      * 创建通用分类
@@ -270,7 +302,7 @@ class CourseService {
     getProductCourse(){
         let productCourseList = [];
         //  todo 可以把请求挪到 repository中
-        return this._getProductCourseList({
+        return courseRepository.getProductCourseList({
             selectTips:this.getSelectedSpecifyCourseTypeByJson(),
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size
@@ -335,7 +367,7 @@ class CourseService {
      * @returns {*}
      */
     getOrCreateProductCourseDetail(productCourseNo){
-        return this._getProductDetail({
+        return courseRepository.getProductDetail({
             goodNo:productCourseNo
         }).then((data)=>{
             let productCourse = this.findProductCourseByCourseNo(productCourseNo);
@@ -352,7 +384,6 @@ class CourseService {
 
     findProductCourseByCourseNo(productCourseNo) {
         return this.courseList.find((course)=>{
-            console.log(course);
             return course.goodNo === productCourseNo;
         });
     }
@@ -368,10 +399,17 @@ class CourseService {
     }
 
     downLoadHomework(ownedCoursePlanItem){
-        let coursePlanItem = this.findOwnedCoursePlanItemById(ownedCoursePlanItem.id);
-        coursePlanItem.homework.getStatusInfo().downLoad();
+        return ownedCoursePlanItem.homework.getStatusInfo(ownedCoursePlanItem).downLoad();
     }
-
+    getLectureNotes(coursePlanItem){
+        return coursePlanItem.lectureNotes.getLectureNotesStatus().showLectureNotes(userService.login.token);
+    }
+    queryUserHomework(coursePlanItem){
+        console.log(coursePlanItem);
+        return courseRepository.queryUserHomeWork({
+            userCoursePlanId:coursePlanItem.id
+        })
+    }
 }
 
 export const courseService = new CourseService();

@@ -111,3 +111,60 @@
     align-items: center;
     justify-content: center;
 }
+.settle_coupon_list_box{
+}
+.settle_coupon_title{
+    font-size:0.16rem;
+    color:#000000;
+}
+.settle_coupon_list{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width:9rem;
+}
+.coupon{
+    position:relative;
+    width:2.7rem;
+    height:1.2rem;
+    margin:0 0.3rem 0.3rem 0;
+}
+.selected_coupon{
+    background:url("../../img/coupon_selected.png") no-repeat center;
+    background-size: 2.7rem 1.2rem;
+    width:2.7rem;
+    height:1.2rem;
+}
+.unselected_coupon{
+    background:url("../../img/coupon_unselected.png") no-repeat center;
+    background-size: 2.7rem 1.2rem;
+    width:2.7rem;
+    height:1.2rem;
+}
+.cant_use_coupon{
+    background:url("../../img/coupon_cant_use.png") no-repeat center;
+    background-size: 2.7rem 1.2rem;
+    width:2.7rem;
+    height:1.2rem;
+}
+.coupon_price{
+    font-size:0.3rem;
+    color:#B8836C;
+    margin:0.17rem 0 0 0.23rem;
+    font-weight:600;
+}
+.coupon_name{
+    margin:0.02rem 0 0 0.23rem;
+    font-weight:600;
+    color:#808080;
+}
+.coupon_end_time{
+    margin:0 0 0 0.23rem;
+    font-weight:400;
+    font-size:0.12rem;
+}
+.coupon_sub_limit{
+    color:#CCCCCC;
+    font-size:0.12rem;
+    margin:0.12rem 0 0 0.23rem;
+}

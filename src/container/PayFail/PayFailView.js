@@ -24,7 +24,7 @@ export class PayFailView extends Component{
         return (
             <div>
                 <div className="wrap"/>
-                <HeaderView userInfo={userService.getUser().userInfo}/>
+                <HeaderView userInfo={userService.user.getUserInfo()}/>
                 <div className="pay_fail_main">
                     <div className="pay_fail_tips">
                         <div className="pay_fail_tips_top">

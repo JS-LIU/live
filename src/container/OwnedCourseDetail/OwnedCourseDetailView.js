@@ -55,7 +55,7 @@ export class OwnedCourseDetailView extends Component{
         return (
             <div>
                 <div className="wrap" />
-                <MyCourseHeaderView userInfo={userService.getUser().userInfo}/>
+                <MyCourseHeaderView userInfo={userService.user.getUserInfo()}/>
                 <div className="owned_course_plan_main">
                     <div className="crumbs">
                         首页 > 我的课程 > {this.state.ownedCourse.courseName}

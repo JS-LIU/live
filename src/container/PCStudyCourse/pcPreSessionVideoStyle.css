@@ -1,0 +1,134 @@
+.pc_pre_session_dialog{
+    position:fixed;
+    z-index: 2;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.pc_pre_session_dialog_wrap{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:#000000;
+    opacity: 0.5;
+}
+.pc_pre_session_dialog_main{
+    position: relative;
+    background:#FFFFFF;
+    margin:0.5rem auto 0;
+    width:6.86rem;
+    border-radius:0.08rem;
+    z-index: 3;
+}
+.pc_pre_session_dialog_main_title{
+    font-size:0.16rem;
+    color:#000000;
+    height:0.5rem;
+    line-height: 0.5rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0.15rem;
+}
+.pc_pre_session_dialog_main_close_dialog_btn{
+    width:0.5rem;
+    height:0.5rem;
+    background:url("../../img/close_dialog_btn.png") no-repeat left center;
+    background-size: 0.16rem;
+}
+.pc_pre_session_dialog_main_scroll{
+    padding:0 0.3rem 1rem;
+    max-height:7rem;
+    overflow-y: auto;
+}
+
+.pc_pre_session_dialog_main_scroll::-webkit-scrollbar {
+    display: none;
+}
+.pc_subject_audio_player{
+    display:flex;
+    position:relative;
+}
+.pc_pre_session_dialog_subject_list{
+    display:flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.pc_pre_session_dialog_subject_list_title{
+    font-size: 0.14rem;
+    color: #FFFFFF;
+    padding: 0.01rem 0.05rem;
+    background: #000000;
+    border-radius: 0.04rem;
+    display: flex;
+    flex-direction: row;
+    width: 0.5rem;
+    margin:0.21rem 0 0.15rem;
+    justify-content: center;
+}
+.subject_item{
+    display:flex;
+    flex-direction: column;
+    font-size:0.14rem;
+    color:#000000;
+    margin-bottom:0.5rem;
+}
+.subject_question{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.subject_question_item{
+    display:flex;
+    justify-content: center;
+}
+.option_item_list{
+    display:flex;
+    flex-direction: column;
+}
+.option_item_list_item{
+    display:flex;
+    flex-direction: row;
+    padding-top:0.2rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+.option_item_list_item_num{
+}
+.option_item_list_item_index{
+    padding-left:0.13rem;
+}
+.option_item_list_item_content{
+    padding-left:0.26rem;
+    flex:1;
+}
+.option_item_list_item_analysis{
+    color:#FF5649;
+    padding-left:0.26rem;
+}
+.confirm_pre_session_btn{
+    width:1.2rem;
+    height:0.4rem;
+    border-radius: 0.2rem;
+    font-size:0.14rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    background:#61BF55;
+    color:#FFFFFF;
+    margin:0 auto 1.5rem;
+    cursor: pointer;
+}
+.correct_show{
+    color:#61BF55;
+    font-size:0.24rem;
+}
+.incorrect_show{
+    color:#FF5649;
+    font-size:0.24rem;
+}

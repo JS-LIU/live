@@ -5,6 +5,7 @@ import {CourseType} from "./CourseType";
 import {LearnStatus} from './LearnStatus';
 import {OwnedCoursePlanItem} from "./OwnedCoursePlanItem";
 import {CourseInfo} from "./CourseInfo";
+import {Teacher} from "./Teacher";
 /**
  * 已经购买过的课程
  */
@@ -18,8 +19,12 @@ export class OwnedCourse {
     setDetail(detail){
         this.detail = detail;
         this.coursePlanList = this.getCoursePlanList();
+        this.updateTeacherInfo();
     }
-
+    updateTeacherInfo(){
+        this.courseInfo.teacherInfo = new Teacher(this.detail.teacherInfo);
+        this.courseInfo.assistantInfo = new Teacher(this.detail.assistantInfo);
+    }
     getCoursePlanList(){
         let list = [];
         for(let i = 0;i < this.detail.coursePlans.length;i++){
@@ -29,6 +34,12 @@ export class OwnedCourse {
             list.push(new OwnedCoursePlanItem(coursePlanItem));
         }
         return list;
+    }
+
+    findCoursePlanItemByCoursePlanItemId(coursePlanItemId){
+        return this.coursePlanList.find((coursePlanItem,index)=>{
+            return coursePlanItem.coursePlanItem.id === coursePlanItemId;
+        });
     }
     //  添加类型为coursePlanItem
     coursePlanItemPaddingType(coursePlanItem){

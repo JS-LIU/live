@@ -9,5 +9,12 @@ export class OwnedCoursePlanItem {
     }
     getModule(repairParam){
         return Object.assign({},this.coursePlanItem.getModule(),repairParam);
+        // return this.coursePlanItem.lectureNotes.getLectureNotesStatus().showLectureNotes(repairParam.token).then((data)=>{
+        //     return new Promise((resolve, reject)=>{
+        //         resolve(Object.assign({},this.coursePlanItem.getModule(),{
+        //             courseWareShowUrl:data.urlPath
+        //         },repairParam));
+        //     })
+        // })
     }
 }

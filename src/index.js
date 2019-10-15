@@ -40,14 +40,28 @@ import {ForgetPasswordView} from './container/Login/ForgetPasswordView';
 import {baseUrl} from "./config/config";
 import {userService} from "./service/UserService";
 //  resetFontSize
+
+HB.ui.setBaseFontSize = function(designWidth,rem2px){
+    var d = window.document.createElement('div');
+    d.style.width = '1rem';
+    d.style.display = "none";
+    var head = window.document.getElementsByTagName('head')[0];
+    head.appendChild(d);
+    var defaultFontSize = parseFloat(window.getComputedStyle(d, null).getPropertyValue('width'));
+    d.remove();
+    document.documentElement.style.fontSize = designWidth / designWidth * rem2px / defaultFontSize * 100 + '%';
+    var st = document.createElement('style');
+    var portrait = "@media screen and (min-width: "+window.innerWidth+"px) {html{font-size:"+ ((designWidth/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}";
+    var landscape = "@media screen and (min-width: "+window.innerHeight+"px) {html{font-size:"+ ((designWidth/(designWidth/rem2px)/defaultFontSize)*100) +"%;}}";
+    st.innerHTML = portrait + landscape;
+    head.appendChild(st);
+    return defaultFontSize
+};
 HB.ui.setBaseFontSize(1920,100);
 //  获取当前路径
 // baseUrl.setBaseUrl("/product");
 
 //  上次访问的是哪个页面 到了这个页面我要让他访问哪个页面
-
-
-
 
 let renderDom = function(){
     ReactDOM.render(
@@ -60,7 +74,8 @@ let renderDom = function(){
                 <Route path="/selectCourseCenter" component={SelectCourseCenterView} />
                 <Route path="/studyCourseCenter/:myCourse" component={StudyCourseCenterView} />
                 <Route path="/productCourseDetail/:productCourseNo" component={ProductCourseDetailView} />
-                <Route path="/confirmOrder/:productCourseNo" component={SettleCenterView} />
+                {/*<Route path="/confirmOrder/:productCourseNo" component={SettleCenterView} />*/}
+                <Route path="/confirmOrder" component={SettleCenterView} />
                 <Route path="/pay" component={PayView} />
                 <Route path="/paySuccess/:status" component={PaySuccessView}/>
                 <Route path="/payFail/:status" component={PayFailView}/>
@@ -83,20 +98,22 @@ let redirectConfig = {
     "login/login":"/login/login",
     "studyCourseCenter/myCourseList":"/studyCourseCenter/myCourseList",
     "studyCourseCenter/week":"/studyCourseCenter/week",
-    "user":"/user/accountManage",
+    "user":"/user/userInfo",
     "ownedCourseDetail":"/studyCourseCenter/myCourseList",
     "orderDetail":'/orderDetail'+localStorage.getItem("orderNo"),
+    "home":'/home'
 };
 let redirectUrl = redirectConfig[redirect] || "/home";
 if(token){
-    userService.updateUserInfo({token:token});
     HB.save.setLocalStorageByLimitTime("token",token);
-    userService.getUserInfo().then(()=>{
+    userService.login.updateToken(token);
+    userService.updateUserInfo().then(()=>{
         renderDom();
-    })
+    });
 }else{
     localStorage.clear();
     redirectUrl = redirectConfig[HB.url.getSearchKey("redirect")] || "/home";
+    console.log(redirectUrl);
     renderDom();
 }
 

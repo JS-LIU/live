@@ -63,7 +63,7 @@ export class AccountManageView extends Component{
                         <li className="account_item">
                             <div className="account_change_item_title">手机</div>
                             <div className="account_change_item_info">
-                                <div className="account_change_item_info_phone_num">{userService.getUser().phoneNum}</div>
+                                <div className="account_change_item_info_phone_num">{userService.user.getUserInfo().phone}</div>
                                 <a className="account_change_item_info_send_v_code" onClick={this.sendVCode.bind(this)}>{this.state.countDown}</a>
                             </div>
                         </li>
@@ -97,7 +97,7 @@ export class AccountManageView extends Component{
                     <li className="account_item">
                         <div className="account_change_item_title">手机</div>
                         <div className="account_change_item_info">
-                            <div className="account_change_item_info_phone_num">{userService.getUser().phoneNum}</div>
+                            <div className="account_change_item_info_phone_num">{userService.user.getUserInfo().phone}</div>
                         </div>
                     </li>
                     <li className="account_item">

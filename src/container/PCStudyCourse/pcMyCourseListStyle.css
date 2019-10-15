@@ -1,6 +1,6 @@
 .pc_my_course_main{
     position:relative;
-    width:11.31rem;
+    width:11.3rem;
     margin:0 auto;
 
 }
@@ -29,9 +29,15 @@
     overflow: hidden;
 }
 .my_course_learn_status{
-    width:0.48rem;
     height:0.24rem;
     margin-right:0.02rem;
+    cursor: pointer;
+    width:0.55rem;
+    background:#F3F3F3;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .pc_my_course_main_course_list{
     width:11rem;
@@ -130,4 +136,14 @@
 }
 .my_owned_course_product_item_footer_total_course_proceed_text{
     padding-left:0.08rem;
+}
+.my_course_no_course{
+    height:2rem;
+    background:url("../../img/no_course.png") no-repeat center;
+    background-size: 2.97rem 1.59rem;
+    padding-top:2rem;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
 }

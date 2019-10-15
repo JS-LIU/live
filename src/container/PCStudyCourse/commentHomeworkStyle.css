@@ -1,0 +1,78 @@
+.comment_homework_dialog{
+    position:fixed;
+    z-index: 2;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.comment_homework_wrap{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:#000000;
+    opacity: 0.5;
+}
+.comment_homework_dialog_main{
+    position: relative;
+    background:#FFFFFF;
+    margin:0.5rem auto 0;
+    width:6.86rem;
+    border-radius:0.08rem;
+    z-index: 3;
+}
+.comment_homework_dialog_main_title{
+    font-size:0.16rem;
+    color:#000000;
+    height:0.5rem;
+    line-height: 0.5rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0.15rem;
+}
+.comment_homework_dialog_main_close_dialog_btn{
+    width:0.5rem;
+    height:0.5rem;
+    background:url("../../img/close_dialog_btn.png") no-repeat left center;
+    background-size: 0.16rem;
+}
+.comment_homework_dialog_main_scroll{
+    padding:0 0.3rem 1rem;
+    max-height:7rem;
+    overflow-y: auto;
+}
+.comment_homework_player{
+    display:flex;
+    position:relative;
+}
+.comment_homework_info_list{
+    display:flex;
+    flex-direction: column;
+    align-self: flex-start;
+}
+.comment_homework_describe_title{
+    font-size:0.14rem;
+    color:#FFF;
+    background:#39579A;
+    padding:0.05rem 0.09rem;
+    border-radius: 0.04rem;
+    margin-top:0.3rem;
+    align-self: self-start;
+}
+.comment_homework_auditContent_title{
+    font-size:0.14rem;
+    color:#FFF;
+    background:#05AEB1;
+    padding:0.05rem 0.09rem;
+    border-radius: 0.04rem;
+    margin-top:0.3rem;
+    align-self: self-start;
+}
+.comment_homework_info_text{
+    font-size:0.14rem;
+    color:#808080;
+    margin-top:0.14rem;
+}

@@ -15,7 +15,7 @@ export class StudyCourseCenterView extends Component{
         return(
             <div>
                 <div className="wrap" />
-                <MyCourseHeaderView userInfo={userService.getUser().userInfo}/>
+                <MyCourseHeaderView userInfo={userService.user.getUserInfo()}/>
                 <div>
                     <Route path="/studyCourseCenter/week" component={WeekCourseView}/>
                     <Route path="/studyCourseCenter/myCourseList" component={MyCourseListView}/>

@@ -24,7 +24,7 @@ export class PaySuccessView extends Component{
         return (
             <div>
                 <div className="wrap"></div>
-                <HeaderView history={this.props.history} title={"支付成功"} userInfo={userService.getUser().userInfo}/>
+                <HeaderView history={this.props.history} title={"支付成功"} userInfo={userService.user.getUserInfo()}/>
                 <div className="pay_success_main">
                     <div className="pay_success_body_box">
                         <div className="pay_success_body_box_inner">

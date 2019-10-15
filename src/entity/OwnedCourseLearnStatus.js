@@ -6,6 +6,7 @@ export class OwnedCourseLearnStatus {
         this.id = status.id;
         this.name = status.name;
         this.active = status.active;
+        this.order = status.order;
     }
     unSelected(){
         this.active = false;

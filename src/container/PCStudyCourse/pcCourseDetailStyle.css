@@ -1,6 +1,6 @@
 .pc_owned_course_plan_main{
     position:relative;
-    width:11.31rem;
+    width:11.3rem;
 }
 .pc_owned_course_plan_list{
     width: 10.46rem;
@@ -131,6 +131,7 @@
 .course_plan_item_info_course_start_time{
     margin-top:0.14rem;
     font-size:0.12rem;
+    padding-left: 0.4rem;
 }
 .pc_course_plan_item_right_pl_1{
     display:flex;

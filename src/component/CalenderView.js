@@ -13,13 +13,14 @@ import DatePicker from 'rc-calendar/lib/Picker';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import 'moment/locale/en-gb';
+// import 'moment/locale/en-gb';
 import {baseUrl} from "../config/config";
+import calenderViewStyle from './calenderViewStyle.css';
 
 const format = 'YYYY-MM-DD';
 const cn = location.search.indexOf('cn') !== -1;
 const mdFormat = "MM.DD";
-const now = moment();
+
 
 
 const style = `
@@ -52,12 +53,13 @@ const style = `
 export class CalenderView extends Component {
     constructor(props) {
         super(props);
+        this.now = moment();
         this.state = {
             open: false,
-            value: now
+            value: this.now
         };
+        this.recordWeek = 0;
     }
-
     onOpenChange(open) {
         this.setState({
             open: open,
@@ -68,9 +70,10 @@ export class CalenderView extends Component {
         this.setState({
             value: value,
         });
-        this.props.weekData.startTime = value.week(value.week()).startOf('week').format(format);
-        this.props.weekData.endTime = value.week(value.week()).endOf('week').format(format);
-        this.props.onChangeTime();
+        // this.props.weekData.startTime = value.week(value.week()).startOf('week').format(format);
+        // this.props.weekData.endTime = value.week(value.week()).endOf('week').format(format);
+        // this.props.onChangeTime();
+        this.resetWeek(value);
     }
 
     dateRender(current) {
@@ -90,6 +93,42 @@ export class CalenderView extends Component {
             </div>)
     }
 
+    resetWeek(value){
+        this.props.weekData.startTime = value.week(value.week()).startOf('week').format(format);
+        this.props.weekData.endTime = value.week(value.week()).endOf('week').format(format);
+        this.props.onChangeTime();
+    }
+    nextWeek(value){
+        return ()=>{
+            value.add(1, 'weeks');
+            this.setState({
+                value,
+                open: false,
+            });
+            // this.onOpenChange(false);
+            this.recordWeek++;
+            this.resetWeek(value);
+        }
+    }
+    lastWeek(value){
+        return ()=>{
+            value.add(-1, 'weeks');
+            this.setState({
+                value,
+                open: false,
+            });
+            // this.recordWeek--;
+            // this.onOpenChange(false);
+            this.resetWeek(value);
+        }
+    }
+
+    openCalender(){
+        let open = !this.state.open;
+        this.setState({
+            open: open
+        });
+    }
     render() {
         const state = this.state;
         const calendar = (
@@ -97,12 +136,12 @@ export class CalenderView extends Component {
                 className="week-calendar"
                 dateRender={this.dateRender.bind(this)}
                 locale={zhCN}
-                style={{zIndex: 1000}}
+                style={{top:"0.3rem"}}
                 showDateInput={false}
             />);
         return (
             <DatePicker
-                onOpenChange={this.onOpenChange.bind(this)}
+                // onOpenChange={this.onOpenChange.bind(this)}
                 open={this.state.open}
                 animation="slide-up"
                 calendar={calendar}
@@ -114,14 +153,19 @@ export class CalenderView extends Component {
                         this.props.weekData.startTime = value.week(value.week()).startOf('week').format(format);
                         this.props.weekData.endTime = value.week(value.week()).endOf('week').format(format);
                         return (
-                            <div tabIndex="0" style={calendar_show}>
-                                <div>
-                                    {value.week(value.week()).startOf('week').format(mdFormat)}
+                            <div style={calendar_show}>
+                                <div className="calender_last_week_btn" onClick={this.lastWeek(value)} />
+                                <div className="week_show" onClick={this.openCalender.bind(this)}>
+                                    <div>
+                                        {value.week(value.week()).startOf('week').format(mdFormat)}
+                                    </div>
+                                    <div>-</div>
+                                    <div>
+                                        {value.week(value.week()).endOf('week').format(mdFormat)}
+                                    </div>
                                 </div>
-                                <div>-</div>
-                                <div>
-                                    {value.week(value.week()).endOf('week').format(mdFormat)}
-                                </div>
+
+                                <div className="calender_next_week_btn" onClick={this.nextWeek(value)} />
                             </div>
                         );
                     }
@@ -133,12 +177,10 @@ export class CalenderView extends Component {
 const calendar_show = {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     width: "1.91rem",
     fontSize: "0.16rem",
     color: "#000000",
-    background: "url('"+baseUrl.getBaseUrl() +"/src/img/calendar_icon.png') no-repeat 1.6rem 0.01rem",
-    backgroundSize: "0.2rem",
-    paddingRight: "0.3rem"
+    zIndex:"9999"
 };

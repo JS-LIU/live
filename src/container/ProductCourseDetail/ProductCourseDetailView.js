@@ -31,7 +31,7 @@ export class ProductCourseDetailView extends Component{
             this.setState({
                 isShowAliPlay:true
             });
-            courseService.getVideoView(course).then((data)=>{
+            courseService.getVideoView(course.detail.videoId).then((data)=>{
                 new Aliplayer({
                     id: "J_prismPlayer",
                     vid : data.data.aliVodId,
@@ -99,8 +99,9 @@ export class ProductCourseDetailView extends Component{
     }
     //  todo 这里应该调后台接口但是后台没接口
     onBuyCourse(){
-        if(userService.login.isLogin(userService.getUser())){
-            this.props.history.push("/confirmOrder/" + `${this.productCourseNo}`);
+        if(userService.login.isLogin()){
+            let url = `/confirmOrder?productCourseNo=${this.productCourseNo}`;
+            this.props.history.push(url);
         }else{
             this.props.history.push("/login/login");
         }
@@ -129,7 +130,7 @@ export class ProductCourseDetailView extends Component{
         return(
             <div>
                 <div className="wrap" />
-                <HeaderView history={this.props.history} userInfo={userService.getUser().userInfo}/>
+                <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="product_course_detail_main">
                     <div className="crumbs">
                         首页 > 选课中心 > {this.state.course.name}

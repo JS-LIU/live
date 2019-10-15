@@ -1,0 +1,47 @@
+.lecture_dialog{
+    position:fixed;
+    z-index: 2;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.lecture_wrap{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    background:#000000;
+    opacity: 0.5;
+}
+.lecture_main{
+    position: relative;
+    background:#FFFFFF;
+    margin:0.2rem auto 0;
+    width:6.86rem;
+    border-radius:0.08rem;
+    z-index: 3;
+    height:90%;
+    overflow: hidden;
+}
+.lecture_main_main_title{
+    font-size:0.16rem;
+    color:#000000;
+    height:0.5rem;
+    line-height: 0.5rem;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0.15rem;
+}
+.lecture_main_close_dialog_btn{
+    width:0.5rem;
+    height:0.5rem;
+    background:url("../../img/close_dialog_btn.png") no-repeat left center;
+    background-size: 0.16rem;
+}
+.lecture_frame{
+    width:100%;
+    height:100%;
+}

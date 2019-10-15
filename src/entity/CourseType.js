@@ -12,6 +12,7 @@ export class CourseType {
     static StatusManager(){
         return {
             "1":{
+                id:1,
                 name:"p",
                 background:"#00b7ba",
                 url:baseUrl.getBaseUrl() + "/src/img/product_course_python_header_bg.png",
@@ -22,12 +23,14 @@ export class CourseType {
                 // }
             },
             "2":{
+                id:2,
                 name:"c",
                 background:"#4161A6",
                 url:baseUrl.getBaseUrl() + "/src/img/product_course_c++_header_bg.png",
                 iconBackground:baseUrl.getBaseUrl() + "/src/img/icon_c.png"
             },
             "3":{
+                id:3,
                 name:"n",
                 background:"#b178c8",
                 url:baseUrl.getBaseUrl() + "/src/img/product_course_noi_header_bg.png",

@@ -6,108 +6,81 @@ import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom"
 import {userService} from "../../service/UserService";
 import userInfoStyle from "./userInfoStyle.css";
 import {TimeManager} from "../../entity/TimeManager";
+import {HB} from "../../util/HB";
+import {UserInfoOptionNodesView} from "../../component/UserInfoOptionNodesView";
 
 export class UserInfoView extends Component{
     constructor(props) {
         super(props);
-        this.state = {
-            userInfo:userService.getUser().userInfo
-        };
         //  clone userService;
-        this.userInfo = Object.assign({},userService.getUser().userInfo);
+        this.userInfo = Object.assign({},userService.user.getUserInfo().getModule());
+        this.state = {
+            userName:userService.user.getUserInfo().getModule().userName,
+            sex:userService.user.getUserInfo().getModule().showSex,
+            isMan:userService.user.getUserInfo().isMan(),
+            address:userService.user.getUserInfo().getModule().address
+        };
     }
     onChangeName(e){
         let name = e.target.value;
-        this.userInfo = Object.assign({},this.userInfo,{
+        this.setState({
             userName:name
         });
-        this.setState({
-            userInfo:this.userInfo
+        this.userInfo = Object.assign(this.userInfo,{
+            userName:name
         })
     }
     onChangeSex(e){
-        let sex = (e.target.value==="男"?1:0);
-        this.userInfo = Object.assign(this.userInfo,{
-            sex:sex
-        });
+        this.sex = userService.user.userInfo.convertSexToType(e.target.value);
         this.setState({
-            userInfo:this.userInfo
+            sex:e.target.value,
+            isMan:e.target.value === "男"
+        });
+        this.userInfo = Object.assign(this.userInfo,{
+            sex:this.sex
         })
     }
-    onChangeYear(e){
+    onChangeYear(year){
+        this.year = year;
         this.userInfo = Object.assign(this.userInfo,{
-            birthY:e.target.value
-        });
-        this.setState({
-            userInfo:this.userInfo
+            showBirthY:this.year
         })
     }
-    onChangeMonth(e){
+    onChangeMonth(month){
+        this.month = month;
         this.userInfo = Object.assign(this.userInfo,{
-            birthM:e.target.value
-        });
-        this.setState({
-            userInfo:this.userInfo
+            showBirthM:this.month
         })
     }
-    onChangeDay(e){
+    onChangeDay(day){
+        this.day = day;
         this.userInfo = Object.assign(this.userInfo,{
-            birthD:e.target.value
-        });
-        this.setState({
-            userInfo:this.userInfo
+            showBirthD:this.day
         })
     }
-    onChangeGrade(e){
+    onChangeGrade(grade){
+        this.grade = grade;
         this.userInfo = Object.assign(this.userInfo,{
-            grade:e.target.value
-        });
-        this.setState({
-            userInfo:this.userInfo
+            grade:this.grade
         })
     }
     onChangeAddress(e){
+        this.address = e.target.value;
         this.userInfo = Object.assign(this.userInfo,{
-            address:e.target.value
-        });
-        this.setState({
-            userInfo:this.userInfo
+            address:this.address
         })
     }
     confirmFixed(){
-        userService.resetUserInfo(this.userInfo).then((data)=>{
-            this.props.refreshUserInfo();
-            alert("修改成功");
-        }).catch((msg)=>{
-            alert(msg);
+        this.userInfo = Object.assign(this.userInfo,{
+            birthday:TimeManager.convertYMDToStampByUnix(this.userInfo.showBirthY+"/"+this.userInfo.showBirthM+"/"+this.userInfo.showBirthD)
         });
+        if(HB.valid.trimAllBlank(this.userInfo.userName) === ""){
+            return alert("请填写姓名")
+        }else{
+            this.props.fixedUserInfo(this.userInfo);
+        }
     }
     render() {
-        let years = TimeManager.createDate(1999,2014);
-        let yearNodes = years.map((yearItem,index)=>{
-            return (
-                <option key={index} value={yearItem} selected={parseInt(yearItem) === this.state.userInfo.birthY?"selected":null}>{yearItem}</option>
-            )
-        });
-        let month = TimeManager.createDate(1,12);
-        let monthNodes = month.map((monthItem,index)=>{
-            return (
-                <option key={index} value={monthItem} selected={parseInt(monthItem) === this.state.userInfo.birthM?"selected":null}>{monthItem}</option>
-            )
-        });
-        let day = TimeManager.createDate(1,31);
-        let dayNodes = day.map((dayItem,index)=>{
-            return (
-                <option key={index} value={dayItem} selected={parseInt(dayItem) === parseInt(this.state.userInfo.birthD)?"selected":null}>{dayItem}</option>
-            )
-        });
-        let grade = ["学前班","小学一年级","小学二年级","小学三年级","小学四年级","小学五年级","小学六年级","初中一年级","初中二年级","初中三年级","高中一年级","高中二年级","高中三年级"];
-        let gradeNodes = grade.map((gradeItem,index)=>{
-            return (
-                <option key={index} value={gradeItem} selected={gradeItem === this.state.userInfo.grade?"selected":null}>{gradeItem}</option>
-            )
-
-        });
         return (
             <div className="user_info_main">
                 <div className="user_info_box_title">个人信息</div>
@@ -117,9 +90,9 @@ export class UserInfoView extends Component{
                             <div className="user_info_set_info_box_left_item_title">真实姓名</div>
                             <div className="user_info_set_info_box_left_item_name_box">
                                 <input type="text"
-                                       value={this.state.userInfo.userName}
-                                       className="user_info_set_info_box_left_item_name"
+                                       value={this.state.userName}
                                        onChange={this.onChangeName.bind(this)}
+                                       className="user_info_set_info_box_left_item_name"
                                 />
                             </div>
                         </li>
@@ -129,16 +102,15 @@ export class UserInfoView extends Component{
                                 <input type="radio"
                                        name="sex"
                                        value="男"
-                                       checked={this.state.userInfo.sex === 1}
-                                       className="user_info_set_info_box_left_item_sex_man"
-                                       onChange={this.onChangeSex.bind(this)}/>
+                                       checked={this.state.isMan}
+                                       onChange={this.onChangeSex.bind(this)}
+                                />
                                 <span style={{paddingLeft:"0.07rem"}}>男</span>
                                 <input type="radio"
                                        name="sex"
                                        value="女"
-                                       className="user_info_set_info_box_left_item_sex_woman"
                                        style={{marginLeft:"0.21rem"}}
-                                       checked={this.state.userInfo.sex === 0}
+                                       checked={!this.state.isMan}
                                        onChange={this.onChangeSex.bind(this)}
                                 />
                                 <span style={{paddingLeft:"0.07rem"}}>女</span>
@@ -147,36 +119,69 @@ export class UserInfoView extends Component{
                         <li className="user_info_box_set_info_box_left_item">
                             <div className="user_info_set_info_box_left_item_title">生日</div>
                             <div className="user_info_set_info_box_left_item_birthday">
-                                <select className="user_info_set_info_box_left_item_birthday_year_box"
-                                        onChange={this.onChangeYear.bind(this)}>
-                                    {yearNodes}
-                                </select>
+
+                                <UserInfoOptionNodesView optionList={userService.user.getUserInfo().getModule().birthYList}
+                                                         changeHandle={this.onChangeYear.bind(this)}
+                                                         defValue={userService.user.getUserInfo().getModule().showBirthY}
+                                                         style={{
+                                                             background:"#F8F8F8",
+                                                             width:"0.8rem",
+                                                             height:"0.34rem",
+                                                             border:"0 solid #F8F8F8",
+                                                             display:"flex",
+                                                             flexDirection:"row",
+                                                             alignItems:"center",
+                                                             paddingLeft:"0.1rem"}}/>
                                 <div style={{padding:"0 0.22rem 0 0.12rem"}}>年</div>
-                                <select className="user_info_set_info_box_left_item_birthday_month_box"
-                                        onChange={this.onChangeMonth.bind(this)}>
-                                    {monthNodes}
-                                </select>
+                                <UserInfoOptionNodesView optionList={userService.user.getUserInfo().getModule().birthMList}
+                                                         changeHandle={this.onChangeMonth.bind(this)}
+                                                         defValue={userService.user.getUserInfo().getModule().showBirthM}
+                                                         style={{
+                                                             background:"#F8F8F8",
+                                                             width:"0.6rem",
+                                                             height:"0.34rem",
+                                                             border:"0 solid #F8F8F8",
+                                                             display:"flex",
+                                                             flexDirection:"row",
+                                                             alignItems:"center",
+                                                             paddingLeft:"0.1rem"}}/>
                                 <div style={{padding:"0 0.22rem 0 0.12rem"}}>月</div>
-                                <select className="user_info_set_info_box_left_item_birthday_day_box"
-                                        onChange={this.onChangeDay.bind(this)}>
-                                    {dayNodes}
-                                </select>
+                                <UserInfoOptionNodesView optionList={userService.user.getUserInfo().getModule().birthDList}
+                                                         changeHandle={this.onChangeDay.bind(this)}
+                                                         defValue={userService.user.getUserInfo().getModule().showBirthD}
+                                                         style={{
+                                                             background:"#F8F8F8",
+                                                             width:"0.6rem",
+                                                             height:"0.34rem",
+                                                             border:"0 solid #F8F8F8",
+                                                             display:"flex",
+                                                             flexDirection:"row",
+                                                             alignItems:"center",
+                                                             paddingLeft:"0.1rem"}}/>
                                 <div style={{padding:"0 0.22rem 0 0.12rem"}}>日</div>
                             </div>
                         </li>
                         <li className="user_info_box_set_info_box_left_item">
                             <div className="user_info_set_info_box_left_item_title">年级</div>
                             <div className="user_info_set_info_box_left_item_grade">
-                                <select className="user_info_set_info_box_left_item_grade_box"
-                                        onChange={this.onChangeGrade.bind(this)}>
-                                    {gradeNodes}
-                                </select>
+                                <UserInfoOptionNodesView optionList={userService.user.getUserInfo().getModule().gradeList}
+                                                         changeHandle={this.onChangeGrade.bind(this)}
+                                                         defValue={userService.user.getUserInfo().getModule().grade}
+                                                         style={{
+                                                             background:"#F8F8F8",
+                                                             width:"0.6rem",
+                                                             height:"0.34rem",
+                                                             border:"0 solid #F8F8F8",
+                                                             display:"flex",
+                                                             flexDirection:"row",
+                                                             alignItems:"center",
+                                                             paddingLeft:"0.1rem"}}/>
                             </div>
                         </li>
                         <li className="user_info_box_set_info_box_left_item">
                             <div className="user_info_set_info_box_left_item_title">收货地址</div>
                             <input type="text"
-                                   value={this.state.userInfo.address}
+                                   value={this.state.address}
                                    className="user_info_set_info_box_address"
                                    onChange={this.onChangeAddress.bind(this)}
                             />
@@ -189,7 +194,7 @@ export class UserInfoView extends Component{
                     </ul>
                     <div className="update_header">
                         <div className="update_header_box">
-                            <img src={this.state.userInfo.headImgUrl} alt="" className="update_header_box_img"/>
+                            <img src={this.state.headImgUrl} alt="" className="update_header_box_img"/>
                         </div>
                     </div>
                 </div>

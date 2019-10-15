@@ -9,38 +9,81 @@ import {Order} from "../entity/Order";
 import {OrderProduct} from "../entity/OrderProduct";
 import {Pagination} from "../entity/Pagination";
 import {SearchOrderStatus} from "../entity/SearchOrderStatus";
-
+import {SettleManager} from "../entity/SettleManager";
+import {orderRepository} from '../repository/OrderRepository';
 class OrderService {
     constructor(){
-        let orderAjax = commonAjax.resource('/order/w/v1.0/:action');
-
         this.orderList = [];
-        this._createOrder = function(postInfo){
-            return orderAjax.save({action:'createOrder'},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._reCreateOrder = function(postInfo){
-            return orderAjax.save({action:"paymentOrder"},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._cancelOrder = function(postInfo){
-            return orderAjax.save({action:"cancelOrder"},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._queryOrderStatus = function(postInfo){
-            return orderAjax.save({action:"queryOrderStatus"},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._getOrderList = function(postInfo){
-            return orderAjax.save({action:"pageOrder"},postInfo,{name:"token",value:userService.getUser().token});
-        };
-        this._queryOrderDetail = function(postInfo){
-            return orderAjax.save({action:"queryOrderDetail"},postInfo,{name:"token",value:userService.getUser().token});
-        };
         this.searchOrderStatus = new SearchOrderStatus();
         this.order = null;
         this.orderProduct = null;
         this.pagination = new Pagination(1,10);
     }
+    preOrderStrategy(goodNo, orderNo) {
+        return {
+            "orderDetail": (goodNo, orderNo) => {
+                return orderRepository.orderDetail({
+                    orderNo: orderNo
+                }).then((data) => {
+                    return this.createPreOrderInfo(data);
+                })
+            },
+            "preOrder": (goodNo, orderNo) => {
+                return orderRepository.preOrder({
+                    goodNo:goodNo
+                }).then((data) => {
+                    console.log("createPreOrderInfo:",data);
+                    return this.createPreOrderInfo(data);
+                })
+            }
+        }
+    }
+    createPreOrderInfo(data) {
+        return new Promise((resolve, reject) => {
+            console.log(data);
+            if(data.code!==0){
+                reject(data);
+            }else{
+                this.settleManager = new SettleManager(data.data.sellPrice, data.data.couponList, data.data.account);
+                console.log(data.data);
+                this.order = new Order(data.data);
+                console.log(this.order);
+                resolve({
+                    settleManager: this.settleManager,
+                    order: this.order,
+                });
+            }
+        })
+    }
+    preOrder(preOrderAction, goodNo, orderNo) {
+        console.log(goodNo, orderNo);
+        return this.preOrderStrategy()[preOrderAction].call(this, goodNo, orderNo)
+    }
+    takeOrder() {
+        let userCoupons = this.settleManager.couponManager.getUseCouponAccountCouponNoList();
+        return orderRepository.takeOrder({
+            orderNo: this.order.orderNo,
+            account: this.settleManager.account.getAllowDeltaMax(),
+            userCoupons: userCoupons,
+            salePrice: this.settleManager.calcRealPay()
+        })
+    }
+    toggleSelectCoupon(accountCouponNo) {
+        this.settleManager.couponManager.toggleSelectCoupon(accountCouponNo, this.settleManager.sellPrice);
+        return new Promise((resolve, reject) => {
+            resolve(this.settleManager)
+        })
+    }
+    toggleUseBalance() {
+        this.settleManager.account.toggleUseBalance();
+        return new Promise((resolve, reject) => {
+            resolve(this.settleManager)
+        })
+    }
+
 
     createOrder(productCourse){
-        return this._createOrder({
+        return orderRepository.createOrder({
             goodNo:productCourse.goodNo,
             salePrice:productCourse.salePrice
         }).then((data)=>{
@@ -56,7 +99,7 @@ class OrderService {
         })
     }
     reCreateOrder(orderInfo){
-        return this._reCreateOrder({
+        return orderRepository.reCreateOrder({
             orderNo:orderInfo.orderNo
         }).then((data)=>{
             return new Promise((resolve,reject)=>{
@@ -112,7 +155,7 @@ class OrderService {
 
         this.timing = setInterval(()=>{
             queryStep = this.getQueryStep(currentTimeStampBySec,boundOfFrequently,queryStep);
-            this._queryOrderStatus({
+            orderRepository.queryOrderStatus({
                 orderNo:this.order.orderNo
             }).then((data)=>{
                 currentTimeStampBySec = TimeManager.currentTimeStampBySec();
@@ -154,7 +197,7 @@ class OrderService {
      * @returns {*}
      */
     getOrderList(){
-        return this._getOrderList({
+        return orderRepository.getOrderList({
             orderStatus:this.searchOrderStatus.getCurrentSearchOrderStatus().status,
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size
@@ -185,7 +228,7 @@ class OrderService {
     }
 
     queryOrderDetail(orderNo){
-        return this._queryOrderDetail({
+        return orderRepository.queryOrderDetail({
             orderNo:orderNo
         }).then((data)=>{
             let order = this.findOrderByOrderNo(orderNo);
@@ -201,7 +244,7 @@ class OrderService {
         })
     }
     cancelOrder(orderItem){
-        return this._cancelOrder({
+        return orderRepository.cancelOrder({
             orderNo:orderItem.orderNo
         }).then((data)=>{
             return new Promise((resolve, reject)=>{
@@ -211,9 +254,7 @@ class OrderService {
                     reject(data.message);
                 }
             })
-
         })
     }
-
 }
 export let orderService = new OrderService();

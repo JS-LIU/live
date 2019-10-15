@@ -1,0 +1,56 @@
+.plan_item_dialog{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    z-index:3;
+}
+.plan_item_dialog_wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    z-index: 10;
+    opacity: 0.8;
+    background:#000000;
+}
+.plan_item_dialog_content{
+    position:relative;
+    display:flex;
+    flex-direction: column;
+    width:5.8rem;
+    height:3.4rem;
+    border-radius: 0.12rem;
+    overflow: hidden;
+    z-index:11;
+}
+.close_plan_item_dialog{
+    position:absolute;
+    top:0.19rem;
+    right:0.17rem;
+    width:0.2rem;
+    height:0.2rem;
+    background:url("../../img/close_video_btn.png") center center;
+    background-size: 0.2rem;
+}
+.plan_item_dialog_title{
+    height:1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding:0.15rem;
+}
+.plan_item_dialog_title_text_sub{
+    color:#FFF;
+    font-size:0.14rem;
+}
+.plan_item_dialog_title_text{
+    font-size:0.26rem;
+    color: #FFFFFF;
+}

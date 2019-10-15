@@ -64,7 +64,7 @@ export class RingProgressView extends Component{
                         <div className="circle_progress" style={this.rightCircleStyle} />
                     </div>
                     <div className="wrapper" style={this.leftWrapperStyle}>
-                        <div className="circleProgress"  style={this.leftCircleStyle}/>
+                        <div className="circle_progress"  style={this.leftCircleStyle}/>
                     </div>
                 </div>
                 {this.props.innerRender}

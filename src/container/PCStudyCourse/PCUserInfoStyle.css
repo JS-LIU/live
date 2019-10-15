@@ -1,6 +1,6 @@
 .pc_user_info_main{
     position:relative;
-    width:11.31rem;
+    width:11.3rem;
     background:#ffffff;
 }
 .user_info_box_title{
@@ -78,7 +78,12 @@
     flex-direction: row;
     align-items: center;
     padding-left:0.1rem;
-
+}
+.none_def_appearance{
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    -ms-appearance:none;
 }
 .user_info_set_info_box_left_item_grade_box{
     appearance:none;
@@ -137,4 +142,5 @@
     color:#ffffff;
     background:#FFC900;
     margin-top:0.2rem;
+    cursor: pointer;
 }

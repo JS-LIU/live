@@ -5,7 +5,7 @@ import {TimeManager} from "./TimeManager";
 import {Teacher} from "./Teacher";
 import {Homework} from "./Homework";
 import {PreVideo} from "./PreVideo";
-import {Courseware} from "./Courseware";
+import {LectureNotes} from "./LectureNotes";
 import {LearnStatus} from "./LearnStatus";
 import {CourseType} from "./CourseType";
 import {HB} from "../util/HB";
@@ -20,21 +20,22 @@ export class CoursePlanItem {
         this.preVideo = new PreVideo(coursePlanItemInfo.preVideoStatus,coursePlanItemInfo.preVideoId);
         this.teacherInfo = new Teacher(coursePlanItemInfo.teacherInfo);
         this.assistantInfo = new Teacher(coursePlanItemInfo.assistantInfo);
-        this.courseware = new Courseware(coursePlanItemInfo.coursewareStatus,coursePlanItemInfo.coursewareUrl);
+        this.lectureNotes = new LectureNotes(coursePlanItemInfo.lectureNotesStatus,coursePlanItemInfo.lectureNotes);
         this.homework = new Homework({
-            homeworkDownloadStatus:coursePlanItemInfo.homeworkDownloadStatus||coursePlanItemInfo.userHomeworkStatus,
+            userHomeworkStatus:coursePlanItemInfo.userHomeworkStatus,
             homeworkName:coursePlanItemInfo.homeworkName,
-            homeworkUrl:coursePlanItemInfo.homeworkUrl
+            homeworkUrl:coursePlanItemInfo.homeworkUrl,
+            homeworkSavePath:coursePlanItemInfo.homeworkSavePath,
         });
-        this.learnStatus = new LearnStatus(coursePlanItemInfo.learnStatus);
+        this.learnStatus = new LearnStatus(coursePlanItemInfo.learnStatus,coursePlanItemInfo.videoId,coursePlanItemInfo.videoViewStatus);
         this.type = new CourseType(coursePlanItemInfo.type);
         this.level = coursePlanItemInfo.level;
         this.startTime = coursePlanItemInfo.startTime || coursePlanItemInfo.classTime;
-        this.lectureNotes = coursePlanItemInfo.lectureNotes;
-        this.lectureNotesStatus = coursePlanItemInfo.lectureNotesStatus;
+        this.coursewareUrl = coursePlanItemInfo.coursewareUrl;
+        this.coursewareStatus = coursePlanItemInfo.coursewareStatus;
         this.materialList = coursePlanItemInfo.materialList;
-        this.videoId = coursePlanItemInfo.videoId;
-        this.videoViewStatus = coursePlanItemInfo.videoViewStatus;
+        // this.videoId = coursePlanItemInfo.videoId;
+        // this.videoViewStatus = coursePlanItemInfo.videoViewStatus;
     }
     getShowTime(type){
         let date = TimeManager.timeStampToDate(this.startTime,type);
@@ -53,17 +54,15 @@ export class CoursePlanItem {
             courseName:this.courseName,
             teacherInfo:this.teacherInfo.getModule(),
             assistantInfo:this.assistantInfo.getModule(),
-            courseware:this.courseware.getCourseWareStatus(),
+            lectureNotes:this.lectureNotes.getLectureNotesStatus(),
             homework:this.homework.getStatusInfo(),
             learnStatus:this.learnStatus.getStatusInfo(),
             type:this.type.getTypeInfo(),
             level:this.level,
             startTime:this.startTime,
-            lectureNotes:this.lectureNotes,
-            lectureNotesStatus:this.lectureNotesStatus,
+            coursewareUrl:this.coursewareUrl,
+            coursewareStatus:this.coursewareStatus,
             materialList:this.materialList,
-            videoId:this.videoId,
-            videoViewStatus:this.videoViewStatus,
         }
     }
 }

@@ -7,6 +7,9 @@ import {baseUrl, commonAjax} from "../config/config";
 import {TimeManager} from "../entity/TimeManager";
 import {HB} from "../util/HB";
 import {hex_md5} from "../util/md5";
+import {CouponStatus} from "../entity/CouponStatus";
+import {Pagination} from "../entity/Pagination";
+import {Coupon} from "../entity/Coupon";
 
 /**
  * userService
@@ -22,155 +25,200 @@ import {hex_md5} from "../util/md5";
  */
 class UserService {
     constructor(){
+        this.login = new Login();
+        this.user = new User();
+
         let ajax = commonAjax.resource('/user/w/v1.0/:action');
-        this._login = function(postInfo){
+        // let miniProgramAjax = commonAjax.resource('user/x/v1.0/bindWechatProgram');
+        this._queryUserAccountCoupon = function (postInfo){
+            return ajax.save({ action: 'queryUserAccountCoupon' }, postInfo, { name: "token", value: this.user.token });
+        };
+        this._loginByPassword = function(postInfo){
             return ajax.save({action:'login'},postInfo);
+        };
+        this._loginByVCode = function(postInfo){
+            return ajax.save({action:"loginWithVerifyCode"},postInfo)
+        };
+        this._getUserInfo = function(postInfo){
+            return ajax.save({action:'userInfo'},postInfo,{name:"token",value:this.login.token});
+        };
+        this._getLoginVCode = function(postInfo){
+            return ajax.save({action:"loginVerifyCode"},postInfo)
+        };
+        this._getRegisterVerifyCode = function(postInfo){
+            return ajax.save({action:'registerVerifyCode'},postInfo);
+        };
+        this._getResetPasswordVCode = function(postInfo){
+            return ajax.save({action:'resetPwdVerifyCode'},postInfo);
         };
         this._register = function(postInfo){
             return ajax.save({action:'registerUserInfo'},postInfo);
         };
-
-        this._getPwdVCode = function(postInfo){
-            return userAjax.save({action:'resetPwdVerifyCode'},postInfo);
-        };
-        this._getRegisterVerifyCode = function(postInfo){
-            return userAjax.save({action:'registerVerifyCode'},postInfo);
-        };
-        this._getLoginVCode = function(postInfo){
-            return userAjax.save({action:"loginVerifyCode"},postInfo)
-        };
-        this._loginByCode = function(postInfo){
-            return userAjax.save({action:"loginWithVerifyCode"},postInfo)
-        };
-        this._getUserInfo = function(postInfo){
-            return ajax.save({action:'userInfo'},postInfo,{name:"token",value:this.token});
-        };
-        this._resetPwd = function(postInfo){
-            return ajax.save({action:'resetPwd'},postInfo,{name:"token",value:this.token});
-        };
-
-        this.login = new Login(ajax);
-        this.user = new User(ajax);
         this._resetUserInfo = function(postInfo){
-            return ajax.save({action:"updateUserInfo"},postInfo,{name:"token",value:this.user.token})
+            return ajax.save({action:"updateUserInfo"},postInfo,{name:"token",value:this.login.token})
         };
+        this.couponList = [];
+        this.couponStatusManager = new CouponStatus();
+        this.pagination = new Pagination(1, 10);
     }
-    resetUserInfo(userInfo){
-        userInfo.birthday = TimeManager.convertYMDToStampByUnix(userInfo.birthY+"/"+userInfo.birthM+"/"+userInfo.birthD);
-        return this._resetUserInfo(userInfo).then((data)=>{
+    resetUserInfo(postInfo){
+        return this._resetUserInfo(postInfo).then(()=>{
+            return this.updateUserInfo()
+        })
+    }
+
+    /**
+     * 验证码登录
+     * @param postInfo {phoneNum,code}
+     * @returns Promise
+     */
+    signByVCode(postInfo){
+        return this._loginByVCode({
+            phone:postInfo.phoneNum,
+            code:postInfo.vcode
+        }).then((data)=>{
+            return new Promise((resolve,reject)=>{
+                this.login.updateToken(data.data.token);
+                resolve();
+            })
+        });
+    }
+
+    /**
+     * 密码登录
+     * @param postInfo
+     * @returns {*}
+     */
+    signByPassword(postInfo){
+        return this._loginByPassword({
+            phone:postInfo.phoneNum,
+            pass:hex_md5(postInfo.password)
+        }).then((data)=>{
+            return new Promise((resolve,reject)=>{
+                this.login.updateToken(data.data.token);
+                resolve();
+            })
+        });
+    }
+    signStrategy(){
+        return {
+            "signByVCode":this.signByVCode,
+            "signByPassword":this.signByPassword
+        }
+    }
+
+    //  登录
+    signIn(signWay,postInfo){
+        return this.signStrategy()[signWay].call(this,postInfo)
+    }
+    //  获取用户信息
+    updateUserInfo(){
+        return this._getUserInfo({}).then((data)=>{
             return new Promise((resolve, reject)=>{
                 if(data.code === 0){
-                    this.updateUserInfo({userInfo:userInfo});
-                    resolve(data);
+                    let userInfo = this.createUserInfo(data.data);
+                    resolve(userInfo);
                 }else{
-                    reject(data.message)
+                    reject(data.message);
+                }
+            })
+        });
+    }
+    /**
+     * 获取验证码
+     * 验证码登录
+     * @param phoneNum
+     */
+    getLoginVCode(phoneNum){
+        return this._getLoginVCode({
+            phone:phoneNum
+        })
+    }
+
+    /**
+     * 获取验证码
+     * 注册
+     * @param phoneNum
+     */
+    getRegisterVerifyCode(phoneNum){
+        return this._getRegisterVerifyCode({
+            phone:phoneNum
+        })
+    }
+
+    /**
+     * 获取验证码
+     * 重置密码
+     * @param phoneNum
+     */
+    resetPasswordVCode(phoneNum){
+        return this._getResetPasswordVCode({
+            phone:phoneNum
+        })
+    }
+    getVCodeStrategy(){
+        return {
+            "login":this.getLoginVCode,
+            "register":this.getRegisterVerifyCode,
+            "resetPassword":this.resetPasswordVCode
+        }
+    }
+    //  获取验证码
+    getVCode(purpose,phoneNum){
+        return this.getVCodeStrategy()[purpose].call(this,phoneNum)
+    }
+
+    //  注册
+    register(registerInfo){
+        return this._register({
+            phone:registerInfo.phoneNum,
+            pass:hex_md5(registerInfo.password),
+            code:registerInfo.vCode
+        }).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.data){
+                    this.login.updateToken(data.data.token);
+                    resolve();
+                }else{
+                    reject();
                 }
             })
         })
     }
-    //  登录
-    // signIn(phoneNum,password){
-    //     return this._login({
-    //         phone:phoneNum,
-    //         pass:hex_md5(password)
-    //     }).then((data)=>{
-    //         return new Promise((resolve, reject)=>{
-    //             if(data.code !== 0){
-    //                 reject(data.message)
-    //             }else{
-    //                 //  登录后存储到localstorage
-    //                 HB.save.setLocalStorageByLimitTime("token",data.data.token);
-    //                 this.user.token = data.data.token;
-    //                 resolve(data);
-    //             }
-    //         })
-    //     });
-    // }
-    signIn(){
-        return this.login.signIn(this.user.getPhoneNum(),this.user.getPassword()).then((data)=>{
-            return new Promise((resolve, reject)=>{
-                if(data.code !== 0){
-                    reject(data.message)
-                }else{
-                    //  登录后存储到localstorage
-                    HB.save.setLocalStorageByLimitTime("token",data.data.token);
-                    resolve(data);
-                }
-            })
-        });
+
+
+    /**
+     * 修改用户信息
+     * @param userInfo
+     */
+    changeUserInfo(){
+
     }
-    signInByCode(code){
-        return this.login.signInByCode(this.user.getPhoneNum(),code).then((data)=>{
-            return new Promise((resolve, reject)=>{
-                if(data.code !== 0){
-                    reject(data.message)
-                }else{
-                    HB.save.setLocalStorageByLimitTime("token",data.data.token);
-                    resolve(data);
-                }
-            })
-        });
-    }
-    register(vCode){
-        return this.login.register(this.user.getPhoneNum(),this.user.getPassword(),vCode).then((data)=>{
-            return new Promise((resolve,reject)=>{
-                if(data.code!==0){
-                    reject(data.message)
-                }else{
-                    resolve(data);
-                }
-            })
-        });
-    }
-    //  更新用户信息
-    updateUserInfo(userInfo){
-        Object.assign(this.user,userInfo);
-    }
-    getUser(){
-        return this.user;
-    }
-    getUserInfo(){
+
+
+
+    createUserInfo(userInfo){
+        this.user.createUserInfo(userInfo);
         return this.user.getUserInfo();
     }
-    getPwdVCode(){
-        return this.login.getPwdVCode(this.user)
-    }
-    getRegisterVCode(){
-        return this.login.getRegisterVerifyCode(this.user).then((data)=>{
-            return new Promise((resolve, reject)=>{
-                if(data.code !== 0){
-                    reject(data.message);
-                }else{
-                    resolve(data);
-                }
-            })
-        })
-    }
-    resetPwd(resetInfo){
-        return this.user.resetPwd(resetInfo);
-    }
-    autoUpdateUserInfo(){
-        if(this.getUser().userInfo.userName === ""){
-            Object.assign(this.user.userInfo,{userName:"小松许"})
-        }
-        if(this.getUser().userInfo.headImgUrl === ""){
-            Object.assign(this.user.userInfo,{headImgUrl:baseUrl.getBaseUrl()+"/src/img/def_header_img.png"});
-        }
-        if(!this.getUser().userInfo.sex){
-            Object.assign(this.user.userInfo,{sex:1});
-        }
-        if(!this.getUser().userInfo.grade || this.getUser().userInfo.grade !== ""){
-            Object.assign(this.user.userInfo,{grade:"学前班"});
-        }
-    }
-    getLoginVCode(){
-        return this.login.getLoginVCode(this.user).then((data)=>{
-            return new Promise((resolve, reject)=>{
-                if(data.code!==0){
-                    reject(data.message);
-                }else{
-                    resolve(data)
-                }
+    queryUserAccountCoupon(){
+        return this._queryUserAccountCoupon({
+            couponStatus: this.couponStatusManager.getCurrentCouponStatus().status,
+            pageNum: this.pagination.pageNum,
+            pageSize: this.pagination.size,
+        }).then((data)=>{
+            console.log(data);
+            let list = [];
+            for(let i= 0 ;i < data.data.list.length;i++){
+                list.push(new Coupon(data.data.list[i]))
+            }
+            if(this.pagination.pageNum === 1){
+                this.couponList = list;
+            }else{
+                this.couponList = this.couponList.concat(list);
+            }
+            return new Promise((resolve,reject)=>{
+                resolve(this.couponList)
             })
         });
     }

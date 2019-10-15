@@ -12,7 +12,7 @@ export class HeaderView extends Component{
         super(props);
         this.state = {
             isShowDialog:false
-        }
+        };
     }
 
     onShowDialog(){
@@ -26,14 +26,14 @@ export class HeaderView extends Component{
         })
     }
     toStudyCourseCenter(){
-        if(userService.login.isLogin(userService.getUser())){
+        if(userService.login.isLogin()){
             this.props.history.push("/studyCourseCenter/week");
         }else{
             this.props.history.push("/login/login");
         }
     }
     logout(){
-        window.location.href = "../index.html?redirect=login/login";
+        window.location.href = baseUrl.getBaseUrl()+"/index.html?redirect=login/login";
         localStorage.clear();
     }
     render() {
@@ -51,19 +51,19 @@ export class HeaderView extends Component{
                         <a className="common_header_center_link_item"
                            onClick={this.toStudyCourseCenter.bind(this)}>学习中心</a>
                         <Link to="/downLoad" className="common_header_center_link_item">软件下载</Link>
-                        <Link to={userService.login.isLogin(userService.getUser())?"/user/userInfo":"/login/login"}
+                        <Link to={userService.login.isLogin()?"/user/userInfo":"/login/login"}
                               className="common_header_login_info"
                               onMouseEnter={this.onShowDialog.bind(this)}>
                             <div className="common_header_login_header_box">
                                 <img src={this.props.userInfo.headImgUrl} alt="" className="common_header_login_header_pic"/>
                             </div>
-                            <div className="common_header_login_user_name">{this.props.userInfo.userName||"小松许"}</div>
+                            <div className="common_header_login_user_name">{this.props.userInfo.userName||"新用户"}</div>
                             <div className="down_arrow"/>
                         </Link>
                     </div>
                     {this.state.isShowDialog?<div className="login_info_toggle_list" onMouseLeave={this.onHideDialog.bind(this)}>
-                        <Link to={userService.login.isLogin(userService.getUser())?"/user/userInfo":"/login/login"} className="login_info_toggle_list_item">个人中心</Link>
-                        {userService.login.isLogin(userService.getUser())?<a onClick={this.logout.bind(this)} className="login_info_toggle_list_item">退出登录</a>:<Link to="/login/login" className="login_info_toggle_list_item">登录</Link>}
+                        <Link to={userService.login.isLogin()?"/user/userInfo":"/login/login"} className="login_info_toggle_list_item">个人中心</Link>
+                        {userService.login.isLogin()?<a onClick={this.logout.bind(this)} className="login_info_toggle_list_item">退出登录</a>:<Link to="/login/login" className="login_info_toggle_list_item">登录</Link>}
                     </div>:null}
                 </div>
 

@@ -11,7 +11,7 @@ export class TimeManager {
     }
     //  当前时间戳
     static currentTimeStampBySec(){
-        return Date.parse(new Date()) / 1000;
+        return parseInt(new Date().getTime() / 1000 + "");
     }
     //  分钟转换秒
     static convertMinToSec(min){
@@ -79,11 +79,13 @@ export class TimeManager {
     static convertYMDToStampByCommon(YMD){
         return new Date(YMD).getTime();
     }
-    static createDate(start,end){
-        let list = [];
-        for(let i = start;i <= end;i++){
-            list.push(i);
-        }
-        return list;
+    static createDate(){
+        // let start = new Date().getFullYear() - 15;
+        // let end = new Date().getFullYear() - 4;
+        // let list = [];
+        // for(let i = start;i <= end;i++){
+        //     list.push(i);
+        // }
+        // return list;
     }
 }

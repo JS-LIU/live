@@ -7,9 +7,10 @@ export let commonAjax = HB.ajax();
 //  dev
 commonAjax.setConfig({baseUrl:"/api"});
 // prod
-// commonAjax.setConfig({baseUrl: "https://api-test.sscoding.com/api"});
-export let downloadAjax = HB.ajax();
-downloadAjax.setConfig({baseUrl:"https://api-test.sscoding.com/api",responseType:"arraybuffer"});
+// commonAjax.setConfig({baseUrl: "https://api-test.vcode.vip/api"});
+// export let downloadAjax = HB.ajax();
+// downloadAjax.setConfig({baseUrl:"https://api-test.sscoding.com/api",responseType:"arraybuffer"});
+
 
 class BaseUrl {
     constructor() {
@@ -23,3 +24,6 @@ class BaseUrl {
     }
 }
 export let baseUrl = new BaseUrl();
+// export let platform = "w";
+export let platform = "w";
+// export let platform = "x";

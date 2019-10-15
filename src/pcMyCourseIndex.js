@@ -4,6 +4,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter,
+    HashRouter,
     Switch,
     Route,
     Redirect,
@@ -14,21 +15,24 @@ import {PCStudyCourseView} from "./container/PCStudyCourse/PCStudyCourseView";
 import {HB} from "./util/HB";
 import {userService} from "../src/service/UserService";
 import {baseUrl} from "./config/config";
-
+import commonStyle from './container/PCStudyCourse/commonStyle.css';
 HB.ui.setBaseFontSize(1280,100);
-
-let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTY2NjQ4MjE5OTczIiwia2V5X3VzZXJfaWQiOjQ2LCJpYXQiOjE1NjY2NDgyMTksImV4cCI6MTU2NzI1MzAxOX0.1bofMt32n3mSgQgZXE7K3_WN3aeSSilwsLRJIpFaYWs";
-userService.updateUserInfo({token:token});
 baseUrl.setBaseUrl("/pcwap");
 
-userService.getUserInfo().then(()=>{
+let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTY5MzgwNTQzNjc0Iiwia2V5X3VzZXJfaWQiOjg5LCJpYXQiOjE1NjkzODA1NDMsImV4cCI6MTU2OTk4NTM0M30.4aIGvUyum_TN8I_KQv1mpThqlfoaZxpOymPePhFeISI";
+userService.login.updateToken(token);
+window.navigateBack = function(){
+    window.history.go(-1);
+};
+userService.updateUserInfo().then((data)=>{
+    // let redirect = data.userName ==="" ? "/studyCourseCenter/userInfo" : ;
     ReactDOM.render(
-        (<BrowserRouter>
+        (<HashRouter>
             <Redirect to="/studyCourseCenter/week"/>
             <div>
                 <Route path="/studyCourseCenter/:myCourse" component={PCStudyCourseView} />
             </div>
-        </BrowserRouter>),
+        </HashRouter>),
         document.getElementById('root')
     );
 });

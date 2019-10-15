@@ -17,14 +17,15 @@ export class UserView extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            userInfo:userService.getUser().userInfo
+            userInfo:userService.user.getUserInfo()
         }
     }
-    refreshUserInfo(){
-        userService.getUserInfo().then(()=>{
+    fixedUserInfo(postInfo){
+        userService.resetUserInfo(postInfo).then(()=>{
             this.setState({
-                userInfo:userService.getUser().userInfo
-            })
+                userName:userService.user.getUserInfo().getModule().userName,
+            });
+            alert("修改成功");
         });
 
     }
@@ -38,9 +39,11 @@ export class UserView extends Component{
                 <div className="wrap" />
                 <HeaderView history={this.props.history} userInfo={this.state.userInfo}/>
                 <div className="user_body_main">
-                    <UserTabBox userInfo={userService.getUser().userInfo} history={this.props.history}/>
+                    <UserTabBox userInfo={userService.user.getUserInfo()} history={this.props.history}/>
                     <Route path="/user/userInfo" component={props=>{
-                        let obj = Object.assign({},props,{refreshUserInfo:this.refreshUserInfo.bind(this)});
+                        let obj = Object.assign({},props,{
+                            fixedUserInfo:this.fixedUserInfo.bind(this),
+                        });
                         return <UserInfoView {...obj}/>}
                     } />
                     <Route path="/user/accountManage" component={AccountManageView} />

@@ -41,7 +41,10 @@ export class PayView extends Component {
         this.t = setInterval(() => {
             this.setState({
                 countDown: TimeManager.getCountDownTime(orderService.getOrder().payLastTime - TimeManager.currentTimeStampBySec())
-            })
+            });
+            if(orderService.getOrder().payLastTime - TimeManager.currentTimeStampBySec() < 0){
+               clearInterval(this.t)
+            }
         }, 1000)
     }
 
@@ -56,7 +59,7 @@ export class PayView extends Component {
         }
         return (
             <div>
-                <HeaderView history={this.props.history} userInfo={userService.getUser().userInfo}/>
+                <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="pay_body">
                     <div className="pay_body_header">
                         <div className="pay_body_top">
