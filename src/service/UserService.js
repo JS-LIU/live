@@ -31,7 +31,7 @@ class UserService {
         let ajax = commonAjax.resource('/user/w/v1.0/:action');
         // let miniProgramAjax = commonAjax.resource('user/x/v1.0/bindWechatProgram');
         this._queryUserAccountCoupon = function (postInfo){
-            return ajax.save({ action: 'queryUserAccountCoupon' }, postInfo, { name: "token", value: this.user.token });
+            return ajax.save({ action: 'queryUserAccountCoupon' }, postInfo, { name: "token", value: this.login.token });
         };
         this._loginByPassword = function(postInfo){
             return ajax.save({action:'login'},postInfo);
@@ -51,15 +51,19 @@ class UserService {
         this._getResetPasswordVCode = function(postInfo){
             return ajax.save({action:'resetPwdVerifyCode'},postInfo);
         };
+        this._resetPassword = function(postInfo){
+            return ajax.save({action:'resetPwd'},postInfo);
+        };
         this._register = function(postInfo){
             return ajax.save({action:'registerUserInfo'},postInfo);
         };
         this._resetUserInfo = function(postInfo){
             return ajax.save({action:"updateUserInfo"},postInfo,{name:"token",value:this.login.token})
         };
+
         this.couponList = [];
         this.couponStatusManager = new CouponStatus();
-        this.pagination = new Pagination(1, 10);
+        this.pagination = new Pagination(1, 100);
     }
     resetUserInfo(postInfo){
         return this._resetUserInfo(postInfo).then(()=>{
@@ -95,8 +99,15 @@ class UserService {
             pass:hex_md5(postInfo.password)
         }).then((data)=>{
             return new Promise((resolve,reject)=>{
-                this.login.updateToken(data.data.token);
-                resolve();
+                // console.log(data);
+                if(data.code === 0){
+                    this.login.updateToken(data.data.token);
+                    resolve();
+                }else{
+                    console.log(data.message);
+                    reject(data.message);
+                }
+
             })
         });
     }
@@ -156,6 +167,9 @@ class UserService {
             phone:phoneNum
         })
     }
+    resetPassword(postInfo){
+        return this._resetPassword(postInfo);
+    }
     getVCodeStrategy(){
         return {
             "login":this.getLoginVCode,
@@ -173,14 +187,14 @@ class UserService {
         return this._register({
             phone:registerInfo.phoneNum,
             pass:hex_md5(registerInfo.password),
-            code:registerInfo.vCode
+            code:registerInfo.vcode
         }).then((data)=>{
             return new Promise((resolve, reject)=>{
-                if(data.data){
+                if(data.code === 0){
                     this.login.updateToken(data.data.token);
                     resolve();
                 }else{
-                    reject();
+                    reject(data.message);
                 }
             })
         })
@@ -202,12 +216,12 @@ class UserService {
         return this.user.getUserInfo();
     }
     queryUserAccountCoupon(){
+        console.log(this.couponStatusManager.getCurrentCouponStatus());
         return this._queryUserAccountCoupon({
             couponStatus: this.couponStatusManager.getCurrentCouponStatus().status,
             pageNum: this.pagination.pageNum,
             pageSize: this.pagination.size,
         }).then((data)=>{
-            console.log(data);
             let list = [];
             for(let i= 0 ;i < data.data.list.length;i++){
                 list.push(new Coupon(data.data.list[i]))

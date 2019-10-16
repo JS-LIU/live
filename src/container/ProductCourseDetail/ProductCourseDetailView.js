@@ -21,8 +21,9 @@ export class ProductCourseDetailView extends Component{
             course:null,
             isShowCourseDetail:true,
             isShowProblem:false,
+            isShowAliPlay:false,
+            isShowOutLine:false,
             footerStyle:null,
-            isShowAliPlay:false
         };
         this.productCourseNo = this.props.match.params.productCourseNo;
     }
@@ -77,13 +78,22 @@ export class ProductCourseDetailView extends Component{
     switchToDetail(){
         this.setState({
             isShowCourseDetail:true,
+            isShowProblem:false,
+            isShowOutLine:false,
+        })
+    }
+    switchToOutLine(){
+        this.setState({
+            isShowOutLine:true,
+            isShowCourseDetail:false,
             isShowProblem:false
         })
     }
     switchToProblem(){
         this.setState({
             isShowCourseDetail:false,
-            isShowProblem:true
+            isShowProblem:true,
+            isShowOutLine:false,
         })
     }
     setFooterStyle(){
@@ -103,7 +113,7 @@ export class ProductCourseDetailView extends Component{
             let url = `/confirmOrder?productCourseNo=${this.productCourseNo}`;
             this.props.history.push(url);
         }else{
-            this.props.history.push("/login/login");
+            this.props.history.push("/login/login?redirect=/selectCourseCenter");
         }
     }
     render() {
@@ -125,6 +135,20 @@ export class ProductCourseDetailView extends Component{
         let courseDetail = this.state.course.goodDetailList.map((imgItem,index)=>{
             return (
                 <img src={imgItem} alt="" key={index} className="product_detail_img"/>
+            )
+        });
+        let outlineNodes = this.state.course.outLineList.map((item,index)=>{
+            return (
+                <div className="outline_item" key={index}>
+                    <div className="outline_course_info">
+                        <div className="course_index">{index<10?"0"+(index+1):(index+1)}</div>
+                        <div className="course_index">{item.sessionName}</div>
+                    </div>
+                    <div className="outline_course_teacher_time">
+                        <div className="course_index">{item.teacherName}</div>
+                        <div className="course_index">{TimeManager.convertStampToMD(item.startTime,"unix")}</div>
+                    </div>
+                </div>
             )
         });
         return(
@@ -194,6 +218,7 @@ export class ProductCourseDetailView extends Component{
                             <div className="product_course_detail_bottom">
                                 <div className="product_course_detail_bottom_title">
                                     <div className="product_course_detail_bottom_title_item" onClick={this.switchToDetail.bind(this)}>课程详情</div>
+                                    <div className="product_course_detail_bottom_title_item" onClick={this.switchToOutLine.bind(this)}>课程大纲</div>
                                     <div className="product_course_detail_bottom_title_item" onClick={this.switchToProblem.bind(this)}>常见问题</div>
                                 </div>
                             </div>
@@ -205,6 +230,11 @@ export class ProductCourseDetailView extends Component{
                             {this.state.isShowProblem?(
                                 <div className="product_detail_problem_list">
                                     <img src={this.state.course.commonQuestionUrl} alt="" className="product_detail_img"/>
+                                </div>
+                            ):null}
+                            {this.state.isShowOutLine?(
+                                <div className="outline_list">
+                                    {outlineNodes}
                                 </div>
                             ):null}
                         </div>

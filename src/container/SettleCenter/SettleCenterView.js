@@ -11,6 +11,7 @@ import settleCenterStyle from './settleCenterStyle.css';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
+import {TimeManager} from "../../entity/TimeManager";
 
 export class SettleCenterView extends Component{
     constructor(props) {
@@ -31,6 +32,7 @@ export class SettleCenterView extends Component{
             couponReduceCash:"",
             useBalance:true,
             showCouponList:false,
+            countDown:"20:00"
         }
     }
     componentDidMount() {
@@ -41,7 +43,6 @@ export class SettleCenterView extends Component{
                 repairParam.endTime = preOrderInfo.order.orderCourse.courseInfo.getStartTimeToShow("unix");
                 repairParam.showSellPrice = (preOrderInfo.order.orderCourse.sellPrice / 100).toFixed(2)
             }).call(preOrderInfo.order.orderCourse,{});
-            console.log("orderCourse:====",orderCourse);
             this.setState({
                 useCouponList: settleManager.couponManager.getDefCouponList(),
                 canUseCouponList: settleManager.couponManager.canUseCouponList,
@@ -53,6 +54,7 @@ export class SettleCenterView extends Component{
                 couponList: settleManager.couponManager.couponList
             });
         });
+        this.startCountDown();
         this.setState({
             productCourse:this.productCourse
         });
@@ -86,6 +88,18 @@ export class SettleCenterView extends Component{
             });
         }
 
+    }
+    startCountDown() {
+        let payLastTime = this.state.order.payLastTime;
+        this.t = setInterval(() => {
+            this.setState({
+                countDown: TimeManager.getCountDownTime(payLastTime - TimeManager.currentTimeStampBySec())
+            });
+            if (payLastTime - TimeManager.currentTimeStampBySec() < 0) {
+                clearInterval(this.t);
+                this.props.history.replace("/payFail")
+            }
+        }, 1000)
     }
     render() {
         if(!this.state.orderCourse){
@@ -166,13 +180,21 @@ export class SettleCenterView extends Component{
                         </ul>
                     </div>
                     <div className="settle_real_price_box">
+                        <div className="create_order_count_down">
+                            <div>订单创建成功，请你尽快支付！订单号：{this.state.order.orderNo}</div>
+                            <div>
+                                <span>订单将为你保留</span>
+                                <span className="create_order_count_down_time">{this.state.countDown}</span>
+                                <span>分钟，请抓紧时间支付</span>
+                            </div>
+                        </div>
                         <div className="settle_real_price_info">
                             <div className="settle_real_price_title">实付款：</div>
                             <div className="settle_real_price">￥{this.state.realPay}</div>
                         </div>
                     </div>
                     <div className="create_order_btn_box">
-                        <div onClick={this.createOrder.bind(this)} className="create_order_btn">提交订单</div>
+                        <div onClick={this.createOrder.bind(this)} className="create_order_btn">立即支付</div>
                     </div>
                 </div>
             </div>

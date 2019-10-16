@@ -25,7 +25,7 @@ export class OrderDetailView extends Component{
                 orderInfo:orderInfo
             })
         });
-        HB.save.setStorage({redirect:"/orderDetail",orderNo:this.orderNo});
+        HB.save.setStorage({redirect:"orderDetail",orderNo:this.orderNo});
     }
     render() {
         if(!this.state.orderInfo){

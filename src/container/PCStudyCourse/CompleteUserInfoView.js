@@ -8,6 +8,7 @@ import {UserInfoOptionNodesView} from "../../component/UserInfoOptionNodesView";
 import completeViewStyle from './completeViewStyle.css'
 import {TimeManager} from "../../entity/TimeManager";
 import {HB} from "../../util/HB";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 
 export class CompleteUserInfoView extends Component{
     constructor(props) {
@@ -17,7 +18,8 @@ export class CompleteUserInfoView extends Component{
             userName:userService.user.getUserInfo().getModule().userName,
             sex:userService.user.getUserInfo().getModule().showSex,
             isMan:userService.user.getUserInfo().isMan(),
-            address:userService.user.getUserInfo().getModule().address
+            address:userService.user.getUserInfo().getModule().address,
+            isShowToast:false,
         }
     }
     onChangeYear(year){
@@ -69,12 +71,19 @@ export class CompleteUserInfoView extends Component{
             address:this.address
         })
     }
+    hideToast(){
+        this.setState({
+            isShowToast:false,
+        })
+    }
     confirmFixed(){
         this.userInfo = Object.assign(this.userInfo,{
             birthday:TimeManager.convertYMDToStampByUnix(this.userInfo.showBirthY+"/"+this.userInfo.showBirthM+"/"+this.userInfo.showBirthD)
         });
         if(HB.valid.trimAllBlank(this.userInfo.userName) === ""){
-            return alert("请填写姓名")
+            this.setState({
+                isShowToast:true,
+            })
         }else{
             this.props.fixedUserInfo(this.userInfo);
         }
@@ -85,6 +94,11 @@ export class CompleteUserInfoView extends Component{
             <div className="complete_view">
                 <div className="complete_wrap" />
                 <div className="complete_dialog">
+                    {this.props.isShowToast?<ShowToastView
+                        text={"请填写姓名"}
+                        showTime={1500}
+                        hideToast={this.props.hideToast}
+                        style={{position:"absolute",bottom:"0.8rem"}}/>:null}
                     <div className="complete_dialog_title">完善信息</div>
                     <ul className="complete_dialog_main">
                         <li className="complete_dialog_line">

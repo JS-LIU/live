@@ -10,13 +10,16 @@ import {CourseProductList} from "./CourseProductList";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {HB} from "../../util/HB";
 import selectCourseStyle from "./selectCourseStyle.css";
+import {CompleteUserInfoView} from "../PCStudyCourse/CompleteUserInfoView";
 
 export class SelectCourseCenterView extends Component{
     constructor(props) {
         super(props);
+        let isNeedRepair = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"isNeedRepair") || false;
         this.state = {
             courseTypeList:[],
             courseList:[],
+            isNeedRepair:isNeedRepair
         };
         /**
          * 分页信息
@@ -82,10 +85,19 @@ export class SelectCourseCenterView extends Component{
         });
         this.onQueryCourseList();
     }
+    fixedUserInfo(postInfo){
+        userService.resetUserInfo(postInfo).then(()=>{
+            this.setState({
+                userInfo:userService.user.getUserInfo(),
+                isNeedRepair:false
+            });
+        });
+    }
     render() {
         return(
             <div>
                 <div className="wrap" />
+                {this.state.isNeedRepair?<CompleteUserInfoView fixedUserInfo={this.fixedUserInfo.bind(this)}/>:null}
                 <HeaderView  history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="select_course_center_main">
                     <div className="crumbs">

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import registerStyle from './registerStyle.css';
 import {HB} from "../../util/HB";
 import {CountDownView} from "../../component/CountDown/CountDownView";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 
 export class RegisterView extends Component{
     constructor(props) {
@@ -65,31 +66,7 @@ export class RegisterView extends Component{
     }
     inputVCode(e){
         this.vcode = e.target.value;
-        // this.props.inputVCode(e.target.value);
     }
-    // getVCode(){
-    //     if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.phoneNum)){
-    //         // this.startCountDown();
-    //         this.props.getRegisterVCode();
-    //     }
-    // }
-
-    // startCountDown(){
-    //     let startTime = 60;
-    //     let t = setInterval(()=>{
-    //         startTime--;
-    //         this.setState({
-    //             countDown:startTime+"s后重新获取"
-    //         });
-    //         if(startTime === 0){
-    //             startTime = 60;
-    //             this.setState({
-    //                 countDown:"获取验证码"
-    //             });
-    //             clearInterval(t);
-    //         }
-    //     },1000)
-    // }
     render() {
         return (
             <div className="register_right">
@@ -98,7 +75,7 @@ export class RegisterView extends Component{
                     <Link to="/login/login" className="register_right_top_register_btn">登录</Link>
                 </div>
                 <div className="register_right_log">
-                    <div className="register_right_log_way">注册松鼠编程</div>
+                    <div className="register_right_log_way">注册</div>
                     <div className="register_right_log_log">
                         <div className="register_right_log_log_phone_num" style={this.state.phoneNumStyle}>
                             <input
@@ -148,6 +125,11 @@ export class RegisterView extends Component{
                     </div>
                     <div className="register_btn" onClick={this.register.bind(this)}>注册</div>
                 </div>
+                {this.props.isShowToast?<ShowToastView
+                    text={this.props.toastText}
+                    showTime={1500}
+                    hideToast={this.props.hideToast}
+                    style={{position:"absolute",bottom:"0.8rem"}}/>:null}
             </div>
         );
     }

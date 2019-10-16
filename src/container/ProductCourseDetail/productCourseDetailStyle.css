@@ -282,6 +282,11 @@
     flex-direction: column;
     background: #FFFFFF;
 }
+.outline_list{
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+}
 .common_question_item{
     padding:0.2rem;
 }
@@ -321,4 +326,12 @@
     background-size: 0.2rem;
     width:0.2rem;
     height:0.2rem;
+}
+.outline_item{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:0.36rem 0.4rem 0 0.24rem;
+    font-size:0.16rem;
+    color: #808080;
 }

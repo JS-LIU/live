@@ -1,4 +1,5 @@
 .user_info_main{
+    position:relative;
     width:10.15rem;
     border:0.01rem solid #E8E8E8;
     border-radius: 0.08rem;

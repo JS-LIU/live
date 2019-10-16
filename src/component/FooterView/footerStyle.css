@@ -42,7 +42,7 @@
     align-self: flex-start;
 }
 .common_footer_right_top{
-    background:url("../../img/sscoding_logo.png") no-repeat center bottom;
+    background:url("../../img/sscoding_logo.svg") no-repeat center bottom;
     background-size: 0.94rem 0.46rem;
     padding-bottom:0.7rem;
     color:#FFFFFF;

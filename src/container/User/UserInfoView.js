@@ -8,6 +8,7 @@ import userInfoStyle from "./userInfoStyle.css";
 import {TimeManager} from "../../entity/TimeManager";
 import {HB} from "../../util/HB";
 import {UserInfoOptionNodesView} from "../../component/UserInfoOptionNodesView";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 
 export class UserInfoView extends Component{
     constructor(props) {
@@ -83,6 +84,12 @@ export class UserInfoView extends Component{
     render() {
         return (
             <div className="user_info_main">
+                {this.props.isShowToast?<ShowToastView
+                    showTime={1500}
+                    text={"修改成功"}
+                    hideToast={this.props.hideToast}
+                    style={{position:"absolute",bottom:"0.8rem"}}
+                />:null}
                 <div className="user_info_box_title">个人信息</div>
                 <div className="user_info_box_set_info_box">
                     <ul className="user_info_box_set_info_box_left">

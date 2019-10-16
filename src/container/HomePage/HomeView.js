@@ -14,6 +14,7 @@ import {baseUrl} from "../../config/config";
 import HomeStyle from './HomeStyle.css';
 import {HB} from "../../util/HB";
 import {HomeViewDialogView} from "./HomeViewDialogView";
+import {CompleteUserInfoView} from "../PCStudyCourse/CompleteUserInfoView";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -35,6 +36,7 @@ function SamplePrevArrow(props) {
 export class HomeView extends Component{
     constructor(props) {
         super(props);
+        let isNeedRepair = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"isNeedRepair") || false;
         this.sec_1_swiper_params = {
             // loop: true,
             // pagination: {
@@ -42,7 +44,7 @@ export class HomeView extends Component{
             //     clickable: true
             // },
             dots: true,
-            // autoplay: true,
+            autoplay: true,
             arrows:false,
             infinite: true,
             speed: 500,
@@ -68,6 +70,7 @@ export class HomeView extends Component{
             prevArrow: <SamplePrevArrow />
         };
         this.state = {
+            userInfo:userService.user.getUserInfo(),
             cooperationList:[
                 {cn:"sec_5_content_item_1",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}>
                         <div>中国计算机学会</div>
@@ -209,6 +212,7 @@ export class HomeView extends Component{
                 }
             ],
             isShowPlanItem:false,
+            isNeedRepair:isNeedRepair
         }
     }
 
@@ -270,7 +274,14 @@ export class HomeView extends Component{
             advantage:this.state.advantage
         })
     }
-
+    fixedUserInfo(postInfo){
+        userService.resetUserInfo(postInfo).then(()=>{
+            this.setState({
+                userInfo:userService.user.getUserInfo(),
+                isNeedRepair:false
+            });
+        });
+    }
     render() {
         let cooperationNodes = this.state.cooperationList.map((item,i)=>{
             return (
@@ -287,7 +298,7 @@ export class HomeView extends Component{
         });
         let prizeNodes = this.state.prizeNodes.map((item,i)=>{
             return (
-                <div className="prize_item" >
+                <div className="prize_item" key={i}>
                     <img src={item} alt="" className="prize_item_pic"/>
                 </div>
             )
@@ -319,7 +330,8 @@ export class HomeView extends Component{
         return(
             <div>
                 {this.state.isShowPlanItem?<HomeViewDialogView planItem={this.showItem} closePlanItem={this.closePlanItem.bind(this)}/>:null}
-                <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
+                {this.state.isNeedRepair?<CompleteUserInfoView fixedUserInfo={this.fixedUserInfo.bind(this)}/>:null}
+                <HeaderView history={this.props.history} userInfo={this.state.userInfo}/>
                 <Slider {...this.sec_1_swiper_params}>
                     <Link className="home_head_img_box">
                         <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_1.png"} className="home_head_img" alt=""/>

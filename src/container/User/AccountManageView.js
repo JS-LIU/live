@@ -12,7 +12,9 @@ export class AccountManageView extends Component{
         this.resetInfo = {};
         this.state = {
             countDown:"获取验证码"
-        }
+        };
+        this.phone = userService.user.getUserInfo().phone;
+        this.hidePhone = this.phone.substr(0, 3) + "****" +this.phone.substr(7);
     }
     sendVCode(){
         if(this.state.countDown === "获取验证码"){
@@ -34,9 +36,11 @@ export class AccountManageView extends Component{
     confirmFixed(){
         if(this.resetInfo.VPsd !== this.resetInfo.newPsd){
             alert("两次输入的密码不同");
+        }else{
+            this.resetInfo.phoneNum = userService.user.getUserInfo().phone;
+            userService.resetPassword(this.resetInfo);
         }
-        this.resetInfo.phoneNum = userService.getUser().phoneNum;
-        userService.resetPwd(this.resetInfo);
+
     }
     startCountDown(){
         let startTime = 60;
@@ -63,7 +67,7 @@ export class AccountManageView extends Component{
                         <li className="account_item">
                             <div className="account_change_item_title">手机</div>
                             <div className="account_change_item_info">
-                                <div className="account_change_item_info_phone_num">{userService.user.getUserInfo().phone}</div>
+                                <div className="account_change_item_info_phone_num">{this.hidePhone}</div>
                                 <a className="account_change_item_info_send_v_code" onClick={this.sendVCode.bind(this)}>{this.state.countDown}</a>
                             </div>
                         </li>
@@ -97,7 +101,7 @@ export class AccountManageView extends Component{
                     <li className="account_item">
                         <div className="account_change_item_title">手机</div>
                         <div className="account_change_item_info">
-                            <div className="account_change_item_info_phone_num">{userService.user.getUserInfo().phone}</div>
+                            <div className="account_change_item_info_phone_num">{this.hidePhone}</div>
                         </div>
                     </li>
                     <li className="account_item">

@@ -67,16 +67,12 @@ export class Coupon {
     }
     calcCanMulity(totalPrice) {
         if (this.preReduce) {
-            console.log("最多可用：",this.calcMaxCanUse(totalPrice))
             return this.calcMaxCanUse(totalPrice);
         } else {
             return Infinity;
         }
     }
     calcMaxCanUse(totalPrice) {
-        // let preReduceByYuan = this.preReduce / 100;
-        // let tp = this.
-        //   console.log(this.preReduce)
         return Math.floor(totalPrice / this.preReduce);
     }
 

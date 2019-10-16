@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import loginStyle from './loginStyle.css';
 import {HB} from "../../util/HB";
 import {CountDownView} from "../../component/CountDown/CountDownView";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 export class LoginView extends Component{
     constructor(props) {
         super(props);
@@ -13,7 +14,6 @@ export class LoginView extends Component{
         this.vcode = "";
         this.password = "";
         this.state={
-            // countDown:"获取验证码",
             phoneNumStyle:{border:"0.01rem solid #ffffff"},
             passwordStyle:{border:"0.01rem solid #ffffff"},
             loginByPsd:true,
@@ -28,11 +28,10 @@ export class LoginView extends Component{
             phoneNum:this.phoneNum,
             password:this.password,
             vcode:this.vcode
-        });
+        })
     }
     inputPhoneNum(e){
         this.phoneNum = e.target.value;
-        // this.props.inputPhoneNum(e.target.value);
         this.setState({
             phoneNum:this.phoneNum
         })
@@ -88,31 +87,12 @@ export class LoginView extends Component{
             signWay:"signByVCode"
         })
     }
-    inputVCode(e){ // ()=>{
-        //
-        // }
-        // this.props.inputVCode(e.target.value);
+    inputVCode(e){
         this.vcode = e.target.value;
         this.setState({
             vcode:this.vcode
         })
     }
-    // startCountDown(){
-    //     let startTime = 60;
-    //     let t = setInterval(()=>{
-    //         startTime--;
-    //         this.setState({
-    //             countDown:startTime+"s后重新获取"
-    //         });
-    //         if(startTime === 0){
-    //             startTime = 60;
-    //             this.setState({
-    //                 countDown:"获取验证码"
-    //             });
-    //             clearInterval(t);
-    //         }
-    //     },1000)
-    // }
 
     render() {
         return (
@@ -171,7 +151,6 @@ export class LoginView extends Component{
                                initText={"获取验证码"}
                                countDownText={"秒后重新获取"}
                                totalSec={60}/>
-                            {/*<div className="v_code_time" onClick={this.getLoginVCode.bind(this)}>{this.state.countDown}</div>*/}
                         </div>}
 
                     </div>
@@ -180,6 +159,11 @@ export class LoginView extends Component{
                     </div>
                     <div className="login_btn" onClick={this.login.bind(this)}>登录</div>
                 </div>
+                {this.props.isShowToast?<ShowToastView
+                    text={this.props.toastText}
+                    showTime={1500}
+                    hideToast={this.props.hideToast}
+                    style={{position:"absolute",bottom:"0.8rem"}}/>:null}
             </div>
         );
     }

@@ -34,7 +34,7 @@
 .common_header_logo{
     width:1.43rem;
     height:100%;
-    background:#F5F5F5 url("../../img/sscoding_logo.png") no-repeat center;
+    background:#F5F5F5 url("../../img/sscoding_logo.svg") no-repeat center;
     background-size: 0.94rem 0.47rem;
 }
 .common_header_title{
@@ -86,12 +86,12 @@
     display:flex;
     flex-direction: column;
     align-items: center;
-    top:0.5rem;
+    top:0.55rem;
     right:0;
     width:0.96rem;
-    height:0.95rem;
+    height:1.25rem;
     background:url("../../img/user_info_toggle_list_box.png") no-repeat top center;
-    background-size: 0.96rem 0.95rem;
+    background-size: 0.96rem 1.25rem;
     z-index: 1;
 }
 .login_info_toggle_list_item{
@@ -104,4 +104,5 @@
     justify-content: center;
     margin-top:0.01rem;
     font-size:0.14rem;
+    cursor: pointer;
 }

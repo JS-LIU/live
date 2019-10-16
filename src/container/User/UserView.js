@@ -18,22 +18,27 @@ export class UserView extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            userInfo:userService.user.getUserInfo()
+            userInfo:userService.user.getUserInfo(),
+            isShowToast:false
         }
     }
     fixedUserInfo(postInfo){
         userService.resetUserInfo(postInfo).then(()=>{
             this.setState({
                 userName:userService.user.getUserInfo().getModule().userName,
+                isShowToast:true
             });
-            alert("修改成功");
         });
 
     }
     componentDidMount() {
         HB.save.setStorage({redirect:"user"})
     }
-
+    hideToast(){
+        this.setState({
+            isShowToast:false,
+        })
+    }
     render() {
         return (
             <div>
@@ -44,6 +49,8 @@ export class UserView extends Component{
                     <Route path="/user/userInfo" component={props=>{
                         let obj = Object.assign({},props,{
                             fixedUserInfo:this.fixedUserInfo.bind(this),
+                            isShowToast:this.state.isShowToast,
+                            hideToast:this.hideToast.bind(this)
                         });
                         return <UserInfoView {...obj}/>}
                     } />

@@ -3,13 +3,11 @@
  */
 
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {LoginHeaderView} from "../../component/HeaderView/LoginHeaderView";
-import {LoginView} from "./LoginView";
-import {RegisterView} from "./RegisterView";
-import forgetPasswordStyle from './forgetPasswordStyle.css';
+import { Link } from "react-router-dom";
 import {userService} from "../../service/UserService";
 import {HB} from "../../util/HB";
+import forgetPasswordStyle from './forgetPasswordStyle.css';
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 
 export class ForgetPasswordView extends Component{
     constructor(props) {
@@ -18,7 +16,9 @@ export class ForgetPasswordView extends Component{
             countDown:"获取验证码",
             phoneNumStyle:{border:"0.01rem solid #ffffff"},
             passwordStyle:{border:"0.01rem solid #ffffff"},
-            vCodeStyle:{border:"0.01rem solid #ffffff"}
+            vCodeStyle:{border:"0.01rem solid #ffffff"},
+            isShowToast:false,
+            toastText:""
         };
         this.forgetInfo = {};
     }
@@ -34,7 +34,6 @@ export class ForgetPasswordView extends Component{
     }
     onInputPhoneNum(e){
         this.forgetInfo.phoneNum = e.target.value;
-        userService.getUser().phoneNum = e.target.value;
     }
     focusVCode(){
         this.setState({
@@ -68,11 +67,18 @@ export class ForgetPasswordView extends Component{
             userService.getPwdVCode().then(()=>{
 
             }).catch((msg)=>{
-                alert(msg);
+                this.setState({
+                    isShowToast:true,
+                    toastText:msg
+                })
             })
         }
     }
-
+    hideToast(){
+        this.setState({
+            isShowToast:false,
+        })
+    }
     startCountDown(){
         let startTime = 60;
         let t = setInterval(()=>{
@@ -90,7 +96,7 @@ export class ForgetPasswordView extends Component{
         },1000)
     }
     resetPassword(){
-        userService.resetPwd(this.forgetInfo).then(()=>{
+        userService.resetPassword(this.forgetInfo).then(()=>{
             this.props.history.push("/login/login");
         })
     }
@@ -99,6 +105,11 @@ export class ForgetPasswordView extends Component{
             <div className="find_password_main">
                 <div className="forget_wrap" />
                 <div className="find_password_box">
+                    {this.props.isShowToast?<ShowToastView
+                        text={this.props.toastText}
+                        showTime={1500}
+                        hideToast={this.props.hideToast}
+                        style={{position:"absolute",bottom:"0.8rem"}}/>:null}
                     <div className="find_password_link">
                         <Link to="/login/login" style={{color:"#00A0E5"}}>登录</Link>
                         <div>|</div>

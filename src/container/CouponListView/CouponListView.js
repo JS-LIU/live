@@ -31,7 +31,7 @@ export class CouponListView extends Component{
     }
     updateCouponList(){
         userService.queryUserAccountCoupon().then((couponList)=>{
-            this.setData({
+            this.setState({
                 couponList: couponList
             })
         });
