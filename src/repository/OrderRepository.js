@@ -71,8 +71,12 @@ export class OrderRepository {
     rePay(postInfo){
         return this.orderAjax.save({platform:platform,version:"v1.1",action:"payment"},postInfo,{name:"token",value:userService.login.token});
     }
+    //  弃用
     createOrder(postInfo){
         return this.orderAjax.save({platform:platform,version:"v1.1",action:'createOrder'},postInfo,{name:"token",value:userService.login.token})
+    }
+    takeOrder(postInfo){
+        return this.orderAjax.save({platform:platform,version:"v1.1",action:'takeOrder'},postInfo,{name:"token",value:userService.login.token})
     }
     reCreateOrder(postInfo){
         return this.orderAjax.save({platform:platform,version:"v1.1",action:"paymentOrder"},postInfo,{name:"token",value:userService.login.token});

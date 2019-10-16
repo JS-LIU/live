@@ -51,6 +51,13 @@ export class LoginMainView extends Component{
                 isShowToast:true,
                 toastText:msg
             })
+        }).then((data)=>{
+            if(data.code !== 0){
+                this.setState({
+                    isShowToast:true,
+                    toastText:data.message
+                })
+            }
         });
     }
     register(registerInfo){

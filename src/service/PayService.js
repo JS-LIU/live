@@ -7,8 +7,8 @@ class PayService {
     constructor(){
         this.pay = null;
     }
-    createPay(payModels){
-        this.pay = new Pay(payModels);
+    createPay(payModels,payPrice){
+        this.pay = new Pay(payModels,payPrice);
     }
     getPay(){
         return this.pay;

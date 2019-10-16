@@ -76,7 +76,7 @@ export class PayView extends Component {
                                     </p>
                                 </div>
                             </div>
-                            <div className="order_price">应付金额： ￥{this.state.orderInfo.payPrice / 100}</div>
+                            <div className="order_price">应付金额： ￥{this.state.payInfo.payPrice / 100}</div>
                         </div>
                     </div>
                     <div className="pay_body_info_box">

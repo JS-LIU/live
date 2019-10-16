@@ -118,6 +118,9 @@ export class Order {
         }
 
     }
+    updateOrderStatus(status){
+        this.status = status;
+    }
     getModule(){
         return {
             orderNo :this.orderNo,

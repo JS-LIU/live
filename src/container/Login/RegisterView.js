@@ -95,7 +95,7 @@ export class RegisterView extends Component{
                                        onBlur={this.onVCodeBlur.bind(this)}/>
                             <CountDownView
                                 clickHandle={()=>{
-                                    this.props.getVCode("register",this.phoneNum);
+                                    this.props.getVCode("register",this.phoneNum)
                                 }}
                                 startCondition={()=>{return new Promise((resolve, reject)=>{
                                     if(HB.valid.isPoneAvailable(this.phoneNum)){
@@ -128,7 +128,7 @@ export class RegisterView extends Component{
                     text={this.props.toastText}
                     showTime={1500}
                     hideToast={this.props.hideToast}
-                    style={{position:"absolute",bottom:"0.8rem"}}/>:null}
+                    style={{position:"absolute",bottom:"0.6rem"}}/>:null}
             </div>
         );
     }

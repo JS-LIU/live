@@ -47,7 +47,8 @@ class OrderService {
                 this.settleManager = new SettleManager(data.data.sellPrice, data.data.couponList, data.data.account);
                 console.log(data.data);
                 this.order = new Order(data.data);
-                console.log(this.order);
+                console.log(this.order.orderCourse);
+                this.createOrderProduct(this.order.orderCourse);
                 resolve({
                     settleManager: this.settleManager,
                     order: this.order,
@@ -56,7 +57,6 @@ class OrderService {
         })
     }
     preOrder(preOrderAction, goodNo, orderNo) {
-        console.log(goodNo, orderNo);
         return this.preOrderStrategy()[preOrderAction].call(this, goodNo, orderNo)
     }
     takeOrder() {
@@ -117,8 +117,8 @@ class OrderService {
     /**
      * 创建订单商品
      */
-    createOrderProduct(productCourse){
-        this.orderProduct =  new OrderProduct(productCourse);
+    createOrderProduct(orderProduct){
+        this.orderProduct =  orderProduct;
         return this.orderProduct;
     }
     getOrderProduct(){
@@ -158,6 +158,7 @@ class OrderService {
             orderRepository.queryOrderStatus({
                 orderNo:this.order.orderNo
             }).then((data)=>{
+                this.order.updateOrderStatus(data.data.orderStatus);
                 currentTimeStampBySec = TimeManager.currentTimeStampBySec();
                 if(this.order.getOrderStatus(data.data.orderStatus) === "已支付"){
                     success(data.data.orderStatus);

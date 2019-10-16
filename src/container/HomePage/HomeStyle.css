@@ -65,6 +65,7 @@
     flex-direction: column;
     justify-content: center;
     margin-left:0.84rem;
+    flex: 1;
 }
 .sec_2_video_box_bottom_left{
     display:flex;
@@ -91,7 +92,7 @@
     font-size:0.16rem;
     color:#FFFFFF;
     background:#FFC200;
-    border-radius: 0.14rem;
+    border-radius: 0.18rem;
     padding:0.06rem 0.16rem;
     margin-right:0.2rem;
 }
@@ -237,8 +238,20 @@
 .sec_4_content_python_color{
     color:#05AEB1;
 }
+.sec_4_content_more_line{
+    text-decoration:underline;
+}
 .sec_4_content_cpp_color{
     color:#39579A;
+}
+.sec_4_content_more_cpp_line{
+    border-bottom:0.01rem solid #39579A;
+}
+.sec_4_content_more_noip_line{
+    border-bottom:0.01rem solid #A96DBE;
+}
+.sec_4_dialog_line_text{
+    font-size:0.14rem;
 }
 .sec_4_content_noip_color{
     color:#A96DBE;
@@ -329,7 +342,7 @@
 }
 .sec_5_teacher_info,.sec_8_child_info{
     height:5.83rem;
-    width:3.35rem;
+    width:4.35rem;
     display:flex;
     flex-direction: column;
 }

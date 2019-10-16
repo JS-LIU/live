@@ -38,6 +38,13 @@
     flex-direction: column;
     justify-content: space-between;
     height:0.7rem;
+    color:#000000;
+}
+.settle_product_course_info_line{
+    display:flex;
+}
+.settle_product_course_info_title{
+    color:#808080;
 }
 .settle_product_course_info_price{
     width:100%;
@@ -68,6 +75,12 @@
     margin-bottom:0.15rem;
     font-size:0.14rem;
 }
+.settle_info_item_title{
+    width:1rem;
+    padding-right: 0.3rem;
+    display:flex;
+    justify-content: flex-end;
+}
 .settle_real_price_box{
     display:flex;
     flex-direction: row;
@@ -89,7 +102,8 @@
     padding-left:0.3rem;
 }
 .create_order_count_down_time{
-    color:#FFDFDD;
+    color:#FF6458;
+    padding:0 0.04rem;
 }
 .settle_real_price_info{
     display:flex;
@@ -109,6 +123,7 @@
     flex-direction: row;
     justify-content: flex-end;
     cursor: pointer;
+    padding-bottom:0.5rem;
 }
 
 .create_order_btn{

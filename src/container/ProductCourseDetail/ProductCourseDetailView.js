@@ -113,7 +113,7 @@ export class ProductCourseDetailView extends Component{
             let url = `/confirmOrder?productCourseNo=${this.productCourseNo}`;
             this.props.history.push(url);
         }else{
-            this.props.history.push("/login/login?redirect=/selectCourseCenter");
+            this.props.history.push(`/login/login?redirect=/productCourseDetail/${this.productCourseNo}`);
         }
     }
     render() {

@@ -43,7 +43,7 @@ export class HomeView extends Component{
             //     el: '.swiper-pagination',
             //     clickable: true
             // },
-            dots: true,
+            // dots: true,
             autoplay: true,
             arrows:false,
             infinite: true,
@@ -386,7 +386,7 @@ export class HomeView extends Component{
                                 <div className="sec_4_content_text_num sec_4_content_python_color">2.</div>
                                 <div className="sec_4_content_text_bottom_info">
                                     <div className="sec_4_content_text sec_4_content_python_color">蓝桥杯Python创意编程组初赛至国赛全国各省市Python程序设计比赛</div>
-                                    <div className="sec_4_content_more sec_4_content_python_color" onClick={this.showMorePlan('python')}>查看更多</div>
+                                    <div className="sec_4_content_more sec_4_content_python_color sec_4_content_more_line" onClick={this.showMorePlan('python')}>查看更多</div>
                                 </div>
                             </div>
                         </div>
@@ -400,7 +400,7 @@ export class HomeView extends Component{
                                 <div className="sec_4_content_text_bottom_info">
                                     <div className="sec_4_content_text sec_4_content_cpp_color">全国青少年信息学CSP-J/S资格认证</div>
                                     <div className="sec_4_content_text sec_4_content_cpp_color">蓝桥杯C++创意编程组初赛至国赛</div>
-                                    <div className="sec_4_content_more sec_4_content_cpp_color" onClick={this.showMorePlan('cpp')}>查看更多</div>
+                                    <div className="sec_4_content_more sec_4_content_cpp_color sec_4_content_more_line" onClick={this.showMorePlan('cpp')}>查看更多</div>
                                 </div>
                             </div>
                         </div>
@@ -413,7 +413,7 @@ export class HomeView extends Component{
                                 <div className="sec_4_content_text_num sec_4_content_noip_color">2.</div>
                                 <div className="sec_4_content_text_bottom_info">
                                     <div className="sec_4_content_text sec_4_content_noip_color">全国青少年信息学CSP-J/S资格认证</div>
-                                    <div className="sec_4_content_more sec_4_content_noip_color" onClick={this.showMorePlan('noip')}>查看更多</div>
+                                    <div className="sec_4_content_more sec_4_content_noip_color sec_4_content_more_line" onClick={this.showMorePlan('noip')}>查看更多</div>
                                 </div>
                             </div>
                         </div>

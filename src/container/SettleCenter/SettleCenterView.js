@@ -12,6 +12,7 @@ import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 import {TimeManager} from "../../entity/TimeManager";
+import {FooterView} from "../../component/FooterView/FooterView";
 
 export class SettleCenterView extends Component{
     constructor(props) {
@@ -43,6 +44,7 @@ export class SettleCenterView extends Component{
                 repairParam.endTime = preOrderInfo.order.orderCourse.courseInfo.getStartTimeToShow("unix");
                 repairParam.showSellPrice = (preOrderInfo.order.orderCourse.sellPrice / 100).toFixed(2)
             }).call(preOrderInfo.order.orderCourse,{});
+            console.log(preOrderInfo);
             this.setState({
                 useCouponList: settleManager.couponManager.getDefCouponList(),
                 canUseCouponList: settleManager.couponManager.canUseCouponList,
@@ -53,18 +55,25 @@ export class SettleCenterView extends Component{
                 order: preOrderInfo.order,
                 couponList: settleManager.couponManager.couponList
             });
+            console.log(this.state.order);
+            this.startCountDown();
         });
-        this.startCountDown();
+
         this.setState({
             productCourse:this.productCourse
         });
     }
     createOrder(){
-        orderService.createOrder(this.state.productCourse).then((info)=>{
-            payService.createPay(info.payModels);
-            this.props.history.push('/pay')
+        orderService.takeOrder().then((info)=>{
+            if (info.data.payStatus === 0){
+                this.props.history.replace("/paySuccess");
+            }else{
+                payService.createPay(info.data.payModels,info.data.payPrice);
+                this.props.history.push('/pay');
+            }
+
         }).catch((msg)=>{
-            alert(msg)
+           console.log(msg);
         })
     }
     onToggleUseBalance(){
@@ -138,20 +147,24 @@ export class SettleCenterView extends Component{
                     <div className="product_course_pay_info">
                         <div className="product_course_pay_info_box">
                             <ul className="settle_product_course_info">
-                                <li>课程名称：{this.state.orderCourse.courseName}</li>
-                                <li>授课老师：{this.state.orderCourse.teacherInfo.teacherName}</li>
-                                <CourseTimeShowView
-                                    style={{
-                                        display:"flex",
-                                        flexDirection: "row",
-                                        fontSize: "0.14rem",
-                                        color:"#000000",
-                                    }}
-                                    showTimeStepEnd={true}
-                                    timeStep={this.state.orderCourse.timeList}
-                                    startTime={this.state.orderCourse.startTime}
-                                    endTime={this.state.orderCourse.endTime}
-                                />
+                                <li className="settle_product_course_info_line"><span className="settle_product_course_info_title">课程名称：</span><span >{this.state.orderCourse.courseName}</span></li>
+                                <li className="settle_product_course_info_line"><span className="settle_product_course_info_title">授课老师：</span><span>{this.state.orderCourse.teacherInfo.teacherName}</span></li>
+                                <li className="settle_product_course_info_line">
+                                    <span className="settle_product_course_info_title">上课时间：</span>
+                                    <CourseTimeShowView
+                                        style={{
+                                            display:"flex",
+                                            flexDirection: "row",
+                                            fontSize: "0.14rem",
+                                            color:"#000000",
+                                        }}
+                                        showTimeStepEnd={true}
+                                        timeStep={this.state.orderCourse.timeList}
+                                        startTime={this.state.orderCourse.startTime}
+                                        endTime={this.state.orderCourse.endTime}
+                                    />
+                                </li>
+
                             </ul>
                             <div className="settle_product_course_info_price">课程价格：{this.state.orderCourse.showSellPrice}</div>
                         </div>
@@ -166,15 +179,15 @@ export class SettleCenterView extends Component{
                     <div className="settle_info_box">
                         <ul className="settle_info_list">
                             <li className="settle_info_item">
-                                <div>商品金额：</div>
+                                <div className="settle_info_item_title">商品金额：</div>
                                 <div>￥{this.state.orderCourse.showSellPrice}</div>
                             </li>
                             <li className="settle_info_item">
-                                <div>优惠减免：</div>
+                                <div className="settle_info_item_title">优惠减免：</div>
                                 <div>￥{this.state.couponReduceCash}</div>
                             </li>
                             <li className="settle_info_item">
-                                <div>合计：</div>
+                                <div className="settle_info_item_title">合计：</div>
                                 <div>￥{this.state.realPay}</div>
                             </li>
                         </ul>
@@ -197,6 +210,7 @@ export class SettleCenterView extends Component{
                         <div onClick={this.createOrder.bind(this)} className="create_order_btn">立即支付</div>
                     </div>
                 </div>
+                <FooterView/>
             </div>
         )
     }

@@ -2,7 +2,7 @@
  * Created by Liudq on 2019-08-04
  */
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {orderService} from "../../service/OrderService";
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
@@ -23,8 +23,10 @@ export class PaySuccessView extends Component{
     render() {
         return (
             <div>
-                <div className="wrap"></div>
-                <HeaderView history={this.props.history} title={"支付成功"} userInfo={userService.user.getUserInfo()}/>
+                <div className="wrap" />
+                <HeaderView history={this.props.history}
+                            title={"支付成功"}
+                            userInfo={userService.user.getUserInfo()}/>
                 <div className="pay_success_main">
                     <div className="pay_success_body_box">
                         <div className="pay_success_body_box_inner">
@@ -54,5 +56,4 @@ export class PaySuccessView extends Component{
             </div>
         );
     }
-
 }
