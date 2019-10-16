@@ -101,6 +101,7 @@
     flex-direction: row;
     align-items: center;
     box-shadow: 0 0.03rem 0 0 rgba(255, 170, 0, 1);
+    cursor: pointer;
 }
 
 .register_right_register_v_code{

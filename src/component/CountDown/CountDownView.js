@@ -27,6 +27,7 @@ export class CountDownView extends Component{
                 justifyContent:"center",
                 alignItems:"center",
                 color:"#FFFFFF",
+                cursor:"pointer",
                 fontSize:"0.14rem"},this.props.style);
         this.state = {
             countDown:this.initText

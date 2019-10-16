@@ -75,7 +75,7 @@ export class RegisterView extends Component{
                     <Link to="/login/login" className="register_right_top_register_btn">登录</Link>
                 </div>
                 <div className="register_right_log">
-                    <div className="register_right_log_way">注册</div>
+                    <div className="register_right_log_way">注册未科编程</div>
                     <div className="register_right_log_log">
                         <div className="register_right_log_log_phone_num" style={this.state.phoneNumStyle}>
                             <input
@@ -107,7 +107,6 @@ export class RegisterView extends Component{
                                 initText={"获取验证码"}
                                 countDownText={"秒后重新获取"}
                                 totalSec={60}/>
-                                {/*<div className="v_code_time" onClick={this.getVCode.bind(this)}>{this.state.countDown}</div>*/}
                         </div>
                         <div className="register_right_log_log_password" style={this.state.passwordStyle}>
                             <input type="password"
