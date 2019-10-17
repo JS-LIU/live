@@ -32,7 +32,7 @@ export class PayView extends Component {
             function(status){
                 self.props.history.replace('/paySuccess/' + `${status}`);
             }, function(status){
-                self.props.history.replace('/payFail/' + `${status}`);
+                self.props.history.replace('/payFail');
             });
         this.startCountDown();
     }

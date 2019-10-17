@@ -33,30 +33,17 @@ export class DownLoadView extends Component{
                     </div>
                     <ul className="down_load_sec_1_recommend_list">
                         <li className="recommend_item">
-                            <div className="subscription_item_title">松鼠编程订阅号</div>
+                            <div className="subscription_item_title">未科编程服务号</div>
                             <div className="recommend_item_info">
-                                <span>剑桥考试考官，TKT满分证书持有</span>
-                                <span>者，教学风格风趣幽默,精通学习规</span>
-                                <span>律，善用六步教学法、带领孩子在探</span>
-                                <span> 索中学习新知。</span>
+                                <span>孩子学习动态实时掌握，上课提醒，</span>
+                                <span>作业查看，学习报告等即时获取。</span>
                             </div>
                         </li>
                         <li className="recommend_item">
-                            <div className="server_code_item_title">松鼠编程订阅号</div>
+                            <div className="server_code_item_title">未科编程小程序</div>
                             <div className="recommend_item_info">
-                                <span>剑桥考试考官，TKT满分证书持有</span>
-                                <span>者，教学风格风趣幽默,精通学习规</span>
-                                <span>律，善用六步教学法、带领孩子在探</span>
-                                <span> 索中学习新知。</span>
-                            </div>
-                        </li>
-                        <li className="recommend_item">
-                            <div className="miniprogram_item_title">松鼠编程服务号</div>
-                            <div className="recommend_item_info">
-                                <span>剑桥考试考官，TKT满分证书持有</span>
-                                <span>者，教学风格风趣幽默,精通学习规</span>
-                                <span>律，善用六步教学法、带领孩子在探</span>
-                                <span> 索中学习新知。</span>
+                                <span>事实掌握课程信息、订单信息、优惠</span>
+                                <span>信息；最新上线课程快速掌握。</span>
                             </div>
                         </li>
                     </ul>

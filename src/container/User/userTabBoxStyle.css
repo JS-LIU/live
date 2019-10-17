@@ -50,6 +50,7 @@
     width:1.25rem;
     height:0.4rem;
     overflow: hidden;
+    cursor: pointer;
 }
 .user_info_tab_item_img{
     padding:0.16rem 0.08rem;

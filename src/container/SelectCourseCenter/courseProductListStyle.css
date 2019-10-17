@@ -32,13 +32,17 @@
 }
 .course_product_item_header_box{
     position:relative;
-    padding:0.29rem 0.29rem 0.18rem;
+    padding:0 0.29rem 0.18rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 .course_product_item_title{
-    font-size:0.2rem;
+    font-size: 0.2rem;
+    height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .course_product_item_time{
     font-size:0.14rem;

@@ -62,14 +62,15 @@ export class ProductCourseDetailView extends Component{
                 repairParam.endTime = course.courseInfo.getEndTimeToShow("unix");
                 repairParam.sellEndTime = course.getSellEndTimeToShow("unix");
             }).call(course,{});
+            console.log(productModule);
             this.setState({
                 course:productModule
             });
-            // this.setFooterStyle();
         });
     }
     switchCourseDetail(courseItem){
         return ()=>{
+            console.log(courseItem.goodNo);
             this.props.history.replace("/productCourseDetail/" + courseItem.goodNo);
             this.productCourseNo = courseItem.goodNo;
             this.updateProductCourseDetail();
@@ -107,7 +108,6 @@ export class ProductCourseDetailView extends Component{
             })
         }
     }
-    //  todo 这里应该调后台接口但是后台没接口
     onBuyCourse(){
         if(userService.login.isLogin()){
             let url = `/confirmOrder?productCourseNo=${this.productCourseNo}`;
@@ -142,10 +142,10 @@ export class ProductCourseDetailView extends Component{
                 <div className="outline_item" key={index}>
                     <div className="outline_course_info">
                         <div className="course_index">{index<10?"0"+(index+1):(index+1)}</div>
-                        <div className="course_index">{item.sessionName}</div>
+                        <div className="course_index">{item.name}</div>
                     </div>
                     <div className="outline_course_teacher_time">
-                        <div className="course_index">{item.teacherName}</div>
+                        <div className="course_index">{item.teacherInfo.teacherName}</div>
                         <div className="course_index">{TimeManager.convertStampToMD(item.startTime,"unix")}</div>
                     </div>
                 </div>
@@ -157,7 +157,9 @@ export class ProductCourseDetailView extends Component{
                 <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="product_course_detail_main">
                     <div className="crumbs">
-                        首页 > 选课中心 > {this.state.course.name}
+                        <Link to="/index">首页</Link> >
+                        <Link to="/selectCourseCenter">选课中心</Link> >
+                        <span style={{cursor:"pointer"}}>{this.state.course.courseName}</span>
                     </div>
                     <div className="product_course_detail">
                         <div className="product_course_detail_info">
@@ -253,17 +255,19 @@ export class ProductCourseDetailView extends Component{
                                         <div className="product_course_detail_right_course_end_time">报名截止时间：{this.state.course.sellEndTime}</div>
                                     </div>
                                 </div>
-                                <div className="product_course_detail_right_course_buy_only">
-                                    <div className="product_course_detail_right_course_buy_only_title">单独购买</div>
-                                    <a className="product_course_detail_right_course_buy_only_course">
-                                        {this.state.course.courseName}
-                                    </a>
-                                </div>
                                 {this.state.course.suggestGoods.length > 0 ? (
-                                    <div className="product_course_detail_right_course_buy_combo_list">
-                                        <div className="product_course_detail_right_course_buy_only_title">建议课程</div>
-                                        {courseComboNodes}
-                                    </div>):null}
+                                    <div>
+                                        <div className="product_course_detail_right_course_buy_only">
+                                            <a className="product_course_detail_right_course_buy_only_course">
+                                                {this.state.course.courseName}
+                                            </a>
+                                        </div>
+                                        <div className="product_course_detail_right_course_buy_combo_list">
+                                            <div className="product_course_detail_right_course_buy_only_title">建议课程</div>
+                                            {courseComboNodes}
+                                        </div>
+                                    </div>
+                                    ):null}
                                 <div className="product_course_detail_settle_box">
                                     <a className="product_course_buy_btn" onClick={this.onBuyCourse.bind(this)}>购买学习</a>
                                     <a className="product_course_consult_btn">咨询</a>

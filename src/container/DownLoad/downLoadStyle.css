@@ -3,8 +3,6 @@
     display:flex;
     height:5.44rem;
     background:#1A1A1A url("../../img/down_load_header_bg.png") no-repeat center;
-    background-size: 19.2rem 5.44rem;
-    width:19.2rem;
 }
 .down_load_btn_list{
     position:absolute;
@@ -13,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     top:2.8rem;
-    left:9.93rem;
+    left:7.4rem;
     width:4.64rem;
     height:0.6rem;
     color:#000000;
@@ -23,24 +21,26 @@
     width: 2rem;
     height: 0.6rem;
     border-radius: 0.08rem;
-    background: #ffffff url("../../img/mac_icon.png") no-repeat 0.23rem center;
+    background:#ffffff url("../../img/win_icon.png") no-repeat 0.23rem center;
     background-size: 0.26rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding-left: 0.14rem;
+    cursor: pointer;
 }
 .mac_down_load_btn{
     width:2.14rem;
     height:0.6rem;
     border-radius: 0.08rem;
-    background:#ffffff url("../../img/win_icon.png") no-repeat 0.23rem center;
+    background: #ffffff url("../../img/mac_icon.png") no-repeat 0.23rem center;
     background-size: 0.26rem 0.31rem;
     display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .down_load_sec_1{
     display:flex;
@@ -55,7 +55,7 @@
     color:#404040;
 }
 .down_load_sec_1_recommend_list{
-    width:9.82rem;
+    width:6.44rem;
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -86,7 +86,7 @@
     font-size:0.2rem;
     color:#FFAA00;
     padding-top:1.9rem;
-    background:url("../../img/server_code.png") no-repeat top center;
+    background:url("../../img/miniprogram_code.png") no-repeat top center;
     background-size: 1.6rem;
     width:2.56rem;
 }

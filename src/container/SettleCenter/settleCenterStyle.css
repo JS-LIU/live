@@ -51,6 +51,10 @@
     border-top:0.01rem solid #e8e8e8;
     padding-top:0.29rem;
     margin-top:0.29rem;
+    display: flex;
+}
+.settle_product_course_info_show_sell_price{
+    color:#000000;
 }
 .settle_pay_title{
     font-size:0.16rem;
@@ -123,7 +127,7 @@
     flex-direction: row;
     justify-content: flex-end;
     cursor: pointer;
-    padding-bottom:0.5rem;
+    padding-bottom:2.5rem;
 }
 
 .create_order_btn{
@@ -149,6 +153,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     width:9rem;
+}
+.no_can_use_coupon{
+    position:relative;
+    width:2.7rem;
+    height:1.2rem;
+    margin:0.2rem 0.3rem 0.3rem 0;
+    background:url("../../img/no_can_use_coupon.png") no-repeat center;
+    background-size: 2.7rem 1.2rem;
 }
 .coupon{
     position:relative;

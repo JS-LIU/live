@@ -33,7 +33,6 @@ export class CourseProductList extends Component{
                                         flexDirection: "row",
                                         fontSize: "0.12rem",
                                         color:"#FFFFFF",
-                                        marginTop: "0.15rem"
                                     }}
                                     showTimeStepEnd={false}
                                     // timeType={"unix"}

@@ -340,16 +340,19 @@
     width:5.61rem;
     height:5.83rem;
 }
-.sec_5_teacher_info,.sec_8_child_info{
+.sec_5_teacher_info{
     height:5.83rem;
     width:4.35rem;
     display:flex;
     flex-direction: column;
+    justify-content: center;
 }
 .sec_8_child_info{
-    position:relative;
-    top:1.44rem;
-    left:5.06rem;
+    height:4.3rem;
+    width:4.35rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .sec_5_teacher_name_info{
     display:flex;
@@ -377,7 +380,7 @@
     color: #FFAA00;
     padding-right:0.38rem;
 }
-.sec_5_teacher_info{
+.sec_5_teacher_info_text,.sec_8_teacher_info_text{
     padding-top:0.2rem;
     font-size: 0.16rem;
 }
@@ -573,7 +576,7 @@
 }
 .sec_7{
     height:5.36rem;
-    background:#FFFCF6 url("../../img/sec_7_bg.jpg") no-repeat center;
+    background:#FFFCF6 url("../../img/sec_7_bg.png") no-repeat center;
     background-size: cover;
     position:relative;
 }
@@ -583,18 +586,9 @@
 .sec_7_enjoy_btn{
     position:absolute;
     right:20%;
-    top:3.24rem;
-    background:linear-gradient(0deg,rgba(255,128,118,1) 0%,rgba(255,100,88,1) 100%);
-    box-shadow:0 0.03rem 0.08rem 0 rgba(0, 0, 0, 1);
-    border-radius:0.3rem;
+    top:3rem;
     width:2.5rem;
     height:0.6rem;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size:0.2rem;
-    color:#FFFFFF;
 }
 
 
@@ -644,18 +638,20 @@
 }
 .sec_8_teacher_img_box{
     position:relative;
+    display:flex!important;
+    align-items: center;
+    justify-content: center;
     border-radius: 0.12rem;
     height:4.3rem;
+    background:#FFFFFF;
 }
 .sec_8_child_img{
-    position:absolute;
-    top:0;
-    left:0;
-    width:10.3rem;
-    height:4.3rem;
 }
 .sec_8_teacher_info{
-
+    width:4.35rem;
+    display:flex;
+    flex-direction: column;
+    height:4.3rem;
 }
 .sec_8_child_img_next_btn{
     background:url("../../img/child_next_btn.png") no-repeat right center;

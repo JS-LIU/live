@@ -25,7 +25,7 @@ export class OrderDetailView extends Component{
                 orderInfo:orderInfo
             })
         });
-        HB.save.setStorage({redirect:"orderDetail",orderNo:this.orderNo});
+        // HB.save.setStorage({redirect:"orderDetail/",orderNo:this.orderNo});
     }
     render() {
         if(!this.state.orderInfo){
@@ -38,7 +38,7 @@ export class OrderDetailView extends Component{
                     <div className="order_detail_product">
                         <div className="order_detail_product_header">
                             <div className="order_detail_product_header_payTime">
-                                {TimeManager.convertStampToYMD(this.state.orderInfo.orderDetail.orderCreateTime,"unix")}
+                                {TimeManager.convertStampToYMD(this.state.orderInfo.orderCreateTime,"unix")}
                             </div>
                             <div className="order_detail_product_header_orderNo">
                                 订单号：{this.state.orderInfo.orderNo}
@@ -47,7 +47,7 @@ export class OrderDetailView extends Component{
                         <div className="order_detail_product_info">
                             <div className="order_detail_product_info_left">
                                 <div className="order_detail_product_info_left_top">
-                                    <div className="order_detail_product_info_left_top_name" style={{background:"url('"+this.state.orderInfo.orderCourse.type.getTypeInfo().iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>{this.state.orderInfo.orderCourse.name}</div>
+                                    <div className="order_detail_product_info_left_top_name" style={{background:"url('"+this.state.orderInfo.orderCourseModule.type.iconBackground +"') no-repeat left center",backgroundSize:"0.25rem"}}>{this.state.orderInfo.orderCourse.name}</div>
                                     <CourseTimeShowView
                                         style={{
                                             display:"flex",
@@ -58,36 +58,36 @@ export class OrderDetailView extends Component{
                                         }}
                                         showTimeStepEnd={false}
                                         timeType={"unix"}
-                                        timeStep={this.state.orderInfo.orderCourse.timeList}
-                                        startTime={this.state.orderInfo.orderCourse.startTime}
-                                        endTime={this.state.orderInfo.orderCourse.endTime}
+                                        timeStep={this.state.orderInfo.orderCourseModule.timeList}
+                                        startTime={this.state.orderInfo.orderCourseModule.startTime}
+                                        endTime={this.state.orderInfo.orderCourseModule.endTime}
                                     />
                                 </div>
                                 <div className="order_detail_product_info_left_bottom">
                                     <div className="order_detail_product_info_left_bottom_teacher_list">
                                         <div className="order_detail_product_info_left_bottom_teacher">
                                             <div className="order_detail_product_teacher_header">
-                                                <img src={this.state.orderInfo.orderCourse.majorTeacher.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} className="order_detail_product_teacher_pic" alt=""/>
+                                                <img src={this.state.orderInfo.orderCourseModule.teacherInfo.headImgUrl} className="order_detail_product_teacher_pic" alt=""/>
                                             </div>
                                             <div className="order_detail_product_teacher_info">
                                                 <div className="order_detail_product_teacher_info_position">
                                                     主讲
                                                 </div>
                                                 <div className="order_detail_product_teacher_info_teacher_name">
-                                                    {this.state.orderInfo.orderCourse.majorTeacher.teacherName}老师
+                                                    {this.state.orderInfo.orderCourseModule.teacherInfo.teacherName}老师
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="order_detail_product_info_left_bottom_teacher" style={{marginLeft:"0.35rem"}}>
                                             <div className="order_detail_product_teacher_header">
-                                                <img src={this.state.orderInfo.orderCourse.assistant.headImgUrl||baseUrl.getBaseUrl() + "/src/img/def_header_img.png"} className="order_detail_product_teacher_pic" alt=""/>
+                                                <img src={this.state.orderInfo.orderCourseModule.assistantInfo.headImgUrl} className="order_detail_product_teacher_pic" alt=""/>
                                             </div>
                                             <div className="order_detail_product_teacher_info">
                                                 <div className="order_detail_product_teacher_info_position">
                                                     助教
                                                 </div>
                                                 <div className="order_detail_product_teacher_info_teacher_name">
-                                                    {this.state.orderInfo.orderCourse.assistant.teacherName}老师
+                                                    {this.state.orderInfo.orderCourseModule.assistantInfo.teacherName}老师
                                                 </div>
                                             </div>
                                         </div>

@@ -40,14 +40,11 @@ class OrderService {
     }
     createPreOrderInfo(data) {
         return new Promise((resolve, reject) => {
-            console.log(data);
             if(data.code!==0){
                 reject(data);
             }else{
                 this.settleManager = new SettleManager(data.data.sellPrice, data.data.couponList, data.data.account);
-                console.log(data.data);
                 this.order = new Order(data.data);
-                console.log(this.order.orderCourse);
                 this.createOrderProduct(this.order.orderCourse);
                 resolve({
                     settleManager: this.settleManager,
@@ -205,6 +202,7 @@ class OrderService {
         }).then((data)=>{
             return new Promise((resolve, reject)=>{
                 if(data.data && data.data.list){
+                    console.log(data.data.list);
                     this.orderList = this.createOrderList(data.data.list);
                     this.pagination.setTotalSize(data.data.total);
                     resolve(this.orderList);
@@ -229,7 +227,7 @@ class OrderService {
     }
 
     queryOrderDetail(orderNo){
-        return orderRepository.queryOrderDetail({
+        return orderRepository.orderDetail({
             orderNo:orderNo
         }).then((data)=>{
             let order = this.findOrderByOrderNo(orderNo);
@@ -254,6 +252,18 @@ class OrderService {
                 }else{
                     reject(data.message);
                 }
+            })
+        })
+    }
+    rePay(orderNo) {
+        this.order = this.findOrderByOrderNo(orderNo);
+        this.createOrderProduct(this.order.orderCourse);
+        return orderRepository.rePay({
+            orderNo: orderNo
+        }).then((data)=>{
+            this.order.payLastTime = data.data.payLastTime;
+            return new Promise((resolve, reject)=>{
+                resolve(data);
             })
         })
     }

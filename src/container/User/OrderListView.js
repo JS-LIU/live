@@ -33,17 +33,17 @@ export class OrderListView extends Component {
     }
     toPay(orderItem){
         return ()=>{
+            console.log(orderItem);
             if(orderItem.status === 3005){
                 // let url = "/confirmOrder?productCourseNo=''&orderNo="+orderItem.orderNo+"&requestWay=orderDetail";
                 let url = `/confirmOrder?orderNo=${orderItem.orderNo}&requestWay=orderDetail`;
                 this.props.history.push(url);
             }else if(orderItem.status === 3001){
                 orderService.rePay(orderItem.orderNo).then((info)=>{
-                    payService.createPay(info.payModels);
+                    payService.createPay(info.data.payModels,info.data.payPrice);
                     this.props.history.replace("/pay");
                 });
             }
-
         }
     }
     cancelOrder(orderItem){
@@ -63,15 +63,15 @@ export class OrderListView extends Component {
         if(orderItem.status === 3004){
             return (
                 <div>
-                    <div>已过期</div>
-                    <Link to={"/user/orderDetail/"+`${orderItem.orderNo}`}>订单详情</Link>
+                    <div className="order_list_pay_item">已过期</div>
+                    <Link className="order_list_pay_item" to={"/user/orderDetail/"+`${orderItem.orderNo}`}>订单详情</Link>
                 </div>
             )
         }else if(orderItem.status === 3003){
             return (
                 <div>
-                    <div>已取消</div>
-                    <Link to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
+                    <div className="order_list_pay_item">已取消</div>
+                    <Link className="order_list_pay_item" to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
                         订单详情
                     </Link>
                 </div>
@@ -79,8 +79,8 @@ export class OrderListView extends Component {
         }else if(orderItem.status === 3002){
             return (
                 <div>
-                    <div>已支付</div>
-                    <Link to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
+                    <div className="order_list_pay_item">已支付</div>
+                    <Link className="order_list_pay_item" to={"/user/orderDetail/" + `${orderItem.orderNo}`}>
                         订单详情
                     </Link>
                 </div>
@@ -89,8 +89,8 @@ export class OrderListView extends Component {
         else if(orderItem.status === 3001||orderItem.status === 3005){
             return (
                 <div>
-                    <div onClick={this.toPay(orderItem)}>去支付</div>
-                    <div onClick={this.cancelOrder(orderItem)}>取消订单</div>
+                    <div className="repay_now" onClick={this.toPay(orderItem)}>立即支付</div>
+                    <div className="cancel_order" onClick={this.cancelOrder(orderItem)}>取消订单</div>
                 </div>
             )
         }

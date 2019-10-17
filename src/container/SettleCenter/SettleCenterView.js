@@ -69,7 +69,7 @@ export class SettleCenterView extends Component{
                 this.props.history.replace("/paySuccess");
             }else{
                 payService.createPay(info.data.payModels,info.data.payPrice);
-                this.props.history.push('/pay');
+                this.props.history.replace('/pay');
             }
 
         }).catch((msg)=>{
@@ -114,7 +114,7 @@ export class SettleCenterView extends Component{
         if(!this.state.orderCourse){
             return null;
         }
-        let couponList = this.state.couponList.map((couponItem,index)=>{
+        let couponNodes = this.state.couponList.map((couponItem,index)=>{
             return (<div className="coupon"
                          onClick={this.onSelectCoupon(couponItem.accountCouponNo)}
                          key={index}>
@@ -166,13 +166,19 @@ export class SettleCenterView extends Component{
                                 </li>
 
                             </ul>
-                            <div className="settle_product_course_info_price">课程价格：{this.state.orderCourse.showSellPrice}</div>
+                            <div className="settle_product_course_info_price">
+                                <span>课程价格：</span>
+                                <span className="settle_product_course_info_show_sell_price">￥{this.state.orderCourse.showSellPrice}</span>
+                            </div>
                         </div>
                     </div>
                     <div className="settle_coupon_list_box">
                         <div className="settle_coupon_title">代金券</div>
+
                         <div className="settle_coupon_list">
-                            {couponList}
+                            {this.state.couponList.length>0?couponNodes:
+                                <div className="no_can_use_coupon" />
+                            }
                         </div>
                     </div>
                     <div className="settle_pay_title">订单结算</div>

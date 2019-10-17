@@ -11,7 +11,7 @@ import payFailStyle from './payFailStyle.css';
 export class PayFailView extends Component{
     constructor(props) {
         super(props);
-        this.status = this.props.match.params.status;
+        // this.status = this.props.match.params.status;
     }
     reSelectCourse(){
         this.props.history.replace("/selectCourseCenter");
@@ -29,7 +29,7 @@ export class PayFailView extends Component{
                     <div className="pay_fail_tips">
                         <div className="pay_fail_tips_top">
                             <div className="pay_fail_tips_title">支付失败</div>
-                            <div className="pay_fail_tips_reason">很抱歉，订单{orderService.getOrder().getOrderStatus(this.status)}，请重新支付</div>
+                            <div className="pay_fail_tips_reason">很抱歉，订单{orderService.getOrder().getOrderStatus()}，请重新支付</div>
                         </div>
                         <div onClick={this.reSelectCourse} className="pay_fail_reselect_course_btn">重新报名</div>
                     </div>

@@ -16,15 +16,11 @@ export class Coupon {
         this.preReduce = couponInfo.minCondition;
         this.selected = false;
         this.ifSaleGrant = couponInfo.ifSaleGrant;
-        this.name = this.setCouponName(couponInfo.ifSaleGrant,this.cash);
+        this.name = this.setCouponName(couponInfo.ifSaleGrant,this.preReduce);
     }
 
-    setCouponName(ifSaleGrant,cash){
-        if(ifSaleGrant === 1){
-            return "满"+cash/100+"元可用";
-        }else{
-            return "代金券";
-        }
+    setCouponName(ifSaleGrant,preReduce){
+        return "满"+preReduce/100+"元可用";
     }
     toggleSelect(alreadyUsed, totalPrice) {
         if (this.isCanSelect(alreadyUsed, totalPrice)) {

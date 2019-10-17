@@ -77,7 +77,7 @@ let renderDom = function(){
                 <Route path="/confirmOrder" component={SettleCenterView} />
                 <Route path="/pay" component={PayView} />
                 <Route path="/paySuccess/:status" component={PaySuccessView}/>
-                <Route path="/payFail/:status" component={PayFailView}/>
+                <Route path="/payFail" component={PayFailView}/>
                 <Route path="/user/:userInfo" component={UserView}/>
                 <Route path="/ownedCourseDetail/:id" component={OwnedCourseDetailView}/>
                 <Route path="/orderDetail/:orderNo" component={OrderDetailView}/>

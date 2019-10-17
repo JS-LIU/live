@@ -34,7 +34,13 @@ export class Order {
     }
     setDetail(orderDetail){
         this.orderCourse.courseInfo.assistantInfo = new Teacher(orderDetail.assistant || {});
-        this.orderCourse.courseInfo.teacherInfo = new Teacher(orderDetail.teacherList[0]);
+        let teacherInfo = null;
+        if(orderDetail.teacherList){
+            teacherInfo = orderDetail.teacherList[0]
+        }else{
+            teacherInfo = orderDetail.teacherInfo;
+        }
+        this.orderCourse.courseInfo.teacherInfo = new Teacher(teacherInfo);
         this.orderDetail = orderDetail;
         this.setPayTime();
         this.setPayType();
@@ -81,8 +87,8 @@ export class Order {
         if(this.status !== 3002){
             this.orderDetail.payTime = this.getOrderStatus(this.status);
         }else{
-            console.log(this.orderDetail.payTime)
-            let d = TimeManager.timeStampToDate(this.orderDetail.payTime, "unix");
+            // console.log(this.orderDetail.payTime)
+            let d = TimeManager.timeStampToDate(this.orderDetail.payTime, "common");
             this.orderDetail.payTime = d.Y + "-" + d.M + "-" + d.D + " " + d.h + ":" + d.m + ":" + d.s
         }
     }

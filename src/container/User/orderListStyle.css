@@ -78,7 +78,36 @@
     width:2.12rem;
 
 }
-
+.repay_now{
+    background: #FFC200;
+    border-radius: 0.04rem;
+    width:0.9rem;
+    height:0.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color:#FFFFFF;
+    cursor: pointer;
+}
+.cancel_order{
+    width:0.9rem;
+    height:0.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+.order_list_pay_item{
+    width:0.9rem;
+    height:0.3rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 .pagination_box {
     display:flex;
     flex-direction:row;

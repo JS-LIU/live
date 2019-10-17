@@ -53,7 +53,7 @@ export class HomeView extends Component{
         };
         this.sec_5_swiper_params = {
             arrows:false,
-            autoplay: true,
+            // autoplay: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
@@ -61,7 +61,7 @@ export class HomeView extends Component{
         };
         this.sec_8_swiper_params = {
             arrows:true,
-            autoplay: true,
+            // autoplay: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
@@ -438,7 +438,7 @@ export class HomeView extends Component{
                                     <div className="sec_5_teacher_title">计算机博士</div>
                                     <div className="sec_5_teacher_title">ACM指导教师</div>
                                 </div>
-                                <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_info_text">
                                     北京工业大学计算机学院硕士生导师，主讲计算机专业课程，发表高水平论文十余篇，曾主持国家自然科学基金青年基金项目。
                                 </div>
                             </div>
@@ -456,7 +456,7 @@ export class HomeView extends Component{
                                     <div className="sec_5_teacher_title">剑桥教师</div>
                                     <div className="sec_5_teacher_title">STEAM教育专家</div>
                                 </div>
-                                <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_info_text">
                                     多年从事国际学校双语计算机教学及课程研发，精通K12计算机全英文教学，所教学生均考入世界前50顶尖大学攻读计算机相关专业。
                                 </div>
                             </div>
@@ -464,7 +464,7 @@ export class HomeView extends Component{
                     </div>
                     <div>
                         <div className="sec_5_teacher_img_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
+                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_4.png"} className="sec_5_teacher_img" alt=""/>
                             <div className="sec_5_teacher_info">
                                 <div className="sec_5_teacher_name_info">
                                     <div className="sec_5_teacher_name">李丽红</div>
@@ -474,7 +474,7 @@ export class HomeView extends Component{
                                     <div className="sec_5_teacher_title">北邮名师</div>
                                     <div className="sec_5_teacher_title">NOIP金牌教练</div>
                                 </div>
-                                <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_info_text">
                                     15年编程实战，带队比赛经验丰富，北京邮电大学本硕毕业，擅长调动学生情绪积极思考，提高学生学习兴趣，讲课过程深入浅出，课堂气氛活泼生动。
                                 </div>
                             </div>
@@ -482,7 +482,7 @@ export class HomeView extends Component{
                     </div>
                     <div>
                         <div className="sec_5_teacher_img_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
+                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_3.png"} className="sec_5_teacher_img" alt=""/>
                             <div className="sec_5_teacher_info">
                                 <div className="sec_5_teacher_name_info">
                                     <div className="sec_5_teacher_name">蒋新云</div>
@@ -492,7 +492,7 @@ export class HomeView extends Component{
                                     <div className="sec_5_teacher_title">北工大毕业</div>
                                     <div className="sec_5_teacher_title">资深少儿编程教育专家</div>
                                 </div>
-                                <div className="sec_5_teacher_info">
+                                <div className="sec_5_teacher_info_text">
                                     原知名上市教育集团少儿编程总设计师。敬畏技术，喜爱孩子，专注课堂模型的探索和创新，启发孩子好奇心，培养能力。
                                 </div>
                             </div>
@@ -502,7 +502,7 @@ export class HomeView extends Component{
                 <div className="sec_6">
                     <div className="sec_6_title">
                         <div className="sec_6_title_text">沉浸式课堂，让孩子更爱学习</div>
-                        <div className="sec_title_line" ></div>
+                        <div className="sec_title_line" />
                     </div>
                     <ul className="sec_6_problem_list" >
                         {advantageNodes}
@@ -511,7 +511,7 @@ export class HomeView extends Component{
                 <div className="sec_8">
                     <div className="sec_8_title">
                         <div className="sec_8_title_text">破茧成蝶，真实未科学员</div>
-                        <div className="sec_title_line" ></div>
+                        <div className="sec_title_line" />
                     </div>
                 </div>
                 <div className="sec_8_slider_box">
@@ -524,7 +524,7 @@ export class HomeView extends Component{
                                         <div className="sec_5_teacher_name">周昊宇</div>
                                         <div className="sec_5_teacher_position">C++学员</div>
                                     </div>
-                                    <div className="sec_5_teacher_info">
+                                    <div className="sec_8_teacher_info_text">
                                         <div>常州市局前街小学 四年级</div>
                                         <div>常州市小学生“程序设计小能手”二等奖</div>
                                         <div>江苏省“信息与未来”比赛省级二等奖</div>
@@ -532,13 +532,13 @@ export class HomeView extends Component{
                                 </div>
                             </div>
                             <div className="sec_8_teacher_img_box">
-                                <img src={baseUrl.getBaseUrl() + "/src/img/child_pic_1.png"} className="sec_8_child_img" alt=""/>
+                                <img src={baseUrl.getBaseUrl() + "/src/img/child_pic_2.png"} className="sec_8_child_img" alt=""/>
                                 <div className="sec_8_child_info">
                                     <div className="sec_5_teacher_name_info">
                                         <div className="sec_5_teacher_name">林一鸣</div>
                                         <div className="sec_5_teacher_position">Python学员</div>
                                     </div>
-                                    <div className="sec_5_teacher_info">
+                                    <div className="sec_8_teacher_info_text">
                                         <div>石狮市第三实验小学 五年级</div>
                                         <div>福建省中小学电脑制作活动三等奖</div>
                                         <div>石狮市中小学电脑制作活动一等奖</div>
@@ -572,9 +572,7 @@ export class HomeView extends Component{
                     </div>
                 </div>
                 <div className="sec_7">
-                    <div className="sec_7_enjoy_btn">
-                        ¥9.9试学一期班(8课时)
-                    </div>
+                    <div className="sec_7_enjoy_btn" />
                 </div>
                 <FooterView/>
             </div>
