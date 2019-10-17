@@ -66,7 +66,7 @@ export class SettleCenterView extends Component{
     createOrder(){
         orderService.takeOrder().then((info)=>{
             if (info.data.payStatus === 0){
-                this.props.history.replace("/paySuccess");
+                this.props.history.replace("/paySuccess/3002");
             }else{
                 payService.createPay(info.data.payModels,info.data.payPrice);
                 this.props.history.replace('/pay');

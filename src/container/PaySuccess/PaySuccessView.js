@@ -12,6 +12,7 @@ import paySuccessStyle from './paySuccessStyle.css';
 export class PaySuccessView extends Component{
     constructor(props) {
         super(props);
+        console.log("paySuccess===getOrderProduct",orderService.getOrderProduct());
         this.state = {
             orderProduct:orderService.getOrderProduct()
         }
