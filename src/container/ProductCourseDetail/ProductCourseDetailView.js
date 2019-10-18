@@ -157,8 +157,10 @@ export class ProductCourseDetailView extends Component{
                 <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="product_course_detail_main">
                     <div className="crumbs">
-                        <Link to="/index">首页</Link> >
-                        <Link to="/selectCourseCenter">选课中心</Link> >
+                        <Link to="/index">首页</Link>
+                        <span className="crumbs_next">></span>
+                        <Link to="/selectCourseCenter">选课中心</Link>
+                        <span className="crumbs_next">></span>
                         <span style={{cursor:"pointer"}}>{this.state.course.courseName}</span>
                     </div>
                     <div className="product_course_detail">
@@ -202,7 +204,7 @@ export class ProductCourseDetailView extends Component{
                                             </div>
                                             <div className="course_product_detail_teacher_name_box">
                                                 <div>主讲教师</div>
-                                                <a title={this.state.course.teacherInfo.teacherName} style={{width:"0.56rem",height:"0.21rem",overflow:"hidden"}}>{this.state.course.teacherInfo.teacherName}老师</a>
+                                                <a title={this.state.course.teacherInfo.teacherName} style={{width:"0.7rem",height:"0.21rem",overflow:"hidden"}}>{this.state.course.teacherInfo.teacherName}老师</a>
                                             </div>
                                         </div>
                                         <div className="course_product_detail_teacher_info">
@@ -211,7 +213,7 @@ export class ProductCourseDetailView extends Component{
                                             </div>
                                             <div className="course_product_detail_teacher_name_box">
                                                 <div>助教</div>
-                                                <div>{this.state.course.assistantInfo.teacherName}</div>
+                                                <div>1v1辅导</div>
                                             </div>
                                         </div>
                                     </div>
@@ -219,9 +221,9 @@ export class ProductCourseDetailView extends Component{
                             </div>
                             <div className="product_course_detail_bottom">
                                 <div className="product_course_detail_bottom_title">
-                                    <div className="product_course_detail_bottom_title_item" onClick={this.switchToDetail.bind(this)}>课程详情</div>
-                                    <div className="product_course_detail_bottom_title_item" onClick={this.switchToOutLine.bind(this)}>课程大纲</div>
-                                    <div className="product_course_detail_bottom_title_item" onClick={this.switchToProblem.bind(this)}>常见问题</div>
+                                    <div className={`product_course_detail_bottom_title_item ${this.state.isShowCourseDetail?"selected_course_detail_bottom_title_item":null}`} onClick={this.switchToDetail.bind(this)}>课程详情</div>
+                                    <div className={`product_course_detail_bottom_title_item ${this.state.isShowOutLine?"selected_course_detail_bottom_title_item":null}`} onClick={this.switchToOutLine.bind(this)}>课程大纲</div>
+                                    <div className={`product_course_detail_bottom_title_item ${this.state.isShowProblem?"selected_course_detail_bottom_title_item":null}`} onClick={this.switchToProblem.bind(this)}>常见问题</div>
                                 </div>
                             </div>
                             {this.state.isShowCourseDetail?(

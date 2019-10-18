@@ -11,36 +11,37 @@
     justify-content: space-between;
     align-items: center;
     top:2.8rem;
-    left:7.4rem;
+    left: 52%;
     width:4.64rem;
     height:0.6rem;
     color:#000000;
     font-size:0.2rem;
 }
 .windows_down_load_btn{
-    width: 2rem;
+    width: 1.9rem;
     height: 0.6rem;
     border-radius: 0.08rem;
-    background:#ffffff url("../../img/win_icon.png") no-repeat 0.23rem center;
+    background: #ffffff url('../../img/win_icon.png') no-repeat 0.29rem center;
     background-size: 0.26rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-left: 0.14rem;
+    padding-left: 0.29rem;
     cursor: pointer;
 }
 .mac_down_load_btn{
-    width:2.14rem;
-    height:0.6rem;
+    width: 1.9rem;
+    height: 0.6rem;
     border-radius: 0.08rem;
-    background: #ffffff url("../../img/mac_icon.png") no-repeat 0.23rem center;
+    background: #ffffff url("../../img/mac_icon.png") no-repeat 0.45rem center;
     background-size: 0.26rem 0.31rem;
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    padding-left: 0.29rem;
 }
 .down_load_sec_1{
     display:flex;

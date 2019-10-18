@@ -51,7 +51,7 @@ export class ProductCourse {
             list.push(new CoursePlanItem({
                 name: outlineList[i].sessionName,
                 startTime: outlineList[i].date,
-                teacherInfo:{teacherName:outlineList[i].name}
+                teacherInfo:{teacherName:outlineList[i].teacherName}
             }))
         }
         return list;

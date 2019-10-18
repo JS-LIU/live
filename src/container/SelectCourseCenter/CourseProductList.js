@@ -53,7 +53,7 @@ export class CourseProductList extends Component{
                                 teacherStyle={{marginLeft:"0.18rem"}}
                                 teacherTitle={"助教"}
                                 headImgUrl={productModule.assistantInfo.headImgUrl}
-                                teacherName={productModule.assistantInfo.teacherName}
+                                teacherName={"1v1辅导"}
                             />
                         </div>
                         <div className="course_product_item_footer">

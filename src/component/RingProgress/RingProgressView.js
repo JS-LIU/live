@@ -13,11 +13,11 @@ export class RingProgressView extends Component{
         let resultRate = (rate - 1/2);
         if(resultRate > 0){
             rightRotate = 405;
-            leftRotate += 180 * resultRate * 2;
-        }else{
             leftRotate = -135;
-            rightRotate += (180 * rate * 2);
+            rightRotate += (360 * rate);
         }
+        console.log("rate=========",rate);
+        console.log("rightRotate:====:",rightRotate);
         this.unit = this.props.unit;
         this.circleProgressWrapperStyle = Object.assign({}, {
             width: this.props.size + this.unit,
@@ -54,6 +54,9 @@ export class RingProgressView extends Component{
         });
     //   r -135 start 45
     //     l 225 start
+    }
+    componentDidMount() {
+        console.log("didMount")
     }
 
     render() {

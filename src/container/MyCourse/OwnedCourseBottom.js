@@ -6,7 +6,6 @@ import {RingProgressView} from "../../component/RingProgress/RingProgressView";
 export class OwnedCourseBottom extends Component {
     constructor(props) {
         super(props);
-
     }
 
     getBottom(courseItem) {

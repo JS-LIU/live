@@ -53,7 +53,7 @@ export class HomeView extends Component{
         };
         this.sec_5_swiper_params = {
             arrows:false,
-            // autoplay: true,
+            autoplay: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
@@ -61,7 +61,7 @@ export class HomeView extends Component{
         };
         this.sec_8_swiper_params = {
             arrows:true,
-            // autoplay: true,
+            autoplay: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,

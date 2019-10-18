@@ -101,7 +101,8 @@ let redirectConfig = {
     "user":"/user/userInfo",
     "ownedCourseDetail":"/studyCourseCenter/myCourseList",
     "orderDetail":'/orderDetail'+localStorage.getItem("orderNo"),
-    "home":'/home'
+    "home":'/home',
+    "download":'/downLoad'
 };
 let redirectUrl = redirectConfig[redirect] || "/home";
 if(token){

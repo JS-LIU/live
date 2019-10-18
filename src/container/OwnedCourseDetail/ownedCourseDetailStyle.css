@@ -9,6 +9,9 @@
     font-size:0.14rem;
     color:#808080;
 }
+.crumbs_next{
+    padding:0 0.1rem;
+}
 .owned_course_plan_list{
     width: 11.8rem;
     display:flex;

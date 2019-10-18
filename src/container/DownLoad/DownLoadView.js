@@ -14,7 +14,7 @@ export class DownLoadView extends Component{
         super(props);
     }
     componentDidMount() {
-        HB.save.setStorage({redirect:"home"})
+        HB.save.setStorage({redirect:"download"})
     }
 
     render() {
