@@ -17,9 +17,9 @@ import {userService} from "../src/service/UserService";
 import {baseUrl} from "./config/config";
 import commonStyle from './container/PCStudyCourse/commonStyle.css';
 HB.ui.setBaseFontSize(1280,100);
-// baseUrl.setBaseUrl("/pcwap");
+baseUrl.setBaseUrl("/pcwap");
 
-let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTcxMzc4MDM4NDY5Iiwia2V5X3VzZXJfaWQiOjEwMDE3LCJpYXQiOjE1NzEzNzgwMzgsImV4cCI6MTU3MTk4MjgzOH0.qF_mHfK0HmnpHfk3rEikCbutV3XEVUtNdtixBx-FqQk";
+let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTcxODIzMTI4NzkwIiwia2V5X3VzZXJfaWQiOjg5LCJpYXQiOjE1NzE4MjMxMjgsImV4cCI6MTU3MjQyNzkyOH0.kOu1ZZj5O9c6EE1lCJEPzzavS-fLP_KCHLwKrpur9Zo";
 userService.login.updateToken(token);
 window.navigateBack = function(){
     window.history.go(-1);

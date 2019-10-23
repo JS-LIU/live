@@ -22,7 +22,7 @@ export class CoursePlanItem {
         this.assistantInfo = new Teacher(coursePlanItemInfo.assistantInfo);
         this.lectureNotes = new LectureNotes(coursePlanItemInfo.lectureNotesStatus,coursePlanItemInfo.lectureNotes);
         this.homework = new Homework({
-            userHomeworkStatus:coursePlanItemInfo.userHomeworkStatus,
+            homeworkDownloadStatus:coursePlanItemInfo.homeworkDownloadStatus,
             homeworkName:coursePlanItemInfo.homeworkName,
             homeworkUrl:coursePlanItemInfo.homeworkUrl,
             homeworkSavePath:coursePlanItemInfo.homeworkSavePath,

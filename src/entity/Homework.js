@@ -6,7 +6,7 @@ import {courseService} from "../service/CourseService";
 
 export class Homework {
     constructor(homeWorkInfo){
-        this.userHomeworkStatus = homeWorkInfo.userHomeworkStatus;
+        this.homeworkDownloadStatus = homeWorkInfo.homeworkDownloadStatus;
         this.homeworkName = homeWorkInfo.homeworkName;
         this.homeworkUrl = homeWorkInfo.homeworkUrl;
         this.homeworkSavePath = homeWorkInfo.homeworkSavePath;
@@ -84,6 +84,6 @@ export class Homework {
         }
     }
     getStatusInfo(coursePlanItem){
-        return this.statusManager(coursePlanItem)[this.userHomeworkStatus];
+        return this.statusManager(coursePlanItem)[this.homeworkDownloadStatus];
     }
 }

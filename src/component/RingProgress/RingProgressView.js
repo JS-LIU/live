@@ -10,14 +10,14 @@ export class RingProgressView extends Component{
         let rightRotate = 225;
         let leftRotate = -135;
         let rate = this.props.nowProgress / this.props.totalProgress;
-        let resultRate = (rate - 1/2);
-        if(resultRate > 0){
+        //  大于一半
+        if(rate > 1/2){
             rightRotate = 405;
+            leftRotate += (360*(rate-1/2));
+        }else{
             leftRotate = -135;
             rightRotate += (360 * rate);
         }
-        console.log("rate=========",rate);
-        console.log("rightRotate:====:",rightRotate);
         this.unit = this.props.unit;
         this.circleProgressWrapperStyle = Object.assign({}, {
             width: this.props.size + this.unit,

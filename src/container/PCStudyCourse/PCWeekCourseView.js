@@ -41,6 +41,7 @@ export class PCWeekCourseView extends Component{
             TimeManager.convertToTimeStampBySec(this.weekData.startTime + " 00:00:00"),
             TimeManager.convertToTimeStampBySec(this.weekData.endTime + " 23:59:59")
         ).then((coursePlanList)=>{
+            console.log(coursePlanList);
             this.setState({
                 coursePlanList:coursePlanList
             });
@@ -60,8 +61,7 @@ export class PCWeekCourseView extends Component{
         this.onGetMore();
     }
     startHomework(coursePlan){
-
-        if(coursePlan.coursePlanItem.homework.userHomeworkStatus === 4){
+        if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "下载作业"){
             window.startHomeWork(JSON.stringify({
                 id:coursePlan.coursePlanItem.id,
                 urlPath:coursePlan.homeworkInfo.urlPath,
@@ -77,17 +77,19 @@ export class PCWeekCourseView extends Component{
         return "nextSuccessor";
     }
     showHomeWork(coursePlan){
-        this.setState({
-            showHomeworkComment:true,
-            commentInfo:coursePlan.homeworkInfo,
-            courseName:coursePlan.coursePlanItem.courseName
-        })
+        if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "作业已提交"||coursePlan.coursePlanItem.homework.getStatusInfo().name === "作业已批改"){
+            this.setState({
+                showHomeworkComment:true,
+                commentInfo:coursePlan.homeworkInfo,
+                courseName:coursePlan.coursePlanItem.courseName
+            })
+        }
+        return "nextSuccessor";
     }
 
     downLoadHomework(coursePlanItem){
-
         return ()=>{
-            console.log("coursePlanItem:",coursePlanItem);
+            console.log(coursePlanItem);
             courseService.downLoadHomework(coursePlanItem).then((data)=>{
                 console.log(data);
                 let hasComment = coursePlanItem.homework.getStatusInfo().isModify;
@@ -133,9 +135,7 @@ export class PCWeekCourseView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
-            //  todo 临时修改发版
-            // this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
-            window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
+            this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
         }
     }
     closeDialog(){

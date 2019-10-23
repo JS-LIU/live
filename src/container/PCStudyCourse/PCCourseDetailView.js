@@ -31,41 +31,36 @@ export class PCCourseDetailView extends Component{
         });
     }
     startHomework(coursePlan){
-        console.log(JSON.stringify({
-            id:coursePlan.coursePlanItem.id,
-            urlPath:coursePlan.homeworkInfo.urlPath,
-            title:coursePlan.coursePlanItem.name,
-            courseName:coursePlan.coursePlanItem.courseName,
-            type:coursePlan.coursePlanItem.type.type,
-            userReward:userService.user.getUserInfo().userReward,
-            userName:userService.user.getUserInfo().userName,
-            sex:userService.user.getUserInfo().sex,
-            savePath:coursePlan.coursePlanItem.homeworkSavePath
-        }));
-        window.startHomeWork(JSON.stringify({
-            id:coursePlan.coursePlanItem.id,
-            urlPath:coursePlan.homeworkInfo.urlPath,
-            title:coursePlan.coursePlanItem.name,
-            courseName:coursePlan.coursePlanItem.courseName,
-            type:coursePlan.coursePlanItem.type.type,
-            userReward:userService.user.getUserInfo().userReward,
-            userName:userService.user.getUserInfo().userName,
-            sex:userService.user.getUserInfo().sex,
-            savePath:coursePlan.coursePlanItem.homeworkSavePath
-        }));
+        if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "下载作业"){
+            window.startHomeWork(JSON.stringify({
+                id:coursePlan.coursePlanItem.id,
+                urlPath:coursePlan.homeworkInfo.urlPath,
+                title:coursePlan.coursePlanItem.name,
+                courseName:coursePlan.coursePlanItem.courseName,
+                type:coursePlan.coursePlanItem.type.type,
+                userReward:userService.user.getUserInfo().userReward,
+                userName:userService.user.getUserInfo().userName,
+                sex:userService.user.getUserInfo().sex,
+                savePath:coursePlan.coursePlanItem.homeworkSavePath
+            }));
+        }
+        return "nextSuccessor";
     }
     showHomeWork(coursePlan){
-        this.setState({
-            showHomeworkComment:true,
-            commentInfo:coursePlan.homeworkInfo,
-            courseName:coursePlan.coursePlanItem.courseName
-        })
+        if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "作业已提交"||coursePlan.coursePlanItem.homework.getStatusInfo().name === "作业已批改"){
+            this.setState({
+                showHomeworkComment:true,
+                commentInfo:coursePlan.homeworkInfo,
+                courseName:coursePlan.coursePlanItem.courseName
+            })
+        }
+        return "nextSuccessor";
 
     }
     downLoadHomework(coursePlanItem){
         return ()=>{
+
             courseService.downLoadHomework(coursePlanItem).then((data)=>{
-                console.log(data);
                 let hasComment = coursePlanItem.homework.getStatusInfo().isModify;
                 this.showHomeWork.after(this.startHomework).call(this,{coursePlanItem:coursePlanItem,homeworkInfo:Object.assign(data.data,{hasComment:hasComment})});
             });
@@ -109,10 +104,7 @@ export class PCCourseDetailView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
-            //  todo 临时修改发版
-            console.log("enter====")
-            // this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
-            window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
+            this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
         }
     }
     closeDialog(){
