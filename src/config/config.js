@@ -8,6 +8,7 @@ export let commonAjax = HB.ajax();
 commonAjax.setConfig({baseUrl:"/api"});
 // prod
 // commonAjax.setConfig({baseUrl: "https://api-test.vcode.vip/api"});
+// commonAjax.setConfig({baseUrl: "https://api.vcode.vip/api"});
 // export let downloadAjax = HB.ajax();
 // downloadAjax.setConfig({baseUrl:"https://api-test.sscoding.com/api",responseType:"arraybuffer"});
 

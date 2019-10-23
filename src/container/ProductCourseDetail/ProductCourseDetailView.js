@@ -32,7 +32,7 @@ export class ProductCourseDetailView extends Component{
             this.setState({
                 isShowAliPlay:true
             });
-            courseService.getVideoView(course.detail.videoId).then((data)=>{
+            courseService.getVideoView(course.videoId).then((data)=>{
                 new Aliplayer({
                     id: "J_prismPlayer",
                     vid : data.data.aliVodId,

@@ -32,7 +32,6 @@ export class PaginationView extends Component{
     }
     prePage(toPage){
         if(toPage === this.showList[0]){
-            console.log("往钱翻");
             let list = [];
             let end = toPage;
             if(end < this.showPageSize){
@@ -48,12 +47,10 @@ export class PaginationView extends Component{
     getShowList(toPage){
 
         if(toPage === this.showList[this.showList.length-1] && this.showList.length > 1){
-            console.log("往后翻");
             let list = [];
             let start = toPage;
 
             if(this.getMaxPage(toPage) - toPage < this.showPageSize){
-                console.log("最后了");
                 start = this.getMaxPage(toPage) - this.showPageSize;
             }
             console.log(start,this.getMaxPage(toPage));

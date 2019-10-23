@@ -7,6 +7,7 @@ import {payService} from "../../service/PayService";
 import {orderService} from "../../service/OrderService";
 import QRcode from 'qrcode.react';
 import {TimeManager} from "../../entity/TimeManager";
+import {HB} from "../../util/HB";
 import payStyle from './payStyle.css';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
@@ -19,24 +20,47 @@ export class PayView extends Component {
             payInfo: null,
             orderStatus: "",
             countDown: ""
-        }
+        };
+        this.orderNo = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"orderNo");
+        this.payLastTime = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"payLastTime");
+        this.payPrice = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"payPrice");
+        this.payUrl = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"payUrl");
     }
 
     componentDidMount() {
-        this.setState({
-            orderInfo: orderService.getOrder(),
-            payInfo: payService.getPay(),
-        });
+        if(orderService.getOrder()){
+            this.setState({
+                orderInfo: orderService.getOrder(),
+                payInfo: payService.getPay(),
+            });
+            this.queryOrderStatus();
+            this.startCountDown();
+        }else{
+            orderService.queryOrderDetail(this.orderNo).then((orderInfo)=>{
+                orderService.order = orderInfo;
+                this.setState({
+                    orderInfo: orderService.getOrder(),
+                    payInfo: {
+                        payUrl:this.payUrl,
+                        payPrice:this.payPrice
+                    },
+                });
+                this.queryOrderStatus();
+                this.startCountDown();
+            });
+        }
+        HB.save.setStorage({redirect:"pay"});
+        HB.save.setStorage({pay:`/pay?payLastTime=${this.payLastTime}&orderNo=${this.orderNo}&payPrice=${this.payPrice}&payUrl=${this.payUrl}`})
+    }
+    queryOrderStatus(){
         let self = this;
         orderService.queryOrderStatus(TimeManager.currentTimeStampBySec(),
             function(status){
-                self.props.history.replace('/paySuccess/' + `${status}`);
+                self.props.history.replace('/paySuccess/3002');
             }, function(status){
                 self.props.history.replace('/payFail');
             });
-        this.startCountDown();
     }
-
     startCountDown() {
         this.t = setInterval(() => {
             this.setState({

@@ -20,7 +20,6 @@ export class OrderDetailView extends Component{
     }
     componentDidMount() {
         orderService.queryOrderDetail(this.orderNo).then((orderInfo)=>{
-            console.log("=====",orderInfo);
             this.setState({
                 orderInfo:orderInfo
             })

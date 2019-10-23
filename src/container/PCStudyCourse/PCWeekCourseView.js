@@ -133,7 +133,9 @@ export class PCWeekCourseView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
-            this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
+            //  todo 临时修改发版
+            // this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
+            window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
         }
     }
     closeDialog(){

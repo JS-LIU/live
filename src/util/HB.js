@@ -26,7 +26,6 @@
  *      HB.design.chain
  */
 export let HB = window.HB || {};
-
 HB.obj = (function(){
 
     //  判断obj1中是否有obj2中的所有属性

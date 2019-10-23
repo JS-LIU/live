@@ -230,17 +230,22 @@ class OrderService {
         return orderRepository.orderDetail({
             orderNo:orderNo
         }).then((data)=>{
-            let order = this.findOrderByOrderNo(orderNo);
+            let order = this.findOrCreateOrderByOrderNo(orderNo);
             order.setDetail(data.data);
             return new Promise((resolve, reject)=>{
                 resolve(order);
             })
         });
     }
-    findOrderByOrderNo(orderNo){
-        return this.orderList.find((orderItem,index)=>{
+    findOrCreateOrderByOrderNo(orderNo){
+        let order = this.orderList.find((orderItem,index)=>{
             return orderItem.orderNo === orderNo
-        })
+        });
+        if(order){
+            return order;
+        }else{
+            return new Order({orderNo:orderNo});
+        }
     }
     cancelOrder(orderItem){
         return orderRepository.cancelOrder({
@@ -256,7 +261,7 @@ class OrderService {
         })
     }
     rePay(orderNo) {
-        this.order = this.findOrderByOrderNo(orderNo);
+        this.order = this.findOrCreateOrderByOrderNo(orderNo);
         this.createOrderProduct(this.order.orderCourse);
         return orderRepository.rePay({
             orderNo: orderNo

@@ -24,7 +24,6 @@ export class AccountManageView extends Component{
 
     }
     inputVCode(e){
-        console.log(this.resetInfo.vCode);
         this.resetInfo.vCode = e.target.value
     }
     inputNewPsd(e){
@@ -38,7 +37,7 @@ export class AccountManageView extends Component{
             alert("两次输入的密码不同");
         }else{
             this.resetInfo.phoneNum = userService.user.getUserInfo().phone;
-            userService.resetPassword(this.resetInfo);
+            userService.getVCode("resetPassword",this.resetInfo.phoneNum);
         }
 
     }

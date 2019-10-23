@@ -4,8 +4,6 @@
 import {Login} from "../entity/Login";
 import {User} from "../entity/User";
 import {baseUrl, commonAjax} from "../config/config";
-import {TimeManager} from "../entity/TimeManager";
-import {HB} from "../util/HB";
 import {hex_md5} from "../util/md5";
 import {CouponStatus} from "../entity/CouponStatus";
 import {Pagination} from "../entity/Pagination";
@@ -82,8 +80,12 @@ class UserService {
             code:postInfo.vcode
         }).then((data)=>{
             return new Promise((resolve,reject)=>{
-                this.login.updateToken(data.data.token);
-                resolve();
+                if(data.code === 0){
+                    this.login.updateToken(data.data.token);
+                    resolve();
+                }else{
+                    reject(data.message);
+                }
             })
         });
     }
@@ -99,12 +101,10 @@ class UserService {
             pass:hex_md5(postInfo.password)
         }).then((data)=>{
             return new Promise((resolve,reject)=>{
-                // console.log(data);
                 if(data.code === 0){
                     this.login.updateToken(data.data.token);
                     resolve();
                 }else{
-                    console.log(data.message);
                     reject(data.message);
                 }
 
@@ -136,8 +136,8 @@ class UserService {
         });
     }
     /**
-     * 获取验证码
      * 验证码登录
+     * 获取验证码
      * @param phoneNum
      */
     getLoginVCode(phoneNum){
@@ -168,7 +168,11 @@ class UserService {
         })
     }
     resetPassword(postInfo){
-        return this._resetPassword(postInfo);
+        return this._resetPassword({
+            code:postInfo.vCode,
+            phone:postInfo.phoneNum,
+            password:hex_md5(postInfo.newPsd)
+        });
     }
     getVCodeStrategy(){
         return {
@@ -216,7 +220,6 @@ class UserService {
         return this.user.getUserInfo();
     }
     queryUserAccountCoupon(){
-        console.log(this.couponStatusManager.getCurrentCouponStatus());
         return this._queryUserAccountCoupon({
             couponStatus: this.couponStatusManager.getCurrentCouponStatus().status,
             pageNum: this.pagination.pageNum,

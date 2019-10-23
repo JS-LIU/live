@@ -69,7 +69,8 @@ export class SettleCenterView extends Component{
                 this.props.history.replace("/paySuccess/3002");
             }else{
                 payService.createPay(info.data.payModels,info.data.payPrice);
-                this.props.history.replace('/pay');
+                console.log(info.data);
+                this.props.history.replace(`/pay?payLastTime=${info.data.payLastTime}&orderNo=${info.data.orderNo}&payPrice=${info.data.payPrice}&payUrl=${info.data.payModels[0].payUrl}`);
             }
 
         }).catch((msg)=>{

@@ -80,7 +80,6 @@ export class CouponManager {
         let alreadyUsedCoupon = this.canUseCouponList.filter((couponItem,index)=>{
             return (couponItem.ifSaleGrant === coupon.ifSaleGrant) && couponItem.selected;
         });
-        console.log("alreadyUsed:",alreadyUsedCoupon.length);
         return alreadyUsedCoupon.length;
     }
     updateCouponUseStatus(coupon){

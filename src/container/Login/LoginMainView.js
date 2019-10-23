@@ -18,12 +18,18 @@ export class LoginMainView extends Component{
         this.redirect = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"redirect");
         this.state = {
             isShowToast:false,
-            toastText:""
+            toastText:"",
+            signWay:"signByPassword",
         }
     }
 
     componentDidMount() {
 
+    }
+    cutSignWay(signWay){
+        this.setState({
+            signWay:signWay
+        })
     }
     //  登录
     login(signWay,signInfo){
@@ -41,7 +47,8 @@ export class LoginMainView extends Component{
         }).catch((msg)=>{
             this.setState({
                 isShowToast:true,
-                toastText:msg
+                toastText:msg,
+                signWay:signWay
             })
         })
     }
@@ -94,6 +101,8 @@ export class LoginMainView extends Component{
                             getVCode:this.getVCode.bind(this),
                             isShowToast:this.state.isShowToast,
                             toastText:this.state.toastText,
+                            signWay:this.state.signWay,
+                            cutSignWay:this.cutSignWay.bind(this),
                             hideToast:this.hideToast.bind(this)
                         });
                         return <LoginView  {...obj} />

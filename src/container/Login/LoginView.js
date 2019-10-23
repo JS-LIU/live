@@ -16,19 +16,31 @@ export class LoginView extends Component{
         this.state={
             phoneNumStyle:{border:"0.01rem solid #ffffff"},
             passwordStyle:{border:"0.01rem solid #ffffff"},
-            loginByPsd:true,
             phoneNum:this.phoneNum,
             password:this.password,
-            signWay:"signByPassword",
+            signWay:this.props.signWay,
+            loginByPsd:true
         }
     }
+    componentDidMount() {
+        if(this.state.signWay === "signByPassword"){
+            this.setState({
+                loginByPsd:true,
+            })
+        }else{
+            this.setState({
+                loginByPsd:false,
+            })
+        }
+    }
+
     //  登录
     login(){
         this.props.login(this.state.signWay,{
             phoneNum:this.phoneNum,
             password:this.password,
             vcode:this.vcode
-        })
+        });
     }
     inputPhoneNum(e){
         this.phoneNum = e.target.value;
@@ -63,12 +75,12 @@ export class LoginView extends Component{
             passwordStyle:{border:"0.01rem solid #ffffff"}
         })
     }
-    onLoginByPassword(){
-        this.resetInitParam();
-        this.setState({
-            loginByPsd:true,
-            signWay:"signByPassword"
-        })
+    cutSignWay(signWay){
+        return ()=>{
+            this.resetInitParam();
+            this.props.cutSignWay(signWay);
+        };
+
     }
     resetInitParam(){
         this.phoneNum = "";
@@ -80,13 +92,7 @@ export class LoginView extends Component{
             vcode:this.vcode
         })
     }
-    onLoginByVCode(){
-        this.resetInitParam();
-        this.setState({
-            loginByPsd:false,
-            signWay:"signByVCode"
-        })
-    }
+
     inputVCode(e){
         this.vcode = e.target.value;
         this.setState({
@@ -104,11 +110,11 @@ export class LoginView extends Component{
                 <div className="login_right_log">
                     <div className="login_right_log_way">
                         <div className="login_right_log_way_title"
-                             onClick={this.onLoginByPassword.bind(this)}
+                             onClick={this.cutSignWay("signByPassword")}
                              style={this.state.loginByPsd?{color:"#000000"}:{}}>密码登录</div>
                         <div className="login_seg">|</div>
                         <div className="login_right_log_way_title"
-                             onClick={this.onLoginByVCode.bind(this)}
+                             onClick={this.cutSignWay("signByVCode")}
                              style={this.state.loginByPsd?{}:{color:"#000000"}}>验证码登录</div>
                     </div>
                     <div className="login_right_log_log">

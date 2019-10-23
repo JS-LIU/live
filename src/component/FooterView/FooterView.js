@@ -12,7 +12,6 @@ export class FooterView extends Component{
     }
 
     render() {
-        console.log(this.props.style);
         return (
             <div className="common_footer" style={this.props.style}>
                 <div className="common_footer_main">

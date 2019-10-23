@@ -242,7 +242,6 @@ export class HomeView extends Component{
     }
     showMorePlan(planItem){
         return ()=>{
-            console.log(planItem);
             this.showItem = this.state.planList.find((item,index)=>{
                 return item.key === planItem;
             });
@@ -259,7 +258,6 @@ export class HomeView extends Component{
     }
     showSubAdvantage(advantageItem){
         return ()=>{
-            console.log(12);
             advantageItem.isActive = true;
             this.setState({
                 advantage:this.state.advantage

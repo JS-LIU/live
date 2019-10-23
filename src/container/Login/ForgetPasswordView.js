@@ -8,7 +8,7 @@ import {userService} from "../../service/UserService";
 import {HB} from "../../util/HB";
 import forgetPasswordStyle from './forgetPasswordStyle.css';
 import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
-
+var a = 0;
 export class ForgetPasswordView extends Component{
     constructor(props) {
         super(props);
@@ -64,7 +64,7 @@ export class ForgetPasswordView extends Component{
     getPwdVCode(){
         if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.forgetInfo.phoneNum)){
             this.startCountDown();
-            userService.getPwdVCode().then(()=>{
+            userService.getVCode("resetPassword",this.forgetInfo.phoneNum).then(()=>{
 
             }).catch((msg)=>{
                 this.setState({

@@ -56,7 +56,6 @@ export class RingProgressView extends Component{
     //     l 225 start
     }
     componentDidMount() {
-        console.log("didMount")
     }
 
     render() {

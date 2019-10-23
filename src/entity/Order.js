@@ -11,28 +11,43 @@ export class Order {
         this.orderNo = orderInfo.orderNo;
         this.payPrice = orderInfo.payPrice;
         this.payLastTime = orderInfo.payLastTime;
-        this.frequentlyStep = 2;
-        this.lazyStep = 10;
         this.status = orderInfo.status||orderInfo.orderStatus;
         this.sellPrice = orderInfo.sellPrice;
         this.orderCreateTime = orderInfo.orderCreateTime;
+        this.frequentlyStep = 2;
+        this.lazyStep = 10;
         //  todo 现在order对商品是1对1 1对多的时候改成list
-        this.orderCourse = new OrderProduct({
-            timeList:orderInfo.timeList,
-            name:orderInfo.goodName,
-            level:orderInfo.series,
-            sellPrice:orderInfo.sellPrice,
-            salePrice: orderInfo.salePrice,
-            startTime:orderInfo.startTime,
-            endTime:orderInfo.endTime,
-            type:orderInfo.goodType,
-            teacherList: [orderInfo.teacherInfo],
-            assistant:orderInfo.assistant,
-            goodNo:orderInfo.goodNo
-        });
+        this.orderCourse = this.createOrderCourse(orderInfo);
         this.orderDetail = null;
     }
+    createOrderCourse(productInfo){
+        if(productInfo.timeList){
+            return new OrderProduct({
+                timeList:productInfo.timeList,
+                name:productInfo.goodName,
+                level:productInfo.series,
+                sellPrice:productInfo.sellPrice,
+                salePrice: productInfo.salePrice,
+                startTime:productInfo.startTime,
+                endTime:productInfo.endTime,
+                type:productInfo.goodType,
+                teacherList: [productInfo.teacherInfo],
+                assistant:productInfo.assistant,
+                goodNo:productInfo.goodNo
+            });
+        }
+        return null;
+    }
+    updateOrderInfo(orderDetail){
+        this.payPrice = orderDetail.salePrice;
+        this.payLastTime = orderDetail.payLastTime;
+        this.status = orderDetail.orderStatus;
+        this.sellPrice = orderDetail.sellPrice;
+        this.orderCreateTime = orderDetail.orderCreateTime;
+    }
     setDetail(orderDetail){
+        this.updateOrderInfo(orderDetail);
+        this.orderCourse = this.createOrderCourse(orderDetail);
         this.orderCourse.courseInfo.assistantInfo = new Teacher(orderDetail.assistant || {});
         let teacherInfo = null;
         if(orderDetail.teacherList){
@@ -53,8 +68,6 @@ export class Order {
      * @returns {boolean}
      */
     isOverDue(currentTimeStampBySec){
-        console.log("======",currentTimeStampBySec);
-        console.log("======",this.payLastTime);
         return (currentTimeStampBySec > this.payLastTime);
     }
 
