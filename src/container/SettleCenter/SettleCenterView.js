@@ -44,7 +44,6 @@ export class SettleCenterView extends Component{
                 repairParam.endTime = preOrderInfo.order.orderCourse.courseInfo.getStartTimeToShow("unix");
                 repairParam.showSellPrice = (preOrderInfo.order.orderCourse.sellPrice / 100).toFixed(2)
             }).call(preOrderInfo.order.orderCourse,{});
-            console.log(preOrderInfo);
             this.setState({
                 useCouponList: settleManager.couponManager.getDefCouponList(),
                 canUseCouponList: settleManager.couponManager.canUseCouponList,
@@ -55,8 +54,9 @@ export class SettleCenterView extends Component{
                 order: preOrderInfo.order,
                 couponList: settleManager.couponManager.couponList
             });
-            console.log(this.state.order);
             this.startCountDown();
+        }).catch(()=>{
+            this.props.history.replace("/user/orderList");
         });
 
         this.setState({

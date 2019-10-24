@@ -24,7 +24,6 @@ export class OrderListView extends Component {
     componentDidMount() {
         //  设计暂时只有全部订单
         orderService.getOrderList().then((list)=>{
-            console.log(list);
             this.setState({
                 orderList:list,
                 total:orderService.pagination.getTotalPage()
@@ -33,9 +32,7 @@ export class OrderListView extends Component {
     }
     toPay(orderItem){
         return ()=>{
-            console.log(orderItem);
             if(orderItem.status === 3005){
-                // let url = "/confirmOrder?productCourseNo=''&orderNo="+orderItem.orderNo+"&requestWay=orderDetail";
                 let url = `/confirmOrder?orderNo=${orderItem.orderNo}&requestWay=orderDetail`;
                 this.props.history.push(url);
             }else if(orderItem.status === 3001){
@@ -111,8 +108,6 @@ export class OrderListView extends Component {
                     repairParam.endTime = orderItem.orderCourse.courseInfo.getEndTimeToShow("unix");
                 }).call(orderItem.orderCourse, {});
                 orderItem.orderCourseModule = productModule;
-
-                console.log(orderItem);
                 return (
                     <div className="order_list_order_item" key={index}>
                         <div className="order_list_order_item_header">

@@ -5,13 +5,16 @@ import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import accountManageStyle from './accountManageStyle.css';
 import {userService} from "../../service/UserService";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 
 export class AccountManageView extends Component{
     constructor(props) {
         super(props);
         this.resetInfo = {};
         this.state = {
-            countDown:"获取验证码"
+            countDown:"获取验证码",
+            isShowToast:false,
+            toastText:""
         };
         this.phone = userService.user.getUserInfo().phone;
         this.hidePhone = this.phone.substr(0, 3) + "****" +this.phone.substr(7);
@@ -19,7 +22,7 @@ export class AccountManageView extends Component{
     sendVCode(){
         if(this.state.countDown === "获取验证码"){
             this.startCountDown();
-            userService.getPwdVCode()
+            userService.getVCode("resetPassword",this.phone)
         }
 
     }
@@ -34,12 +37,26 @@ export class AccountManageView extends Component{
     }
     confirmFixed(){
         if(this.resetInfo.VPsd !== this.resetInfo.newPsd){
-            alert("两次输入的密码不同");
+            //  弹窗
+            this.setState({
+                isShowToast:true,
+                toastText:"两次输入的密码不同"
+            })
         }else{
             this.resetInfo.phoneNum = userService.user.getUserInfo().phone;
-            userService.getVCode("resetPassword",this.resetInfo.phoneNum);
+            userService.resetPassword(this.resetInfo).then(()=>{
+                //  弹窗
+                this.setState({
+                    isShowToast:true,
+                    toastText:"修改成功"
+                })
+            }).catch((msg)=>{
+                this.setState({
+                    isShowToast:true,
+                    toastText:msg
+                })
+            })
         }
-
     }
     startCountDown(){
         let startTime = 60;
@@ -57,17 +74,27 @@ export class AccountManageView extends Component{
             }
         },1000)
     }
+    hideToast(){
+        this.setState({
+            isShowToast:false,
+        })
+    }
     render() {
         return (
             <div className="account_manage">
                 <div className="account_title">修改密码</div>
                 <div className="account_change_psd">
+                    {this.state.isShowToast?<ShowToastView
+                        text={this.state.toastText}
+                        showTime={1500}
+                        hideToast={this.hideToast.bind(this)}
+                        style={{position:"absolute",bottom:"4.8rem",left:"5rem"}}/>:null}
                     <ul className="account_change_psd_box">
                         <li className="account_item">
                             <div className="account_change_item_title">手机</div>
                             <div className="account_change_item_info">
                                 <div className="account_change_item_info_phone_num">{this.hidePhone}</div>
-                                <a className="account_change_item_info_send_v_code" onClick={this.sendVCode.bind(this)}>{this.state.countDown}</a>
+                                <div className="account_change_item_info_send_v_code" onClick={this.sendVCode.bind(this)}>{this.state.countDown}</div>
                             </div>
                         </li>
                         <li className="account_item">
@@ -86,6 +113,7 @@ export class AccountManageView extends Component{
                         <li className="account_item">
                             <div className="account_change_item_title">确认密码</div>
                             <input placeholder="请确认新密码"
+                                   type="password"
                                    className="account_change_item_input input_psd"
                                    onChange={this.inputVPsd.bind(this)}/>
                         </li>

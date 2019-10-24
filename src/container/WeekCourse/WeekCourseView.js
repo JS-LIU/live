@@ -128,8 +128,9 @@ export class WeekCourseView extends Component{
         }else{
             return (
                 <div className="week_no_course">
-                    暂无课程
+                    <Link className="to_course_center_btn" to="/selectCourseCenter">选课中心</Link>
                 </div>
+
             )
         }
     }

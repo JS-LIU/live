@@ -52,13 +52,18 @@ export class OwnedCourseDetailView extends Component{
             repairParam.startTime = this.state.ownedCourse.courseInfo.getStartTimeToShow("common");
             repairParam.endTime = this.state.ownedCourse.courseInfo.getEndTimeToShow("common");
         }).call(this.state.ownedCourse,{});
+        console.log(ownedCourseModule);
         return (
             <div>
                 <div className="wrap" />
                 <MyCourseHeaderView userInfo={userService.user.getUserInfo()}/>
                 <div className="owned_course_plan_main">
                     <div className="crumbs">
-                        首页 > 我的课程 > {this.state.ownedCourse.courseName}
+                        <Link to="/index">首页</Link>
+                        <span className="crumbs_next">></span>
+                        <Link to="/studyCourseCenter/myCourseList">我的课程</Link>
+                        <span className="crumbs_next">></span>
+                        <span style={{cursor:"pointer"}}>{ownedCourseModule.courseName}</span>
                     </div>
                     <div className="owned_course_plan_list">
                         <OwnedCourseHeaderView ownedCourseModule={ownedCourseModule}/>

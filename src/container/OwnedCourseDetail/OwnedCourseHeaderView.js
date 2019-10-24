@@ -67,7 +67,7 @@ export class OwnedCourseHeaderView extends Component{
                         size={"0.88"}
                         borderWidth={"0.06"}
                         borderBg={"rgba(255,255,255,1)"}
-                        progressBorderBg={"rgba(220,255,234,1)"}
+                        progressBorderBg={"#F1FFCE"}
                         nowProgress={this.props.ownedCourseModule.finishLessonNum}
                         totalProgress={this.props.ownedCourseModule.totalLessonNum}
                         innerRender={this.courseProgressRender()}

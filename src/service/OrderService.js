@@ -32,7 +32,6 @@ class OrderService {
                 return orderRepository.preOrder({
                     goodNo:goodNo
                 }).then((data) => {
-                    console.log("createPreOrderInfo:",data);
                     return this.createPreOrderInfo(data);
                 })
             }
@@ -41,7 +40,7 @@ class OrderService {
     createPreOrderInfo(data) {
         return new Promise((resolve, reject) => {
             if(data.code!==0){
-                reject(data);
+                reject(data.message);
             }else{
                 this.settleManager = new SettleManager(data.data.sellPrice, data.data.couponList, data.data.account);
                 this.order = new Order(data.data);

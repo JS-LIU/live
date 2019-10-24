@@ -36,11 +36,16 @@ export class LoginView extends Component{
 
     //  登录
     login(){
-        this.props.login(this.state.signWay,{
-            phoneNum:this.phoneNum,
-            password:this.password,
-            vcode:this.vcode
-        });
+        if(!HB.valid.isPhoneAvailable(this.phoneNum)){
+            this.props.showToast("请输入正确的手机号")
+        }else{
+            this.props.login(this.state.signWay,{
+                phoneNum:this.phoneNum,
+                password:this.password,
+                vcode:this.vcode
+            });
+        }
+
     }
     inputPhoneNum(e){
         this.phoneNum = e.target.value;
@@ -148,7 +153,7 @@ export class LoginView extends Component{
                                    this.props.getVCode("login",this.phoneNum);
                                }}
                                startCondition={()=>{return new Promise((resolve, reject)=>{
-                                   if(HB.valid.isPoneAvailable(this.phoneNum)){
+                                   if(HB.valid.isPhoneAvailable(this.phoneNum)){
                                        resolve();
                                    }else{
                                        reject()

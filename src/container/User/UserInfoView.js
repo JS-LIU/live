@@ -88,7 +88,7 @@ export class UserInfoView extends Component{
                     showTime={1500}
                     text={"修改成功"}
                     hideToast={this.props.hideToast}
-                    style={{position:"absolute",bottom:"0.8rem"}}
+                    style={{position:"absolute",bottom:"0.3rem",left:"5rem"}}
                 />:null}
                 <div className="user_info_box_title">个人信息</div>
                 <div className="user_info_box_set_info_box">

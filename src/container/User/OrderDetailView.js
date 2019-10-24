@@ -20,9 +20,13 @@ export class OrderDetailView extends Component{
     }
     componentDidMount() {
         orderService.queryOrderDetail(this.orderNo).then((orderInfo)=>{
+            orderInfo.orderCourseModule = orderInfo.orderCourse.getModule.before((repairParam)=>{
+                repairParam.startTime = orderInfo.orderCourse.courseInfo.getStartTimeToShow("common");
+                repairParam.endTime = orderInfo.orderCourse.courseInfo.getEndTimeToShow("common");
+            }).call(orderInfo.orderCourse,{});
             this.setState({
                 orderInfo:orderInfo
-            })
+            });
         });
         // HB.save.setStorage({redirect:"orderDetail/",orderNo:this.orderNo});
     }
@@ -91,14 +95,14 @@ export class OrderDetailView extends Component{
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="course_price">课程价格：￥{this.state.orderInfo.orderCourse.sellPrice / 100}</div>
+                                    <div className="course_price">课程价格：￥{this.state.orderInfo.orderCourseModule.sellPrice / 100}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <ul className="order_info_list">
                         <li className="order_info_list_item">付款时间：{this.state.orderInfo.orderDetail.payTime}</li>
-                        <li className="order_info_list_item">商品总价：{this.state.orderInfo.orderDetail.salePrice}</li>
+                        <li className="order_info_list_item">商品总价：{this.state.orderInfo.orderCourseModule.sellPrice / 100}</li>
                         <li className="order_info_list_item">付款方式：{this.state.orderInfo.orderDetail.payType}</li>
                         <li className="order_real_price">实付金额：￥{this.state.orderInfo.orderDetail.sellPrice}</li>
                     </ul>

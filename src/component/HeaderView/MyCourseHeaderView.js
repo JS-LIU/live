@@ -18,11 +18,11 @@ export class MyCourseHeaderView extends Component{
                         <Link to="/studyCourseCenter/week" className="common_header_center_link_item">本周课程</Link>
                         <Link to="/studyCourseCenter/myCourseList" className="common_header_center_link_item">我的课程</Link>
                         <Link to="/user/userInfo" className="common_header_login_info" onMouseEnter={this.showDialog}>
-                            <a className="common_header_login_header_box">
+                            <div className="common_header_login_header_box">
                                 <img src={this.props.userInfo.headImgUrl||"src/img/def_header_img.png"} alt="" className="common_header_login_header_pic"/>
-                            </a>
-                            <a className="common_header_login_user_name">{this.props.userInfo.userName}</a>
-                            <a className="down_arrow"/>
+                            </div>
+                            <div className="common_header_login_user_name">{this.props.userInfo.userName}</div>
+                            <div className="down_arrow"/>
                         </Link>
                     </div>
                 </div>

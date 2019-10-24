@@ -152,7 +152,10 @@ export class MyCourseListView extends Component{
                         </div>
 
                         <div className="my_course_main_course_list">
-                            {this.state.ownedCourseList.length > 0?ownedCourseListNodes:(<div className="my_course_no_course" style={{width:"100%"}}>暂无课程</div>)}
+                            {this.state.ownedCourseList.length > 0?ownedCourseListNodes:(
+                                <div className="my_course_no_course" style={{width:"100%"}}>
+                                    <Link className="to_course_center_btn" to="/selectCourseCenter">选课中心</Link>
+                                </div>)}
                         </div>
                     </div>
                 </div>

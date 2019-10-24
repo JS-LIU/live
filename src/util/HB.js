@@ -277,7 +277,7 @@ HB.valid = (function(){
     function validPhoneNum(phoneNum){
         return phoneNum.length === 11;
     }
-    function isPoneAvailable(phoneNum) {
+    function isPhoneAvailable(phoneNum) {
         let myReg=/^[1][3,4,5,7,8][0-9]{9}$/;
         if (!myReg.test(phoneNum)) {
             return false;
@@ -342,7 +342,7 @@ HB.valid = (function(){
         parseDay:parseDay,
         validPhoneNum:validPhoneNum,
         addTimeToDay:addTimeToDay,
-        isPoneAvailable:isPoneAvailable
+        isPhoneAvailable:isPhoneAvailable
     }
 
 })();

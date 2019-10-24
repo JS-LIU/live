@@ -172,6 +172,14 @@ class UserService {
             code:postInfo.vCode,
             phone:postInfo.phoneNum,
             password:hex_md5(postInfo.newPsd)
+        }).then((data)=>{
+            return new Promise((resolve, reject)=>{
+                if(data.code === 0){
+                    resolve();
+                }else{
+                    reject(data.message);
+                }
+            })
         });
     }
     getVCodeStrategy(){

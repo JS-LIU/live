@@ -127,9 +127,9 @@ export class ProductCourseDetailView extends Component{
         });
         let courseComboNodes = this.state.course.suggestGoods.map((courseItem,index)=>{
             return (
-                <a className="suggest_goods_item" key={index} onClick={this.switchCourseDetail(courseItem)}>
+                <div className="suggest_goods_item" key={index} onClick={this.switchCourseDetail(courseItem)}>
                     {courseItem.name}
-                </a>
+                </div>
             )
         });
         let courseDetail = this.state.course.goodDetailList.map((imgItem,index)=>{

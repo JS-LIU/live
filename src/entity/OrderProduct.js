@@ -15,7 +15,7 @@ export class OrderProduct {
         this.salePrice = productCourse.salePrice;
         //    主讲人列表
         this.teacherList = productCourse.teacherList || [];
-        this.assistant = productCourse.assistant;
+        this.assistantInfo = productCourse.assistantInfo;
         this.sellPrice = productCourse.sellPrice;
     }
 
@@ -24,8 +24,8 @@ export class OrderProduct {
     }
     setTeacherInfo() {
         this.courseInfo.teacherInfo = new Teacher(this.getMajorSpeaker());
-        this.courseInfo.assistantInfo = new Teacher(this.assistant);
     }
+
     getModule(repairParam) {
         this.setTeacherInfo();
         return Object.assign({}, this.courseInfo.getModule(), {

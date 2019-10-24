@@ -22,10 +22,10 @@ export class DownLoadView extends Component{
             <div>
                 <HeaderView userInfo={userService.user.getUserInfo()}/>
                 <div className="down_load_header">
-                    <ul className="down_load_btn_list">
-                        <li className="windows_down_load_btn">Windows下载</li>
-                        <li className="mac_down_load_btn">Mac下载</li>
-                    </ul>
+                    <div className="down_load_btn_list">
+                        <a href="https://download.vcode.vip/windows/Vcode_student_setup_win.exe" className="windows_down_load_btn">Windows下载</a>
+                        <a href="https://download.vcode.vip/mac/%E6%9C%AA%E7%A7%91%E7%BC%96%E7%A8%8B.dmg" className="mac_down_load_btn">Mac下载</a>
+                    </div>
                 </div>
                 <div className="down_load_sec_1">
                     <div className="down_load_sec_1_title">

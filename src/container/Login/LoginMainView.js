@@ -84,6 +84,12 @@ export class LoginMainView extends Component{
             })
         });
     }
+    showToast(msg){
+        this.setState({
+            isShowToast:true,
+            toastText:msg
+        })
+    }
     hideToast(){
         this.setState({
             isShowToast:false,
@@ -103,7 +109,8 @@ export class LoginMainView extends Component{
                             toastText:this.state.toastText,
                             signWay:this.state.signWay,
                             cutSignWay:this.cutSignWay.bind(this),
-                            hideToast:this.hideToast.bind(this)
+                            hideToast:this.hideToast.bind(this),
+                            showToast:this.showToast.bind(this)
                         });
                         return <LoginView  {...obj} />
                     }} />
@@ -113,7 +120,8 @@ export class LoginMainView extends Component{
                             getVCode:this.getVCode.bind(this),
                             isShowToast:this.state.isShowToast,
                             toastText:this.state.toastText,
-                            hideToast:this.hideToast.bind(this)
+                            hideToast:this.hideToast.bind(this),
+                            showToast:this.showToast.bind(this)
                         });
                         return <RegisterView {...obj}/>
                     }} />

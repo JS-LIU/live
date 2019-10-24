@@ -54,7 +54,8 @@ export class UserView extends Component{
                         });
                         return <UserInfoView {...obj}/>}
                     } />
-                    <Route path="/user/accountManage" component={AccountManageView} />
+                    <Route path="/user/accountManage"
+                           component={AccountManageView} />
                     <Route path="/user/orderList" component={OrderListView}/>
                     <Route path="/user/orderDetail/:orderNo" component={OrderDetailView}/>
                     <Route path="/user/couponList" component={CouponListView}/>

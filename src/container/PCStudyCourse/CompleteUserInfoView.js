@@ -200,18 +200,6 @@ export class CompleteUserInfoView extends Component{
                                                          alignItems:"center",
                                                          paddingLeft:"0.1rem"}}/>
                         </li>
-                        <li className="complete_dialog_line">
-                            <div className="complete_dialog_line_title">
-                                <div className="complete_dialog_line_title_text">居住地</div>
-                            </div>
-                            <div className="complete_dialog_user_address">
-                                <input type="text"
-                                       value={this.state.address}
-                                       className="complete_dialog_input"
-                                       onChange={this.onChangeAddress.bind(this)}
-                                />
-                            </div>
-                        </li>
                     </ul>
                     <div className="complete_dialog_change_user_info">
                         <div className="complete_dialog_change_user_info_btn"

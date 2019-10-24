@@ -31,8 +31,8 @@ export class Order {
                 startTime:productInfo.startTime,
                 endTime:productInfo.endTime,
                 type:productInfo.goodType,
-                teacherList: [productInfo.teacherInfo],
-                assistant:productInfo.assistant,
+                teacherList: [this.setTeacherByOrderDetail(productInfo)],
+                assistantInfo:this.setAssistantInfo(productInfo),
                 goodNo:productInfo.goodNo
             });
         }
@@ -48,20 +48,26 @@ export class Order {
     setDetail(orderDetail){
         this.updateOrderInfo(orderDetail);
         this.orderCourse = this.createOrderCourse(orderDetail);
-        this.orderCourse.courseInfo.assistantInfo = new Teacher(orderDetail.assistant || {});
-        let teacherInfo = null;
-        if(orderDetail.teacherList){
-            teacherInfo = orderDetail.teacherList[0]
-        }else{
-            teacherInfo = orderDetail.teacherInfo;
-        }
-        this.orderCourse.courseInfo.teacherInfo = new Teacher(teacherInfo);
+        // this.updateOrderCourseModule();
         this.orderDetail = orderDetail;
         this.setPayTime();
         this.setPayType();
         this.setSalePrice();
         this.setSellPrice();
         this.setReducePrice();
+    }
+
+    setTeacherByOrderDetail(productInfo){
+        let teacherInfo = null;
+        if(productInfo.teacherList){
+            teacherInfo = productInfo.teacherList[0]
+        }else{
+            teacherInfo = productInfo.teacherInfo;
+        }
+        return new Teacher(teacherInfo);
+    }
+    setAssistantInfo(productInfo){
+        return new Teacher(productInfo.assistant || {});
     }
     /**
      * 是否过期
