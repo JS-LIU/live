@@ -39,7 +39,7 @@ export class PCStudyCourseView extends Component{
             background:"url('"+baseUrl.getBaseUrl()+"/src/img/select_center_uncheck.png"+"') no-repeat left center",
             link:"/studyCourseCenter/select",
             action:()=>{
-                let url = "https://pcwap-test.vcode.vip/product/index.html?redirect=selectCourseCenter&t="+userService.login.token;
+                let url = "https://vcode.vip/product/index.html?redirect=selectCourseCenter&t="+userService.login.token;
                 window.CallNativeBrowser(url);
             }
         }];

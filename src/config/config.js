@@ -25,6 +25,6 @@ class BaseUrl {
     }
 }
 export let baseUrl = new BaseUrl();
-// export let platform = "w";
 export let platform = "w";
+// export let platform = "c";
 // export let platform = "x";

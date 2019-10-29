@@ -90,6 +90,7 @@ let renderDom = function(){
 //  获取token todo 将登陆跳转逻辑 重构到 RouterService 中
 let token = HB.url.getSearchKey("token")||HB.url.getSearchKey("t")||HB.save.getLocalStorageByLimitTime("token");
 let redirect = HB.url.getSearchKey("redirect")||localStorage.getItem("redirect");
+console.log(redirect);
 let redirectConfig = {
     "resetPassword":"/forgetPassword",
     "register":"/login/register",
@@ -112,9 +113,8 @@ if(token){
         renderDom();
     });
 }else{
-    localStorage.clear();
     redirectUrl = redirectConfig[HB.url.getSearchKey("redirect")] || "/home";
-    console.log(redirectUrl);
+    localStorage.clear();
     renderDom();
 }
 

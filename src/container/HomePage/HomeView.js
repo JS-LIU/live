@@ -38,12 +38,13 @@ export class HomeView extends Component{
         super(props);
         let isNeedRepair = HB.url.getSearchKeyByLocationSearch(this.props.location.search,"isNeedRepair") || false;
         this.sec_1_swiper_params = {
-            // loop: true,
-            // pagination: {
-            //     el: '.swiper-pagination',
-            //     clickable: true
-            // },
-            // dots: true,
+            dots: true,
+            customPaging: function(i) {
+                return (
+                    <div className="slider_dot" />
+                );
+            },
+            dotsClass: "slider_dot_line",
             autoplay: true,
             arrows:false,
             infinite: true,
@@ -52,6 +53,13 @@ export class HomeView extends Component{
             slidesToScroll: 1
         };
         this.sec_5_swiper_params = {
+            dots: true,
+            customPaging: function(i) {
+                return (
+                    <div className="slider_dot" />
+                );
+            },
+            dotsClass: "slider_dot_line",
             arrows:false,
             autoplay: true,
             infinite: true,
@@ -60,8 +68,15 @@ export class HomeView extends Component{
             slidesToScroll: 1
         };
         this.sec_8_swiper_params = {
+            dots: true,
+            customPaging: function(i) {
+                return (
+                    <div className="slider_dot" />
+                );
+            },
+            dotsClass: "slider_dot_line",
             arrows:true,
-            autoplay: true,
+            // autoplay: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
@@ -72,13 +87,13 @@ export class HomeView extends Component{
         this.state = {
             userInfo:userService.user.getUserInfo(),
             cooperationList:[
-                {cn:"sec_5_content_item_1",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}>
+                {cn:"sec_5_content_item_1",companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}>
                         <div>中国计算机学会</div>
                         <div>CCF会员单位</div>
                 </div>),id:0},
-                {cn:"sec_5_content_item_2",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:1},
-                {cn:"sec_5_content_item_3",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:2},
-                {cn:"sec_5_content_item_4",active:false,companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国计算机学会</div><div>CCF会员单位</div></div>),id:3},
+                {cn:"sec_5_content_item_2",companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>创新工场人工智能</div><div>研究院技术支持</div></div>),id:1},
+                {cn:"sec_5_content_item_3",companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>美国计算机行业</div><div>学会金牌会员</div></div>),id:2},
+                {cn:"sec_5_content_item_4",companyName:(<div style={{display:"flex",flexDirection:"column",alignItems:"center",fontSize:"0.14rem",paddingTop:"0.16rem"}}><div>中国人工智能学会</div><div>会员单位</div></div>),id:3},
             ],
             problemList:[{
                 question:"问：不满意如何退费？",
@@ -109,17 +124,17 @@ export class HomeView extends Component{
             }],
             advantage:[{
                 pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_1.png",
-                text:"有趣有用有效的学习案例，让孩子沉浸编程之乐",
+                text:"有趣有用有效的学习案例，尽享编程之乐",
                 hideText:"精选编程项目案例",
                 isActive:false,
             },{
                 pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_2.png",
-                text:"老师与学员摄像头、屏幕、课件等屏幕实时共享",
+                text:"师生摄像头、屏幕、课件等屏幕实时共享",
                 hideText:"在线直播互动",
                 isActive:false,
             },{
                 pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_3.png",
-                text:"课程进度、课堂表现、学习成绩定时推送随时查询",
+                text:"学习进度、表现、成绩定时推送随时查询",
                 hideText:"学习报告",
                 isActive:false,
             },{
@@ -128,7 +143,7 @@ export class HomeView extends Component{
                 hideText:"AI智能巡班质检",
                 isActive:false,
             },{
-                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_6.png",
+                pic:baseUrl.getBaseUrl() + "/src/img/sec_6_pic_5.png",
                 text:"独家在线学习平台，听课与编程协作同步进行",
                 hideText:"班级团队协作",
                 isActive:false,
@@ -225,21 +240,21 @@ export class HomeView extends Component{
         }
         return this.state.cooperationList;
     }
-    setCooperationActive(item) {
-        return () => {
-            this.makeCooperationUnActive();
-            item.active = true;
-            this.setState({
-                cooperationList:this.state.cooperationList
-            })
-        }
-    }
-    setCooperationActiveUnActive(){
-        this.makeCooperationUnActive();
-        this.setState({
-            cooperationList:this.state.cooperationList
-        })
-    }
+    // setCooperationActive(item) {
+    //     return () => {
+    //         this.makeCooperationUnActive();
+    //         item.active = true;
+    //         this.setState({
+    //             cooperationList:this.state.cooperationList
+    //         })
+    //     }
+    // }
+    // setCooperationActiveUnActive(){
+    //     this.makeCooperationUnActive();
+    //     this.setState({
+    //         cooperationList:this.state.cooperationList
+    //     })
+    // }
     showMorePlan(planItem){
         return ()=>{
             this.showItem = this.state.planList.find((item,index)=>{
@@ -287,10 +302,9 @@ export class HomeView extends Component{
                     <div
                         className={item.cn}
                         style={item.active?{backgroundColor:"#FAFAFA"}:{backgroundColor:"#FFFFFF"}}
-                        onMouseEnter={this.setCooperationActive(item)}
-                        onMouseLeave={this.setCooperationActiveUnActive.bind(this)}>
+                        >
                     </div>
-                    {item.active?item.companyName:""}
+                    {item.companyName}
                 </li>
             )
         });
@@ -329,19 +343,21 @@ export class HomeView extends Component{
             <div>
                 {this.state.isShowPlanItem?<HomeViewDialogView planItem={this.showItem} closePlanItem={this.closePlanItem.bind(this)}/>:null}
                 {this.state.isNeedRepair?<CompleteUserInfoView fixedUserInfo={this.fixedUserInfo.bind(this)}/>:null}
-                <HeaderView history={this.props.history} userInfo={this.state.userInfo}/>
-                <Slider {...this.sec_1_swiper_params}>
-                    <Link className="home_head_img_box">
-                        <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_1.png"} className="home_head_img" alt=""/>
-                    </Link>
-                    <Link className="home_head_img_box">
-                        <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_2.png"} className="home_head_img" alt=""/>
-                    </Link>
-                </Slider>
+                <HeaderView history={this.props.history} userInfo={this.state.userInfo} headerStyle={{position:"fixed",top:"0"}}/>
+                <div className="sec_1">
+                    <Slider {...this.sec_1_swiper_params}>
+                        <Link className="home_head_img_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_1.png"} className="home_head_img" alt=""/>
+                        </Link>
+                        <Link className="home_head_img_box">
+                            <img src={baseUrl.getBaseUrl() + "/src/img/activeImg_2.png"} className="home_head_img" alt=""/>
+                        </Link>
+                    </Slider>
+                </div>
                 <div className="sec_2">
                     <div className="sec_2_title">
                         <div className="sec_2_title_text">“贴身”双师，在家学习省心更放心</div>
-                        <div className="sec_title_line" ></div>
+                        <div className="sec_title_line" />
                     </div>
                     <div className="sec_2_video_box_top">
                         <div className="sec_2_video_box">
@@ -366,7 +382,7 @@ export class HomeView extends Component{
                                 <div className="sec_2_video_box_top_right_tag_list_item">课堂划重点</div>
                             </div>
                         </div>
-                        <div className="sec_2_video_box_bottom_right"></div>
+                        <div className="sec_2_video_box_bottom_right" />
                     </div>
                 </div>
                 <div className="sec_4">
@@ -397,7 +413,6 @@ export class HomeView extends Component{
                                 <div className="sec_4_content_text_num sec_4_content_cpp_color">2.</div>
                                 <div className="sec_4_content_text_bottom_info">
                                     <div className="sec_4_content_text sec_4_content_cpp_color">全国青少年信息学CSP-J/S资格认证</div>
-                                    <div className="sec_4_content_text sec_4_content_cpp_color">蓝桥杯C++创意编程组初赛至国赛</div>
                                     <div className="sec_4_content_more sec_4_content_cpp_color sec_4_content_more_line" onClick={this.showMorePlan('cpp')}>查看更多</div>
                                 </div>
                             </div>
@@ -420,83 +435,85 @@ export class HomeView extends Component{
                 <div className="sec_5">
                     <div className="sec_5_title">
                         <div className="sec_5_title_text">顶尖老师、让学员出类拔萃</div>
-                        <div className="sec_title_line" ></div>
+                        <div className="sec_title_line" />
                     </div>
                 </div>
-                <Slider {...this.sec_5_swiper_params}>
-                    <div>
-                        <div className="sec_5_teacher_img_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_1.png"} className="sec_5_teacher_img" alt=""/>
-                            <div className="sec_5_teacher_info">
-                                <div className="sec_5_teacher_name_info">
-                                    <div className="sec_5_teacher_name">苏航</div>
-                                    <div className="sec_5_teacher_position">c++/竞赛讲师</div>
-                                </div>
-                                <div className="sec_5_teacher_title_list">
-                                    <div className="sec_5_teacher_title">计算机博士</div>
-                                    <div className="sec_5_teacher_title">ACM指导教师</div>
-                                </div>
-                                <div className="sec_5_teacher_info_text">
-                                    北京工业大学计算机学院硕士生导师，主讲计算机专业课程，发表高水平论文十余篇，曾主持国家自然科学基金青年基金项目。
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="sec_5_teacher_img_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
-                            <div className="sec_5_teacher_info">
-                                <div className="sec_5_teacher_name_info">
-                                    <div className="sec_5_teacher_name">齐润博</div>
-                                    <div className="sec_5_teacher_position">Python讲师</div>
-                                </div>
-                                <div className="sec_5_teacher_title_list">
-                                    <div className="sec_5_teacher_title">剑桥教师</div>
-                                    <div className="sec_5_teacher_title">STEAM教育专家</div>
-                                </div>
-                                <div className="sec_5_teacher_info_text">
-                                    多年从事国际学校双语计算机教学及课程研发，精通K12计算机全英文教学，所教学生均考入世界前50顶尖大学攻读计算机相关专业。
+                <div className="sec_5_bottom">
+                    <Slider {...this.sec_5_swiper_params}>
+                        <div className="sec_5_teacher_box">
+                            <div className="sec_5_teacher_img_box">
+                                <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_1.png"} className="sec_5_teacher_img" alt=""/>
+                                <div className="sec_5_teacher_info">
+                                    <div className="sec_5_teacher_name_info">
+                                        <div className="sec_5_teacher_name">苏航</div>
+                                        <div className="sec_5_teacher_position">c++/竞赛讲师</div>
+                                    </div>
+                                    <div className="sec_5_teacher_title_list">
+                                        <div className="sec_5_teacher_title">计算机博士</div>
+                                        <div className="sec_5_teacher_title">ACM指导教师</div>
+                                    </div>
+                                    <div className="sec_5_teacher_info_text">
+                                        北京工业大学计算机学院硕士生导师，主讲计算机专业课程，发表高水平论文十余篇，曾主持国家自然科学基金青年基金项目。
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <div className="sec_5_teacher_img_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_4.png"} className="sec_5_teacher_img" alt=""/>
-                            <div className="sec_5_teacher_info">
-                                <div className="sec_5_teacher_name_info">
-                                    <div className="sec_5_teacher_name">李丽红</div>
-                                    <div className="sec_5_teacher_position">C++/竞赛讲师</div>
-                                </div>
-                                <div className="sec_5_teacher_title_list">
-                                    <div className="sec_5_teacher_title">北邮名师</div>
-                                    <div className="sec_5_teacher_title">NOIP金牌教练</div>
-                                </div>
-                                <div className="sec_5_teacher_info_text">
-                                    15年编程实战，带队比赛经验丰富，北京邮电大学本硕毕业，擅长调动学生情绪积极思考，提高学生学习兴趣，讲课过程深入浅出，课堂气氛活泼生动。
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="sec_5_teacher_img_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_3.png"} className="sec_5_teacher_img" alt=""/>
-                            <div className="sec_5_teacher_info">
-                                <div className="sec_5_teacher_name_info">
-                                    <div className="sec_5_teacher_name">蒋新云</div>
-                                    <div className="sec_5_teacher_position">C++/竞赛讲师</div>
-                                </div>
-                                <div className="sec_5_teacher_title_list">
-                                    <div className="sec_5_teacher_title">北工大毕业</div>
-                                    <div className="sec_5_teacher_title">资深少儿编程教育专家</div>
-                                </div>
-                                <div className="sec_5_teacher_info_text">
-                                    原知名上市教育集团少儿编程总设计师。敬畏技术，喜爱孩子，专注课堂模型的探索和创新，启发孩子好奇心，培养能力。
+                        <div>
+                            <div className="sec_5_teacher_img_box">
+                                <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_2.png"} className="sec_5_teacher_img" alt=""/>
+                                <div className="sec_5_teacher_info">
+                                    <div className="sec_5_teacher_name_info">
+                                        <div className="sec_5_teacher_name">齐润博</div>
+                                        <div className="sec_5_teacher_position">Python讲师</div>
+                                    </div>
+                                    <div className="sec_5_teacher_title_list">
+                                        <div className="sec_5_teacher_title">剑桥教师</div>
+                                        <div className="sec_5_teacher_title">STEAM教育专家</div>
+                                    </div>
+                                    <div className="sec_5_teacher_info_text">
+                                        多年从事国际学校双语计算机教学及课程研发，精通K12计算机全英文教学，所教学生均考入世界前50顶尖大学攻读计算机相关专业。
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </Slider>
+                        <div>
+                            <div className="sec_5_teacher_img_box">
+                                <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_4.png"} className="sec_5_teacher_img" alt=""/>
+                                <div className="sec_5_teacher_info">
+                                    <div className="sec_5_teacher_name_info">
+                                        <div className="sec_5_teacher_name">李丽红</div>
+                                        <div className="sec_5_teacher_position">C++/竞赛讲师</div>
+                                    </div>
+                                    <div className="sec_5_teacher_title_list">
+                                        <div className="sec_5_teacher_title">北邮名师</div>
+                                        <div className="sec_5_teacher_title">NOIP金牌教练</div>
+                                    </div>
+                                    <div className="sec_5_teacher_info_text">
+                                        15年编程实战，带队比赛经验丰富，北京邮电大学本硕毕业，擅长调动学生情绪积极思考，提高学生学习兴趣，讲课过程深入浅出，课堂气氛活泼生动。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div className="sec_5_teacher_img_box">
+                                <img src={baseUrl.getBaseUrl() + "/src/img/teacher_header_3.png"} className="sec_5_teacher_img" alt=""/>
+                                <div className="sec_5_teacher_info">
+                                    <div className="sec_5_teacher_name_info">
+                                        <div className="sec_5_teacher_name">蒋新云</div>
+                                        <div className="sec_5_teacher_position">C++/竞赛讲师</div>
+                                    </div>
+                                    <div className="sec_5_teacher_title_list">
+                                        <div className="sec_5_teacher_title">北工大毕业</div>
+                                        <div className="sec_5_teacher_title">资深少儿编程教育专家</div>
+                                    </div>
+                                    <div className="sec_5_teacher_info_text">
+                                        原知名上市教育集团少儿编程总设计师。敬畏技术，喜爱孩子，专注课堂模型的探索和创新，启发孩子好奇心，培养能力。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Slider>
+                </div>
                 <div className="sec_6">
                     <div className="sec_6_title">
                         <div className="sec_6_title_text">沉浸式课堂，让孩子更爱学习</div>

@@ -12,6 +12,7 @@ import {LoginHeaderView} from '../../component/HeaderView/LoginHeaderView';
 import {LoginView} from "./LoginView";
 import {RegisterView} from './RegisterView';
 import loginStyle from './loginStyle.css';
+import {HeaderView} from "../../component/HeaderView/HeaderView";
 export class LoginMainView extends Component{
     constructor(props) {
         super(props);
@@ -99,7 +100,7 @@ export class LoginMainView extends Component{
         return(
             <div>
                 <div className="login_wrap"/>
-                <LoginHeaderView />
+                <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="login_main">
                     <Route path="/login/login" component={ props =>{
                         let obj = Object.assign({},props,{

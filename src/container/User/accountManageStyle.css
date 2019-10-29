@@ -16,6 +16,7 @@
 }
 .bind_wx_title{
     margin-top:1.12rem;
+    cursor: pointer;
 }
 .account_change_psd,.account_change_wx_box{
     padding:0.41rem 0 0 0.41rem;

@@ -70,7 +70,6 @@ export class ProductCourseDetailView extends Component{
     }
     switchCourseDetail(courseItem){
         return ()=>{
-            console.log(courseItem.goodNo);
             this.props.history.replace("/productCourseDetail/" + courseItem.goodNo);
             this.productCourseNo = courseItem.goodNo;
             this.updateProductCourseDetail();
@@ -167,12 +166,13 @@ export class ProductCourseDetailView extends Component{
                         <div className="product_course_detail_info">
                             <div className="product_course_detail_top">
                                 <div className="product_course_detail_header">
-                                    <div className="product_course_detail_header_teacher_info">
-                                        <div>松鼠编程特级教师</div>
-                                        <div>{this.state.course.teacherInfo.teacherName}老师</div>
-                                    </div>
-                                    <div className="product_course_detail_header_course_video">
-                                        <a className="product_course_detail_header_course_video_btn" onClick={this.playAudio(this.state.course)}/>
+                                    <img src={this.state.course.bannerImg} alt="" className="product_course_detail_header_img"/>
+                                    {/*<div className="product_course_detail_header_teacher_info">*/}
+                                    {/*    <div>松鼠编程特级教师</div>*/}
+                                    {/*    <div>{this.state.course.teacherInfo.teacherName}老师</div>*/}
+                                    {/*</div>*/}
+                                    <div className="product_course_detail_header_course_video"  onClick={this.playAudio(this.state.course)}>
+                                        <div className="product_course_detail_header_course_video_btn">试听</div>
                                     </div>
                                 </div>
                                 <div className="product_course_detail_top_course_info_box">

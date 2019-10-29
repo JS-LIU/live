@@ -38,11 +38,24 @@
 }
 .product_course_detail_header{
     position:relative;
+
     height:3.08rem;
-    background:#6AC35F url("../../img/product_course_detail_header_bg.png") no-repeat center;
-    background-size:7.83rem 3.08rem;
+
+    overflow: hidden;
+
     border-top-left-radius: 0.08rem;
     border-top-right-radius: 0.08rem;
+
+    /*background:#6AC35F url("../../img/product_course_detail_header_bg.png") no-repeat center;*/
+    /*background-size:7.83rem 3.08rem;*/
+}
+.product_course_detail_header_img{
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
 }
 .product_course_detail_header_teacher_info{
     position:absolute;
@@ -58,23 +71,35 @@
 }
 .product_course_detail_header_course_video{
     position:absolute;
-    top:1.03rem;
-    right:1.3rem;
-    width:1.6rem;
-    height:0.9rem;
-    background:url("../../img/course_video.png") no-repeat center;
-    background-size: 1.6rem 0.9rem;
-    box-shadow: 0 0.06rem 0.13rem 0 rgba(0, 0, 0, 0.34);
+
+    top:1.83rem;
+    left:50%;
+
+    width:1.4rem;
+    height:0.4rem;
+
+    background:#FFF;
+
+    border-radius: 0.2rem;
+    /*background:url("../../img/course_video.png") no-repeat center;*/
+    /*background-size: 1.6rem 0.9rem;*/
+    /*box-shadow: 0 0.06rem 0.13rem 0 rgba(0, 0, 0, 0.34);*/
+
     display:flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
 }
 .product_course_detail_header_course_video_btn{
-    width:0.24rem;
-    height:0.24rem;
-    background:url("../../img/course_video_btn.png") no-repeat center;
-    background-size: 0.24rem;
+    /*width:0.24rem;*/
+    /*height:0.24rem;*/
+    /*background:url("../../img/course_video_btn.png") no-repeat center;*/
+    /*background-size: 0.24rem;*/
+    font-size:0.16rem;
+
+    color:#FFC200;
 }
 .product_course_detail_top_course_info_box{
     display:flex;
@@ -171,7 +196,6 @@
     margin-top:0.09rem;
 }
 .product_course_detail_right_course_info_box{
-    height:0.52rem;
     padding:0 0.12rem;
     display:flex;
     flex-direction: column;
@@ -314,9 +338,11 @@
     font-size:0.14rem;
 }
 #J_prismPlayer{
-    position:fixed;
-    top:2.3rem;
-    left:5.15rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: -4.48rem;
+    margin-top: -2rem;
 }
 .video_player_box{
     position:fixed;
@@ -335,13 +361,18 @@
     background: #000000;
 }
 .video_player_close_btn{
-    position:fixed;
-    top:2.3rem;
-    right:4.7rem;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+
+    margin-top: -2rem;
+    margin-right: -4.68rem;
+
+    width: 0.2rem;
+    height: 0.2rem;
+
     background:url("../../img/close_video_btn.png") no-repeat center;
     background-size: 0.2rem;
-    width:0.2rem;
-    height:0.2rem;
 }
 .outline_item{
     display:flex;
