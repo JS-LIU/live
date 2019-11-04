@@ -7,9 +7,15 @@ import ringProgressStyle from "./ringProgressStyle.css";
 export class RingProgressView extends Component{
     constructor(props) {
         super(props);
+
+    //   r -135 start 45
+    //     l 225 start
+    }
+    render() {
         let rightRotate = 225;
         let leftRotate = -135;
         let rate = this.props.nowProgress / this.props.totalProgress;
+        this.rate = rate;
         //  大于一半
         if(rate > 1/2){
             rightRotate = 405;
@@ -52,13 +58,6 @@ export class RingProgressView extends Component{
             left:0,
             transform:"rotate("+leftRotate+"deg)"
         });
-    //   r -135 start 45
-    //     l 225 start
-    }
-    componentDidMount() {
-    }
-
-    render() {
         return (
             <div className="ring_progress_main">
                 <div className="circle_progress_wrapper" style={this.circleProgressWrapperStyle}>

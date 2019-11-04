@@ -98,7 +98,7 @@ export class RegisterView extends Component{
                                     this.props.getVCode("register",this.phoneNum)
                                 }}
                                 startCondition={()=>{return new Promise((resolve, reject)=>{
-                                    if(HB.valid.isPoneAvailable(this.phoneNum)){
+                                    if(HB.valid.isPhoneAvailable(this.phoneNum)){
                                         resolve();
                                     }else{
                                         reject()

@@ -65,6 +65,7 @@ export class MyCourseListView extends Component{
             this.setState({
                 learnStatusList:courseService.selectOwnedCourseLearnStatus(learnStatus)
             });
+            courseService.pagination.to(1);
             this.updateOwnedCourseList();
         }
     }
@@ -82,8 +83,8 @@ export class MyCourseListView extends Component{
         let ownedCourseListNodes = this.state.ownedCourseList.map((courseItem,index)=>{
             let ownedCourseModule = courseItem.getModule.before((repairParam)=>{
                 repairParam = repairParam || {};
-                repairParam.startTime = courseItem.courseInfo.getStartTimeToShow("common");
-                repairParam.endTime = courseItem.courseInfo.getEndTimeToShow("common");
+                repairParam.startTime = courseItem.courseInfo.getStartTimeToShow("unix");
+                repairParam.endTime = courseItem.courseInfo.getEndTimeToShow("unix");
             }).call(courseItem,{});
             return (
                 <Link to={"/ownedCourseDetail/"+`${ownedCourseModule.id}`} key={index} className="my_course_item">

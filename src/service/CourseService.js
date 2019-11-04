@@ -187,7 +187,6 @@ class CourseService {
      * @returns [OwnedCourse]
      */
     getAllOwnedCourseList(){
-        console.log(this.getOwnedCourseLearnStatusList().getActive().id);
         return courseRepository.getAllOwnedCourseList({
             pageNum:this.pagination.pageNum,
             pageSize:this.pagination.size,

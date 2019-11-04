@@ -1,0 +1,42 @@
+.policy_main{
+    padding:0.5rem 0.6rem 1.3rem;
+
+    width:8.01rem;
+
+    font-size:0.16rem;
+    color:#000000;
+
+    background:#FFFFFF;
+}
+.policy_title_box{
+    display:flex;
+    flex-direction: column;
+
+}
+.policy_title{
+    font-size:24px;
+    font-weight:600;
+
+    background-image: linear-gradient(#2E2E2E,#444444,#2E2E2E);
+    -webkit-background-clip:text;
+    color: transparent;
+}
+.policy_title_line{
+    margin-top:0.15rem;
+
+    width:0.5rem;
+    height:0.04rem;
+
+    border-radius: 0.02rem;
+
+    background:#FFC200;
+}
+.policy_content{
+    font-size: 0.16rem;
+    color:#000000;
+
+    padding-top:0.24rem;
+
+    line-height: 0.36rem;
+}
+

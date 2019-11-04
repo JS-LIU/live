@@ -32,6 +32,15 @@ export class LoginView extends Component{
                 loginByPsd:false,
             })
         }
+        let self = this;
+        window.onkeyup = function(e){
+            if(e.keyCode === 13){
+                self.login();
+            }
+        }
+    }
+    componentWillUnmount() {
+        window.onkeyup = null;
     }
 
     //  登录
@@ -45,7 +54,6 @@ export class LoginView extends Component{
                 vcode:this.vcode
             });
         }
-
     }
     inputPhoneNum(e){
         this.phoneNum = e.target.value;

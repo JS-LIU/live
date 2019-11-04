@@ -57,6 +57,7 @@ export class Order {
         this.setReducePrice();
     }
 
+
     setTeacherByOrderDetail(productInfo){
         let teacherInfo = null;
         if(productInfo.teacherList){
@@ -112,7 +113,6 @@ export class Order {
         }
     }
 
-
     setPayType() {
         if(this.status !== 3002){
             this.orderDetail.payType = this.getOrderStatus(this.status);
@@ -128,8 +128,6 @@ export class Order {
         } else {
             this.orderDetail.salePrice = (this.orderDetail.salePrice / 100).toFixed(2);
         }
-
-
     }
 
     setSellPrice() {
@@ -137,9 +135,9 @@ export class Order {
     }
     setReducePrice(){
         if (this.status !== 3002) {
-            return this.orderDetail.reducePrice = "0.00";
+            this.orderDetail.reducePrice = "0.00";
         } else {
-            this.orderDetail.reducePrice = parseFloat(this.orderDetail.sellPrice) - parseFloat(this.orderDetail.salePrice);
+            this.orderDetail.reducePrice = (parseFloat(this.orderDetail.sellPrice) - parseFloat(this.orderDetail.salePrice)).toFixed(2);
         }
 
     }

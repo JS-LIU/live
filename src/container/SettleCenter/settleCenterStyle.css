@@ -61,7 +61,7 @@
     color:#000;
     padding-bottom: 0.2rem;
     border-bottom:0.01rem solid #e8e8e8;
-    margin-bottom: 0.2rem;
+    margin: 0.3rem 0 0.2rem;
 }
 .settle_info_box{
     display:flex;

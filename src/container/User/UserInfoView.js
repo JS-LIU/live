@@ -69,7 +69,10 @@ export class UserInfoView extends Component{
         this.address = e.target.value;
         this.userInfo = Object.assign(this.userInfo,{
             address:this.address
-        })
+        });
+        this.setState({
+            address:this.address
+        });
     }
     confirmFixed(){
         this.userInfo = Object.assign(this.userInfo,{

@@ -92,14 +92,22 @@
 
     cursor: pointer;
 }
+.product_course_detail_header_course_video:hover{
+    opacity: 0.8;
+}
 .product_course_detail_header_course_video_btn{
     /*width:0.24rem;*/
     /*height:0.24rem;*/
     /*background:url("../../img/course_video_btn.png") no-repeat center;*/
     /*background-size: 0.24rem;*/
+    padding-left: 0.15rem;
+
     font-size:0.16rem;
 
     color:#FFC200;
+
+    background: url("../../img/play_video_btn_img.png") no-repeat left center;
+    background-size: 0.11rem;
 }
 .product_course_detail_top_course_info_box{
     display:flex;

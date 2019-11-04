@@ -443,7 +443,8 @@ HB.ui = (function(){
         scrollToTheBottom:scrollToTheBottom,
         setBaseFontSize:setBaseFontSize,
         parsePx:parsePx,
-        hasScrollbar:hasScrollbar
+        hasScrollbar:hasScrollbar,
+        getScrollTop:getScrollTop
     }
 })();
 

@@ -66,8 +66,8 @@ export class PCMyCourseListView extends Component{
         let ownedCourseListNodes = this.state.ownedCourseList.map((courseItem,index)=>{
             let ownedCourseModule = courseItem.getModule.before((repairParam)=>{
                 repairParam = repairParam || {};
-                repairParam.startTime = courseItem.courseInfo.getStartTimeToShow("common");
-                repairParam.endTime = courseItem.courseInfo.getEndTimeToShow("common");
+                repairParam.startTime = courseItem.courseInfo.getStartTimeToShow("unix");
+                repairParam.endTime = courseItem.courseInfo.getEndTimeToShow("unix");
             }).call(courseItem,{});
 
             return (

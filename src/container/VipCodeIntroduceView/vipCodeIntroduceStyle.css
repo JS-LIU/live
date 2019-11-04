@@ -1,0 +1,19 @@
+.wrap{
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#fafafa;
+}
+.vipCode_introduce_main{
+    position:relative;
+
+    width:11.8rem;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin:0.43rem auto;
+}

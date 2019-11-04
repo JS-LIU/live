@@ -15,6 +15,7 @@ import HomeStyle from './HomeStyle.css';
 import {HB} from "../../util/HB";
 import {HomeViewDialogView} from "./HomeViewDialogView";
 import {CompleteUserInfoView} from "../PCStudyCourse/CompleteUserInfoView";
+import {courseService} from "../../service/CourseService";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -76,7 +77,7 @@ export class HomeView extends Component{
             },
             dotsClass: "slider_dot_line",
             arrows:true,
-            // autoplay: true,
+            autoplay: true,
             infinite: true,
             speed: 500,
             slidesToShow: 1,
@@ -227,19 +228,38 @@ export class HomeView extends Component{
                 }
             ],
             isShowPlanItem:false,
-            isNeedRepair:isNeedRepair
+            isNeedRepair:isNeedRepair,
+            isShowActiveBottom:false,
+            isShowVideo:false
         }
     }
 
     componentDidMount() {
         HB.save.setStorage({redirect:"home"});
-    }
-    makeCooperationUnActive(){
-        for(let i = 0 ;i < this.state.cooperationList.length;i++){
-            this.state.cooperationList[i].active = false;
+        let self = this;
+        window.onscroll = function(){
+            if(HB.ui.getScrollTop() > 500){
+                self.setState({
+                    isShowActiveBottom:true
+                })
+            }else{
+                self.setState({
+                    isShowActiveBottom:false
+                })
+            }
         }
-        return this.state.cooperationList;
+
     }
+    componentWillUnmount() {
+        window.onscroll = null;
+    }
+
+    // makeCooperationUnActive(){
+    //     for(let i = 0 ;i < this.state.cooperationList.length;i++){
+    //         this.state.cooperationList[i].active = false;
+    //     }
+    //     return this.state.cooperationList;
+    // }
     // setCooperationActive(item) {
     //     return () => {
     //         this.makeCooperationUnActive();
@@ -295,6 +315,28 @@ export class HomeView extends Component{
             });
         });
     }
+    showVideo(){
+        this.setState({
+            isShowVideo:true
+        });
+        courseService.getVideoView(517).then((data)=>{
+            new Aliplayer({
+                id: "J_prismPlayer",
+                vid : data.data.aliVodId,
+                playauth : data.data.playAuth,
+                width:'8.96rem',
+                height:'5rem',
+                controlBarVisibility:'hover',
+                diagnosisButtonVisible:false,
+                autoplay: true
+            });
+        })
+    }
+    closeAudio(){
+        this.setState({
+            isShowVideo:false
+        });
+    }
     render() {
         let cooperationNodes = this.state.cooperationList.map((item,i)=>{
             return (
@@ -339,6 +381,7 @@ export class HomeView extends Component{
                 </div>
             )
         });
+
         return(
             <div>
                 {this.state.isShowPlanItem?<HomeViewDialogView planItem={this.showItem} closePlanItem={this.closePlanItem.bind(this)}/>:null}
@@ -361,7 +404,9 @@ export class HomeView extends Component{
                     </div>
                     <div className="sec_2_video_box_top">
                         <div className="sec_2_video_box">
-                            <img src={baseUrl.getBaseUrl() + "/src/img/sec_2_video_play_btn.png"} className="sec_2_video_play_btn" alt=""/>
+                            <img src={baseUrl.getBaseUrl() + "/src/img/sec_2_video_play_btn.png"}
+                                 onClick={this.showVideo.bind(this)}
+                                 className="sec_2_video_play_btn" alt=""/>
                         </div>
                         <div className="sec_2_video_box_top_right">
                             <div className="sec_2_video_box_top_right_title">金牌团队-一线专职编程教师直播授课</div>
@@ -589,9 +634,22 @@ export class HomeView extends Component{
                 <div className="sec_7">
                     <div className="sec_7_enjoy_btn" />
                 </div>
+                {this.state.isShowActiveBottom?<div className="quick_buy_course_link_box">
+                    <div className="quick_buy_course_text">
+                        <span>显示优惠：</span>
+                        <span>9.9</span>
+                        <span>元试学一期班</span>
+                    </div>
+                    <div className="quick_buy_course_btn">立即学习</div>
+                </div>:null}
+                {this.state.isShowVideo?<div className="video_player_box">
+                    <div className="video_player_wrapper" />
+                    <div className="video_player_close_btn" onClick={this.closeAudio.bind(this)} />
+                    <div id="J_prismPlayer" className="audio_player" />
+                    </div>:null}
+
                 <FooterView/>
             </div>
-
         )
     }
 }

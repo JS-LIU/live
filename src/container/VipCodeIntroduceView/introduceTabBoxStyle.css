@@ -1,0 +1,27 @@
+.introduce_tab_box{
+
+    display:flex;
+    flex-direction: column;
+
+    width:2.24rem;
+    height:3.8rem;
+
+    background:#FFFFFF;
+}
+.introduce_tab_list{
+    padding:0.43rem 0.31rem 0 0.38rem;
+}
+.introduce_tab{
+    margin-bottom:0.34rem;
+
+    font-size:0.16rem;
+    color:#000000;
+}
+.active_introduce_tab{
+    font-size:0.16rem;
+    color:#000000;
+    font-weight: 600;
+
+    background: url("../../img/play_video_btn_img.png") no-repeat right center;
+    background-size: 0.11rem;
+}

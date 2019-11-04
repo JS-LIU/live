@@ -29,9 +29,9 @@ export class PayFailView extends Component{
                     <div className="pay_fail_tips">
                         <div className="pay_fail_tips_top">
                             <div className="pay_fail_tips_title">支付失败</div>
-                            <Link to="/user/orderList" className="pay_fail_tips_reason">很抱歉，订单{orderService.getOrder().getOrderStatus()}，请重新支付</Link>
+                            <Link to="/user/orderList" className="pay_fail_tips_reason">很抱歉，已超过订单支付时间限制，请从重新报名</Link>
                         </div>
-                        <div onClick={this.reSelectCourse} className="pay_fail_reselect_course_btn">重新报名</div>
+                        <div onClick={this.reSelectCourse.bind(this)} className="pay_fail_reselect_course_btn">重新报名</div>
                     </div>
                 </div>
 

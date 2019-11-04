@@ -39,6 +39,7 @@ import {DownLoadView} from "./container/DownLoad/DownLoadView";
 import {ForgetPasswordView} from './container/Login/ForgetPasswordView';
 import {baseUrl} from "./config/config";
 import {userService} from "./service/UserService";
+import {VipCodeIntroduceView} from "./container/VipCodeIntroduceView/VipCodeIntroduceView";
 //  resetFontSize
 
 HB.ui.setBaseFontSize = function(designWidth,rem2px){
@@ -82,6 +83,7 @@ let renderDom = function(){
                 <Route path="/ownedCourseDetail/:id" component={OwnedCourseDetailView}/>
                 <Route path="/orderDetail/:orderNo" component={OrderDetailView}/>
                 <Route path="/downLoad" component={DownLoadView}/>
+                <Route path="/vipCodeIntroduce/:vipCodeIntro" component={VipCodeIntroduceView} />
             </div>
         </HashRouter>),
         document.getElementById('app')
@@ -90,7 +92,6 @@ let renderDom = function(){
 //  获取token todo 将登陆跳转逻辑 重构到 RouterService 中
 let token = HB.url.getSearchKey("token")||HB.url.getSearchKey("t")||HB.save.getLocalStorageByLimitTime("token");
 let redirect = HB.url.getSearchKey("redirect")||localStorage.getItem("redirect");
-console.log(redirect);
 let redirectConfig = {
     "resetPassword":"/forgetPassword",
     "register":"/login/register",
@@ -113,7 +114,8 @@ if(token){
         renderDom();
     });
 }else{
-    redirectUrl = redirectConfig[HB.url.getSearchKey("redirect")] || "/home";
+
+    // redirectUrl = redirectConfig[HB.url.getSearchKey("redirect")] || "/home";
     localStorage.clear();
     renderDom();
 }

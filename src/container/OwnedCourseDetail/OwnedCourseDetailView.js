@@ -49,8 +49,8 @@ export class OwnedCourseDetailView extends Component{
         });
         let ownedCourseModule = this.state.ownedCourse.getModule.before((repairParam)=>{
             repairParam = repairParam || {};
-            repairParam.startTime = this.state.ownedCourse.courseInfo.getStartTimeToShow("common");
-            repairParam.endTime = this.state.ownedCourse.courseInfo.getEndTimeToShow("common");
+            repairParam.startTime = this.state.ownedCourse.courseInfo.getStartTimeToShow("unix");
+            repairParam.endTime = this.state.ownedCourse.courseInfo.getEndTimeToShow("unix");
         }).call(this.state.ownedCourse,{});
         console.log(ownedCourseModule);
         return (

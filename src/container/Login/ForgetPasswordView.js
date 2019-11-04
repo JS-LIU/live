@@ -62,7 +62,7 @@ export class ForgetPasswordView extends Component{
         this.forgetInfo.newPsd = e.target.value;
     }
     getPwdVCode(){
-        if(this.state.countDown === "获取验证码" && HB.valid.isPoneAvailable(this.forgetInfo.phoneNum)){
+        if(this.state.countDown === "获取验证码" && HB.valid.isPhoneAvailable(this.forgetInfo.phoneNum)){
             this.startCountDown();
             userService.getVCode("resetPassword",this.forgetInfo.phoneNum).then(()=>{
 
