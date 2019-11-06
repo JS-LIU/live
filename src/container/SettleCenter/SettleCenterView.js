@@ -56,6 +56,7 @@ export class SettleCenterView extends Component{
             });
             this.startCountDown();
         }).catch(()=>{
+            //  展示错误弹窗 并退回课程
             this.props.history.replace("/user/orderList");
         });
 

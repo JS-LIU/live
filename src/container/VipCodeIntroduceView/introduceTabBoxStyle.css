@@ -16,6 +16,8 @@
 
     font-size:0.16rem;
     color:#000000;
+
+    cursor: pointer;
 }
 .active_introduce_tab{
     font-size:0.16rem;

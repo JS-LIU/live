@@ -11,11 +11,12 @@ import {MyCourseListView} from '../MyCourse/MyCourseListView';
 import studyCourseCenterStyle from './studyCourseCenterStyle.css';
 import {HB} from "../../util/HB";
 export class StudyCourseCenterView extends Component{
+
     render() {
         return(
             <div>
                 <div className="wrap" />
-                <MyCourseHeaderView userInfo={userService.user.getUserInfo()}/>
+                <MyCourseHeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div>
                     <Route path="/studyCourseCenter/week" component={WeekCourseView}/>
                     <Route path="/studyCourseCenter/myCourseList" component={MyCourseListView}/>

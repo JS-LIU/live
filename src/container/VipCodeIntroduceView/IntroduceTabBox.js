@@ -33,7 +33,6 @@ export class IntroduceTabBox extends Component{
         let activeTab = this.tabList.find((item,index)=>{
             return item.link === "/"+this.activeTab
         });
-        console.log(activeTab);
         activeTab.activity = true;
         this.state = {
             tabList:this.tabList
@@ -49,6 +48,7 @@ export class IntroduceTabBox extends Component{
             this.setState({
                 tabList:this.tabList
             });
+            this.props.history.replace("/vipCodeIntroduce"+`${tab.link}`)
         }
     }
     render() {

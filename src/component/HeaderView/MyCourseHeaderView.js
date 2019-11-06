@@ -8,15 +8,29 @@ export class MyCourseHeaderView extends Component{
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        this.state={
+            pathname:this.props.history.location.pathname
+        }
+    }
+
+    setActive(path){
+        return () => {
+            this.setState({
+                pathname:path
+            });
+            this.props.history.push(path);
+        }
+    }
     render() {
         return (
             <div className="common_header">
                 <div className="common_header_center_box">
                     <div className="common_header_logo"/>
                     <div className="common_header_right">
-                        <Link to="/home" className="common_header_center_link_item">首页</Link>
-                        <Link to="/studyCourseCenter/week" className="common_header_center_link_item">本周课程</Link>
-                        <Link to="/studyCourseCenter/myCourseList" className="common_header_center_link_item">我的课程</Link>
+                        <div className={`common_header_center_link_item ${this.state.pathname==="/home"?"active_link_item":null}`} onClick={this.setActive("/home")}>首页</div>
+                        <div className={`common_header_center_link_item ${this.state.pathname==="/studyCourseCenter/week"?"active_link_item":null}`} onClick={this.setActive("/studyCourseCenter/week")}>本周课程</div>
+                        <div className={`common_header_center_link_item ${this.state.pathname==="/studyCourseCenter/myCourseList"?"active_link_item":null}` } onClick={this.setActive("/studyCourseCenter/myCourseList")}>我的课程</div>
                         <Link to="/user/userInfo" className="common_header_login_info" onMouseEnter={this.showDialog}>
                             <div className="common_header_login_header_box">
                                 <img src={this.props.userInfo.headImgUrl||"src/img/def_header_img.png"} alt="" className="common_header_login_header_pic"/>

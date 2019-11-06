@@ -2,15 +2,18 @@
  * Created by Liudq on 2019-08-05
  */
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {HB} from '../../util/HB';
+import { Link } from "react-router-dom";
+import {baseUrl} from "../../config/config";
 import footerStyle from './footerStyle.css';
+import {HB} from "../../util/HB";
 
 export class FooterView extends Component{
     constructor(props) {
         super(props);
     }
-
+    backToTop(){
+        HB.ui.scrollTop(0,400);
+    }
     render() {
         return (
             <div className="common_footer" style={this.props.style}>
@@ -36,6 +39,10 @@ export class FooterView extends Component{
                             <div className="common_footer_right_top_customer_service">
                                 <div className="common_footer_right_top_customer_service_phone">客服电话：400-621-6161</div>
                                 <div className="common_footer_right_top_customer_service_time">周一至周日 9:00-24:00（春节除外）</div>
+                                <img src={baseUrl.getBaseUrl()+ "/src/img/back_to_top.png"}
+                                     onClick={this.backToTop.bind(this)}
+                                     alt=""
+                                     className="back_to_top_btn"/>
                             </div>
                         </div>
                     </div>

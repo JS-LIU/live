@@ -18,7 +18,7 @@ export class PaySuccessView extends Component{
         }
     }
     componentDidMount() {
-        HB.save.setStorage({redirect:"user"});
+        HB.save.setStorage({redirect:"downLoad"});
     }
 
     render() {

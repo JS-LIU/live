@@ -1,0 +1,213 @@
+.about_us_main{
+    padding-bottom:1rem;
+
+    width:9.21rem;
+
+    background:#FFFFFF;
+
+    border-radius: 0.04rem;
+
+    overflow: hidden;
+}
+.about_us_main_sec_1{
+    background: url("../../img/about_us_sec_1.png") no-repeat center;
+    background-size: 9.21rem 2.84rem;
+
+    width:9.21rem;
+    height:2.84rem;
+
+    border-top-left-radius: 0.04rem;
+    border-top-right-radius: 0.04rem;
+
+    overflow: hidden;
+}
+.about_us_main_sec_2{
+    margin:0.42rem auto 0;
+
+    width:8rem;
+}
+.about_us_title{
+    display: flex;
+    flex-direction: column;
+
+    font-size:0.24rem;
+    font-weight:600;
+
+    color:rgba(255,194,0,1);
+
+    background:linear-gradient(0deg,rgba(46,46,46,1) 0%, rgba(68,68,68,1) 49.7314453125%, rgba(46,46,46,1) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+.about_us_title_line{
+    margin-top:0.15rem;
+
+    width:0.5rem;
+    height:0.04rem;
+
+    background: #FFC200;
+
+    border-radius: 0.02rem;
+}
+.about_us_text{
+    margin-top: 0.24rem;
+
+    font-size:0.16rem;
+    font-weight:300;
+
+    color:rgba(0,0,0,1);
+
+    line-height:0.36rem;
+}
+.about_us_main_sec_3,.about_us_main_sec_4,.about_us_main_sec_5{
+    margin:0.67rem auto 0;
+
+    width:8rem;
+}
+.about_us_main_sec_5{
+    margin:1.23rem auto 0;
+}
+.likaifu_ad,.xuxiaoping_ad{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+    padding-left: 3rem;
+    margin-top:0.37rem;
+
+    height:3.21rem;
+
+    border:0.01rem solid #E8E8E8;
+    border-radius: 0.12rem;
+
+    background:#FAFAFA url("../../img/likaifu_head.png") no-repeat left bottom;
+    background-size: 2.64rem 2.98rem;
+
+    overflow: hidden;
+}
+.xuxiaoping_ad{
+    padding-left: 0.6rem;
+
+    border:0.01rem solid #FFAA00;
+
+    background:#FFC200 url("../../img/xuxiaoping_head.png") no-repeat right bottom;
+    background-size: 3.3rem 3.23rem;
+}
+.likaifu_introduce,.xuxiaoping_introduce{
+    width:4.64rem;
+    height:0.89rem;
+
+    font-size:0.16rem;
+    font-weight:100;
+    font-style:italic;
+    color:#525C65;
+
+    line-height:0.36rem;
+}
+.xuxiaoping_introduce{
+    width:4.52rem;
+    height:0.52rem;
+}
+.likaifu_info,.xuxiaoping_info{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width:4.05rem;
+}
+.xuxiaoping_info{
+    width:3.67rem;
+}
+.likaifu_signature{
+    width:0.99rem;
+    height:0.44rem;
+}
+.xuxiaoping_signature{
+    width:1.06rem;
+    height:0.46rem;
+}
+.likaifu_ceo,.xuxiaoping_ceo{
+    display:flex;
+    flex-direction: column;
+
+    width:1.6rem;
+    font-size:0.16rem;
+    font-weight:400;
+    color:#525C65;
+}
+.xuxiaoping_ceo{
+    width:1.12rem;
+    color:#FFFFFF;
+}
+.chuangxingongchang_logo{
+    width:0.95rem;
+    height:0.33rem;
+}
+.zhengejijin_logo{
+    width:0.97rem;
+    height:0.3rem;
+}
+.honor_list{
+    margin-top:0.86rem;
+
+    width:8rem;
+    height:1.26rem;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.prize_item{
+    width:2.07rem;
+    height:1.26rem;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.cooperate_org_list{
+    margin-top:0.84rem;
+
+    width:8rem;
+    height:1.46rem;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.cooperate_org_item{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height:1.46rem;
+}
+.ccf_pic{
+    width: 0.97rem;
+    height:0.69rem;
+}
+.chuangxingongchang_org_pic{
+    width:1.7rem;
+    height:0.49rem;
+}
+.comptia_pic{
+    width:0.58rem;
+    height:0.72rem;
+}
+.aai_pic{
+    width:0.63rem;
+    height:0.6rem;
+}
+.ccf_title,.chuangxingongchang_logo_title,
+.comptia_title,.aai_title{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    color:#808080;
+    font-size:0.14rem;
+}

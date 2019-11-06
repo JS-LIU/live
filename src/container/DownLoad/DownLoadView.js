@@ -20,7 +20,7 @@ export class DownLoadView extends Component{
     render() {
         return (
             <div>
-                <HeaderView userInfo={userService.user.getUserInfo()}/>
+                <HeaderView history={this.props.history} userInfo={userService.user.getUserInfo()} />
                 <div className="down_load_header">
                     <div className="down_load_btn_list">
                         <a href="https://download.vcode.vip/windows/Vcode_student_setup_win.exe" className="windows_down_load_btn">Windows下载</a>

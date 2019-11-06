@@ -19,7 +19,7 @@ import commonStyle from './container/PCStudyCourse/commonStyle.css';
 HB.ui.setBaseFontSize(1280,100);
 baseUrl.setBaseUrl("/pcwap");
 
-let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTcxODIzMTI4NzkwIiwia2V5X3VzZXJfaWQiOjg5LCJpYXQiOjE1NzE4MjMxMjgsImV4cCI6MTU3MjQyNzkyOH0.kOu1ZZj5O9c6EE1lCJEPzzavS-fLP_KCHLwKrpur9Zo";
+let token = HB.url.getSearchKey("token")||"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxNTcyOTI1NDMzNjg5Iiwia2V5X3VzZXJfaWQiOjg5LCJpYXQiOjE1NzI5MjU0MzMsImV4cCI6MTU3MzUzMDIzM30.GB4odsOyhj5-J9JsHlHaUs_3SEpWicw465GdSJVaZkw";
 userService.login.updateToken(token);
 window.navigateBack = function(){
     window.history.go(-1);

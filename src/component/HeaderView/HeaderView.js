@@ -12,9 +12,15 @@ export class HeaderView extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            isShowDialog:false
+            isShowDialog:false,
+            pathname:this.props.history.location.pathname
         };
         this.isShowDialog = false;
+    }
+    componentDidMount() {
+        this.state = {
+            pathname:this.props.history.location.pathname
+        };
     }
 
     onShowDialog(){
@@ -53,6 +59,14 @@ export class HeaderView extends Component{
         HB.save.setStorage({redirect:"login/login"});
         window.location.href = baseUrl.getBaseUrl()+"/index.html";
     }
+    setActive(path){
+        return ()=>{
+            this.state = {
+                pathname:path
+            };
+            this.props.history.push(path);
+        }
+    }
     render() {
         return (
             <div className="common_header" style={this.props.headerStyle}>
@@ -63,9 +77,9 @@ export class HeaderView extends Component{
                     </div>
 
                     <div className="common_header_right">
-                        <Link to="/home" className="common_header_center_link_item">首页</Link>
-                        <Link to="/selectCourseCenter" className="common_header_center_link_item">选课中心</Link>
-                        <Link to="/downLoad" className="common_header_center_link_item">软件下载</Link>
+                        <div className={`common_header_center_link_item ${this.state.pathname==="/home"?"active_link_item":null}`} onClick={this.setActive("/home")}>首页</div>
+                        <div className={`common_header_center_link_item ${this.state.pathname==="/selectCourseCenter"?"active_link_item":null}`} onClick={this.setActive("/selectCourseCenter")}>选课中心</div>
+                        <div className={`common_header_center_link_item ${this.state.pathname==="/downLoad"?"active_link_item":null}`} onClick={this.setActive("/downLoad")}>软件下载</div>
                         <Link to={userService.login.isLogin()?"/user/userInfo":"/login/login"}
                               className="common_header_login_info"
                               onMouseLeave={this.onDelayHide.bind(this)}
