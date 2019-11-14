@@ -651,6 +651,8 @@
     background:linear-gradient(0deg,rgba(255,128,118,1) 0%,rgba(255,100,88,1) 100%);
     box-shadow:0 0.03rem 0.08rem 0 rgba(0, 0, 0, 0.3);
     border-radius:0.23rem;
+
+    cursor: pointer;
 }
 
 

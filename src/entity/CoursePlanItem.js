@@ -21,14 +21,15 @@ export class CoursePlanItem {
         this.teacherInfo = new Teacher(coursePlanItemInfo.teacherInfo);
         this.assistantInfo = new Teacher(coursePlanItemInfo.assistantInfo);
         this.lectureNotes = new LectureNotes(coursePlanItemInfo.lectureNotesStatus,coursePlanItemInfo.lectureNotes);
+        this.type = new CourseType(coursePlanItemInfo.type);
         this.homework = new Homework({
             homeworkDownloadStatus:coursePlanItemInfo.homeworkDownloadStatus,
             homeworkName:coursePlanItemInfo.homeworkName,
             homeworkUrl:coursePlanItemInfo.homeworkUrl,
             homeworkSavePath:coursePlanItemInfo.homeworkSavePath,
+            type:coursePlanItemInfo.type
         });
         this.learnStatus = new LearnStatus(coursePlanItemInfo.learnStatus,coursePlanItemInfo.videoId,coursePlanItemInfo.videoViewStatus);
-        this.type = new CourseType(coursePlanItemInfo.type);
         this.level = coursePlanItemInfo.level;
         this.startTime = coursePlanItemInfo.startTime || coursePlanItemInfo.classTime;
         this.coursewareUrl = coursePlanItemInfo.coursewareUrl;

@@ -45,7 +45,9 @@ export class PCStudyCourseView extends Component{
         }];
         this.state={
             navBarList:this.navBarList,
-            userName:userService.user.getUserInfo().getModule().userName
+            userName:userService.user.getUserInfo().getModule().userName,
+            isShowToast:false,
+            errorText:""
         }
     }
     switchActiveBar(navBarItem){
@@ -62,9 +64,20 @@ export class PCStudyCourseView extends Component{
             this.setState({
                 userName:userService.user.getUserInfo().getModule().userName,
             });
-            alert("修改成功");
+            this.showToast("修改成功");
+            // alert("修改成功");
+        })
+    }
+    showToast(errorText){
+        this.setState({
+            isShowToast:true,
+            errorText:errorText
         });
-
+    }
+    hideToast(){
+        this.setState({
+            isShowToast:false
+        })
     }
     render() {
         return(
@@ -82,6 +95,10 @@ export class PCStudyCourseView extends Component{
                            component={ props =>{
                                let obj = Object.assign({},props,{
                                    fixedUserInfo:this.fixedUserInfo.bind(this),
+                                   isShowToast:this.state.isShowToast,
+                                   errorText:this.state.errorText,
+                                   showToast:this.showToast.bind(this),
+                                   hideToast:this.hideToast.bind(this)
                                });
                                return <PCUserInfoView  {...obj}/>
                            }}/>

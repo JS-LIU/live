@@ -22,8 +22,7 @@ export class FooterView extends Component{
                         <div className="common_footer_left_top">
                             <Link to="/vipCodeIntroduce/aboutUs" className="common_footer_left_top_link_item">关于我们</Link>
                             <Link to="/vipCodeIntroduce/policy" className="common_footer_left_top_link_item">隐私政策</Link>
-                            <Link to="/vipCodeIntroduce/policy" className="common_footer_left_top_link_item">常见问题</Link>
-                            <Link to="/vipCodeIntroduce/policy" className="common_footer_left_top_link_item">上课流程</Link>
+                            <Link to="/vipCodeIntroduce/userProtocol" className="common_footer_left_top_link_item">用户协议</Link>
                         </div>
                         <div className="common_footer_left_bottom">
                             <div>

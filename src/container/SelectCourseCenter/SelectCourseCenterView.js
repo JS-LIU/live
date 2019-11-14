@@ -2,15 +2,15 @@
  * Created by Liudq on 2019-07-25
  */
 import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {SelectCourseCenterHeaderView} from "./SelectCourseCenterHeaderView";
 import {courseService} from "../../service/CourseService";
 import {userService} from "../../service/UserService";
 import {CourseProductList} from "./CourseProductList";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {HB} from "../../util/HB";
-import selectCourseStyle from "./selectCourseStyle.css";
 import {CompleteUserInfoView} from "../PCStudyCourse/CompleteUserInfoView";
+import {FooterView} from "../../component/FooterView/FooterView";
+import selectCourseStyle from "./selectCourseStyle.css";
 
 export class SelectCourseCenterView extends Component{
     constructor(props) {
@@ -19,7 +19,8 @@ export class SelectCourseCenterView extends Component{
         this.state = {
             courseTypeList:[],
             courseList:[],
-            isNeedRepair:isNeedRepair
+            isNeedRepair:isNeedRepair,
+            footerStyle:{position:"fixed",bottom:"0"}
         };
         /**
          * 分页信息
@@ -46,9 +47,20 @@ export class SelectCourseCenterView extends Component{
             this.setState({
                 courseList:courseList
             });
+            this.setFooterStyle();
         });
     }
-
+    setFooterStyle(){
+        if(!HB.ui.hasScrollbar(350)){
+            this.setState({
+                footerStyle:{position:"fixed",bottom:"0"}
+            })
+        }else{
+            this.setState({
+                footerStyle:{position:"relative"}
+            })
+        }
+    }
     /**
      * 获取更多
      */
@@ -110,6 +122,7 @@ export class SelectCourseCenterView extends Component{
                     />
                     <CourseProductList courseList={this.state.courseList}/>
                 </div>
+                <FooterView style={this.state.footerStyle}/>
             </div>
         )
     }

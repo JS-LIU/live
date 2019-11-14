@@ -58,8 +58,8 @@ export class CourseProductList extends Component{
                         </div>
                         <div className="course_product_item_footer">
                             <div className="course_product_item_footer_box">
-                                <div className="course_product_item_footer_total_course">共计{productModule.totalLessonNum}课时</div>
-                                <div className="course_product_item_footer_course_price">¥{productModule.salePrice / 100}</div>
+                                <div className="course_product_item_footer_total_course">共计{productModule.totalLessonNum}课次</div>
+                                <div className="course_product_item_footer_course_price">￥{productModule.salePrice / 100}</div>
                             </div>
                         </div>
                     </Link>

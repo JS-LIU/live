@@ -207,3 +207,8 @@
     font-size:0.12rem;
     margin:0.12rem 0 0 0.23rem;
 }
+.show_toast_view{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}

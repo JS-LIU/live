@@ -171,9 +171,9 @@ export class ProductCourseDetailView extends Component{
                                     {/*    <div>松鼠编程特级教师</div>*/}
                                     {/*    <div>{this.state.course.teacherInfo.teacherName}老师</div>*/}
                                     {/*</div>*/}
-                                    <div className="product_course_detail_header_course_video"  onClick={this.playAudio(this.state.course)}>
+                                    {this.state.course.videoId === 0?null:<div className="product_course_detail_header_course_video"  onClick={this.playAudio(this.state.course)}>
                                         <div className="product_course_detail_header_course_video_btn">试听</div>
-                                    </div>
+                                    </div>}
                                 </div>
                                 <div className="product_course_detail_top_course_info_box">
                                     <div className="product_course_detail_top_course_info">
@@ -203,7 +203,7 @@ export class ProductCourseDetailView extends Component{
                                                 <img src={this.state.course.teacherInfo.headImgUrl} alt="" className="course_product_detail_teacher_item_header_img_pic"/>
                                             </div>
                                             <div className="course_product_detail_teacher_name_box">
-                                                <div>主讲教师</div>
+                                                <div>主讲</div>
                                                 <a title={this.state.course.teacherInfo.teacherName} style={{width:"0.7rem",height:"0.21rem",overflow:"hidden"}}>{this.state.course.teacherInfo.teacherName}老师</a>
                                             </div>
                                         </div>
@@ -272,7 +272,7 @@ export class ProductCourseDetailView extends Component{
                                     ):null}
                                 <div className="product_course_detail_settle_box">
                                     <a className="product_course_buy_btn" onClick={this.onBuyCourse.bind(this)}>购买学习</a>
-                                    <a className="product_course_consult_btn">咨询</a>
+                                    {/*<a className="product_course_consult_btn">咨询</a>*/}
                                 </div>
                             </div>
                         </div>

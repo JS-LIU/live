@@ -164,7 +164,8 @@ export class LoginView extends Component{
                                    if(HB.valid.isPhoneAvailable(this.phoneNum)){
                                        resolve();
                                    }else{
-                                       reject()
+                                       this.props.showToast("请输入正确的手机号");
+                                       // reject()
                                    }
                                })}}
                                initText={"获取验证码"}

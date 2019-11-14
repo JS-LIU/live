@@ -101,7 +101,7 @@ export class RegisterView extends Component{
                                     if(HB.valid.isPhoneAvailable(this.phoneNum)){
                                         resolve();
                                     }else{
-                                        reject()
+                                        this.props.showToast("请输入正确的手机号")
                                     }
                                 })}}
                                 initText={"获取验证码"}

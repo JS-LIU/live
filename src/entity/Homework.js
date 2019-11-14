@@ -10,6 +10,7 @@ export class Homework {
         this.homeworkName = homeWorkInfo.homeworkName;
         this.homeworkUrl = homeWorkInfo.homeworkUrl;
         this.homeworkSavePath = homeWorkInfo.homeworkSavePath;
+        this.type = homeWorkInfo.type;
         let fileUrlAjax = commonAjax.resource('/file/w/v1.0/:action');
         this._getFileUrl = function(postInfo){
             return fileUrlAjax.save({action:'getFileUrl'},postInfo);

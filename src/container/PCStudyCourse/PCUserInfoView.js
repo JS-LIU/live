@@ -4,10 +4,11 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect} from "react-router-dom";
 import {userService} from "../../service/UserService";
-import pcUserInfoStyle from "./PCUserInfoStyle.css";
 import {TimeManager} from "../../entity/TimeManager";
 import {HB} from "../../util/HB";
 import {UserInfoOptionNodesView} from "../../component/UserInfoOptionNodesView";
+import pcUserInfoStyle from "./PCUserInfoStyle.css";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
 
 export class PCUserInfoView extends Component{
     constructor(props) {
@@ -75,7 +76,7 @@ export class PCUserInfoView extends Component{
             birthday:TimeManager.convertYMDToStampByUnix(this.userInfo.showBirthY+"/"+this.userInfo.showBirthM+"/"+this.userInfo.showBirthD)
         });
         if(HB.valid.trimAllBlank(this.userInfo.userName) === ""){
-            return alert("请填写姓名")
+            return this.props.showToast("请填写姓名");
         }else{
             this.props.fixedUserInfo(this.userInfo);
         }
@@ -83,6 +84,12 @@ export class PCUserInfoView extends Component{
     render() {
         return (
             <div className="pc_user_info_main">
+                {this.props.isShowToast?<ShowToastView
+                    showTime={1500}
+                    text={this.props.errorText}
+                    hideToast={this.props.hideToast}
+                    style={{position:"absolute",bottom:"0.3rem",left:"5rem"}}
+                />:null}
                 <div className="user_info_box_title">个人信息</div>
                 <div className="user_info_box_set_info_box">
                     <ul className="user_info_box_set_info_box_left">

@@ -9,6 +9,7 @@ import {PolicyView} from "./PolicyView";
 import {userService} from "../../service/UserService";
 import vipCodeIntroduceStyle from './vipCodeIntroduceStyle.css';
 import {AboutUsView} from "./AboutUsView";
+import {ProtocolView} from "./ProtocolView";
 
 export class VipCodeIntroduceView extends Component{
     constructor(props) {
@@ -24,6 +25,7 @@ export class VipCodeIntroduceView extends Component{
                     <IntroduceTabBox match={this.props.match} history={this.props.history}/>
                     <Route path="/vipCodeIntroduce/aboutUs" component={AboutUsView}/>
                     <Route path="/vipCodeIntroduce/policy" component={PolicyView}/>
+                    <Route path="/vipCodeIntroduce/userProtocol" component={ProtocolView}/>
                 </div>
             </div>
         )

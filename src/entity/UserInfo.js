@@ -34,7 +34,7 @@ export class UserInfo {
     }
     getHeadImgUrl(headImgUrl){
         if(HB.obj.isNothing(headImgUrl)){
-            return baseUrl.getBaseUrl()+"/src/img/def_header_img.png"
+            return baseUrl.getBaseUrl()+"/src/img/user_def_header_img.png"
         }
         return headImgUrl;
     }

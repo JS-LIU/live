@@ -4,6 +4,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+
+    padding-bottom:0.5rem;
     /*justify-content: space-between;*/
 }
 

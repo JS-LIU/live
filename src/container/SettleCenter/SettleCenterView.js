@@ -7,12 +7,13 @@ import {orderService} from "../../service/OrderService";
 import {courseService} from "../../service/CourseService";
 import {payService} from "../../service/PayService";
 import {HB} from "../../util/HB";
-import settleCenterStyle from './settleCenterStyle.css';
 import {userService} from "../../service/UserService";
 import {HeaderView} from "../../component/HeaderView/HeaderView";
 import {CourseTimeShowView} from "../../component/CourseTimeShow/CourseTimeShowView";
 import {TimeManager} from "../../entity/TimeManager";
 import {FooterView} from "../../component/FooterView/FooterView";
+import {ShowToastView} from "../../component/ShowToastView/ShowToastView";
+import settleCenterStyle from './settleCenterStyle.css';
 
 export class SettleCenterView extends Component{
     constructor(props) {
@@ -33,7 +34,9 @@ export class SettleCenterView extends Component{
             couponReduceCash:"",
             useBalance:true,
             showCouponList:false,
-            countDown:"20:00"
+            countDown:"20:00",
+            isShowErrorToast:false,
+            errorText:""
         }
     }
     componentDidMount() {
@@ -55,9 +58,16 @@ export class SettleCenterView extends Component{
                 couponList: settleManager.couponManager.couponList
             });
             this.startCountDown();
-        }).catch(()=>{
+        }).catch((msg)=>{
+            this.props.history.replace(`/payFail?errorMsg=${msg}`);
             //  展示错误弹窗 并退回课程
-            this.props.history.replace("/user/orderList");
+            this.setState({
+                isShowErrorToast:true,
+                errorText:msg
+            });
+            setTimeout(()=>{
+                this.props.history.goBack();
+            },1500);
         });
 
         this.setState({
@@ -74,8 +84,8 @@ export class SettleCenterView extends Component{
                 this.props.history.replace(`/pay?payLastTime=${info.data.payLastTime}&orderNo=${info.data.orderNo}&payPrice=${info.data.payPrice}&payUrl=${info.data.payModels[0].payUrl}`);
             }
 
-        }).catch((msg)=>{
-           console.log(msg);
+        }).catch((data)=>{
+            this.props.history.replace(`/payFail?errorMsg=${data.msg}`);
         })
     }
     onToggleUseBalance(){
@@ -108,11 +118,27 @@ export class SettleCenterView extends Component{
             });
             if (payLastTime - TimeManager.currentTimeStampBySec() < 0) {
                 clearInterval(this.t);
-                this.props.history.replace("/payFail")
+                this.props.history.replace(`/payFail?errorMsg=${"订单已超出时间，请重新下单"}`)
             }
         }, 1000)
     }
+    hideToast(){
+        this.setState({
+            isShowErrorToast:false
+        })
+    }
     render() {
+        if(this.state.isShowErrorToast){
+            return (
+                <div className="show_toast_view">
+                    <ShowToastView
+                        text={this.state.errorText}
+                        showTime={1500}
+                        hideToast={this.hideToast}
+                        style={{position:"absolute",bottom:"0.8rem"}}/>
+                </div>
+                )
+        }
         if(!this.state.orderCourse){
             return null;
         }
@@ -218,6 +244,7 @@ export class SettleCenterView extends Component{
                         <div onClick={this.createOrder.bind(this)} className="create_order_btn">立即支付</div>
                     </div>
                 </div>
+
                 <FooterView/>
             </div>
         )

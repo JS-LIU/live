@@ -90,6 +90,8 @@ export class PCWeekCourseView extends Component{
     downLoadHomework(coursePlanItem){
         return ()=>{
             console.log(coursePlanItem);
+            // courseService.homeWorkManager(coursePlanItem);
+            // coursePlanItem.homework.
             courseService.downLoadHomework(coursePlanItem).then((data)=>{
                 console.log(data);
                 let hasComment = coursePlanItem.homework.getStatusInfo().isModify;

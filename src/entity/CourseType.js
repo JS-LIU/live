@@ -31,10 +31,10 @@ export class CourseType {
             },
             "3":{
                 id:3,
-                name:"n",
-                background:"#b178c8",
+                name:"s",
+                background:"#ffba31",
                 url:baseUrl.getBaseUrl() + "/src/img/product_course_noi_header_bg.png",
-                iconBackground:baseUrl.getBaseUrl() + "/src/img/icon_noip.png"
+                iconBackground:baseUrl.getBaseUrl() + "/src/img/icon_s.png"
             }
         }
     }

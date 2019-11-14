@@ -20,13 +20,8 @@ export class IntroduceTabBox extends Component{
                 activity:false,
             },
             {
-                link:"/protocol",
+                link:"/userProtocol",
                 name:"用户协议",
-                activity:false,
-            },
-            {
-                link:"/question",
-                name:"常见问题",
                 activity:false,
             }
         ];

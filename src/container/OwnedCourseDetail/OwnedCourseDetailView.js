@@ -56,7 +56,7 @@ export class OwnedCourseDetailView extends Component{
         return (
             <div>
                 <div className="wrap" />
-                <MyCourseHeaderView userInfo={userService.user.getUserInfo()}/>
+                <MyCourseHeaderView history={this.props.history} userInfo={userService.user.getUserInfo()}/>
                 <div className="owned_course_plan_main">
                     <div className="crumbs">
                         <Link to="/index">首页</Link>

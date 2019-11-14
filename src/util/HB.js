@@ -424,8 +424,10 @@ HB.ui = (function(){
         };
     };
     //  是否有滚动条
-    let hasScrollbar = function() {
-        return document.body.scrollHeight > (window.innerHeight || document.documentElement.clientHeight);
+    let hasScrollbar = function(distance = 0) {
+        console.log(document.body.scrollHeight - distance);
+        console.log(window.innerHeight || document.documentElement.clientHeight);
+        return document.body.scrollHeight + distance > (window.innerHeight || document.documentElement.clientHeight);
     };
 
 

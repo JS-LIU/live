@@ -10,7 +10,8 @@ module.exports = merge(common, {
         port: 9000,
         proxy: {
             "/api": {
-                target: 'http://api-test.sscoding.com',
+                // target: 'https://api-test.vcode.vip',
+                target: 'https://api.vcode.vip',
                 secure: false,
                 bypass: function (req, res, proxyOptions) {
                     if (req.headers.accept.indexOf('html') !== -1) {

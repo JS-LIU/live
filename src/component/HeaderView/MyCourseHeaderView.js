@@ -7,6 +7,9 @@ import headerStyle from "./headerStyle.css";
 export class MyCourseHeaderView extends Component{
     constructor(props) {
         super(props);
+        this.state={
+            pathname:this.props.history.location.pathname
+        }
     }
     componentDidMount() {
         this.state={

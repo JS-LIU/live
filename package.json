@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "@babel/runtime": "^7.5.5",
     "lodash": "^4.17.14",
     "qrcode.react": "^0.9.3",
     "rc-calendar": "^9.15.4",
@@ -21,11 +22,14 @@
     "react-paginate": "^6.3.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "reactjs-swiper": "^0.1.0"
+    "react-slick": "^0.25.2",
+    "react-viewerjs": "^0.1.9",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
     "@babel/core": "^7.5.4",
+    "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",

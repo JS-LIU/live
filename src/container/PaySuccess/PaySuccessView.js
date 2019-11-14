@@ -48,7 +48,7 @@ export class PaySuccessView extends Component{
                                 </div>
                             </div>
                             <div className="pay_success_body_box_inner_right">
-                                <div>关注松鼠编程服务号，及</div>
+                                <div>关注vipcode服务号，及</div>
                                 <div>时获取上课提醒</div>
                             </div>
                         </div>
