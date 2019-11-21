@@ -61,6 +61,19 @@ export class PCWeekCourseView extends Component{
         this.onGetMore();
     }
     startHomework(coursePlan){
+        // todo 始终做作业
+        // window.startHomeWork(JSON.stringify({
+        //     id:coursePlan.coursePlanItem.id,
+        //     urlPath:coursePlan.homeworkInfo.urlPath,
+        //     title:coursePlan.coursePlanItem.name,
+        //     courseName:coursePlan.coursePlanItem.courseName,
+        //     type:coursePlan.coursePlanItem.type.type,
+        //     userReward:userService.user.getUserInfo().userReward,
+        //     userName:userService.user.getUserInfo().userName,
+        //     sex:userService.user.getUserInfo().sex,
+        //     savePath:coursePlan.coursePlanItem.homework.homeworkSavePath,
+        // }));
+
         if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "下载作业"){
             window.startHomeWork(JSON.stringify({
                 id:coursePlan.coursePlanItem.id,
@@ -89,12 +102,12 @@ export class PCWeekCourseView extends Component{
 
     downLoadHomework(coursePlanItem){
         return ()=>{
-            console.log(coursePlanItem);
-            // courseService.homeWorkManager(coursePlanItem);
-            // coursePlanItem.homework.
             courseService.downLoadHomework(coursePlanItem).then((data)=>{
-                console.log(data);
+                console.log(coursePlanItem.homework.getStatusInfo().name)
                 let hasComment = coursePlanItem.homework.getStatusInfo().isModify;
+                // //  todo 改为始终做作业
+                // this.startHomework.call(this,{coursePlanItem:coursePlanItem,homeworkInfo:Object.assign(data.data,{hasComment:hasComment})});
+
                 this.startHomework.after(this.showHomeWork).call(this,{coursePlanItem:coursePlanItem,homeworkInfo:Object.assign(data.data,{hasComment:hasComment})});
             });
         }
@@ -130,6 +143,8 @@ export class PCWeekCourseView extends Component{
         return 'nextSuccessor';
     }
     callLive(coursePlanItem){
+        //  todo 临时改为可以上课
+        // window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
         if(coursePlanItem.learnStatus.getStatusInfo().name === "正在学"){
             window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
         }
@@ -137,6 +152,9 @@ export class PCWeekCourseView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
+            //  todo 临时改为可以上课
+            // this.callLive.call(this,coursePlanItem);
+
             this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
         }
     }
@@ -152,7 +170,6 @@ export class PCWeekCourseView extends Component{
     }
     showVideo(coursePlanItem){
         return ()=>{
-            console.log(coursePlanItem);
             courseService.getPreSessionVideo(coursePlanItem).then((data)=>{
                 this.setState({
                     courseName:coursePlanItem.name,
@@ -189,9 +206,10 @@ export class PCWeekCourseView extends Component{
         if(this.state.coursePlanList.length > 0){
             return this.state.coursePlanList.map((coursePlanItem, index) => {
                 let coursePlanItemModule = coursePlanItem.getModule.before((repairParam)=>{
-                    repairParam.startTime = coursePlanItem.coursePlanItem.getShowTime("common");
+                    repairParam.startTime = coursePlanItem.coursePlanItem.getShowTime("unix");
                     repairParam.courseWareUrl = coursePlanItem.coursePlanItem.lectureNotes.urlPath;
                 }).call(coursePlanItem,{});
+                console.log(coursePlanItemModule);
                 return (
                     <div className="pc_course_week_course_item" key={index}>
                         <div className="pc_course_week_course_item_title">

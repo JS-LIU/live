@@ -65,7 +65,6 @@ export class PCStudyCourseView extends Component{
                 userName:userService.user.getUserInfo().getModule().userName,
             });
             this.showToast("修改成功");
-            // alert("修改成功");
         })
     }
     showToast(errorText){

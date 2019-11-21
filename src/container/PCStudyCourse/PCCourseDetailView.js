@@ -31,6 +31,20 @@ export class PCCourseDetailView extends Component{
         });
     }
     startHomework(coursePlan){
+
+        console.log("下载作业");
+        //  todo 改为始终做作业
+        // window.startHomeWork(JSON.stringify({
+        //     id:coursePlan.coursePlanItem.id,
+        //     urlPath:coursePlan.homeworkInfo.urlPath,
+        //     title:coursePlan.coursePlanItem.name,
+        //     courseName:coursePlan.coursePlanItem.courseName,
+        //     type:coursePlan.coursePlanItem.type.type,
+        //     userReward:userService.user.getUserInfo().userReward,
+        //     userName:userService.user.getUserInfo().userName,
+        //     sex:userService.user.getUserInfo().sex,
+        //     savePath:coursePlan.coursePlanItem.homeworkSavePath
+        // }));
         if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "下载作业"){
             window.startHomeWork(JSON.stringify({
                 id:coursePlan.coursePlanItem.id,
@@ -47,6 +61,7 @@ export class PCCourseDetailView extends Component{
         return "nextSuccessor";
     }
     showHomeWork(coursePlan){
+        console.log("作业已提交");
         if(coursePlan.coursePlanItem.homework.getStatusInfo().name === "作业已提交"||coursePlan.coursePlanItem.homework.getStatusInfo().name === "作业已批改"){
             this.setState({
                 showHomeworkComment:true,
@@ -59,9 +74,12 @@ export class PCCourseDetailView extends Component{
     }
     downLoadHomework(coursePlanItem){
         return ()=>{
-
             courseService.downLoadHomework(coursePlanItem).then((data)=>{
+                console.log(coursePlanItem);
+                console.log("HOMEWORKSTATUS===",coursePlanItem.homework.getStatusInfo().name);
                 let hasComment = coursePlanItem.homework.getStatusInfo().isModify;
+                //  todo 改为始终做作业
+                // this.startHomework.call(this,{coursePlanItem:coursePlanItem,homeworkInfo:Object.assign(data.data,{hasComment:hasComment})});
                 this.showHomeWork.after(this.startHomework).call(this,{coursePlanItem:coursePlanItem,homeworkInfo:Object.assign(data.data,{hasComment:hasComment})});
             });
         }
@@ -78,7 +96,6 @@ export class PCCourseDetailView extends Component{
     reViewVideo(coursePlanItem){
         if (coursePlanItem.learnStatus.getStatusInfo().name === "已结束" && coursePlanItem.learnStatus.videoViewStatus === 1) {
             courseService.getVideoView(coursePlanItem.learnStatus.videoId).then((data)=>{
-                console.log("videoInfo:",data);
                 this.setState({
                     showReviewVideo:true
                 });
@@ -97,6 +114,8 @@ export class PCCourseDetailView extends Component{
         return 'nextSuccessor';
     }
     callLive(coursePlanItem){
+        //  todo 临时改为可以上课
+        // window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
         if(coursePlanItem.learnStatus.getStatusInfo().name === "正在学"){
             window.CallLiveClient(JSON.stringify({classPlanId:coursePlanItem.id,courseType:coursePlanItem.type.type,courseName:coursePlanItem.courseName}));
         }
@@ -104,6 +123,8 @@ export class PCCourseDetailView extends Component{
     }
     enterCourse(coursePlanItem){
         return ()=>{
+            //  todo 临时改为可以上课
+            // this.callLive.call(this,coursePlanItem);
             this.unOpen.after(this.reViewVideo).after(this.callLive).call(this,coursePlanItem);
         }
     }
@@ -217,7 +238,8 @@ export class PCCourseDetailView extends Component{
                 {this.state.showHomeworkComment?<CommentHomeworkView
                     courseName={this.state.courseName}
                     commentInfo={this.state.commentInfo}
-                    closeHomeworkDialog={this.closeHomeworkDialog.bind(this)} hasComment={this.state.hasComment}/>:null}
+                    closeHomeworkDialog={this.closeHomeworkDialog.bind(this)}
+                    hasComment={this.state.hasComment}/>:null}
                 {this.state.showLecture?<ShowLectureView
                     courseName={this.state.courseName}
                     closeLectureDialog={this.closeLectureDialog.bind(this)}

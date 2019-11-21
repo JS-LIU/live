@@ -11,17 +11,28 @@ export class CommentHomeworkView extends Component{
 
     }
     componentDidMount() {
-        new Aliplayer({
-            id: "J_comment_homework_video",
-            vid : this.props.commentInfo.aliVodId,
-            playauth : this.props.commentInfo.playAuth,
-            width:'6.2rem',
-            height:'3.68rem',
-            position:"absolute",
-            controlBarVisibility:'hover',
-            diagnosisButtonVisible:false,
-            autoplay: true
-        });
+        if(this.props.commentInfo.courseType !== 3){
+            new Aliplayer({
+                id: "J_comment_homework_video",
+                vid : this.props.commentInfo.aliVodId,
+                playauth : this.props.commentInfo.playAuth,
+                width:'6.2rem',
+                height:'3.68rem',
+                position:"absolute",
+                controlBarVisibility:'hover',
+                diagnosisButtonVisible:false,
+                autoplay: true
+            });
+        }else{
+            $LAB.script("http://static.vipcode.com/sdk/lib.min.js").wait(()=>{
+                let scratchPlayer = new ScratchMobile({
+                    canvas:"J_scratch_video"
+                });
+                scratchPlayer.loadProject(self.props.commentInfo.codePath, function(){
+                    scratchPlayer.greenFlag();
+                });
+            });
+        }
     }
     closeHomeworkDialog(){
         this.props.closeHomeworkDialog();
@@ -37,6 +48,7 @@ export class CommentHomeworkView extends Component{
                     </div>
                     <div className="comment_homework_dialog_main_scroll">
                         <div id="J_comment_homework_video" className="comment_homework_player" />
+                        <canvas id="J_scratch_video" className="comment_homework_player"/>
                         {this.props.commentInfo.hasComment?<div className="comment_homework_info_list">
                                 <span className="comment_homework_describe_title">作业简介</span>
                                 <div className="comment_homework_info_text">{this.props.commentInfo.describe}</div>
